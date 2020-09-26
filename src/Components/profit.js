@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const utils = require('../Utils/utils');
 const log = require('./log');
 
 const init = () => {
@@ -74,7 +74,7 @@ const init = () => {
 const calculate = async (offer) => {
   try {
     const profit = JSON.parse(
-      await log.readFileAsync(
+      await utils.readFileAsync(
         `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
           -2
         )}-${new Date().getFullYear()}.json`
