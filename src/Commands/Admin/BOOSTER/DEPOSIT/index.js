@@ -8,7 +8,7 @@ module.exports = (sender, msg, client, users, manager) => {
     msg.toUpperCase().replace('!DEPOSITBOOSTER ', ''),
     10
   );
-  if (!Number.Number.isNaN(amountbooster) && parseInt(amountbooster, 10) > 0) {
+  if (!Number.isNaN(amountbooster) && parseInt(amountbooster, 10) > 0) {
     log.adminChat(
       sender.getSteamID64(),
       users[sender.getSteamID64()].language,
