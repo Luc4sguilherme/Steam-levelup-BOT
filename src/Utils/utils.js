@@ -6,8 +6,6 @@
 const _ = require('lodash');
 const request = require('request-promise');
 const fs = require('fs');
-const path = require('path');
-
 const jsonfile = require('jsonfile');
 const util = require('util');
 

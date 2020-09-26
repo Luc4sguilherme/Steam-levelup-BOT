@@ -9,16 +9,16 @@ const messages = require('./Config/messages.js');
 const main = require('./Config/main.js');
 const rates = require('./Config/rates.js');
 const inventory = require('./Components/inventory');
+const profit = require('./Components/profit');
+const log = require('./Components/log');
+const user = require('./Components/user');
 const chatMessage = require('./Components/message');
-const calculateProfit = require('./Components/profit');
 const commands = require('./Commands');
 const request = require('./Components/request');
-const log = require('./Components/log');
 const { getCardsInSets } = require('./Components/sets');
+const checkSteamLogged = require('./Components/checkSteamLogged');
 
-let load;
 let allCards = {};
-let users = {};
 let userMsgs = {};
 
 // Initialize SteamUser, TradeOfferManager and SteamCommunity
@@ -32,97 +32,10 @@ const manager = new TradeOfferManager({
 const community = new SteamCommunity();
 
 // Reading the Users.json File
-if (!fs.existsSync('./Data/User/Users.json')) {
-  fs.writeFile(
-    './Data/User/Users.json',
-    JSON.stringify(users),
-    {
-      flags: 'w',
-    },
-    (ERR) => {
-      if (ERR) {
-        log.error(`An error occurred while writing UserData file: ${ERR}`);
-      }
-    }
-  );
-} else {
-  fs.readFile('./Data/User/Users.json', (ERR, DATA) => {
-    if (ERR) {
-      log.error(
-        `An error occurred while getting UserData from Users.json : ${ERR}`
-      );
-    } else {
-      users = JSON.parse(DATA);
-    }
-  });
-}
+const users = user.read();
 
 // create the profit.json File of the current month
-if (
-  !fs.existsSync(
-    `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
-      -2
-    )}-${new Date().getFullYear()}.json`
-  )
-) {
-  const profit = {
-    totaltrades: 0,
-    status: {
-      sets: 0,
-      csgo: 0,
-      gems: 0,
-      hydra: 0,
-      tf: 0,
-    },
-    sell: {
-      csgo: {
-        sets: 0,
-        currency: 0,
-      },
-      gems: {
-        sets: 0,
-        currency: 0,
-      },
-      hydra: {
-        sets: 0,
-        currency: 0,
-      },
-      tf: {
-        sets: 0,
-        currency: 0,
-      },
-    },
-    buy: {
-      csgo: {
-        sets: 0,
-        currency: 0,
-      },
-      gems: {
-        sets: 0,
-        currency: 0,
-      },
-      hydra: {
-        sets: 0,
-        currency: 0,
-      },
-      tf: {
-        sets: 0,
-        currency: 0,
-      },
-    },
-  };
-  fs.writeFile(
-    `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
-      -2
-    )}-${new Date().getFullYear()}.json`,
-    JSON.stringify(profit),
-    (ERR) => {
-      if (ERR) {
-        log.error(`An error occurred while writing profit file: ${ERR}`);
-      }
-    }
-  );
-}
+profit.init();
 
 // Loading Card Data in Sets
 getCardsInSets((ERR, DATA) => {
@@ -136,85 +49,11 @@ getCardsInSets((ERR, DATA) => {
 });
 
 // Constantly checking for a too long inactivity of any user in our friendlist
-setInterval(() => {
-  const c = [];
-  const a = [];
-  for (let i = 0; i < Object.keys(client.myFriends).length; i += 1) {
-    if (users.hasOwnProperty(Object.keys(client.myFriends)[i]) === false) {
-      a.push(Object.keys(client.myFriends)[i]);
-    }
-  }
-  if (a.length > 0) {
-    function addUsers(obj, prop) {
-      for (const p of prop) {
-        (obj[p] = {}), (obj[p].idleforhours = 0), (obj[p].language = 'EN');
-      }
-    }
-    addUsers(users, a);
-  }
-  for (let i = 0; i < Object.keys(users).length; i += 1) {
-    if (
-      client.myFriends[Object.keys(users)[i]] === undefined ||
-      client.myFriends[Object.keys(users)[i]] === 5
-    ) {
-      c.push(Object.keys(users)[i]);
-    }
-    if (users[Object.keys(users)[i]].idleforhours >= main.maxDaysAdded * 24) {
-      chatMessage(
-        client,
-        Object.keys(users)[i],
-        messages.INACTIVE[users[Object.keys(users)[i]].language]
-      );
-      client.removeFriend(Object.keys(users)[i]);
-      c.push(Object.keys(users)[i]);
-    } else {
-      users[Object.keys(users)[i]].idleforhours += 1;
-    }
-  }
-  if (c.length > 0) {
-    function deleteUsers(obj, prop) {
-      for (const p of prop) {
-        p in obj && delete obj[p];
-      }
-    }
-    deleteUsers(users, c);
-  }
-  fs.writeFile('./Data/User/Users.json', JSON.stringify(users), (ERR) => {
-    if (ERR) {
-      log.error(`An error occurred while writing UserData file: ${ERR}`);
-    }
-  });
-}, 1000 * 60 * 60);
+user.inactive(client, users);
 
 // Constantly checking for abusive spam
 setInterval(() => {
-  for (let i = 0; i < Object.keys(userMsgs).length; i += 1) {
-    if (userMsgs[Object.keys(userMsgs)[i]] === main.maxMsgPerSec) {
-      chatMessage(
-        client,
-        Object.keys(userMsgs)[i],
-        messages.SPAM[0][users[Object.keys(userMsgs)[i]].language]
-      );
-    } else if (userMsgs[Object.keys(userMsgs)[i]] > main.maxMsgPerSec) {
-      chatMessage(
-        client,
-        Object.keys(userMsgs)[i],
-        messages.SPAM[1][users[Object.keys(userMsgs)[i]].language]
-      );
-      client.removeFriend(Object.keys(userMsgs)[i]);
-      for (let j = 0; j < main.admins.length; j += 1) {
-        chatMessage(
-          client,
-          main.admins[j],
-          messages.SPAM[2][users[Object.keys(userMsgs)[i]].language].replace(
-            '{STEAMID64}',
-            Object.keys(userMsgs)[i]
-          )
-        );
-      }
-    }
-  }
-  userMsgs = {};
+  userMsgs = user.spam(client, users, userMsgs);
 }, 1000);
 
 // Account Credentials, has to be setup in the main.js
@@ -284,27 +123,29 @@ client.on('webSession', (sessionID, cookies) => {
       }
     }
   }
+
   // Set Cookies and start the confirmation checker
   community.setCookies(cookies);
   community.startConfirmationChecker(10000, main.identitySecret);
+
   // Update stock
-  load = {
-    0: 'GEMS',
-    1: 'CSGO',
-    2: 'TF2',
-    3: 'SETS',
-    4: 'HYDRA',
-  };
   inventory.loadInventory(
     client,
     community,
     allCards,
-    load,
+    {
+      0: 'GEMS',
+      1: 'CSGO',
+      2: 'TF2',
+      3: 'SETS',
+      4: 'HYDRA',
+    },
     utils.playLoading,
     () => {
       inventory.play(client);
     }
   );
+
   // Requester
   if (main.requester.enabled) {
     setInterval(() => {
@@ -337,27 +178,7 @@ community.on('sessionExpired', () => {
   client.webLogOn();
 });
 
-setInterval(function checkSteamLogged() {
-  community.loggedIn(function (err, loggedIn) {
-    if (err) {
-      log.warn('checkSteamLogged');
-      if (
-        err.message.indexOf('socket hang up') > -1 ||
-        err.message.indexOf('ESOCKETTIMEDOUT') > -1
-      ) {
-        utils.restart();
-      } else {
-        setTimeout(checkSteamLogged, 1000 * 10);
-      }
-    } else if (!loggedIn) {
-      log.warn('WebLogin check : NOT LOGGED IN');
-      utils.restart();
-    } else {
-      log.warn('WebLogin check : LOGGED IN');
-      client.setPersona(SteamUser.EPersonaState.LookingToTrade);
-    }
-  });
-}, 1000 * 60 * 15);
+checkSteamLogged(client, community);
 
 // Console will show us how much new Items we have
 client.on('newItems', function (count) {
@@ -467,6 +288,7 @@ client.on('friendMessage', (SENDER, MSG) => {
     commands(SENDER, MSG, client, users, community, allCards, manager);
   }
 });
+
 // Handle the Invites we send or receive
 client.on('friendRelationship', (SENDER, REL) => {
   // If we add a friend
@@ -507,6 +329,7 @@ client.on('friendRelationship', (SENDER, REL) => {
     chatMessage(client, SENDER, main.tutorial);
   }
 });
+
 // If the offer changes the state (example: Offer is created (1), confirmed (2) and the status changes to accepted (3) or declined (4).)
 manager.on('sentOfferChanged', (OFFER) => {
   if (OFFER.state === 2) {
@@ -543,7 +366,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       utils.notifyAdmin(client, users, OFFER);
 
       // Calculate profit
-      calculateProfit(OFFER);
+      profit.calculate(OFFER);
 
       // Add giveaway entry if user entered
       utils.addGiveawayEntry(OFFER, (ERR) => {
@@ -724,6 +547,7 @@ manager.on('sentOfferChanged', (OFFER) => {
     );
   }
 });
+
 // If we get a new offer and no error we check the escrow, if we and our partner are able to trade and WE dont send any items to the user we have a donation and accept it.
 manager.on('newOffer', (OFFER) => {
   if (
@@ -829,6 +653,7 @@ manager.on('newOffer', (OFFER) => {
     });
   }
 });
+
 // If we get a new confirmation then confirm the Trade
 community.on('newConfirmation', (CONF) => {
   log.tradeoffer('New confirmation.');

@@ -2,7 +2,76 @@ const fs = require('fs');
 
 const log = require('./log');
 
-const calculateProfit = async (offer) => {
+const init = () => {
+  if (
+    !fs.existsSync(
+      `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
+        -2
+      )}-${new Date().getFullYear()}.json`
+    )
+  ) {
+    const profit = {
+      totaltrades: 0,
+      status: {
+        sets: 0,
+        csgo: 0,
+        gems: 0,
+        hydra: 0,
+        tf: 0,
+      },
+      sell: {
+        csgo: {
+          sets: 0,
+          currency: 0,
+        },
+        gems: {
+          sets: 0,
+          currency: 0,
+        },
+        hydra: {
+          sets: 0,
+          currency: 0,
+        },
+        tf: {
+          sets: 0,
+          currency: 0,
+        },
+      },
+      buy: {
+        csgo: {
+          sets: 0,
+          currency: 0,
+        },
+        gems: {
+          sets: 0,
+          currency: 0,
+        },
+        hydra: {
+          sets: 0,
+          currency: 0,
+        },
+        tf: {
+          sets: 0,
+          currency: 0,
+        },
+      },
+    };
+
+    fs.writeFile(
+      `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
+        -2
+      )}-${new Date().getFullYear()}.json`,
+      JSON.stringify(profit),
+      (ERR) => {
+        if (ERR) {
+          log.error(`An error occurred while writing profit file: ${ERR}`);
+        }
+      }
+    );
+  }
+};
+
+const calculate = async (offer) => {
   try {
     const profit = JSON.parse(
       await log.readFileAsync(
@@ -82,4 +151,4 @@ const calculateProfit = async (offer) => {
   }
 };
 
-module.exports = calculateProfit;
+module.exports = { calculate, init };
