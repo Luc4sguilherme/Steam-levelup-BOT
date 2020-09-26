@@ -30,50 +30,60 @@ const read = () => {
 };
 
 const inactive = (client, users) => {
+  const listUsers = users;
+  function addUsers(obj, prop) {
+    for (const p of prop) {
+      (obj[p] = {}), (obj[p].idleforhours = 0), (obj[p].language = 'EN');
+    }
+  }
+
+  function deleteUsers(obj, prop) {
+    for (const p of prop) {
+      p in obj && delete obj[p];
+    }
+  }
   setInterval(() => {
     const c = [];
     const a = [];
     for (let i = 0; i < Object.keys(client.myFriends).length; i += 1) {
-      if (users.hasOwnProperty(Object.keys(client.myFriends)[i]) === false) {
+      if (
+        Object.prototype.hasOwnProperty.call(
+          listUsers,
+          Object.keys(client.myFriends)[i]
+        ) === false
+      ) {
         a.push(Object.keys(client.myFriends)[i]);
       }
     }
     if (a.length > 0) {
-      function addUsers(obj, prop) {
-        for (const p of prop) {
-          (obj[p] = {}), (obj[p].idleforhours = 0), (obj[p].language = 'EN');
-        }
-      }
-      addUsers(users, a);
+      addUsers(listUsers, a);
     }
-    for (let i = 0; i < Object.keys(users).length; i += 1) {
+    for (let i = 0; i < Object.keys(listUsers).length; i += 1) {
       if (
-        client.myFriends[Object.keys(users)[i]] === undefined ||
-        client.myFriends[Object.keys(users)[i]] === 5
+        client.myFriends[Object.keys(listUsers)[i]] === undefined ||
+        client.myFriends[Object.keys(listUsers)[i]] === 5
       ) {
-        c.push(Object.keys(users)[i]);
+        c.push(Object.keys(listUsers)[i]);
       }
-      if (users[Object.keys(users)[i]].idleforhours >= main.maxDaysAdded * 24) {
+      if (
+        listUsers[Object.keys(listUsers)[i]].idleforhours >=
+        main.maxDaysAdded * 24
+      ) {
         chatMessage(
           client,
-          Object.keys(users)[i],
-          messages.INACTIVE[users[Object.keys(users)[i]].language]
+          Object.keys(listUsers)[i],
+          messages.INACTIVE[listUsers[Object.keys(listUsers)[i]].language]
         );
-        client.removeFriend(Object.keys(users)[i]);
-        c.push(Object.keys(users)[i]);
+        client.removeFriend(Object.keys(listUsers)[i]);
+        c.push(Object.keys(listUsers)[i]);
       } else {
-        users[Object.keys(users)[i]].idleforhours += 1;
+        listUsers[Object.keys(listUsers)[i]].idleforhours += 1;
       }
     }
     if (c.length > 0) {
-      function deleteUsers(obj, prop) {
-        for (const p of prop) {
-          p in obj && delete obj[p];
-        }
-      }
-      deleteUsers(users, c);
+      deleteUsers(listUsers, c);
     }
-    fs.writeFile('./Data/User/Users.json', JSON.stringify(users), (ERR) => {
+    fs.writeFile('./Data/User/Users.json', JSON.stringify(listUsers), (ERR) => {
       if (ERR) {
         log.error(`An error occurred while writing UserData file: ${ERR}`);
       }

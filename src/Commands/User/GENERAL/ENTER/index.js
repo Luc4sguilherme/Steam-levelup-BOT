@@ -32,7 +32,7 @@ module.exports = (sender, client, users) => {
         JSON.stringify(giveawayJSON, null, '\t'),
         function (err) {
           if (err)
-            return log.error(
+            log.error(
               `An error occurred while writing giveaway entry file: ${err}`
             );
           log.userChat(

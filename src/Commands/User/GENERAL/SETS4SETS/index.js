@@ -16,7 +16,10 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     main.admins.indexOf(parseInt(sender.getSteamID64(), 10)) >= 0;
   if (
     admin ||
-    users[sender.getSteamID64()].hasOwnProperty('sets4sets') !== false
+    Object.prototype.hasOwnProperty.call(
+      users[sender.getSteamID64()],
+      'sets4sets'
+    ) !== false
   ) {
     if (Object.keys(inventory.botSets).length) {
       let n = msg.toUpperCase().replace('!SETS4SETS ', '');
