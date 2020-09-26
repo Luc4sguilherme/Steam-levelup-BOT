@@ -9,7 +9,6 @@ const RELOAD = require('./GENERAL/RELOAD');
 const REQUESTER = require('./GENERAL/REQUESTER');
 const RESTART = require('./GENERAL/RESTART');
 const RESTOCK = require('./GENERAL/RESTOCK');
-const SETS4SETS = require('./GENERAL/SETS4SETS');
 const UNBLOCK = require('./GENERAL/UNBLOCK');
 const UNPACK = require('./GENERAL/UNPACK');
 const USERCHECK = require('./GENERAL/USERCHECK');
@@ -61,9 +60,6 @@ function admin(sender, msg, client, users, community, allCards, manager) {
       break;
     case '!RESTOCK':
       RESTOCK(sender, client, users, community, allCards, manager);
-      break;
-    case '!SETS4SETS':
-      SETS4SETS(sender, msg, client, users, community, allCards, manager);
       break;
     case '!UNBLOCK':
       UNBLOCK(sender, msg, client, users);
