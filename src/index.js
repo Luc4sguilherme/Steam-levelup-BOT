@@ -406,7 +406,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       } else {
         let canComment;
         const u = users[OFFER.partner.getSteamID64()];
-        if (u.hasOwnProperty('comments')) {
+        if (Object.prototype.hasOwnProperty.call(u, 'comments')) {
           if (
             Math.floor(new Date(utils.timeZone()).getTime() - u.comments) >
             1000 * 60 * 60 * main.comment
