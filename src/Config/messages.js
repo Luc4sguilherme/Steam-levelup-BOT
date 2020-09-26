@@ -1658,6 +1658,13 @@ module.exports = {
         },
       },
       INVALID: {
+        MESSAGE: {
+          EN: 'Please enter a message',
+          PT: 'Digite uma mensagem',
+          RU: 'Пожалуйста, введите сообщение',
+          ES: 'Por favor ingrese un mensaje',
+          CN: '请输入消息',
+        },
         SETS: {
           EN: 'Please provide a valid amount of sets - example: {command}',
           PT: 'Forneça uma quantidade válida de conjuntos - exemplo: {command}',
