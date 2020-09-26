@@ -1,11 +1,12 @@
+const chatMessage = require('../../../../Components/message');
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, client) => {
-  utils.userChat(sender.getSteamID64(), 'ES', '[ !HELP ]');
+  log.userChat(sender.getSteamID64(), 'ES', '[ !HELP ]');
   let message = '/pre ';
   for (let i = 0; i < messages.HELP.ES.length; i += 1) {
     message += messages.HELP.ES[i];
   }
-  utils.chatMessage(client, sender, message);
+  chatMessage(client, sender, message);
 };

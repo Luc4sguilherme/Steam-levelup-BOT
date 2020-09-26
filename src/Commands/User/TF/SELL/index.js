@@ -4,7 +4,11 @@ const messages = require('../../../../Config/messages');
 const rates = require('../../../../Config/rates');
 const utils = require('../../../../Utils/utils');
 const acceptedKeys = require('../../../../Config/keys');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const { getSets } = require('../../../../Components/sets');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
   if (inventory.botSets) {
@@ -12,13 +16,13 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     const amountofsets = n * rates.tf.buy;
     const maxKeys = parseInt(main.maxSell / rates.tf.buy, 10);
     if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
-      utils.userChat(
+      log.userChat(
         sender.getSteamID64(),
         users[sender.getSteamID64()].language,
         `[ !SELLTF ${n} ]`
       );
       if (n <= maxKeys) {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.REQUEST[users[sender.getSteamID64()].language]
@@ -27,10 +31,8 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         const theirSets = [];
         manager.getInventoryContents(440, 2, true, (ERR1, INV) => {
           if (ERR1) {
-            utils.error(
-              `An error occurred while getting bot inventory: ${ERR1}`
-            );
-            utils.chatMessage(
+            log.error(`An error occurred while getting bot inventory: ${ERR1}`);
+            chatMessage(
               client,
               sender,
               messages.ERROR.LOADINVENTORY.US[
@@ -47,7 +49,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
               }
             }
             if (botKeys.length !== n) {
-              utils.chatMessage(
+              chatMessage(
                 client,
                 sender,
                 messages.ERROR.OUTOFSTOCK.DEFAULT.TF.US[0][
@@ -62,7 +64,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                 (ERR2, DATA) => {
                   if (!ERR2) {
                     const s = DATA;
-                    utils.getSets(s, allCards, (ERR3, DDATA) => {
+                    getSets(s, allCards, (ERR3, DDATA) => {
                       if (!ERR3) {
                         utils.sortSetsByAmountB(s, (DATA2) => {
                           const setsSent = {};
@@ -104,7 +106,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           }
                         });
                         if (amountofB > 0) {
-                          utils.chatMessage(
+                          chatMessage(
                             client,
                             sender,
                             messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][
@@ -117,7 +119,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           ]
                             .replace('{SETS}', amountofsets)
                             .replace('{TF}', n);
-                          utils.makeOffer(
+                          makeOffer(
                             client,
                             users,
                             manager,
@@ -133,38 +135,38 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           );
                         }
                       } else {
-                        utils.chatMessage(
+                        chatMessage(
                           client,
                           sender,
                           messages.ERROR.LOADINVENTORY.THEM[0][
                             users[sender.getSteamID64()].language
                           ]
                         );
-                        utils.error(
+                        log.error(
                           `An error occurred while getting user sets: ${ERR3}`
                         );
                       }
                     });
                   } else if (ERR2.message.indexOf('profile is private') > -1) {
-                    utils.chatMessage(
+                    chatMessage(
                       client,
                       sender,
                       messages.ERROR.LOADINVENTORY.THEM[2][
                         users[sender.getSteamID64()].language
                       ]
                     );
-                    utils.error(
+                    log.error(
                       `An error occurred while getting user inventory: ${ERR2}`
                     );
                   } else {
-                    utils.chatMessage(
+                    chatMessage(
                       client,
                       sender,
                       messages.ERROR.LOADINVENTORY.THEM[0][
                         users[sender.getSteamID64()].language
                       ]
                     );
-                    utils.error(
+                    log.error(
                       `An error occurred while getting user inventory: ${ERR2}`
                     );
                   }
@@ -174,7 +176,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
           }
         });
       } else {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.ERROR.INPUT.AMOUNTOVER.TF[
@@ -183,7 +185,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         );
       }
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.INPUT.INVALID.TF[
@@ -192,7 +194,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       );
     }
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[2][

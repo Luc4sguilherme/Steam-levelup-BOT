@@ -1,28 +1,31 @@
 /* eslint-disable no-restricted-syntax */
 const messages = require('../../../../Config/messages');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
 const utils = require('../../../../Utils/utils');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, manager) => {
   if (inventory.botSets) {
     let n = msg.toUpperCase().replace('!WITHDRAWSETS ', '');
     const amountofsets = parseInt(n, 10);
     if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
-      utils.adminChat(
+      log.adminChat(
         sender.getSteamID64(),
         users[sender.getSteamID64()].language,
         `[ !WITHDRAWSETS ${n} ]`
       );
       n = parseInt(n, 10);
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.REQUEST[users[sender.getSteamID64()].language]
       );
       manager.getInventoryContents(753, 2, true, (ERR) => {
         if (ERR) {
-          utils.error(`An error occurred while getting inventory: ${ERR}`);
-          utils.chatMessage(
+          log.error(`An error occurred while getting inventory: ${ERR}`);
+          chatMessage(
             client,
             sender,
             messages.ERROR.LOADINVENTORY.US[
@@ -62,7 +65,7 @@ module.exports = (sender, msg, client, users, manager) => {
             }
           });
           if (amountofB > 0) {
-            utils.chatMessage(
+            chatMessage(
               client,
               sender,
               messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
@@ -73,7 +76,7 @@ module.exports = (sender, msg, client, users, manager) => {
             const message = messages.TRADE.SETMESSAGE[0].SETS[
               users[sender.getSteamID64()].language
             ].replace('{SETS}', amountofsets);
-            utils.makeOffer(
+            makeOffer(
               client,
               users,
               manager,
@@ -91,7 +94,7 @@ module.exports = (sender, msg, client, users, manager) => {
         }
       });
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.INPUT.INVALID.SETS[
@@ -100,7 +103,7 @@ module.exports = (sender, msg, client, users, manager) => {
       );
     }
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[2][

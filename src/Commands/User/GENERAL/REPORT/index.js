@@ -1,9 +1,10 @@
+const chatMessage = require('../../../../Components/message');
 const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users) => {
-  utils.userChat(
+  log.userChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !REPORT ]'
@@ -11,7 +12,7 @@ module.exports = (sender, msg, client, users) => {
   const n = msg.substring('!REPORT'.length).trim();
   if (n.length > 0) {
     for (let j = 0; j < main.admins.length; j += 1) {
-      utils.chatMessage(
+      chatMessage(
         client,
         main.admins[j],
         messages.REPORT.RESPONSE[0][users[main.admins[j]].language]
@@ -23,13 +24,13 @@ module.exports = (sender, msg, client, users) => {
           .replace('{MESSAGE}', n)
       );
     }
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.REPORT.RESPONSE[1][users[sender.getSteamID64()].language]
     );
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.REPORT.ERROR[users[sender.getSteamID64()].language]

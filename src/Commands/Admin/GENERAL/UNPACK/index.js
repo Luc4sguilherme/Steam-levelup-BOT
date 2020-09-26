@@ -1,8 +1,9 @@
-const utils = require('../../../../Utils/utils');
 const messages = require('../../../../Config/messages');
+const chatMessage = require('../../../../Components/message');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users, community, manager) => {
-  utils.adminChat(
+  log.adminChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !UNPACK ]'
@@ -19,7 +20,7 @@ module.exports = (sender, client, users, community, manager) => {
           itemid = INV[i].id;
           community.openBoosterPack(appid, itemid, (ERR2) => {
             if (ERR2) {
-              utils.error(
+              log.error(
                 `An error occurred while getting unpack Booster: ${ERR2}`
               );
             }
@@ -27,7 +28,7 @@ module.exports = (sender, client, users, community, manager) => {
         }
       }
       if (botBooster.length > 0) {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.UNPACK.RESPONSE[
@@ -35,19 +36,19 @@ module.exports = (sender, client, users, community, manager) => {
           ].replace('{BOOSTER}', botBooster.length)
         );
       } else {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.UNPACK.ERROR[users[sender.getSteamID64()].language]
         );
       }
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
       );
-      utils.error(
+      log.error(
         sender.getSteamID64(),
         `[ !UNPACK ] An error occurred while getting inventory: ${ERR1}`
       );

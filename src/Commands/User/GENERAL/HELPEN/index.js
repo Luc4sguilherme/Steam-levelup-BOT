@@ -1,8 +1,9 @@
-const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
 const messages = require('../../../../Config/messages');
+const chatMessage = require('../../../../Components/message');
 
 module.exports = (sender, client, users) => {
-  utils.userChat(
+  log.userChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !HELP ]'
@@ -15,5 +16,5 @@ module.exports = (sender, client, users) => {
   ) {
     message += messages.HELP[users[sender.getSteamID64()].language][i];
   }
-  utils.chatMessage(client, sender, message);
+  chatMessage(client, sender, message);
 };

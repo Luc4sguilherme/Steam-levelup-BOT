@@ -1,12 +1,13 @@
 const jsonfile = require('jsonfile');
+const chatMessage = require('../../../../Components/message');
 
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
 
 let giveawayJSON;
 
 module.exports = (sender, client, users) => {
-  utils.userChat(
+  log.userChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !GIVEAWAY ]'
@@ -36,9 +37,9 @@ module.exports = (sender, client, users) => {
     ]
       .replace('{PRICE}', giveawayJSON.prize)
       .replace('{DATE}', giveawayJSON.end);
-    utils.chatMessage(client, sender, message);
+    chatMessage(client, sender, message);
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.GIVEAWAY.NOTACTIVE[users[sender.getSteamID64()].language]

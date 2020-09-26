@@ -3,16 +3,19 @@ const SID64REGEX = new RegExp(/^[0-9]{17}$/);
 const messages = require('../../../../Config/messages');
 const acceptedKeys = require('../../../../Config/keys');
 const utils = require('../../../../Utils/utils');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
+const { getSets } = require('../../../../Components/sets');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, community, allCards) => {
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
   const n = msg.toUpperCase().replace('!USERCHECK ', '').toString();
-  utils.adminChat(
+  log.adminChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     `[ !USERCHECK ${n} ]`
@@ -41,7 +44,7 @@ module.exports = (sender, msg, client, users, community, allCards) => {
     }
     utils.getRep(n, (ERR, DATA) => {
       if (ERR) {
-        utils.error(`An error occurred while getting user in Steamrep: ${ERR}`);
+        log.error(`An error occurred while getting user in Steamrep: ${ERR}`);
       } else {
         const u = JSON.parse(DATA);
         message +=
@@ -167,7 +170,7 @@ module.exports = (sender, msg, client, users, community, allCards) => {
               }
             }
           } else {
-            utils.error(
+            log.error(
               `An error occurred while getting user Gems inventory: ${ERR}`
             );
           }
@@ -193,7 +196,7 @@ module.exports = (sender, msg, client, users, community, allCards) => {
               }
             }
           } else {
-            utils.error(
+            log.error(
               `An error occurred while getting user CSGO inventory: ${ERR}`
             );
           }
@@ -210,7 +213,7 @@ module.exports = (sender, msg, client, users, community, allCards) => {
               }
             }
           } else {
-            utils.error(
+            log.error(
               `An error occurred while getting user TF2 inventory: ${ERR}`
             );
           }
@@ -268,12 +271,12 @@ module.exports = (sender, msg, client, users, community, allCards) => {
                 .replace('{SETS1}', hisMaxSets)
                 .replace('{SETS2}', botNSets);
             } else {
-              utils.chatMessage(
+              chatMessage(
                 client,
                 sender,
                 messages.ERROR.BADGES[3][users[sender.getSteamID64()].language]
               );
-              utils.error(`An error occurred while getting badges: ${ERR}`);
+              log.error(`An error occurred while getting badges: ${ERR}`);
             }
           });
         }
@@ -284,7 +287,7 @@ module.exports = (sender, msg, client, users, community, allCards) => {
           inventory.getInventory(n, community, (ERR1, DATA) => {
             if (!ERR1) {
               const s = DATA;
-              utils.getSets(s, allCards, (ERR2, DDATA) => {
+              getSets(s, allCards, (ERR2, DDATA) => {
                 if (!ERR2) {
                   let userNSets = 0;
                   for (let i = 0; i < Object.keys(DDATA).length; i += 1) {
@@ -321,21 +324,21 @@ module.exports = (sender, msg, client, users, community, allCards) => {
               '{GEMSQUANTITYNOTRADABLE}',
               customer.gemsQuantity.notradable
             );
-          utils.chatMessage(client, sender, message);
+          chatMessage(client, sender, message);
         }, 1000);
       } else {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.ERROR.LOADINVENTORY.THEM[1][
             users[sender.getSteamID64()].language
           ]
         );
-        utils.error(`An error occurred while getting user inventory: ${ERR}`);
+        log.error(`An error occurred while getting user inventory: ${ERR}`);
       }
     });
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.INPUT.INVALID.STEAMID64[

@@ -1,33 +1,37 @@
 /* eslint-disable no-continue */
 const utils = require('../../../../Utils/utils');
 const messages = require('../../../../Config/messages');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const { getSets } = require('../../../../Components/sets');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users, community, allCards, manager) => {
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
-  utils.adminChat(
+  log.adminChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !RESTOCK ]'
   );
   inventory.getInventory(sender.getSteamID64(), community, (ERR1, DATA1) => {
-    utils.warn('INVENTORY LOADED');
+    log.warn('INVENTORY LOADED');
     if (!ERR1) {
       const s = DATA1;
       const theirSets = [];
-      utils.getSets(s, allCards, (ERR2, DATA2) => {
-        utils.warn('SETS LOADED');
+      getSets(s, allCards, (ERR2, DATA2) => {
+        log.warn('SETS LOADED');
         if (!ERR2) {
           let userNSets = 0;
           for (let i = 0; i < Object.keys(DATA2).length; i += 1) {
             userNSets += DATA2[Object.keys(DATA2)[i]].length;
           }
           if (userNSets === 0) {
-            utils.chatMessage(
+            chatMessage(
               client,
               sender,
               messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[1][
@@ -49,7 +53,7 @@ module.exports = (sender, client, users, community, allCards, manager) => {
             const message = messages.TRADE.SETMESSAGE[0].SETS[
               users[sender.getSteamID64()].language
             ].replace('{SETS}', userNSets);
-            utils.makeOffer(
+            makeOffer(
               client,
               users,
               manager,
@@ -65,34 +69,34 @@ module.exports = (sender, client, users, community, allCards, manager) => {
             );
           }
         } else {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[0][
               users[sender.getSteamID64()].language
             ]
           );
-          utils.error(`An error occurred while getting user sets: ${ERR2}`);
+          log.error(`An error occurred while getting user sets: ${ERR2}`);
         }
       });
     } else if (ERR1.message.indexOf('profile is private') > -1) {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.LOADINVENTORY.THEM[2][
           users[sender.getSteamID64()].language
         ]
       );
-      utils.error(`An error occurred while getting user inventory: ${ERR1}`);
+      log.error(`An error occurred while getting user inventory: ${ERR1}`);
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.LOADINVENTORY.THEM[0][
           users[sender.getSteamID64()].language
         ]
       );
-      utils.error(`An error occurred while getting user inventory: ${ERR1}`);
+      log.error(`An error occurred while getting user inventory: ${ERR1}`);
     }
   });
 };

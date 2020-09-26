@@ -2,15 +2,16 @@ const kill = require('tree-kill');
 const process = require('process');
 
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const chatMessage = require('../../../../Components/message');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users) => {
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
-  utils.adminChat(
+  log.adminChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !DIE ]'

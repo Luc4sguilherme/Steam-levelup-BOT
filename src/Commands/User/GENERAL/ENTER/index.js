@@ -1,13 +1,14 @@
 const fs = require('fs');
 const jsonfile = require('jsonfile');
+const chatMessage = require('../../../../Components/message');
 
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
 
 let giveawayJSON;
 
 module.exports = (sender, client, users) => {
-  utils.userChat(
+  log.userChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !ENTER ]'
@@ -31,17 +32,17 @@ module.exports = (sender, client, users) => {
         JSON.stringify(giveawayJSON, null, '\t'),
         function (err) {
           if (err)
-            return utils.error(
+            return log.error(
               `An error occurred while writing giveaway entry file: ${err}`
             );
-          utils.userChat(
+          log.userChat(
             sender.getSteamID64(),
             users[sender.getSteamID64()].language,
             '[ !ENTER ] Giveaway entry added! '
           );
         }
       );
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.GIVEAWAY.ENTER[0][users[sender.getSteamID64()].language]
@@ -49,14 +50,14 @@ module.exports = (sender, client, users) => {
           .replace('{DATE}', giveawayJSON.end)
       );
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.GIVEAWAY.ENTER[1][users[sender.getSteamID64()].language]
       );
     }
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.GIVEAWAY.NOTACTIVE[users[sender.getSteamID64()].language]

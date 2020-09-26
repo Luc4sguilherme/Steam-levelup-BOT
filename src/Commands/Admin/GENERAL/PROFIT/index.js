@@ -1,5 +1,7 @@
 const utils = require('../../../../Utils/utils');
 const messages = require('../../../../Config/messages');
+const chatMessage = require('../../../../Components/message');
+const log = require('../../../../Components/log');
 
 module.exports = async (sender, client, users) => {
   try {
@@ -11,7 +13,7 @@ module.exports = async (sender, client, users) => {
       )
     );
 
-    utils.adminChat(
+    log.adminChat(
       sender.getSteamID64(),
       users[sender.getSteamID64()].language,
       '[ !PROFIT ]'
@@ -113,8 +115,8 @@ module.exports = async (sender, client, users) => {
       .replace('{HYDRABUY}', profit.buy.hydra.currency)
       .replace('{TFBUY}', profit.buy.tf.currency)
       .replace('{GEMSBUY}', profit.buy.gems.currency);
-    utils.chatMessage(client, sender, message);
+    chatMessage(client, sender, message);
   } catch (error) {
-    utils.error(`An error occurred while getting profit.json: ${error}`);
+    log.error(`An error occurred while getting profit.json: ${error}`);
   }
 };

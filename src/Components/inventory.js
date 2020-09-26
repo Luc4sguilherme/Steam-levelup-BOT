@@ -7,8 +7,10 @@ const async = require('async');
 const moment = require('moment');
 
 const acceptedKeys = require('../Config/keys.js');
-const utils = require('./utils');
+const utils = require('../Utils/utils');
 const rates = require('../Config/rates.js');
+const { getSets } = require('./sets.js');
+const log = require('./log');
 
 const inventory = {};
 
@@ -116,7 +118,7 @@ inventory.loadInventory = (
   async.series(LoadInventories, () => {
     playLoading.resetTimer();
     inventory.loading -= 1;
-    utils.warn(
+    log.warn(
       `Inventory loaded in ${moment().diff(
         startedTime,
         'seconds',
@@ -203,12 +205,12 @@ inventory.loadCSGO = (SID, community, callback) => {
           }
         }
       }
-      utils.warn(
+      log.warn(
         `Bot's CSGO loaded: ${inventory.stock.csKeys.tradable} tradable, ${inventory.stock.csKeys.notradable} notradable.`
       );
       callback();
     } else {
-      utils.error(`An error occurred while getting bot CSGO inventory: ${ERR}`);
+      log.error(`An error occurred while getting bot CSGO inventory: ${ERR}`);
       callback(ERR);
     }
   });
@@ -228,12 +230,12 @@ inventory.loadHYDRA = (SID, community, callback) => {
           }
         }
       }
-      utils.warn(
+      log.warn(
         `Bot's Hydra loaded: ${inventory.stock.hydraKeys.tradable} tradable, ${inventory.stock.hydraKeys.notradable} notradable.`
       );
       callback();
     } else {
-      utils.error(
+      log.error(
         `An error occurred while getting bot HYDRA inventory: ${ERR}`
       );
       callback(ERR);
@@ -255,12 +257,12 @@ inventory.loadTF = (SID, community, callback) => {
           }
         }
       }
-      utils.warn(
+      log.warn(
         `Bot's TF2 loaded: ${inventory.stock.tfKeys.tradable} tradable, ${inventory.stock.tfKeys.notradable} notradable.`
       );
       callback();
     } else {
-      utils.error(`An error occurred while getting bot TF2 inventory: ${ERR}`);
+      log.error(`An error occurred while getting bot TF2 inventory: ${ERR}`);
       callback(ERR);
     }
   });
@@ -280,12 +282,12 @@ inventory.loadGEMS = (SID, community, callback) => {
           }
         }
       }
-      utils.warn(
+      log.warn(
         `Bot's Gems loaded: ${inventory.stock.gemsQuantity.tradable} tradable, ${inventory.stock.gemsQuantity.notradable} notradable.`
       );
       callback();
     } else {
-      utils.error(`An error occurred while getting bot Gems inventory: ${ERR}`);
+      log.error(`An error occurred while getting bot Gems inventory: ${ERR}`);
       callback(ERR);
     }
   });
@@ -295,7 +297,7 @@ inventory.loadSETS = (SID, community, allCards, callback) => {
   inventory.getInventory(SID, community, (ERR1, DATA1) => {
     if (!ERR1) {
       const s = DATA1;
-      utils.getSets(s, allCards, (ERR2, DATA2) => {
+      getSets(s, allCards, (ERR2, DATA2) => {
         if (!ERR2) {
           inventory.botSets = DATA2;
           let botNSets = 0;
@@ -304,15 +306,15 @@ inventory.loadSETS = (SID, community, allCards, callback) => {
               inventory.botSets[Object.keys(inventory.botSets)[i]].length;
           }
           inventory.stock.totalBotSets = botNSets;
-          utils.warn(`Bot's Sets loaded: ${inventory.stock.totalBotSets}`);
+          log.warn(`Bot's Sets loaded: ${inventory.stock.totalBotSets}`);
           callback();
         } else {
-          utils.error(`An error occurred while getting bot sets: ${ERR2}`);
+          log.error(`An error occurred while getting bot sets: ${ERR2}`);
           callback(ERR2);
         }
       });
     } else {
-      utils.error(`An error occurred while getting bot inventory: ${ERR1}`);
+      log.error(`An error occurred while getting bot inventory: ${ERR1}`);
       callback(ERR1);
     }
   });

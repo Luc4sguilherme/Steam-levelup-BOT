@@ -1,5 +1,7 @@
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, manager) => {
   const amountbooster = parseInt(
@@ -7,24 +9,24 @@ module.exports = (sender, msg, client, users, manager) => {
     10
   );
   if (!Number.isNaN(amountbooster) && parseInt(amountbooster, 10) > 0) {
-    utils.adminChat(
+    log.adminChat(
       sender.getSteamID64(),
       users[sender.getSteamID64()].language,
       `[ !WITHDRAWBOOSTER ${amountbooster} ]`
     );
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.REQUEST[users[sender.getSteamID64()].language]
     );
     manager.getInventoryContents(753, 6, true, (ERR, INV) => {
       if (ERR) {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
         );
-        utils.error(`An error occurred while getting inventory: ${ERR}`);
+        log.error(`An error occurred while getting inventory: ${ERR}`);
       } else {
         const botBooster = [];
         for (let i = 0; i < INV.length; i += 1) {
@@ -36,7 +38,7 @@ module.exports = (sender, msg, client, users, manager) => {
           }
         }
         if (botBooster.length < amountbooster) {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.ERROR.OUTOFSTOCK.DEFAULT.BOOSTER.US[
@@ -47,7 +49,7 @@ module.exports = (sender, msg, client, users, manager) => {
           const message = messages.TRADE.SETMESSAGE[0].BOOSTER[
             users[sender.getSteamID64()].language
           ].replace('{BOOSTER}', amountbooster.toString());
-          utils.makeOffer(
+          makeOffer(
             client,
             users,
             manager,
@@ -65,7 +67,7 @@ module.exports = (sender, msg, client, users, manager) => {
       }
     });
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.INPUT.INVALID.BOOSTER[

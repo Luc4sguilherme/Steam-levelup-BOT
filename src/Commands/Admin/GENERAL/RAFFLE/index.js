@@ -2,10 +2,11 @@ const jsonfile = require('jsonfile');
 const fs = require('fs');
 
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const chatMessage = require('../../../../Components/message');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users) => {
-  utils.adminChat(
+  log.adminChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !RAFFLE ]'
@@ -26,12 +27,12 @@ module.exports = (sender, client, users) => {
         }
         const random = Math.floor(Math.random() * Object.keys(obj1).length);
         const winner = obj1[random];
-        utils.adminChat(
+        log.adminChat(
           sender.getSteamID64(),
           users[sender.getSteamID64()].language,
           `[ !RAFFLE ] Winner is: ${winner}`
         );
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.GIVEAWAY.RAFFLE[0][users[sender.getSteamID64()].language]
@@ -47,11 +48,11 @@ module.exports = (sender, client, users) => {
           JSON.stringify(giveawayJSON, null, '\t'),
           function (err) {
             if (err) {
-              utils.error(
+              log.error(
                 `An error occurred while writing winner giveaway entry file: ${err}`
               );
             } else {
-              utils.adminChat(
+              log.adminChat(
                 sender.getSteamID64(),
                 users[sender.getSteamID64()].language,
                 '[ !RAFFLE ] Winner giveaway added! '
@@ -60,21 +61,21 @@ module.exports = (sender, client, users) => {
           }
         );
       } else {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.GIVEAWAY.RAFFLE[1][users[sender.getSteamID64()].language]
         );
       }
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.GIVEAWAY.RAFFLE[2][users[sender.getSteamID64()].language]
       );
     }
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.GIVEAWAY.NOTACTIVE[users[sender.getSteamID64()].language]

@@ -8,8 +8,13 @@ const utils = require('./Utils/utils');
 const messages = require('./Config/messages.js');
 const main = require('./Config/main.js');
 const rates = require('./Config/rates.js');
-const inventory = require('./Utils/inventory');
+const inventory = require('./Components/inventory');
+const chatMessage = require('./Components/message');
+const calculateProfit = require('./Components/profit');
 const commands = require('./Commands');
+const request = require('./Components/request');
+const log = require('./Components/log');
+const { getCardsInSets } = require('./Components/sets');
 
 let load;
 let allCards = {};
@@ -36,14 +41,14 @@ if (!fs.existsSync('./Data/User/Users.json')) {
     },
     (ERR) => {
       if (ERR) {
-        utils.error(`An error occurred while writing UserData file: ${ERR}`);
+        log.error(`An error occurred while writing UserData file: ${ERR}`);
       }
     }
   );
 } else {
   fs.readFile('./Data/User/Users.json', (ERR, DATA) => {
     if (ERR) {
-      utils.error(
+      log.error(
         `An error occurred while getting UserData from Users.json : ${ERR}`
       );
     } else {
@@ -113,20 +118,20 @@ if (
     JSON.stringify(profit),
     (ERR) => {
       if (ERR) {
-        utils.error(`An error occurred while writing profit file: ${ERR}`);
+        log.error(`An error occurred while writing profit file: ${ERR}`);
       }
     }
   );
 }
 
 // Loading Card Data in Sets
-utils.getCardsInSets((ERR, DATA) => {
+getCardsInSets((ERR, DATA) => {
   if (!ERR) {
     allCards = DATA;
     const datalength = DATA ? Object.keys(DATA).length : 0;
-    utils.warn(`Card data loaded. [${datalength}]`);
+    log.warn(`Card data loaded. [${datalength}]`);
   } else {
-    utils.error(`An error occurred while getting cards: ${ERR}`);
+    log.error(`An error occurred while getting cards: ${ERR}`);
   }
 });
 
@@ -155,7 +160,7 @@ setInterval(() => {
       c.push(Object.keys(users)[i]);
     }
     if (users[Object.keys(users)[i]].idleforhours >= main.maxDaysAdded * 24) {
-      utils.chatMessage(
+      chatMessage(
         client,
         Object.keys(users)[i],
         messages.INACTIVE[users[Object.keys(users)[i]].language]
@@ -176,7 +181,7 @@ setInterval(() => {
   }
   fs.writeFile('./Data/User/Users.json', JSON.stringify(users), (ERR) => {
     if (ERR) {
-      utils.error(`An error occurred while writing UserData file: ${ERR}`);
+      log.error(`An error occurred while writing UserData file: ${ERR}`);
     }
   });
 }, 1000 * 60 * 60);
@@ -185,20 +190,20 @@ setInterval(() => {
 setInterval(() => {
   for (let i = 0; i < Object.keys(userMsgs).length; i += 1) {
     if (userMsgs[Object.keys(userMsgs)[i]] === main.maxMsgPerSec) {
-      utils.chatMessage(
+      chatMessage(
         client,
         Object.keys(userMsgs)[i],
         messages.SPAM[0][users[Object.keys(userMsgs)[i]].language]
       );
     } else if (userMsgs[Object.keys(userMsgs)[i]] > main.maxMsgPerSec) {
-      utils.chatMessage(
+      chatMessage(
         client,
         Object.keys(userMsgs)[i],
         messages.SPAM[1][users[Object.keys(userMsgs)[i]].language]
       );
       client.removeFriend(Object.keys(userMsgs)[i]);
       for (let j = 0; j < main.admins.length; j += 1) {
-        utils.chatMessage(
+        chatMessage(
           client,
           main.admins[j],
           messages.SPAM[2][users[Object.keys(userMsgs)[i]].language].replace(
@@ -225,7 +230,7 @@ client.logOn({
 // When the WebSession logs in, we will set the Profile to Online, otherwise the Bot would appear offline while being online in the WebSession
 client.on('loggedOn', () => {
   client.getPersonas([client.steamID], () => {
-    // utils.info("Name: " + personas[client.steamID].player_name + " (" + client.steamID + ")");
+    // log.info("Name: " + personas[client.steamID].player_name + " (" + client.steamID + ")");
   });
   if (main.ratesInBotName.status) {
     function rate() {
@@ -258,9 +263,9 @@ client.on('webSession', (sessionID, cookies) => {
   // Starting the WebSession
   manager.setCookies(cookies, (ERR) => {
     if (ERR) {
-      utils.error('An error occurred while setting cookies.');
+      log.error('An error occurred while setting cookies.');
     } else {
-      utils.info('Websession created and cookies set.');
+      log.info('Websession created and cookies set.');
     }
   });
   // Add people that added the bot while it was online.
@@ -307,7 +312,7 @@ client.on('webSession', (sessionID, cookies) => {
       const ID64 = main.requester.steamID64;
       (function req() {
         if (i < ID64.length) {
-          utils.request(
+          request(
             ID64[i],
             community,
             allCards,
@@ -328,14 +333,14 @@ client.on('webSession', (sessionID, cookies) => {
 
 // Relog when the websession is expired
 community.on('sessionExpired', () => {
-  utils.info('Session Expired. Relogging.');
+  log.info('Session Expired. Relogging.');
   client.webLogOn();
 });
 
 setInterval(function checkSteamLogged() {
   community.loggedIn(function (err, loggedIn) {
     if (err) {
-      utils.warn('checkSteamLogged');
+      log.warn('checkSteamLogged');
       if (
         err.message.indexOf('socket hang up') > -1 ||
         err.message.indexOf('ESOCKETTIMEDOUT') > -1
@@ -345,10 +350,10 @@ setInterval(function checkSteamLogged() {
         setTimeout(checkSteamLogged, 1000 * 10);
       }
     } else if (!loggedIn) {
-      utils.warn('WebLogin check : NOT LOGGED IN');
+      log.warn('WebLogin check : NOT LOGGED IN');
       utils.restart();
     } else {
-      utils.warn('WebLogin check : LOGGED IN');
+      log.warn('WebLogin check : LOGGED IN');
       client.setPersona(SteamUser.EPersonaState.LookingToTrade);
     }
   });
@@ -356,12 +361,12 @@ setInterval(function checkSteamLogged() {
 
 // Console will show us how much new Items we have
 client.on('newItems', function (count) {
-  utils.info(`We have ${count} new Items in our Inventory`);
+  log.info(`We have ${count} new Items in our Inventory`);
 });
 
 // Console will show the registred email from the Bot account
 client.on('emailInfo', function (address) {
-  utils.info(`E-Mail: ${address}`);
+  log.info(`E-Mail: ${address}`);
 });
 
 // Console will show our current account limitations (ex. when we would be tradebanned, or could not access the market due to steam restrictions)
@@ -372,42 +377,42 @@ client.on('accountLimitations', function (
   canInviteFriends
 ) {
   if (limited) {
-    utils.info(
+    log.info(
       'Account is limited. Cannot send friend invites, use the market, open group chat, or access the web API.'
     );
   }
   if (communityBanned) {
-    utils.info('Account is banned from Steam Community');
+    log.info('Account is banned from Steam Community');
   }
   if (locked) {
-    utils.info(
+    log.info(
       'Account is locked. We cannot trade/gift/purchase items, play on VAC servers, or access Steam Community.  Shutting down.'
     );
     process.exit(1);
   }
   if (!canInviteFriends) {
-    utils.info('Account is unable to send friend requests.');
+    log.info('Account is unable to send friend requests.');
   }
 });
 
 // Console will show the current Wallet Balance of the Steam Account
 client.on('wallet', function (hasWallet, currency, balance) {
   if (hasWallet) {
-    utils.info(
+    log.info(
       `Wallet: ${SteamUser.formatCurrency(
         balance,
         currency
       )} Steam Credit remaining`
     );
   } else {
-    utils.info('We do not have a Steam wallet.');
+    log.info('We do not have a Steam wallet.');
   }
 });
 
 // Handle the messages we get via Steam Chat
 client.on('friendMessage', (SENDER, MSG) => {
   // Writing the User Logs to File
-  utils.userLogs(SENDER, MSG);
+  log.userChatFullMessages(SENDER, MSG);
 
   if (Object.keys(users).indexOf(SENDER.getSteamID64()) < 0) {
     users[SENDER.getSteamID64()] = {};
@@ -415,7 +420,7 @@ client.on('friendMessage', (SENDER, MSG) => {
     users[SENDER.getSteamID64()].idleforhours = 0;
     fs.writeFile('./Data/User/Users.json', JSON.stringify(users), (ERR) => {
       if (ERR) {
-        utils.error(`An error occurred while writing UserData file: ${ERR}`);
+        log.error(`An error occurred while writing UserData file: ${ERR}`);
       }
     });
   } else {
@@ -429,15 +434,11 @@ client.on('friendMessage', (SENDER, MSG) => {
 
   // User Messages
   if (client.myFriends[SENDER.getSteamID64()] === 5) {
-    utils.chatMessage(
-      client,
-      SENDER,
-      'You have been banned from using our services'
-    );
+    chatMessage(client, SENDER, 'You have been banned from using our services');
   } else if (client.myFriends[SENDER.getSteamID64()] === undefined) {
-    utils.chatMessage(client, SENDER, 'You need to add me as a friend');
+    chatMessage(client, SENDER, 'You need to add me as a friend');
   } else if (MSG.indexOf('[/tradeoffer]') >= 0) {
-    utils.chatMessage(
+    chatMessage(
       client,
       SENDER,
       messages.REQUEST[users[SENDER.getSteamID64()].language]
@@ -457,7 +458,7 @@ client.on('friendMessage', (SENDER, MSG) => {
       MSG.toUpperCase().search(/RELOAD/) !== -1 ||
       MSG.toUpperCase().search(/UNPACK/) !== -1)
   ) {
-    return utils.chatMessage(
+    return chatMessage(
       client,
       SENDER,
       messages.LOADING[users[SENDER.getSteamID64()].language]
@@ -472,11 +473,9 @@ client.on('friendRelationship', (SENDER, REL) => {
   if (REL === 2) {
     client.addFriend(SENDER, (err, name) => {
       if (err) {
-        utils.error(
-          `Error trying to add ${SENDER.getSteamID64()}Reason:${err}`
-        );
+        log.error(`Error trying to add ${SENDER.getSteamID64()}Reason:${err}`);
       } else if (name) {
-        utils.info(`Succesfully added ${SENDER.getSteamID64()} to friendlist.`);
+        log.info(`Succesfully added ${SENDER.getSteamID64()} to friendlist.`);
         if (Object.keys(users).indexOf(SENDER.getSteamID64()) < 0) {
           users[SENDER.getSteamID64()] = {};
           users[SENDER.getSteamID64()].language = 'EN';
@@ -487,39 +486,56 @@ client.on('friendRelationship', (SENDER, REL) => {
       }
     });
   } else if (REL === 0) {
-    utils.info(
+    log.info(
       `User ID: ${SENDER.getSteamID64()} has deleted us from their friendlist.`
     );
   }
   // If the friend invite gets accepted
   if (REL === 3) {
-    utils.inviteToGroup(client, community, SENDER.getSteamID64());
-    utils.chatMessage(client, SENDER, messages.WELCOME.EN);
-    utils.chatMessage(client, SENDER, messages.WELCOME.PT);
-    utils.chatMessage(client, SENDER, messages.WELCOME.RU);
-    utils.chatMessage(client, SENDER, messages.WELCOME.ES);
-    utils.chatMessage(client, SENDER, messages.WELCOME.CN);
-    utils.chatMessage(client, SENDER, main.tutorial);
+    utils.inviteToGroup(client, community, SENDER.getSteamID64(), (err) => {
+      if (err) {
+        log.error(
+          `An error occurred fetching user from the steam group: ${err}`
+        );
+      }
+    });
+    chatMessage(client, SENDER, messages.WELCOME.EN);
+    chatMessage(client, SENDER, messages.WELCOME.PT);
+    chatMessage(client, SENDER, messages.WELCOME.RU);
+    chatMessage(client, SENDER, messages.WELCOME.ES);
+    chatMessage(client, SENDER, messages.WELCOME.CN);
+    chatMessage(client, SENDER, main.tutorial);
   }
 });
 // If the offer changes the state (example: Offer is created (1), confirmed (2) and the status changes to accepted (3) or declined (4).)
 manager.on('sentOfferChanged', (OFFER) => {
   if (OFFER.state === 2) {
-    // utils.chatMessage(client, OFFER.partner, "Your trade has been confirmed! Click here to accept it: https://www.steamcommunity.com/tradeoffer/" + OFFER.id);
-    utils.tradeoffer(
+    // chatMessage(client, OFFER.partner, "Your trade has been confirmed! Click here to accept it: https://www.steamcommunity.com/tradeoffer/" + OFFER.id);
+    log.tradeoffer(
       `Tradeoffer has been confirmed and is awaiting confirmation from User. TradeID:${OFFER.id}`
     );
   } else if (OFFER.state === 3) {
-    utils.tradeoffer(`Tradeoffer has been completed. TradeID:${OFFER.id}`);
+    log.tradeoffer(`Tradeoffer has been completed. TradeID:${OFFER.id}`);
 
     // Update stock
     inventory.updateStock(OFFER, client, community, allCards);
 
     // Invite steam group
-    utils.inviteToGroup(client, community, OFFER.partner.getSteamID64());
+    utils.inviteToGroup(
+      client,
+      community,
+      OFFER.partner.getSteamID64(),
+      (err) => {
+        if (err) {
+          log.error(
+            `An error occurred fetching user from the steam group: ${err}`
+          );
+        }
+      }
+    );
 
     // Trades history
-    utils.tradesHistory(OFFER);
+    log.tradesHistory(OFFER);
 
     let message = '/pre ';
     if (main.admins.indexOf(OFFER.partner.getSteamID64()) === -1) {
@@ -527,12 +543,12 @@ manager.on('sentOfferChanged', (OFFER) => {
       utils.notifyAdmin(client, users, OFFER);
 
       // Calculate profit
-      utils.calculateProfit(OFFER);
+      calculateProfit(OFFER);
 
       // Add giveaway entry if user entered
       utils.addGiveawayEntry(OFFER, (ERR) => {
         if (ERR) {
-          utils.error(
+          log.error(
             `An error occurred while writing giveaway entry file: ${ERR}`
           );
         } else {
@@ -540,14 +556,14 @@ manager.on('sentOfferChanged', (OFFER) => {
             messages.GIVEAWAY.ENTER[2][
               users[OFFER.partner.getSteamID64()].language
             ];
-          utils.warn('Giveaway entry added! ');
+          log.warn('Giveaway entry added! ');
         }
       });
 
       // Access to sets4sets command
       utils.accesstosets4sets(OFFER, (ERR, numsets) => {
         if (ERR) {
-          utils.error(`An error occurred while writing UserData file: ${ERR}`);
+          log.error(`An error occurred while writing UserData file: ${ERR}`);
         } else if (numsets > 0) {
           message += messages.SETS4SETS.CANUSE[1][
             users[OFFER.partner.getSteamID64()].language
@@ -563,7 +579,7 @@ manager.on('sentOfferChanged', (OFFER) => {
     }
     community.getSteamUser(OFFER.partner, (ERR, USER) => {
       if (ERR) {
-        utils.error(`An error occurred while getting user profile: ${ERR}`);
+        log.error(`An error occurred while getting user profile: ${ERR}`);
       } else {
         let canComment;
         const u = users[OFFER.partner.getSteamID64()];
@@ -584,7 +600,7 @@ manager.on('sentOfferChanged', (OFFER) => {
             messages.COMMENT[users[OFFER.partner.getSteamID64()].language],
             (ERR1) => {
               if (ERR1) {
-                utils.error(
+                log.error(
                   `An error occurred while commenting on user profile: ${ERR1}`
                 );
               } else {
@@ -597,7 +613,7 @@ manager.on('sentOfferChanged', (OFFER) => {
                   JSON.stringify(users),
                   (ERR2) => {
                     if (ERR2) {
-                      utils.error(
+                      log.error(
                         `An error occurred while writing UserData file: ${ERR2}`
                       );
                     }
@@ -608,7 +624,7 @@ manager.on('sentOfferChanged', (OFFER) => {
           );
         }
         if (message.length > 5) {
-          utils.chatMessage(client, OFFER.partner.getSteamID64(), message);
+          chatMessage(client, OFFER.partner.getSteamID64(), message);
         }
         utils.checkUserinGroup(
           community,
@@ -616,7 +632,7 @@ manager.on('sentOfferChanged', (OFFER) => {
           (err, isMember) => {
             if (!err) {
               if (main.groupSteam && main.doGroupInvites && !isMember) {
-                utils.chatMessage(
+                chatMessage(
                   client,
                   OFFER.partner.getSteamID64(),
                   messages.TRADE.DONE[0][
@@ -624,7 +640,7 @@ manager.on('sentOfferChanged', (OFFER) => {
                   ].replace('{GROUP}', main.groupSteam)
                 );
               } else {
-                utils.chatMessage(
+                chatMessage(
                   client,
                   OFFER.partner.getSteamID64(),
                   messages.TRADE.DONE[1][
@@ -633,14 +649,14 @@ manager.on('sentOfferChanged', (OFFER) => {
                 );
               }
             } else {
-              utils.chatMessage(
+              chatMessage(
                 client,
                 OFFER.partner.getSteamID64(),
                 messages.TRADE.DONE[1][
                   users[OFFER.partner.getSteamID64()].language
                 ]
               );
-              utils.error(
+              log.error(
                 `An error occurred inviting user to steam group: ${err}`
               );
             }
@@ -649,63 +665,61 @@ manager.on('sentOfferChanged', (OFFER) => {
       }
     });
   } else if (OFFER.state === 4) {
-    utils.chatMessage(
+    chatMessage(
       client,
       OFFER.partner,
       messages.TRADE.COUNTEROFFER[
         users[OFFER.partner.getSteamID64()].language
       ].replace('{OFFERID}', OFFER.id)
     );
-    utils.tradeoffer(`Aborted because of counter offer. TradeID:${OFFER.id}`);
+    log.tradeoffer(`Aborted because of counter offer. TradeID:${OFFER.id}`);
   } else if (OFFER.state === 5) {
-    utils.chatMessage(
+    chatMessage(
       client,
       OFFER.partner,
       messages.TRADE.EXPIRED[0][
         users[OFFER.partner.getSteamID64()].language
       ].replace('{OFFERID}', OFFER.id)
     );
-    utils.tradeoffer(`Tradeoffer expired. TradeID:${OFFER.id}`);
+    log.tradeoffer(`Tradeoffer expired. TradeID:${OFFER.id}`);
   } else if (OFFER.state === 6) {
-    utils.chatMessage(
+    chatMessage(
       client,
       OFFER.partner,
       messages.TRADE.EXPIRED[1][
         users[OFFER.partner.getSteamID64()].language
       ].replace('{OFFERID}', OFFER.id)
     );
-    utils.tradeoffer(
-      `Tradeoffer canceled by Bot (expired). TradeID:${OFFER.id}`
-    );
+    log.tradeoffer(`Tradeoffer canceled by Bot (expired). TradeID:${OFFER.id}`);
   } else if (OFFER.state === 7 || OFFER.state === 10) {
-    utils.chatMessage(
+    chatMessage(
       client,
       OFFER.partner,
       messages.TRADE.DECLINED.THEM[
         users[OFFER.partner.getSteamID64()].language
       ].replace('{OFFERID}', OFFER.id)
     );
-    utils.tradeoffer(`Tradeoffer declined by User. TradeID:${OFFER.id}`);
+    log.tradeoffer(`Tradeoffer declined by User. TradeID:${OFFER.id}`);
   } else if (OFFER.state === 8) {
-    utils.chatMessage(
+    chatMessage(
       client,
       OFFER.partner,
       messages.TRADE.DECLINED.US[1][
         users[OFFER.partner.getSteamID64()].language
       ].replace('{OFFERID}', OFFER.id)
     );
-    utils.tradeoffer(
+    log.tradeoffer(
       `Tradeoffer canceled by Bot (items unavailable). TradeID:${OFFER.id}`
     );
   } else if (OFFER.state === 11) {
-    utils.chatMessage(
+    chatMessage(
       client,
       OFFER.partner,
       messages.TRADE.ESCROW[
         users[OFFER.partner.getSteamID64()].language
       ].replace('{OFFERID}', OFFER.id)
     );
-    utils.tradeoffer(
+    log.tradeoffer(
       `Tradeoffer aborted because user is in escrow and cant trade. TradeID:${OFFER.id}`
     );
   }
@@ -718,28 +732,28 @@ manager.on('newOffer', (OFFER) => {
   ) {
     OFFER.getUserDetails((ERR1, ME, THEM) => {
       if (ERR1) {
-        utils.error(`An error occurred while getting trade holds: ${ERR1}`);
-        utils.chatMessage(
+        log.error(`An error occurred while getting trade holds: ${ERR1}`);
+        chatMessage(
           client,
           OFFER.partner,
           messages.ERROR.TRADEHOLD[users[OFFER.partner.getSteamID64()].language]
         );
         OFFER.decline((ERR2) => {
           if (ERR2) {
-            utils.error(`An error occurred while declining trade: ${ERR2}`);
+            log.error(`An error occurred while declining trade: ${ERR2}`);
           }
         });
       } else if (ME.escrowDays === 0 && THEM.escrowDays === 0) {
         OFFER.accept((ERR3) => {
           if (ERR3) {
-            utils.error(`An error occurred while accepting trade: ${ERR3}`);
+            log.error(`An error occurred while accepting trade: ${ERR3}`);
             OFFER.decline((ERR4) => {
               if (ERR4) {
-                utils.error(`An error occurred while accepting trade: ${ERR4}`);
+                log.error(`An error occurred while accepting trade: ${ERR4}`);
               }
             });
           } else {
-            utils.chatMessage(
+            chatMessage(
               client,
               OFFER.partner,
               messages.TRADE.ACCEPTED[
@@ -749,14 +763,14 @@ manager.on('newOffer', (OFFER) => {
           }
         });
       } else {
-        utils.chatMessage(
+        chatMessage(
           client,
           OFFER.partner,
           messages.TRADEHOLD[users[OFFER.partner.getSteamID64()].language]
         );
         OFFER.decline((ERR5) => {
           if (ERR5) {
-            utils.error(`An error occurred while declining trade: ${ERR5}`);
+            log.error(`An error occurred while declining trade: ${ERR5}`);
           }
         });
       }
@@ -764,14 +778,12 @@ manager.on('newOffer', (OFFER) => {
   } else if (OFFER.itemsToGive.length === 0) {
     if (main.acceptDonations) {
       OFFER.accept((ERR) => {
-        utils.tradeoffer(
-          `New Donation by user #${OFFER.partner.getSteamID64()}`
-        );
+        log.tradeoffer(`New Donation by user #${OFFER.partner.getSteamID64()}`);
         if (ERR) {
-          utils.error(`An error occurred while accepting trade: ${ERR}`);
+          log.error(`An error occurred while accepting trade: ${ERR}`);
         } else {
           for (let j = 0; j < main.admins.length; j += 1) {
-            utils.chatMessage(
+            chatMessage(
               client,
               main.admins[j],
               messages.TRADE.NOTIFYADMIN.DONATION[
@@ -779,7 +791,7 @@ manager.on('newOffer', (OFFER) => {
               ].replace('{ID64}', OFFER.partner.getSteamID64())
             );
           }
-          utils.chatMessage(
+          chatMessage(
             client,
             OFFER.partner,
             messages.TRADE.DONATION.ACCEPTED[
@@ -791,10 +803,10 @@ manager.on('newOffer', (OFFER) => {
     } else {
       OFFER.decline((ERR) => {
         if (ERR) {
-          utils.error(`An error occurred while declining trade: ${ERR}`);
+          log.error(`An error occurred while declining trade: ${ERR}`);
         }
       });
-      utils.chatMessage(
+      chatMessage(
         client,
         OFFER.partner,
         messages.TRADE.DONATION.DECLINED[
@@ -805,9 +817,9 @@ manager.on('newOffer', (OFFER) => {
   } else {
     OFFER.decline((ERR) => {
       if (ERR) {
-        utils.error(`An error occurred while declining trade: ${ERR}`);
+        log.error(`An error occurred while declining trade: ${ERR}`);
       }
-      utils.chatMessage(
+      chatMessage(
         client,
         OFFER.partner,
         messages.TRADE.DECLINED.US[0][
@@ -819,12 +831,12 @@ manager.on('newOffer', (OFFER) => {
 });
 // If we get a new confirmation then confirm the Trade
 community.on('newConfirmation', (CONF) => {
-  utils.tradeoffer('New confirmation.');
+  log.tradeoffer('New confirmation.');
   community.acceptConfirmationForObject(main.identitySecret, CONF.id, (ERR) => {
     if (ERR) {
-      utils.error(`An error occurred while accepting confirmation: ${ERR}`);
+      log.error(`An error occurred while accepting confirmation: ${ERR}`);
     } else {
-      utils.tradeoffer('Confirmation accepted.');
+      log.tradeoffer('Confirmation accepted.');
     }
   });
 });

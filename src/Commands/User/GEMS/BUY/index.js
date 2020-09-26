@@ -4,14 +4,17 @@ const messages = require('../../../../Config/messages');
 const rates = require('../../../../Config/rates');
 const utils = require('../../../../Utils/utils');
 const acceptedKeys = require('../../../../Config/keys');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, manager) => {
   if (inventory.botSets) {
     let n = msg.toUpperCase().replace('!BUYGEMS ', '');
     const amountofsets = parseInt(n, 10);
     if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
-      utils.userChat(
+      log.userChat(
         sender.getSteamID64(),
         users[sender.getSteamID64()].language,
         `[ !BUYGEMS ${n} ]`
@@ -21,7 +24,7 @@ module.exports = (sender, msg, client, users, manager) => {
         const theirGems = [];
         const mySets = [];
         let amountTheirGems = 0;
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.REQUEST[users[sender.getSteamID64()].language]
@@ -51,7 +54,7 @@ module.exports = (sender, msg, client, users, manager) => {
                 }
               }
               if (amountTheirGems < n * rates.gems.sell) {
-                utils.chatMessage(
+                chatMessage(
                   client,
                   sender,
                   messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.THEM[0][
@@ -61,7 +64,7 @@ module.exports = (sender, msg, client, users, manager) => {
               } else {
                 utils.getBadges(sender.getSteamID64(), (ERR2, DATA) => {
                   if (!ERR2) {
-                    utils.warn('Badge loaded without error');
+                    log.warn('Badge loaded without error');
                     const b = {}; // List with badges that CAN still be crafted
                     if (DATA) {
                       for (let i = 0; i < Object.keys(DATA).length; i += 1) {
@@ -71,7 +74,7 @@ module.exports = (sender, msg, client, users, manager) => {
                         }
                       }
                     } else {
-                      utils.chatMessage(
+                      chatMessage(
                         client,
                         sender.getSteamID64(),
                         messages.ERROR.BADGES[2][
@@ -202,7 +205,7 @@ module.exports = (sender, msg, client, users, manager) => {
                           }
                         }
                         if (hisMaxSets > 0) {
-                          utils.chatMessage(
+                          chatMessage(
                             client,
                             sender,
                             messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
@@ -215,7 +218,7 @@ module.exports = (sender, msg, client, users, manager) => {
                           ]
                             .replace('{SETS}', amountofsets)
                             .replace('{GEMS}', n * rates.gems.sell);
-                          utils.makeOffer(
+                          makeOffer(
                             client,
                             users,
                             manager,
@@ -232,7 +235,7 @@ module.exports = (sender, msg, client, users, manager) => {
                         }
                       });
                     } else {
-                      utils.chatMessage(
+                      chatMessage(
                         client,
                         sender,
                         messages.ERROR.OUTOFSTOCK.NOTUSED.GEMS[
@@ -241,46 +244,46 @@ module.exports = (sender, msg, client, users, manager) => {
                       );
                     }
                   } else {
-                    utils.chatMessage(
+                    chatMessage(
                       client,
                       sender,
                       messages.ERROR.BADGES[1][
                         users[sender.getSteamID64()].language
                       ]
                     );
-                    utils.error(
+                    log.error(
                       `An error occurred while loading badges: ${ERR2}`
                     );
                   }
                 });
               }
             } else if (ERR1.message.indexOf('profile is private') > -1) {
-              utils.chatMessage(
+              chatMessage(
                 client,
                 sender,
                 messages.ERROR.LOADINVENTORY.THEM[2][
                   users[sender.getSteamID64()].language
                 ]
               );
-              utils.error(
+              log.error(
                 `An error occurred while getting user inventory: ${ERR1}`
               );
             } else {
-              utils.chatMessage(
+              chatMessage(
                 client,
                 sender,
                 messages.ERROR.LOADINVENTORY.THEM[0][
                   users[sender.getSteamID64()].language
                 ]
               );
-              utils.error(
+              log.error(
                 `An error occurred while getting user inventory: ${ERR1}`
               );
             }
           }
         );
       } else {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.ERROR.INPUT.AMOUNTOVER.SETS[
@@ -289,7 +292,7 @@ module.exports = (sender, msg, client, users, manager) => {
         );
       }
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.INPUT.INVALID.SETS[
@@ -298,7 +301,7 @@ module.exports = (sender, msg, client, users, manager) => {
       );
     }
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[2][

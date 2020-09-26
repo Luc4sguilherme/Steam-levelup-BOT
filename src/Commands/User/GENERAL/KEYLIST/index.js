@@ -1,8 +1,9 @@
+const chatMessage = require('../../../../Components/message');
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users) => {
-  utils.userChat(
+  log.userChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !KEYLIST ]'
@@ -33,5 +34,5 @@ module.exports = (sender, client, users) => {
     message +=
       messages.KEYLIST.ACCEPTED.TF[users[sender.getSteamID64()].language][j];
   }
-  utils.chatMessage(client, sender, message);
+  chatMessage(client, sender, message);
 };

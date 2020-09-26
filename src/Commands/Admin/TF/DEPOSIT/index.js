@@ -1,16 +1,18 @@
-const utils = require('../../../../Utils/utils');
 const messages = require('../../../../Config/messages');
 const acceptedKeys = require('../../../../Config/keys');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, manager) => {
   const amountkeys = parseInt(msg.toUpperCase().replace('!DEPOSITTF ', ''), 10);
   if (!Number.isNaN(amountkeys) && parseInt(amountkeys, 10) > 0) {
-    utils.adminChat(
+    log.adminChat(
       sender.getSteamID64(),
       users[sender.getSteamID64()].language,
       `[ !DEPOSITTF ${amountkeys} ]`
     );
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.REQUEST[users[sender.getSteamID64()].language]
@@ -32,7 +34,7 @@ module.exports = (sender, msg, client, users, manager) => {
             }
           }
           if (theirKeys.length < amountkeys) {
-            utils.chatMessage(
+            chatMessage(
               client,
               sender,
               messages.ERROR.OUTOFSTOCK.DEFAULT.TF.THEM[1][
@@ -43,7 +45,7 @@ module.exports = (sender, msg, client, users, manager) => {
             const message = messages.TRADE.SETMESSAGE[0].TF[
               users[sender.getSteamID64()].language
             ].replace('{TF}', amountkeys);
-            utils.makeOffer(
+            makeOffer(
               client,
               users,
               manager,
@@ -59,28 +61,28 @@ module.exports = (sender, msg, client, users, manager) => {
             );
           }
         } else if (ERR.message.indexOf('profile is private') > -1) {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[2][
               users[sender.getSteamID64()].language
             ]
           );
-          utils.error(`An error occurred while getting user inventory: ${ERR}`);
+          log.error(`An error occurred while getting user inventory: ${ERR}`);
         } else {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[0][
               users[sender.getSteamID64()].language
             ]
           );
-          utils.error(`An error occurred while getting user inventory: ${ERR}`);
+          log.error(`An error occurred while getting user inventory: ${ERR}`);
         }
       }
     );
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.INPUT.INVALID.TF[

@@ -1,20 +1,21 @@
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
-const inventory = require('../../../../Utils/inventory');
+const log = require('../../../../Components/log');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
 
 module.exports = (sender, client, users) => {
-  utils.userChat(
+  log.userChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !STOCK ]'
   );
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
   setTimeout(function () {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.STOCK[users[sender.getSteamID64()].language]

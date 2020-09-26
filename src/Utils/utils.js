@@ -7,14 +7,12 @@ const _ = require('lodash');
 const request = require('request-promise');
 const fs = require('fs');
 const path = require('path');
-const colour = require('cli-color');
+
 const jsonfile = require('jsonfile');
 const util = require('util');
 
 const main = require('../Config/main.js');
 const messages = require('../Config/messages.js');
-
-const apiKey = main.steamLadderApiKey;
 
 const utils = {};
 
@@ -51,192 +49,6 @@ utils.date1 = () => {
 utils.date2 = () => {
   const time = new Date(utils.timeZone());
   return `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`;
-};
-
-utils.warn = (data) => {
-  const text = `${utils.date1()} @ [ WARN ] ${data}`;
-  if (main.log.warn.enabled) {
-    console.log(colour[main.log.warn.color](text));
-  }
-  fs.appendFile(
-    `./Data/History/Warn/log-${utils.date2()}.txt`,
-    `${text}\r\n`,
-    {
-      flags: 'a',
-    },
-    (ERR) => {
-      if (ERR) {
-        utils.error(`An error occurred while writing warn logs file: ${ERR}`);
-      }
-    }
-  );
-};
-
-utils.error = (data) => {
-  const text = `${utils.date1()} @ [ ERROR ] ${data}`;
-  if (main.log.error.enabled) {
-    console.log(colour[main.log.error.color](text));
-  }
-  fs.appendFile(
-    `./Data/History/Error/log-${utils.date2()}.txt`,
-    `${text}\r\n`,
-    {
-      flags: 'a',
-    },
-    (ERR) => {
-      if (ERR) {
-        utils.error(`An error occurred while writing Error logs file: ${ERR}`);
-      }
-    }
-  );
-};
-
-utils.info = (data) => {
-  const text = `${utils.date1()} @ [ INFO ] ${data}`;
-  if (main.log.info.enabled) {
-    console.log(colour[main.log.info.color](text));
-  }
-  fs.appendFile(
-    `./Data/History/Info/log-${utils.date2()}.txt`,
-    `${text}\r\n`,
-    {
-      flags: 'a',
-    },
-    (ERR) => {
-      if (ERR) {
-        utils.error(`An error occurred while writing Info logs file: ${ERR}`);
-      }
-    }
-  );
-};
-
-utils.userChat = (id64, userLang, data) => {
-  const text = `${utils.date1()} @ [ USERCHAT: ${id64}][ ${userLang} ]${data}`;
-  if (main.log.userChat.enabled) {
-    console.log(colour[main.log.userChat.color](text));
-  }
-  fs.appendFile(
-    `./Data/History/UserChat/log-${utils.date2()}.txt`,
-    `${text}\r\n`,
-    {
-      flags: 'a',
-    },
-    (ERR) => {
-      if (ERR) {
-        utils.error(
-          `An error occurred while writing UserChat logs file: ${ERR}`
-        );
-      }
-    }
-  );
-};
-
-utils.adminChat = (id64, userLang, data) => {
-  const text = `${utils.date1()} @ [ ADMINCHAT: ${id64}][ ${userLang} ]${data}`;
-  if (main.log.adminChat.enabled) {
-    console.log(colour[main.log.adminChat.color](text));
-  }
-  fs.appendFile(
-    `./Data/History/adminChat/log-${utils.date2()}.txt`,
-    `${text}\r\n`,
-    {
-      flags: 'a',
-    },
-    (ERR) => {
-      if (ERR) {
-        utils.error(
-          `An error occurred while writing AdminChat logs file: ${ERR}`
-        );
-      }
-    }
-  );
-};
-
-utils.tradeoffer = (data) => {
-  const text = `${utils.date1()} @ [ TRADEOFFER ] ${data}`;
-  if (main.log.tradeOffer.enabled) {
-    console.log(colour[main.log.tradeOffer.color](text));
-  }
-  fs.appendFile(
-    `./Data/History/Tradeoffer/log-${utils.date2()}.txt`,
-    `${text}\r\n`,
-    {
-      flags: 'a',
-    },
-    (ERR) => {
-      if (ERR) {
-        utils.error(
-          `An error occurred while writing Tradeoffer logs file: ${ERR}`
-        );
-      }
-    }
-  );
-};
-
-utils.botLogs = (id64, msg) => {
-  const separator =
-    '==========================================================';
-  const dir = `./Data/ChatLogs/BotLogs/${utils.date2()}`;
-  const timeZone = new Date(utils.timeZone());
-  const time = `${`0${timeZone.getHours()}`.slice(
-    -2
-  )}:${`0${timeZone.getMinutes()}`.slice(
-    -2
-  )}:${`0${timeZone.getSeconds()}`.slice(-2)}`;
-
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
-
-  fs.appendFile(
-    `${dir}/${id64}.txt`,
-    `${separator} ${time} ${separator} 
-    ${msg} \r\n\r\n`,
-    {
-      flags: 'a',
-    },
-    (ERR) => {
-      if (ERR) {
-        utils.error(
-          `An error occurred while writing Bot ChatLogs file: ${ERR}`
-        );
-      }
-    }
-  );
-};
-
-utils.userLogs = (id64, msg) => {
-  const dir = `./Data/ChatLogs/UserLogs/${utils.date2()}`;
-  const timeZone = new Date(utils.timeZone());
-  const time = `${`0${timeZone.getHours()}`.slice(
-    -2
-  )}:${`0${timeZone.getMinutes()}`.slice(
-    -2
-  )}:${`0${timeZone.getSeconds()}`.slice(-2)}`;
-
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
-
-  fs.appendFile(
-    `${dir}/${id64}.txt`,
-    `${time} --> ${msg} \r`,
-    {
-      flags: 'a',
-    },
-    (ERR) => {
-      if (ERR) {
-        utils.error(
-          `An error occurred while writing User ChatLogs file: ${ERR}`
-        );
-      }
-    }
-  );
-};
-
-utils.chatMessage = (client, id64, msg) => {
-  client.chatMessage(id64, msg);
-  utils.botLogs(id64, msg);
 };
 
 utils.getMonth = (value, language) => {
@@ -346,124 +158,23 @@ utils.getleftovercards = (SID, community, cards, callback) => {
 };
 
 utils.getRep = async (SID, callback) => {
-  const url = 'https://steamrep.com/api/beta4/reputation/';
-  const options = {
-    method: 'GET',
-    uri: url + SID,
-    qs: {
-      tagdetails: 1,
-      extended: 1,
-      json: 1,
-    },
-  };
+  try {
+    const url = 'https://steamrep.com/api/beta4/reputation/';
+    const options = {
+      method: 'GET',
+      uri: url + SID,
+      qs: {
+        tagdetails: 1,
+        extended: 1,
+        json: 1,
+      },
+    };
 
-  await request(options)
-    .then(function (response) {
-      // Handle the response
-      callback(null, response);
-    })
-    .catch(function (ERR) {
-      // Deal with the error
-      callback(ERR);
-    });
-};
-
-utils.getRank = async (SID, callback) => {
-  const baseURL = 'https://steamladder.com/api/v1';
-  const options = {
-    method: 'GET',
-    uri: `${baseURL}/profile/${SID}`,
-    json: true,
-    headers: {
-      Authorization: `Token ${apiKey}`,
-    },
-  };
-
-  await request(options)
-    .then(function (response) {
-      // Handle the response
-      callback(
-        null,
-        response.ladder_rank.worldwide_xp,
-        response.ladder_rank.region.region_xp,
-        response.ladder_rank.country.country_xp
-      );
-    })
-    .catch(function (ERR) {
-      // Deal with the error
-      callback(ERR);
-    });
-};
-
-utils.updateRank = async (SID) => {
-  const baseURL = 'https://steamladder.com/api/v1';
-  const options = {
-    method: 'POST',
-    uri: `${baseURL}/profile/${SID}/`,
-    json: true,
-    headers: {
-      Authorization: `Token ${apiKey}`,
-    },
-  };
-
-  await request(options)
-    .then(function () {
-      // Handle the response
-      utils.warn('Rank updated');
-    })
-    .catch(function (ERR) {
-      // Deal with the error
-      utils.error(`An error occurred while updating the rank: ${ERR}`);
-    });
-};
-
-utils.maxSets = (cardsFromSortedInventory) => {
-  let cardCounts = _.mapValues(
-    cardsFromSortedInventory,
-    (cardsArray) => cardsArray.length
-  );
-  cardCounts = Object.keys(cardCounts).map((key) => cardCounts[key]);
-  return Math.min(...cardCounts);
-};
-
-utils.getCardsInSets = (callback) => {
-  fs.readFile('./Data/Sets/set_data.json', 'utf8', (err, data) => {
-    if (err) {
-      callback(err);
-    } else {
-      const c = JSON.parse(data);
-      const d = {};
-      for (let i = 0; i < c.sets.length; i += 1) {
-        d[c.sets[i].appid] = {
-          appid: c.sets[i].appid,
-          name: c.sets[i].game,
-          count: c.sets[i].normal.count,
-        };
-      }
-      callback(null, d);
-    }
-  });
-};
-
-utils.getSets = (INV, DATA, callback) => {
-  const s = {};
-  _.forOwn(INV, (c, id) => {
-    const uc = Object.keys(c).length;
-    if (DATA[id.toString()] && uc === DATA[id.toString()].count) {
-      const r = utils.maxSets(c);
-      s[id.toString()] = [];
-      for (let i = 0; i < r; i += 1) {
-        const set = [];
-        _.forOwn(c, (e) => {
-          set.push(e[i]);
-        });
-        s[id.toString()].push(set);
-      }
-    } else if (!DATA[id.toString()]) {
-      utils.warn(`Card set non-existent, skipping it ${id.toString()} `);
-    }
-  });
-  callback(null, s);
+    const response = await request(options);
+    callback(null, response);
+  } catch (error) {
+    callback(error);
+  }
 };
 
 utils.getBadges = (SID, callback) => {
@@ -510,73 +221,6 @@ utils.getLevelExp = (level) => {
     exp += ExpForLevel(i);
   }
   return exp;
-};
-
-utils.makeOffer = (
-  client,
-  users,
-  manager,
-  target,
-  itemsFromMe,
-  itemsFromThem,
-  commandused,
-  message,
-  amountofsets = 0,
-  amountofleftovers = 0,
-  amountofkeys = 0,
-  amountofgems = 0
-) => {
-  const offer = manager.createOffer(target);
-  offer.addMyItems(itemsFromMe);
-  offer.addTheirItems(itemsFromThem);
-
-  utils.tradeoffer('Creating trade offer');
-
-  offer.data('commandused', commandused);
-  if (amountofsets) {
-    offer.data('amountofsets', amountofsets);
-  }
-  if (amountofleftovers) {
-    offer.data('amountofleftovers', amountofleftovers);
-  }
-  if (amountofkeys) {
-    offer.data('amountofkeys', amountofkeys);
-  }
-  if (amountofgems) {
-    offer.data('amountofgems', amountofgems);
-  }
-
-  offer.setMessage(message);
-  offer.getUserDetails((ERR1, ME, THEM) => {
-    if (ERR1) {
-      utils.error(`An error occurred while getting trade holds: ${ERR1}`);
-      client.chatMessage(
-        target,
-        messages.ERROR.TRADEHOLD[users[target].language]
-      );
-    } else if (ME.escrowDays === 0 && THEM.escrowDays === 0) {
-      utils.tradeoffer('Sending trade offer');
-      offer.send((ERR2) => {
-        if (ERR2) {
-          client.chatMessage(
-            target,
-            messages.ERROR.SENDTRADE[users[target].language]
-          );
-          utils.error(`An error occurred while sending trade offer: ${ERR2}`);
-        } else {
-          client.chatMessage(
-            target,
-            `${messages.TRADEMSG[users[target].language]} \n\n`
-          );
-          utils.tradeoffer(
-            `offer #${offer.id} sent successfully to user #${target}`
-          );
-        }
-      });
-    } else {
-      client.chatMessage(target, messages.TRADEHOLD[users[target].language]);
-    }
-  });
 };
 
 utils.addGiveawayEntry = (offer, callback) => {
@@ -643,7 +287,7 @@ utils.checkUserinGroup = (community, target, callback) => {
   });
 };
 
-utils.inviteToGroup = (client, community, target) => {
+utils.inviteToGroup = (client, community, target, callback) => {
   if (main.groupID && main.doGroupInvites) {
     const customer = target;
     utils.checkUserinGroup(community, customer, (err, isMember) => {
@@ -652,38 +296,10 @@ utils.inviteToGroup = (client, community, target) => {
           client.inviteToGroup(customer, main.groupID);
         }
       } else {
-        utils.error(
-          `An error occurred fetching user from the steam group: ${err}`
-        );
+        callback(err);
       }
     });
   }
-};
-
-utils.tradesHistory = (offer) => {
-  let d = `Command: ${offer.data('commandused')}`;
-  if (offer.data('amountofsets')) {
-    d += `\nSets: ${offer.data('amountofsets')}`;
-  }
-  if (offer.data('amountofleftovers')) {
-    d += `\nLeftovers: ${offer.data('amountofleftovers')}`;
-  }
-  if (offer.data('amountofkeys')) {
-    d += `\nKeys: ${offer.data('amountofkeys')}`;
-  }
-  if (offer.data('amountofgems')) {
-    d += `\nGems: ${offer.data('amountofgems')}`;
-  }
-  d += `\nSteamID: ${offer.partner.getSteamID64()}`;
-  fs.writeFile(
-    `./Data/TradesAccepted/${offer.id}-${offer.partner.getSteamID64()}.txt`,
-    d,
-    (ERR) => {
-      if (ERR) {
-        utils.error(`An error occurred while writing trade file: ${ERR}`);
-      }
-    }
-  );
 };
 
 utils.notifyAdmin = (client, users, offer) => {
@@ -740,86 +356,6 @@ utils.notifyAdmin = (client, users, offer) => {
   }
 };
 
-utils.calculateProfit = async (offer) => {
-  try {
-    const profit = JSON.parse(
-      await utils.readFileAsync(
-        `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
-          -2
-        )}-${new Date().getFullYear()}.json`
-      )
-    );
-
-    if (offer.data('commandused').search(/BUY/) !== -1) {
-      profit.totaltrades += 1;
-      if (offer.data('commandused').search(/CSGO/) !== -1) {
-        profit.buy.csgo.sets += parseInt(offer.data('amountofsets'), 10);
-        profit.buy.csgo.currency += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.csgo += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.sets -= parseInt(offer.data('amountofsets'), 10);
-      }
-      if (offer.data('commandused').search(/HYDRA/) !== -1) {
-        profit.buy.hydra.sets += parseInt(offer.data('amountofsets'), 10);
-        profit.buy.hydra.currency += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.hydra += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.sets -= parseInt(offer.data('amountofsets'), 10);
-      }
-      if (offer.data('commandused').search(/TF/) !== -1) {
-        profit.buy.tf.sets += parseInt(offer.data('amountofsets'), 10);
-        profit.buy.tf.currency += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.tf += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.sets -= parseInt(offer.data('amountofsets'), 10);
-      }
-      if (offer.data('commandused').search(/GEMS/) !== -1) {
-        profit.buy.gems.sets += parseInt(offer.data('amountofsets'), 10);
-        profit.buy.gems.currency += parseInt(offer.data('amountofgems'), 10);
-        profit.status.gems += parseInt(offer.data('amountofgems'), 10);
-        profit.status.sets -= parseInt(offer.data('amountofsets'), 10);
-      }
-    }
-    if (offer.data('commandused').search(/SELL/) !== -1) {
-      profit.totaltrades += 1;
-      if (offer.data('commandused').search(/CSGO/) !== -1) {
-        profit.sell.csgo.sets += parseInt(offer.data('amountofsets'), 10);
-        profit.sell.csgo.currency += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.csgo -= parseInt(offer.data('amountofkeys'), 10);
-        profit.status.sets += parseInt(offer.data('amountofsets'), 10);
-      }
-      if (offer.data('commandused').search(/HYDRA/) !== -1) {
-        profit.sell.hydra.sets += parseInt(offer.data('amountofsets'), 10);
-        profit.sell.hydra.currency += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.hydra -= parseInt(offer.data('amountofkeys'), 10);
-        profit.status.sets += parseInt(offer.data('amountofsets'), 10);
-      }
-      if (offer.data('commandused').search(/TF/) !== -1) {
-        profit.sell.tf.sets += parseInt(offer.data('amountofsets'), 10);
-        profit.sell.tf.currency += parseInt(offer.data('amountofkeys'), 10);
-        profit.status.tf -= parseInt(offer.data('amountofkeys'), 10);
-        profit.status.sets += parseInt(offer.data('amountofsets'), 10);
-      }
-      if (offer.data('commandused').search(/GEMS/) !== -1) {
-        profit.sell.gems.sets += parseInt(offer.data('amountofsets'), 10);
-        profit.sell.gems.currency += parseInt(offer.data('amountofgems'), 10);
-        profit.status.gems -= parseInt(offer.data('amountofgems'), 10);
-        profit.status.sets += parseInt(offer.data('amountofsets'), 10);
-      }
-    }
-    fs.writeFile(
-      `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
-        -2
-      )}-${new Date().getFullYear()}.json`,
-      JSON.stringify(profit),
-      (ERR) => {
-        if (ERR) {
-          utils.error(`An error occurred while writing profit file: ${ERR}`);
-        }
-      }
-    );
-  } catch (error) {
-    utils.error(`An error occurred while getting profit.json : ${error}`);
-  }
-};
-
 utils.playLoading = {
   playThis: ['', true],
   moon: ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'],
@@ -841,135 +377,6 @@ utils.playLoading = {
     this.count = 0;
     clearInterval(this.timer);
   },
-};
-
-utils.request = (ID64, community, allCards, manager, inventory, callback) => {
-  if (ID64) {
-    utils.warn(`Auto Request to #${ID64}`);
-    inventory.getInventory(ID64, community, (ERR1, DATA1) => {
-      if (!ERR1) {
-        const s = DATA1;
-        utils.getSets(s, allCards, (ERR2, DATA2) => {
-          utils.warn('SETS LOADED');
-          if (!ERR2) {
-            let userNSets = 0;
-            for (let i = 0; i < Object.keys(DATA2).length; i += 1) {
-              userNSets += DATA2[Object.keys(DATA2)[i]].length;
-            }
-            utils.warn('Creating trade offer');
-            const t = manager.createOffer(ID64);
-            let amountofB = main.requester.amount
-              ? main.requester.amount
-              : userNSets;
-            const setsSent = {};
-            const cardsSent = {};
-            const Cards = {};
-            for (let j = 0; j < Object.keys(DATA1).length; j += 1) {
-              Cards[Object.keys(DATA1)[j]] = Object.values(
-                Object.values(DATA1)[j]
-              );
-            }
-            utils.sortSetsByAmountB(s, (DATA3) => {
-              firstLoop: for (let i = 0; i < DATA3.length; i += 1) {
-                if (DATA2[DATA3[i]]) {
-                  for (let j = 0; j < DATA2[DATA3[i]].length; j += 1) {
-                    if (amountofB > 0) {
-                      if (!setsSent[DATA3[i]]) {
-                        setsSent[DATA3[i]] = 0;
-                      }
-                      if (
-                        main.requester.ignoreLimit
-                          ? true
-                          : setsSent[DATA3[i]] +
-                              (inventory.botSets[DATA3[i]]
-                                ? inventory.botSets[DATA3[i]].length
-                                : 0) <
-                            main.maxStock
-                      ) {
-                        t.addTheirItems(DATA2[DATA3[i]][j]);
-                        amountofB -= 1;
-                        setsSent[DATA3[i]] += 1;
-                      } else {
-                        continue firstLoop;
-                      }
-                    } else {
-                      continue firstLoop;
-                    }
-                  }
-                } else if (main.requester.sendLeftOvers) {
-                  if (Cards[DATA3[i]]) {
-                    for (let j = 0; j < Cards[DATA3[i]].length; j += 1) {
-                      for (let k = 0; k < Cards[DATA3[i]][j].length; k += 1) {
-                        if (
-                          (cardsSent[DATA3[i]] && cardsSent[DATA3[i]] > -1) ||
-                          !cardsSent[DATA3[i]]
-                        ) {
-                          t.addTheirItems(Cards[DATA3[i]][j]);
-                          if (!cardsSent[DATA3[i]]) {
-                            cardsSent[DATA3[i]] = 1;
-                          } else {
-                            cardsSent[DATA3[i]] += 1;
-                          }
-                        } else {
-                          continue firstLoop;
-                        }
-                      }
-                    }
-                  } else {
-                    continue;
-                  }
-                } else {
-                  continue;
-                }
-              }
-            });
-            let amountofSets = 0;
-            let amountofleftovers = 0;
-            for (const key in setsSent) {
-              if (Object.prototype.hasOwnProperty.call(setsSent, key)) {
-                amountofSets += setsSent[key];
-              }
-            }
-            for (const key in cardsSent) {
-              if (Object.prototype.hasOwnProperty.call(cardsSent, key)) {
-                amountofleftovers += cardsSent[key];
-              }
-            }
-            callback(true);
-            if (
-              (main.requester.sendLeftOvers && amountofleftovers > 0) ||
-              amountofSets > 0
-            ) {
-              utils.warn('Sending trade offer');
-              t.data('commandused', 'AUTOREQUEST');
-              t.data('amountofsets', amountofSets.toString());
-              t.data('amountofleftovers', amountofleftovers.toString());
-              t.data('amountofgems', 0);
-              t.data('amountofkeys', 0);
-              t.setMessage('Auto Request');
-              t.send((ERR3) => {
-                if (ERR3) {
-                  utils.error(
-                    `An error occurred while sending trade offer: ${ERR3}`
-                  );
-                } else {
-                  utils.warn(`offer #${t.id} sent successfully`);
-                }
-              });
-            } else {
-              utils.warn("Didn't find cards to requests.");
-            }
-          } else {
-            utils.error(`An error occurred while getting user sets: ${ERR2}`);
-          }
-        });
-      } else {
-        utils.error(`An error occurred while getting user inventory: ${ERR1}`);
-      }
-    });
-  } else {
-    utils.error('An error occurred while auto request: target is not defined');
-  }
 };
 
 // Sorting Sets by Amout but reversed

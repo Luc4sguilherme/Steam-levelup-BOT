@@ -1,12 +1,14 @@
+const chatMessage = require('../../../../Components/message');
 const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
 const rates = require('../../../../Config/rates');
 const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users) => {
   const n = parseInt(msg.toUpperCase().replace('!LEVEL ', ''), 10);
   if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
-    utils.userChat(
+    log.userChat(
       sender.getSteamID64(),
       users[sender.getSteamID64()].language,
       `[ !LEVEL ${n} ]`
@@ -49,7 +51,7 @@ module.exports = (sender, msg, client, users) => {
                     (s - Math.floor(XPNEEDED / 100)) * rates.gems.sell,
                     10
                   );
-                  utils.chatMessage(
+                  chatMessage(
                     client,
                     sender,
                     messages.LEVEL.RESPONSE[
@@ -67,7 +69,7 @@ module.exports = (sender, msg, client, users) => {
                       .replace('{gems}', gems)
                   );
                 } else {
-                  utils.chatMessage(
+                  chatMessage(
                     client,
                     sender,
                     messages.ERROR.INPUT.AMOUNTLOW.LEVEL[
@@ -76,22 +78,22 @@ module.exports = (sender, msg, client, users) => {
                   );
                 }
               } else {
-                utils.chatMessage(
+                chatMessage(
                   client,
                   sender,
                   messages.ERROR.LEVEL[1][users[sender.getSteamID64()].language]
                 );
               }
             } else {
-              utils.chatMessage(
+              chatMessage(
                 client,
                 sender,
                 messages.ERROR.LEVEL[0][users[sender.getSteamID64()].language]
               );
             }
           } else {
-            utils.error(`An error occurred while getting badge data: ${ERR}`);
-            utils.chatMessage(
+            log.error(`An error occurred while getting badge data: ${ERR}`);
+            chatMessage(
               client,
               sender,
               messages.ERROR.BADGES[1][users[sender.getSteamID64()].language]
@@ -100,7 +102,7 @@ module.exports = (sender, msg, client, users) => {
         }
       );
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.LEVEL[
@@ -109,7 +111,7 @@ module.exports = (sender, msg, client, users) => {
       );
     }
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.INPUT.INVALID.LEVEL[users[sender.getSteamID64()].language]

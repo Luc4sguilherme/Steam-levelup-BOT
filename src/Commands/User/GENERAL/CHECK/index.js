@@ -2,19 +2,21 @@ const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
 const rates = require('../../../../Config/rates');
 const utils = require('../../../../Utils/utils');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users) => {
   const m = msg.toUpperCase().replace('!CHECK ', '');
   const n = parseInt(m, 10);
   if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
     if (main.maxCheck.csgo >= n) {
-      utils.userChat(
+      log.userChat(
         sender.getSteamID64(),
         users[sender.getSteamID64()].language,
         `[ !CHECK ${n} ]`
       );
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.CHECK.AMOUNT[users[sender.getSteamID64()].language]
@@ -24,7 +26,7 @@ module.exports = (sender, msg, client, users) => {
           .replace('{HYDRASELL}', n * rates.hydra.sell)
       );
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.CSGO[
@@ -34,12 +36,12 @@ module.exports = (sender, msg, client, users) => {
     }
   } else if (m === '!CHECK') {
     if (Object.keys(inventory.botSets).length > 0) {
-      utils.userChat(
+      log.userChat(
         sender.getSteamID64(),
         users[sender.getSteamID64()].language,
         '[ !CHECK ]'
       );
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.REQUEST[users[sender.getSteamID64()].language]
@@ -131,7 +133,7 @@ module.exports = (sender, msg, client, users) => {
                     i += 1;
                   } while (utils.getLevelExp(i) <= totalExp);
                   if (CURRENTLEVEL !== i - 1) {
-                    utils.chatMessage(
+                    chatMessage(
                       client,
                       sender,
                       messages.CHECK.DEFAULT.RESPONSE[0][
@@ -142,7 +144,7 @@ module.exports = (sender, msg, client, users) => {
                         .replace('{MESSAGE}', message)
                     );
                   } else {
-                    utils.chatMessage(
+                    chatMessage(
                       client,
                       sender,
                       messages.CHECK.DEFAULT.RESPONSE[1][
@@ -154,7 +156,7 @@ module.exports = (sender, msg, client, users) => {
                     );
                   }
                 } else {
-                  utils.chatMessage(
+                  chatMessage(
                     client,
                     sender,
                     messages.ERROR.LEVEL[1][
@@ -163,7 +165,7 @@ module.exports = (sender, msg, client, users) => {
                   );
                 }
               } else {
-                utils.chatMessage(
+                chatMessage(
                   client,
                   sender,
                   messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[3][
@@ -172,24 +174,24 @@ module.exports = (sender, msg, client, users) => {
                 );
               }
             } else {
-              utils.chatMessage(
+              chatMessage(
                 client,
                 sender,
                 messages.ERROR.BADGES[0][users[sender.getSteamID64()].language]
               );
             }
           } else {
-            utils.chatMessage(
+            chatMessage(
               client,
               sender,
               messages.ERROR.BADGES[1][users[sender.getSteamID64()].language]
             );
-            utils.error(`An error occurred while getting badges: ${ERR}`);
+            log.error(`An error occurred while getting badges: ${ERR}`);
           }
         }
       );
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[2][
@@ -198,7 +200,7 @@ module.exports = (sender, msg, client, users) => {
       );
     }
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.INPUT.UNKNOW.CUSTOMER[

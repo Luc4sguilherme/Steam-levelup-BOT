@@ -1,6 +1,8 @@
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
 const acceptedKeys = require('../../../../Config/keys');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, manager) => {
   const amountgems = parseInt(
@@ -8,12 +10,12 @@ module.exports = (sender, msg, client, users, manager) => {
     10
   );
   if (!Number.isNaN(amountgems) && parseInt(amountgems, 10) > 0) {
-    utils.adminChat(
+    log.adminChat(
       sender.getSteamID64(),
       users[sender.getSteamID64()].language,
       `[ !DEPOSITGEMS ${amountgems} ]`
     );
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.REQUEST[users[sender.getSteamID64()].language]
@@ -44,7 +46,7 @@ module.exports = (sender, msg, client, users, manager) => {
             }
           }
           if (theirgems < amountgems) {
-            utils.chatMessage(
+            chatMessage(
               client,
               sender,
               messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.THEM[1][
@@ -55,7 +57,7 @@ module.exports = (sender, msg, client, users, manager) => {
             const message = messages.TRADE.SETMESSAGE[0].GEMS[
               users[sender.getSteamID64()].language
             ].replace('{GEMS}', amountgems);
-            utils.makeOffer(
+            makeOffer(
               client,
               users,
               manager,
@@ -71,28 +73,28 @@ module.exports = (sender, msg, client, users, manager) => {
             );
           }
         } else if (ERR.message.indexOf('profile is private') > -1) {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[2][
               users[sender.getSteamID64()].language
             ]
           );
-          utils.error(`An error occurred while getting user inventory: ${ERR}`);
+          log.error(`An error occurred while getting user inventory: ${ERR}`);
         } else {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[0][
               users[sender.getSteamID64()].language
             ]
           );
-          utils.error(`An error occurred while getting user inventory: ${ERR}`);
+          log.error(`An error occurred while getting user inventory: ${ERR}`);
         }
       }
     );
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.INPUT.INVALID.GEMS[

@@ -1,24 +1,25 @@
-const utils = require('../../../../Utils/utils');
 const messages = require('../../../../Config/messages');
+const chatMessage = require('../../../../Components/message');
+const log = require('../../../../Components/log');
 
 // Relog automatic
 function restart(client) {
-  utils.warn('Restarting...');
+  log.warn('Restarting...');
   client.relog();
 }
 
 module.exports = (sender, client, users) => {
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
-  utils.adminChat(
+  log.adminChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !RESTART ]'
   );
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.RESTART[users[sender.getSteamID64()].language]

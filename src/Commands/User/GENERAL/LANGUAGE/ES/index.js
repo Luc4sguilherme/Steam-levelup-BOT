@@ -1,9 +1,10 @@
 const fs = require('fs');
-const utils = require('../../../../../Utils/utils');
+const chatMessage = require('../../../../../Components/message');
+const log = require('../../../../../Components/log');
 
 module.exports = (sender, client, users) => {
   const user = users;
-  utils.userChat(
+  log.userChat(
     sender.getSteamID64(),
     user[sender.getSteamID64()].language,
     '[ !ES ]'
@@ -11,9 +12,9 @@ module.exports = (sender, client, users) => {
   user[sender.getSteamID64()].language = 'ES';
   fs.writeFile('./Data/User/Users.json', JSON.stringify(user), (ERR) => {
     if (ERR) {
-      utils.error(`An error occurred while writing UserData file: ${ERR}`);
+      log.error(`An error occurred while writing UserData file: ${ERR}`);
     } else {
-      utils.chatMessage(client, sender, 'Idioma cambiado a español');
+      chatMessage(client, sender, 'Idioma cambiado a español');
     }
   });
 };

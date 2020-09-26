@@ -1,6 +1,8 @@
-const utils = require('../../../../Utils/utils');
 const messages = require('../../../../Config/messages');
 const acceptedKeys = require('../../../../Config/keys');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, manager) => {
   const amountkeys = parseInt(
@@ -8,24 +10,24 @@ module.exports = (sender, msg, client, users, manager) => {
     10
   );
   if (!Number.isNaN(amountkeys) && parseInt(amountkeys, 10) > 0) {
-    utils.adminChat(
+    log.adminChat(
       sender.getSteamID64(),
       users[sender.getSteamID64()].language,
       `[ !WITHDRAWTF ${amountkeys} ]`
     );
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.REQUEST[users[sender.getSteamID64()].language]
     );
     manager.getInventoryContents(440, 2, true, (ERR, INV) => {
       if (ERR) {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
         );
-        utils.error(`An error occurred while getting inventory: ${ERR}`);
+        log.error(`An error occurred while getting inventory: ${ERR}`);
       } else {
         let botkeys = 0;
         let added = 0;
@@ -40,7 +42,7 @@ module.exports = (sender, msg, client, users, manager) => {
           }
         }
         if (botkeys < amountkeys) {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.ERROR.OUTOFSTOCK.DEFAULT.TF.US[1][
@@ -51,7 +53,7 @@ module.exports = (sender, msg, client, users, manager) => {
           const message = messages.TRADE.SETMESSAGE[0].TF[
             users[sender.getSteamID64()].language
           ].replace('{TF}', amountkeys);
-          utils.makeOffer(
+          makeOffer(
             client,
             users,
             manager,
@@ -69,7 +71,7 @@ module.exports = (sender, msg, client, users, manager) => {
       }
     });
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.ERROR.INPUT.INVALID.TF[

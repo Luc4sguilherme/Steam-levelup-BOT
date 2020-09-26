@@ -1,6 +1,8 @@
 const messages = require('../../../../Config/messages');
 const utils = require('../../../../Utils/utils');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users, community, allCards) => {
   const load = {
@@ -10,12 +12,12 @@ module.exports = (sender, client, users, community, allCards) => {
     3: 'SETS',
     4: 'HYDRA',
   };
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
-  utils.adminChat(
+  log.adminChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !RELOAD ]'
@@ -28,7 +30,7 @@ module.exports = (sender, client, users, community, allCards) => {
     utils.playLoading,
     () => {
       inventory.play(client);
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.RELOAD[users[sender.getSteamID64()].language]

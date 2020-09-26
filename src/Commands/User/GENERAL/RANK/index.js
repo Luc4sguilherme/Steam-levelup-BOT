@@ -1,30 +1,32 @@
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const log = require('../../../../Components/log');
+const rank = require('../../../../Components/rank');
+const chatMessage = require('../../../../Components/message');
 
 module.exports = (sender, client, users) => {
-  utils.userChat(
+  log.userChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !RANK ]'
   );
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
   (async function () {
-    await utils.updateRank(sender.getSteamID64());
-    await utils.getRank(
+    await rank.update(sender.getSteamID64());
+    await rank.get(
       sender.getSteamID64(),
       (ERR, WORLDWIDEXP, REGIONXP, COUNTRYXP) => {
         if (ERR) {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.RANK.ERROR[users[sender.getSteamID64()].language]
           );
         } else {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.RANK.RESPONSE[users[sender.getSteamID64()].language]

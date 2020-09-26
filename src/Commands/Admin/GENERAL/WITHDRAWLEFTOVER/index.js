@@ -3,16 +3,19 @@
 /* eslint-disable no-continue */
 const utils = require('../../../../Utils/utils');
 const messages = require('../../../../Config/messages');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users, community, manager) => {
-  utils.adminChat(
+  log.adminChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
     '[ !WITHDRAWLEFTOVER ]'
   );
   const cards = [];
-  utils.chatMessage(
+  chatMessage(
     client,
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
@@ -36,8 +39,8 @@ module.exports = (sender, client, users, community, manager) => {
     cards,
     (ERR, DATA) => {
       if (ERR) {
-        utils.error(`An error occurred while getting inventory: ${ERR}`);
-        utils.chatMessage(
+        log.error(`An error occurred while getting inventory: ${ERR}`);
+        chatMessage(
           client,
           sender,
           messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
@@ -49,7 +52,7 @@ module.exports = (sender, client, users, community, manager) => {
           Cards[Object.keys(DATA)[j]] = Object.values(Object.values(DATA)[j]);
         }
         if (Object.keys(Cards).length === 0) {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.ERROR.OUTOFSTOCK.DEFAULT.LEFTOVER[
@@ -94,7 +97,7 @@ module.exports = (sender, client, users, community, manager) => {
             messages.TRADE.SETMESSAGE[0].LEFTOVER[
               users[sender.getSteamID64()].language
             ];
-          utils.makeOffer(
+          makeOffer(
             client,
             users,
             manager,

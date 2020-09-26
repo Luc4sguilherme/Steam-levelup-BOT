@@ -4,7 +4,11 @@
 const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
 const utils = require('../../../../Utils/utils');
-const inventory = require('../../../../Utils/inventory');
+const inventory = require('../../../../Components/inventory');
+const chatMessage = require('../../../../Components/message');
+const makeOffer = require('../../../../Components/offer');
+const { getSets } = require('../../../../Components/sets');
+const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
   const admin =
@@ -18,7 +22,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       let n = msg.toUpperCase().replace('!SETS4SETS ', '');
       const amountofsets = parseInt(n, 10);
       if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
-        utils.userChat(
+        log.userChat(
           sender.getSteamID64(),
           users[sender.getSteamID64()].language,
           `[ !SETS4SETS ${n} ]`
@@ -28,7 +32,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
             n = parseInt(n, 10);
             const mySets = [];
             const theirSets = [];
-            utils.chatMessage(
+            chatMessage(
               client,
               sender,
               messages.REQUEST[users[sender.getSteamID64()].language]
@@ -41,7 +45,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                 if (!ERR1) {
                   const s = DATA1;
                   const setsSent = {};
-                  utils.getSets(s, allCards, (ERR2, DATA2) => {
+                  getSets(s, allCards, (ERR2, DATA2) => {
                     if (!ERR2) {
                       utils.sortSetsByAmountB(s, (DATA3) => {
                         firsttLoop: for (let i = 0; i < DATA3.length; i += 1) {
@@ -78,7 +82,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                         }
                       });
                       if (amountofB > 0) {
-                        utils.chatMessage(
+                        chatMessage(
                           client,
                           sender,
                           messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][
@@ -90,7 +94,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           sender.getSteamID64(),
                           (ERR3, DATA4) => {
                             if (!ERR3) {
-                              utils.warn('Badge loaded without error');
+                              log.warn('Badge loaded without error');
                               const b = {}; // List with badges that CAN still be crafted
                               if (DATA4) {
                                 for (
@@ -104,7 +108,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                   }
                                 }
                               } else {
-                                utils.chatMessage(
+                                chatMessage(
                                   client,
                                   sender.getSteamID64(),
                                   messages.ERROR.BADGES[2][
@@ -278,7 +282,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                       }
                                     }
                                     if (hisMaxSets > 0) {
-                                      utils.chatMessage(
+                                      chatMessage(
                                         client,
                                         sender,
                                         messages.ERROR.OUTOFSTOCK.DEFAULT.SETS
@@ -292,7 +296,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                       ]
                                         .replace('{SETS1}', amountofsets)
                                         .replace('{SETS2}', n);
-                                      utils.makeOffer(
+                                      makeOffer(
                                         client,
                                         users,
                                         manager,
@@ -310,7 +314,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                   }
                                 );
                               } else {
-                                utils.chatMessage(
+                                chatMessage(
                                   client,
                                   sender,
                                   messages.ERROR.OUTOFSTOCK.NOTUSED.SETS[
@@ -319,14 +323,14 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                 );
                               }
                             } else {
-                              utils.chatMessage(
+                              chatMessage(
                                 client,
                                 sender,
                                 messages.ERROR.BADGES[1][
                                   users[sender.getSteamID64()].language
                                 ]
                               );
-                              utils.error(
+                              log.error(
                                 `An error occurred while loading badges: ${ERR3}`
                               );
                             }
@@ -334,45 +338,45 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                         );
                       }
                     } else {
-                      utils.chatMessage(
+                      chatMessage(
                         client,
                         sender,
                         messages.ERROR.LOADINVENTORY.THEM[0][
                           users[sender.getSteamID64()].language
                         ]
                       );
-                      utils.error(
+                      log.error(
                         `An error occurred while getting user sets: ${ERR2}`
                       );
                     }
                   });
                 } else if (ERR1.message.indexOf('profile is private') > -1) {
-                  utils.chatMessage(
+                  chatMessage(
                     client,
                     sender,
                     messages.ERROR.LOADINVENTORY.THEM[2][
                       users[sender.getSteamID64()].language
                     ]
                   );
-                  utils.error(
+                  log.error(
                     `An error occurred while getting user inventory: ${ERR1}`
                   );
                 } else {
-                  utils.chatMessage(
+                  chatMessage(
                     client,
                     sender,
                     messages.ERROR.LOADINVENTORY.THEM[0][
                       users[sender.getSteamID64()].language
                     ]
                   );
-                  utils.error(
+                  log.error(
                     `An error occurred while getting user inventory: ${ERR1}`
                   );
                 }
               }
             );
           } else if (users[sender.getSteamID64()].sets4sets.numsets === 0) {
-            utils.chatMessage(
+            chatMessage(
               client,
               sender,
               messages.SETS4SETS.CANUSE[0][
@@ -380,7 +384,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
               ]
             );
           } else {
-            utils.chatMessage(
+            chatMessage(
               client,
               sender,
               messages.SETS4SETS.AMOUNTOVER[0][
@@ -392,7 +396,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
             );
           }
         } else {
-          utils.chatMessage(
+          chatMessage(
             client,
             sender,
             messages.SETS4SETS.AMOUNTOVER[1][
@@ -401,7 +405,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
           );
         }
       } else {
-        utils.chatMessage(
+        chatMessage(
           client,
           sender,
           messages.ERROR.INPUT.INVALID.SETS[
@@ -410,7 +414,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         );
       }
     } else {
-      utils.chatMessage(
+      chatMessage(
         client,
         sender,
         messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[2][
@@ -419,7 +423,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       );
     }
   } else {
-    utils.chatMessage(
+    chatMessage(
       client,
       sender,
       messages.SETS4SETS.NOTHAVEACCESS[users[sender.getSteamID64()].language]
