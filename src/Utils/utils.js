@@ -6,7 +6,6 @@
 const _ = require('lodash');
 const request = require('request-promise');
 const fs = require('fs');
-const jsonfile = require('jsonfile');
 const util = require('util');
 
 const main = require('../Config/main.js');
@@ -222,24 +221,31 @@ utils.getLevelExp = (level) => {
 };
 
 utils.addGiveawayEntry = (offer, callback) => {
-  const giveawayEntry = jsonfile.readFileSync('./Data/Giveaway/giveaway.json');
-  if (giveawayEntry.active) {
-    if (
-      typeof giveawayEntry.entries[offer.partner.getSteamID64()] !== 'undefined'
-    ) {
-      giveawayEntry.entries[offer.partner.getSteamID64()] += 1;
-      fs.writeFile(
-        './Data/Giveaway/giveaway.json',
-        JSON.stringify(giveawayEntry, null, '\t'),
-        function (ERR) {
-          if (ERR) {
-            callback(ERR);
-          } else {
-            callback(null);
+  try {
+    const giveawayEntry = JSON.parse(
+      fs.readFileSync('./Data/Giveaway/giveaway.json')
+    );
+    if (giveawayEntry.active) {
+      if (
+        typeof giveawayEntry.entries[offer.partner.getSteamID64()] !==
+        'undefined'
+      ) {
+        giveawayEntry.entries[offer.partner.getSteamID64()] += 1;
+        fs.writeFile(
+          './Data/Giveaway/giveaway.json',
+          JSON.stringify(giveawayEntry, null, '\t'),
+          function (ERR) {
+            if (ERR) {
+              callback(ERR);
+            } else {
+              callback(null);
+            }
           }
-        }
-      );
+        );
+      }
     }
+  } catch (error) {
+    callback(error);
   }
 };
 
