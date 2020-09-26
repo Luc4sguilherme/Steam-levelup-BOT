@@ -35,11 +35,7 @@ module.exports = (sender, client, users) => {
             log.error(
               `An error occurred while writing giveaway entry file: ${err}`
             );
-          log.userChat(
-            sender.getSteamID64(),
-            users[sender.getSteamID64()].language,
-            '[ !ENTER ] Giveaway entry added! '
-          );
+          log.warn('Giveaway entry added!');
         }
       );
       chatMessage(
