@@ -243,8 +243,7 @@ utils.addGiveawayEntry = (offer, callback) => {
   }
 };
 
-utils.accesstosets4sets = (offer, callback) => {
-  const users = jsonfile.readFileSync('./Data/User/Users.json');
+utils.accesstosets4sets = (offer, users, callback) => {
   const customer = users[offer.partner.getSteamID64()];
   if (typeof customer !== 'undefined' && offer.data('amountofsets') !== 0) {
     if (offer.data('commandused') === '!SETS4SETS') {
@@ -346,7 +345,7 @@ utils.notifyAdmin = (client, users, offer) => {
           users[main.admins[j]].language
         ]
           .replace('{SETS1}', offer.data('amountofsets'))
-          .replace('{SETS2}', offer.data('amountofsets_user'));
+          .replace('{SETS2}', offer.data('amountofsets'));
       }
 
       client.chatMessage(main.admins[j], msg1);

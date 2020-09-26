@@ -384,7 +384,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       });
 
       // Access to sets4sets command
-      utils.accesstosets4sets(OFFER, (ERR, numsets) => {
+      utils.accesstosets4sets(OFFER, users, (ERR, numsets) => {
         if (ERR) {
           log.error(`An error occurred while writing UserData file: ${ERR}`);
         } else if (numsets > 0) {
