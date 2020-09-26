@@ -2213,7 +2213,7 @@ module.exports = {
       '► !SELLCHECK = Checks for Sets the Bot can buy from you. \n',
       '► !SELLCSGO (amount_of_keys) = Sell Cardsets and get a specific amount of CS:GO Keys. \n',
       '► !SELLTF (amount_of_keys) = Sell Cardsets and get a specific amount of TF2 Keys. \n',
-      '► !SELLHYDRA [amount_of_keys = Sell Cardsets and get a specific amount of HYDRA Keys. \n',
+      '► !SELLHYDRA (amount_of_keys) = Sell Cardsets and get a specific amount of HYDRA Keys. \n',
       '► !SELLGEMS (amount_of_sets) = Sell a specific amount of Cardsets and get GEMS. \n',
     ],
     PT: [
