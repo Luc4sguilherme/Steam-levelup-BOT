@@ -1,0 +1,27 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2020": true
+    },
+    "extends": [
+        "airbnb-base", 
+        "prettier", 
+        "plugin:node/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 11
+    },
+    "plugins": ["prettier"],
+    "rules": {
+        "prettier/prettier": "error",
+        "no-unused-vars": "warn",
+        "no-console": "off",
+        "func-names": "off",
+        "no-process-exit": "off",
+        "object-shorthand": "off",
+        "class-methods-use-this": "off",
+        "node/no-unpublished-require": "off",
+        "no-labels": "off",
+        "no-continue": "off"
+    }
+}
