@@ -88,7 +88,7 @@ log.adminChat = (id64, userLang, data) => {
     console.log(colour[main.log.adminChat.color](text));
   }
   fs.appendFile(
-    `./Data/History/adminChat/log-${utils.date2()}.txt`,
+    `./Data/History/AdminChat/log-${utils.date2()}.txt`,
     `${text}\r\n`,
     {
       flags: 'a',
@@ -109,7 +109,7 @@ log.tradeoffer = (data) => {
     console.log(colour[main.log.tradeOffer.color](text));
   }
   fs.appendFile(
-    `./Data/History/Tradeoffer/log-${utils.date2()}.txt`,
+    `./Data/History/TradeOffer/log-${utils.date2()}.txt`,
     `${text}\r\n`,
     {
       flags: 'a',
