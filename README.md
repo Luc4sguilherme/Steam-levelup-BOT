@@ -25,7 +25,7 @@ This is an advanced cardsets/levelup bot script.
 ### Profits Tracking 
 - Bot will be registering every single !sell/!buy to you keep track of your profits
 ### Trade Size Limit
-- Limit the amount of keys bot will trade, large amounts means slow processings due to steam servers
+- Limit the amount of keys bot will trade, large amounts means slow processing due to steam servers
 ### Admins 
 - Unlimited admins capacity, you can setup how many admins you want, no matter the size of it
 ### BotName 
@@ -51,11 +51,11 @@ This is an advanced cardsets/levelup bot script.
 ### Group invites 
 - Bot will be inviting every customer who completes a trade, grow up your community!
 ### Perfectly Handle Gems 
-- Perfectly parse any gems on inventories, even splited ones
+- Perfectly parse any gems on inventories, even divided ones
 ### Leftovers 
-- Bot has the hability to detect unseted cards, and to handle them, a card is unseted when there is extra cards that aren't able to complete another set.
+- Bot has the ability to detect unset cards, and to handle them, a card is unset when there is extra cards that aren't able to complete another set.
 ### STM Support 
-- If you supply yourself, or if you have a 1:1 bot, setup this script to periodicly request a desired amount of sets
+- If you supply yourself, or if you have a 1:1 bot, setup this script to periodically request a desired amount of sets
 ### Handle donations 
 - You can enable/disable donates on your bot
 ### BBCodes 
@@ -63,7 +63,7 @@ This is an advanced cardsets/levelup bot script.
 ### Booster Packs 
 - Easy Manage your booster packs, or just open them by using admin commands
 ### Trade Messages 
-- Every trade will have a message containg the currencies and sets that will be exchange
+- Every trade will have a message containing the currencies and sets that will be exchange
 
 ## Commands: !help
 - <code>!EN</code> - Change the bot's language to english. 
