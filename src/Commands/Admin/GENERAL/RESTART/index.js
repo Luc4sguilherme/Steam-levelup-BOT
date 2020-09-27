@@ -1,12 +1,7 @@
 const messages = require('../../../../Config/messages');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');
-
-// Relog automatic
-function restart(client) {
-  log.warn('Restarting...');
-  client.relog();
-}
+const { restart } = require('../../../../Components/login');
 
 module.exports = (sender, client, users) => {
   chatMessage(

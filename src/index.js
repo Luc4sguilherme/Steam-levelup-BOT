@@ -1,4 +1,3 @@
-const SteamTotp = require('steam-totp');
 const TradeOfferManager = require('steam-tradeoffer-manager');
 const SteamCommunity = require('steamcommunity');
 const SteamUser = require('steam-user');
@@ -16,7 +15,7 @@ const chatMessage = require('./Components/message');
 const commands = require('./Commands');
 const request = require('./Components/request');
 const { getCardsInSets } = require('./Components/sets');
-const checkSteamLogged = require('./Components/checkSteamLogged');
+const login = require('./Components/login');
 
 let allCards = {};
 let userMsgs = {};
@@ -57,14 +56,7 @@ setInterval(() => {
 }, 1000);
 
 // Account Credentials, has to be setup in the main.js
-client.logOn({
-  accountName: main.userName,
-  password: main.passWord,
-  twoFactorCode: SteamTotp.getAuthCode(main.sharedSecret),
-  identity_secret: main.identitySecret,
-  rememberPassword: true,
-  shared_secret: main.sharedSecret,
-});
+login.init(client);
 
 // When the WebSession logs in, we will set the Profile to Online, otherwise the Bot would appear offline while being online in the WebSession
 client.on('loggedOn', () => {
@@ -98,7 +90,7 @@ client.on('loggedOn', () => {
 });
 
 // Starting the WebSession and setting up the Cookies
-client.on('webSession', (sessionID, cookies) => {
+client.on('webSession', (_, cookies) => {
   // Starting the WebSession
   manager.setCookies(cookies, (ERR) => {
     if (ERR) {
@@ -172,13 +164,49 @@ client.on('webSession', (sessionID, cookies) => {
   }
 });
 
-// Relog when the websession is expired
-community.on('sessionExpired', () => {
-  log.info('Session Expired. Relogging.');
-  client.webLogOn();
+// Console will show us login session error
+client.on('error', (error) => {
+  const timeouts = {};
+  switch (error.eresult) {
+    case SteamUser.EResult.AccountDisabled:
+      log.error(`This account is disabled!`);
+      break;
+    case SteamUser.EResult.InvalidPassword:
+      log.error(`Invalid Password detected!`);
+      break;
+    case SteamUser.EResult.RateLimitExceeded:
+      log.warn(`Rate Limit Exceeded, trying to login again in 5 minutes.`);
+      timeouts.login_timeout = setTimeout(function () {
+        login.restart(client);
+        clearTimeout(timeouts.login_timeout);
+      }, 1000 * 60 * 5);
+      break;
+    case SteamUser.EResult.LogonSessionReplaced:
+      log.warn(
+        `Unexpected Disconnection!, you have LoggedIn with this same account in another place..`
+      );
+      timeouts.login_timeout = setTimeout(function () {
+        login.restart(client);
+        clearTimeout(timeouts.login_timeout);
+      }, 5000);
+      break;
+    default:
+      log.warn('Unexpected Disconnection!');
+      timeouts.login_Unexpected = setTimeout(function () {
+        login.restart(client);
+        clearTimeout(timeouts.login_Unexpected);
+      }, 5000);
+      break;
+  }
 });
 
-checkSteamLogged(client, community);
+// Relog when the websession is expired
+community.on('sessionExpired', () => {
+  login.webLogin(client);
+});
+
+// Constantly checking if you are logged in
+login.check(client, community);
 
 // Console will show us how much new Items we have
 client.on('newItems', function (count) {
@@ -201,18 +229,22 @@ client.on('accountLimitations', function (
     log.info(
       'Account is limited. Cannot send friend invites, use the market, open group chat, or access the web API.'
     );
+    client.logOff();
   }
   if (communityBanned) {
     log.info('Account is banned from Steam Community');
+    client.logOff();
   }
   if (locked) {
     log.info(
       'Account is locked. We cannot trade/gift/purchase items, play on VAC servers, or access Steam Community.  Shutting down.'
     );
+    client.logOff();
     process.exit(1);
   }
   if (!canInviteFriends) {
     log.info('Account is unable to send friend requests.');
+    client.logOff();
   }
 });
 
