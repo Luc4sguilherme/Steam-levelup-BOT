@@ -47,9 +47,7 @@
 
 - Press the key <code>ESC</code>
 
-- Press the keys <code>Shift</code> + <code>:</code>
-
-- Type in keyboard <code>wq</code>
+- Type in keyboard <code>:wq</code>
 
 - Press <code>Enter</code>
 
