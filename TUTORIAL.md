@@ -41,7 +41,11 @@
 
 - <code>vim main.js</code>
 
+- Press the key <code>i</code>
+
 - Fill in all empty fields
+
+- Press the key <code>ESC</code>
 
 - Press the keys <code>Shift</code> + <code>:</code>
 
