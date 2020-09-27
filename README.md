@@ -126,7 +126,6 @@ This is an advanced cardsets/levelup bot script.
 - <code>!DEPOSITSETS (amount_of_sets)</code> - Deposits a specific amount of SETS. 
 - <code>!DEPOSITBOOSTER (amount_of_booster)</code> - Deposits a specific quantity of BOOSTER. 
 - <code>!RESTOCK</code> - Sends a trade offer to the owner requesting that all available sets be traded. 
-- <code>!SETS4SETS (amount_of_sets)</code> - Trade your duplicate sets for new ones you can craft. 
 - <code>!USERCHECK (ID64)</code> - Verify User. 
 - <code>!BLOCK (ID64)</code> - Block user. 
 - <code>!UNBLOCK (ID64)</code> - Unlock user. 
