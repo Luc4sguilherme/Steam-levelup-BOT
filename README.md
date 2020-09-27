@@ -58,76 +58,76 @@ This is an advanced cardsets/levelup bot script, and is most recommended if you 
 - Every trade will have a message containg the currencies and sets that will be exchange
 
 ## Commands: !help
-- !EN - Change the bot's language to english. 
-- !PT - Change the bot's language to portuguese. 
-- !RU - Change the bot's language to russian. 
-- !ES - Change the bot's language to spanish. 
-- !CN - Change the bot's language to chinese. 
-- !TUTORIAL - Shows the video tutorial. 
-- !GIVEAWAY - Get info about giveaway and your entries. 
-- !SETS4SETS (amount_of_sets) - Trade your duplicate sets for new ones you can craft. 
-- !PRICES - Shows our current rates. 
-- !STOCK - Shows currencies stock of the bot. 
-- !REPORT (desired_message) - Use to send messages directly to my owner. 
-- !RANK - Shows your steam level rank (World / Region / Country). 
-- !LEVEL (your_dream_level) - Will check how many Cardsets you need to reach desired level. 
-- !KEYLIST - Shows all tradable Keys. 
-- !OWNER - Shows owner account. 
-- !INVITE - Sends you an invite to our Steamgroup. 
-- !CHECK - Checks how many sets you can buy. 
-- !CHECKONE - Checks how many individual sets you can buy.  
+- <code>!EN</code> - Change the bot's language to english. 
+- <code>!PT</code> - Change the bot's language to portuguese. 
+- <code>!RU</code> - Change the bot's language to russian. 
+- <code>!ES</code> - Change the bot's language to spanish. 
+- <code>!CN</code> - Change the bot's language to chinese. 
+- <code>!TUTORIAL</code> - Shows the video tutorial. 
+- <code>!GIVEAWAY</code> - Get info about giveaway and your entries. 
+- <code>!SETS4SETS (amount_of_sets)</code> - Trade your duplicate sets for new ones you can craft. 
+- <code>!PRICES</code> - Shows our current rates. 
+- <code>!STOCK</code> - Shows currencies stock of the bot. 
+- <code>!REPORT (desired_message)</code> - Use to send messages directly to my owner. 
+- <code>!RANK</code> - Shows your steam level rank (World / Region / Country). 
+- <code>!LEVEL (your_dream_level)</code> - Will check how many Cardsets you need to reach desired level. 
+- <code>!KEYLIST</code> - Shows all tradable Keys. 
+- <code>!OWNER</code> - Shows owner account. 
+- <code>!INVITE</code> - Sends you an invite to our Steamgroup. 
+- <code>!CHECK</code> - Checks how many sets you can buy. 
+- <code>!CHECKONE</code> - Checks how many individual sets you can buy.  
 ### CSGO Section. 
-- !CHECKCSGO (amount_of_keys) - Shows how many sets and what level you would reach for a specific amount of keys. 
-- !BUYCSGO (amount_of_keys) - Buy uncrafted Cardsets for a specific amount of CS:GO Keys. 
-- !BUYANYCSGO (amount_of_keys) - Buy any Cardsets for a specific amount of CS:GO Keys. 
-- !BUYONECSGO (amount_of_keys) - Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  
+- <code>!CHECKCSGO (amount_of_keys)</code> - Shows how many sets and what level you would reach for a specific amount of keys. 
+- <code>!BUYCSGO (amount_of_keys)</code> - Buy uncrafted Cardsets for a specific amount of CS:GO Keys. 
+- <code>!BUYANYCSGO (amount_of_keys)</code> - Buy any Cardsets for a specific amount of CS:GO Keys. 
+- <code>!BUYONECSGO (amount_of_keys)</code> - Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  
 ### Hydra Section. 
-- !CHECKHYDRA (amount_of_keys) - Shows how many sets and what level you would reach for a specific amount of HYDRA keys. 
-- !BUYHYDRA (amount_of_keys) - Buy uncrafted Cardsets for a specific amount of HYDRA Keys. 
-- !BUYANYHYDRA (amount_of_keys) - Buy any Cardsets for a specific amount of HYDRA Keys. 
-- !BUYONEHYDRA (amount_of_keys) - Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  
+- <code>!CHECKHYDRA (amount_of_keys)</code> - Shows how many sets and what level you would reach for a specific amount of HYDRA keys. 
+- <code>!BUYHYDRA (amount_of_keys)</code> - Buy uncrafted Cardsets for a specific amount of HYDRA Keys. 
+- <code>!BUYANYHYDRA (amount_of_keys)</code> - Buy any Cardsets for a specific amount of HYDRA Keys. 
+- <code>!BUYONEHYDRA (amount_of_keys)</code> - Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  
 ### TF2 Section. 
-- !CHECKTF (amount_of_keys) - Shows how many sets and what level you would reach for a specific amount of tf2 keys. 
-- !BUYTF (amount_of_keys) - Buy uncrafted Cardsets for a specific amount of TF2 Keys. 
-- !BUYANYTF (amount_of_keys) - Buy any Cardsets for a specific amount of TF2 Keys. 
-- !BUYONETF (amount_of_keys) - Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  
+- <code>!CHECKTF (amount_of_keys)</code> - Shows how many sets and what level you would reach for a specific amount of tf2 keys. 
+- <code>!BUYTF (amount_of_keys)</code> - Buy uncrafted Cardsets for a specific amount of TF2 Keys. 
+- <code>!BUYANYTF (amount_of_keys)</code> - Buy any Cardsets for a specific amount of TF2 Keys. 
+- <code>!BUYONETF (amount_of_keys)</code> - Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  
 ### GEMS Section. 
-- !CHECKGEMS (amount_of_gems) - Shows how many sets and what level you would reach for a specific amount of gems. 
-- !BUYGEMS (amount_of_sets) - Buy a specific amount of uncrafted Cardsets for GEMS. 
-- !BUYANYGEMS (amount_of_sets) - Buy a specific amount of amount of Cardsets per gems. 
-- !BUYONEGEMS (amount_of_sets) - Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate. 
+- <code>!CHECKGEMS (amount_of_gems)</code> - Shows how many sets and what level you would reach for a specific amount of gems. 
+- <code>!BUYGEMS (amount_of_sets)</code> - Buy a specific amount of uncrafted Cardsets for GEMS. 
+- <code>!BUYANYGEMS (amount_of_sets)</code> - Buy a specific amount of amount of Cardsets per gems. 
+- <code>!BUYONEGEMS (amount_of_sets)</code> - Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate. 
 ### Suppliers Section. 
-- !SELLCHECK - Checks for Sets the Bot can buy from you. 
-- !SELLCSGO (amount_of_keys) - Sell Cardsets and get a specific amount of CS:GO Keys. 
-- !SELLTF (amount_of_keys) - Sell Cardsets and get a specific amount of TF2 Keys. 
-- !SELLHYDRA (amount_of_keys) - Sell Cardsets and get a specific amount of HYDRA Keys. 
-- !SELLGEMS (amount_of_sets) - Sell a specific amount of Cardsets and get GEMS.
+- <code>!SELLCHECK</code> - Checks for Sets the Bot can buy from you. 
+- <code>!SELLCSGO (amount_of_keys)</code> - Sell Cardsets and get a specific amount of CS:GO Keys. 
+- <code>!SELLTF (amount_of_keys)</code> - Sell Cardsets and get a specific amount of TF2 Keys. 
+- <code>!SELLHYDRA (amount_of_keys)</code> - Sell Cardsets and get a specific amount of HYDRA Keys. 
+- <code>!SELLGEMS (amount_of_sets)</code> - Sell a specific amount of Cardsets and get GEMS.
 
 ## Admin Commands: !admin
-- !WITHDRAWCSGO (amount_of_keys) - Withdraw a specific amount of CS:GO keys. 
-- !WITHDRAWHYDRA (amount_of_keys) - Withdraw a specific amount of HYDRA keys. 
-- !WITHDRAWTF (amount_of_keys) - Withdraw a specific amount of TF2 keys. 
-- !WITHDRAWGEMS (amount_of_gems) - Withdraw a specific amount of GEMS. 
-- !WITHDRAWSETS (amount_of_sets) - Withdraw a specific amount of SETS. 
-- !WITHDRAWBOOSTER (amount_of_booster) - Withdraw a specific amount of BOOSTER. 
-- !WITHDRAWLEFTOVER - Remove leftovers. 
-- !DEPOSITCSGO (amount_of_keys) - Deposits a specific amount of CS:GO keys. 
-- !DEPOSITHYDRA (amount_of_keys) - Deposits a specific amount of HYDRA keys. 
-- !DEPOSITTF (amount_of_keys) - Deposits a specific amount of TF2 keys amount. 
-- !DEPOSITGEMS (amount_of_gems) - Deposits a specific amount of GEMS. 
-- !DEPOSITSETS (amount_of_sets) - Deposits a specific amount of SETS. 
-- !DEPOSITBOOSTER (amount_of_booster) - Deposits a specific quantity of BOOSTER. 
-- !RESTOCK - Sends a trade offer to the owner requesting that all available sets be traded. 
-- !SETS4SETS (amount_of_sets) - Trade your duplicate sets for new ones you can craft. 
-- !USERCHECK (ID64) - Verify User. 
-- !BLOCK (ID64) - Block user. 
-- !UNBLOCK (ID64) - Unlock user. 
-- !RELOAD - Reload Inventory. 
-- !RAFFLE - Choose the winner of the raffle. 
-- !REQUESTER - Forces the automatic request to be triggered. 
-- !PROFIT - Shows bot transactions this month. 
-- !AUTHCODE - Shows auth code. 
-- !BROADCAST (message) - Send a message to all friends in the friends list. 
-- !UNPACK - Unpack all boosters. 
-- !DIE - Turn off the bot. 
-- !RESTART - Restart the bot.
+- <code>!WITHDRAWCSGO (amount_of_keys)</code> - Withdraw a specific amount of CS:GO keys. 
+- <code>!WITHDRAWHYDRA (amount_of_keys)</code> - Withdraw a specific amount of HYDRA keys. 
+- <code>!WITHDRAWTF (amount_of_keys)</code> - Withdraw a specific amount of TF2 keys. 
+- <code>!WITHDRAWGEMS (amount_of_gems)</code> - Withdraw a specific amount of GEMS. 
+- <code>!WITHDRAWSETS (amount_of_sets)</code> - Withdraw a specific amount of SETS. 
+- <code>!WITHDRAWBOOSTER (amount_of_booster)</code> - Withdraw a specific amount of BOOSTER. 
+- <code>!WITHDRAWLEFTOVER</code> - Remove leftovers. 
+- <code>!DEPOSITCSGO (amount_of_keys)</code> - Deposits a specific amount of CS:GO keys. 
+- <code>!DEPOSITHYDRA (amount_of_keys)</code> - Deposits a specific amount of HYDRA keys. 
+- <code>!DEPOSITTF (amount_of_keys)</code> - Deposits a specific amount of TF2 keys amount. 
+- <code>!DEPOSITGEMS (amount_of_gems)</code> - Deposits a specific amount of GEMS. 
+- <code>!DEPOSITSETS (amount_of_sets)</code> - Deposits a specific amount of SETS. 
+- <code>!DEPOSITBOOSTER (amount_of_booster)</code> - Deposits a specific quantity of BOOSTER. 
+- <code>!RESTOCK</code> - Sends a trade offer to the owner requesting that all available sets be traded. 
+- <code>!SETS4SETS (amount_of_sets)</code> - Trade your duplicate sets for new ones you can craft. 
+- <code>!USERCHECK (ID64)</code> - Verify User. 
+- <code>!BLOCK (ID64)</code> - Block user. 
+- <code>!UNBLOCK (ID64)</code> - Unlock user. 
+- <code>!RELOAD</code> - Reload Inventory. 
+- <code>!RAFFLE</code> - Choose the winner of the raffle. 
+- <code>!REQUESTER</code> - Forces the automatic request to be triggered. 
+- <code>!PROFIT</code> - Shows bot transactions this month. 
+- <code>!AUTHCODE</code> - Shows auth code. 
+- <code>!BROADCAST (message)</code> - Send a message to all friends in the friends list. 
+- <code>!UNPACK</code> - Unpack all boosters. 
+- <code>!DIE</code> - Turn off the bot. 
+- <code>!RESTART</code> - Restart the bot.
