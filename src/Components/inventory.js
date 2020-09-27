@@ -205,7 +205,7 @@ inventory.loadCSGO = (SID, community, callback) => {
           }
         }
       }
-      log.warn(
+      log.info(
         `Bot's CSGO loaded: ${inventory.stock.csKeys.tradable} tradable, ${inventory.stock.csKeys.notradable} notradable.`
       );
       callback();
@@ -230,7 +230,7 @@ inventory.loadHYDRA = (SID, community, callback) => {
           }
         }
       }
-      log.warn(
+      log.info(
         `Bot's Hydra loaded: ${inventory.stock.hydraKeys.tradable} tradable, ${inventory.stock.hydraKeys.notradable} notradable.`
       );
       callback();
@@ -257,7 +257,7 @@ inventory.loadTF = (SID, community, callback) => {
           }
         }
       }
-      log.warn(
+      log.info(
         `Bot's TF2 loaded: ${inventory.stock.tfKeys.tradable} tradable, ${inventory.stock.tfKeys.notradable} notradable.`
       );
       callback();
@@ -282,7 +282,7 @@ inventory.loadGEMS = (SID, community, callback) => {
           }
         }
       }
-      log.warn(
+      log.info(
         `Bot's Gems loaded: ${inventory.stock.gemsQuantity.tradable} tradable, ${inventory.stock.gemsQuantity.notradable} notradable.`
       );
       callback();
@@ -306,7 +306,7 @@ inventory.loadSETS = (SID, community, allCards, callback) => {
               inventory.botSets[Object.keys(inventory.botSets)[i]].length;
           }
           inventory.stock.totalBotSets = botNSets;
-          log.warn(`Bot's Sets loaded: ${inventory.stock.totalBotSets}`);
+          log.info(`Bot's Sets loaded: ${inventory.stock.totalBotSets}`);
           callback();
         } else {
           log.error(`An error occurred while getting bot sets: ${ERR2}`);
