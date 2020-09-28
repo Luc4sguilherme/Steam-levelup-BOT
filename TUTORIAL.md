@@ -23,6 +23,10 @@
   npm install
 </pre>
 
+## 5° Getting your <code>shared_secret</code> & <code>identity_secret</code>:
+ - Read for information: <a href=https://steamcommunity.com/groups/TradeVise/discussions/2/1621724915764974831>Link</a>
+ - <code>DO NOT SHARE YOUR CODES WITH ANYONE!!!  These codes serve as your mobile authenticator, if someone that knows what they are doing gets a hold of these codes they could effectively take control of your account! Keep these codes completely private!</code>  
+
 ## 6° Create Steam Api Key
 <pre>
   <a href=https://steamcommunity.com/dev/apikey>https://steamcommunity.com/dev/apikey</a>
@@ -95,6 +99,7 @@
   - Head over to the <code>maFiles</code> folder and open the file named after your accounts <code>SteamID64</code>.
   - Search the file for <code>shared_secret:"XXXXXXXXXXXXXX="</code>, instead of XXX it should have a code there, it always ends with =
   - Do the same for <code>identity_secret</code>, it will look similar.
+  - <code>DO NOT SHARE YOUR CODES WITH ANYONE!!!  These codes serve as your mobile authenticator, if someone that knows what they are doing gets a hold of these codes they could effectively take control of your account! Keep these codes completely private!</code> 
 
 ## 7° Create Steam Api Key
 <pre>
