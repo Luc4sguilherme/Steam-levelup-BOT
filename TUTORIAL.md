@@ -82,7 +82,7 @@
 
 ## 3° Install dependencies
   - Unzip
-  - run file <code>install</code>
+  - run <code>install</code> file
 
 ## 4° Install Steam Desktop Authenticator
 <pre>
@@ -119,4 +119,4 @@
   
 
 ## 10° Starting
-  - run file <code>start</code>
+  - run <code>start</code> file
