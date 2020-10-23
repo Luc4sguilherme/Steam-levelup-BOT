@@ -3,7 +3,7 @@ const log = require('../../../../Components/log');
 const rank = require('../../../../Components/rank');
 const chatMessage = require('../../../../Components/message');
 
-module.exports = (sender, client, users) => {
+module.exports = async (sender, client, users) => {
   log.userChat(
     sender.getSteamID64(),
     users[sender.getSteamID64()].language,
@@ -14,28 +14,25 @@ module.exports = (sender, client, users) => {
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
-  (async function () {
+
+  try {
     await rank.update(sender.getSteamID64());
-    await rank.get(
-      sender.getSteamID64(),
-      (ERR, WORLDWIDEXP, REGIONXP, COUNTRYXP) => {
-        if (ERR) {
-          chatMessage(
-            client,
-            sender,
-            messages.RANK.ERROR[users[sender.getSteamID64()].language]
-          );
-        } else {
-          chatMessage(
-            client,
-            sender,
-            messages.RANK.RESPONSE[users[sender.getSteamID64()].language]
-              .replace('{WORLDWIDEXP}', WORLDWIDEXP)
-              .replace('{REGIONXP}', REGIONXP)
-              .replace('{COUNTRYXP}', COUNTRYXP)
-          );
-        }
-      }
+    const { WORLDWIDEXP, REGIONXP, COUNTRYXP } = await rank.get(
+      sender.getSteamID64()
     );
-  })();
+    chatMessage(
+      client,
+      sender,
+      messages.RANK.RESPONSE[users[sender.getSteamID64()].language]
+        .replace('{WORLDWIDEXP}', WORLDWIDEXP)
+        .replace('{REGIONXP}', REGIONXP)
+        .replace('{COUNTRYXP}', COUNTRYXP)
+    );
+  } catch (error) {
+    chatMessage(
+      client,
+      sender,
+      messages.RANK.ERROR[users[sender.getSteamID64()].language]
+    );
+  }
 };

@@ -5,28 +5,23 @@ const log = require('./log');
 
 const apiKey = main.steamLadderApiKey;
 
-const get = async (SID, callback) => {
-  try {
-    const baseURL = 'https://steamladder.com/api/v1';
-    const options = {
-      method: 'GET',
-      uri: `${baseURL}/profile/${SID}`,
-      json: true,
-      headers: {
-        Authorization: `Token ${apiKey}`,
-      },
-    };
+const get = async (SID) => {
+  const baseURL = 'https://steamladder.com/api/v1';
+  const options = {
+    method: 'GET',
+    uri: `${baseURL}/profile/${SID}`,
+    json: true,
+    headers: {
+      Authorization: `Token ${apiKey}`,
+    },
+  };
 
-    const response = await request(options);
-    callback(
-      null,
-      response.ladder_rank.worldwide_xp,
-      response.ladder_rank.region.region_xp,
-      response.ladder_rank.country.country_xp
-    );
-  } catch (error) {
-    callback(error);
-  }
+  const response = await request(options);
+  return {
+    WORLDWIDEXP: response.ladder_rank.worldwide_xp,
+    REGIONXP: response.ladder_rank.region.region_xp,
+    COUNTRYXP: response.ladder_rank.country.country_xp,
+  };
 };
 
 const update = async (SID) => {
