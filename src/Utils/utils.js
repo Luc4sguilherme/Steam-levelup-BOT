@@ -154,24 +154,20 @@ utils.getleftovercards = (SID, community, cards, callback) => {
   });
 };
 
-utils.getRep = async (SID, callback) => {
-  try {
-    const url = 'https://steamrep.com/api/beta4/reputation/';
-    const options = {
-      method: 'GET',
-      uri: url + SID,
-      qs: {
-        tagdetails: 1,
-        extended: 1,
-        json: 1,
-      },
-    };
+utils.getRep = async (SID) => {
+  const url = 'https://steamrep.com/api/beta4/reputation/';
+  const options = {
+    method: 'GET',
+    uri: url + SID,
+    qs: {
+      tagdetails: 1,
+      extended: 1,
+      json: 1,
+    },
+  };
 
-    const response = await request(options);
-    callback(null, response);
-  } catch (error) {
-    callback(error);
-  }
+  const response = await request(options);
+  return response;
 };
 
 utils.getBadges = (SID, callback) => {

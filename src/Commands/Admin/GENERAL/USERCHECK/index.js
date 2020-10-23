@@ -8,7 +8,7 @@ const chatMessage = require('../../../../Components/message');
 const { getSets } = require('../../../../Components/sets');
 const log = require('../../../../Components/log');
 
-module.exports = (sender, msg, client, users, community, allCards) => {
+module.exports = async (sender, msg, client, users, community, allCards) => {
   chatMessage(
     client,
     sender,
@@ -42,49 +42,75 @@ module.exports = (sender, msg, client, users, community, allCards) => {
             users[sender.getSteamID64()].language
           ];
     }
-    utils.getRep(n, (ERR, DATA) => {
-      if (ERR) {
-        log.error(`An error occurred while getting user in Steamrep: ${ERR}`);
-      } else {
-        const u = JSON.parse(DATA);
-        message +=
-          messages.USERCHECK.REPUTATION.DEFAULT[
-            users[sender.getSteamID64()].language
-          ];
-        switch (u.steamrep.reputation.summary) {
-          case 'SCAMMER':
+
+    try {
+      const DATA = await utils.getRep(n);
+
+      const u = JSON.parse(DATA);
+      message +=
+        messages.USERCHECK.REPUTATION.DEFAULT[
+          users[sender.getSteamID64()].language
+        ];
+      switch (u.steamrep.reputation.summary) {
+        case 'SCAMMER':
+          message +=
+            messages.USERCHECK.REPUTATION.SCAMMER[
+              users[sender.getSteamID64()].language
+            ];
+          break;
+        case 'Caution':
+          message +=
+            messages.USERCHECK.REPUTATION.CAUTION[
+              users[sender.getSteamID64()].language
+            ];
+          break;
+        case 'Admin':
+          message +=
+            messages.USERCHECK.REPUTATION.ADMIN[
+              users[sender.getSteamID64()].language
+            ];
+          break;
+        case 'Middleman':
+          message +=
+            messages.USERCHECK.REPUTATION.MIDDLEMAN[
+              users[sender.getSteamID64()].language
+            ];
+          break;
+        case 'Trusted Seller':
+          message +=
+            messages.USERCHECK.REPUTATION.TRUSTEDSELLER[
+              users[sender.getSteamID64()].language
+            ];
+          break;
+        case 'none':
+          message +=
+            messages.USERCHECK.REPUTATION.NONE[
+              users[sender.getSteamID64()].language
+            ];
+          break;
+        default:
+          message +=
+            messages.USERCHECK.REPUTATION.UNKNOWN[
+              users[sender.getSteamID64()].language
+            ];
+      }
+      if (u.steamrep.reputation.tags) {
+        switch (u.steamrep.reputation.tags.tag.category) {
+          case 'evil':
             message +=
-              messages.USERCHECK.REPUTATION.SCAMMER[
+              messages.USERCHECK.REPUTATION.EVIL[
                 users[sender.getSteamID64()].language
               ];
             break;
-          case 'Caution':
+          case 'trusted':
             message +=
-              messages.USERCHECK.REPUTATION.CAUTION[
+              messages.USERCHECK.REPUTATION.TRUSTED[
                 users[sender.getSteamID64()].language
               ];
             break;
-          case 'Admin':
+          case 'misc':
             message +=
-              messages.USERCHECK.REPUTATION.ADMIN[
-                users[sender.getSteamID64()].language
-              ];
-            break;
-          case 'Middleman':
-            message +=
-              messages.USERCHECK.REPUTATION.MIDDLEMAN[
-                users[sender.getSteamID64()].language
-              ];
-            break;
-          case 'Trusted Seller':
-            message +=
-              messages.USERCHECK.REPUTATION.TRUSTEDSELLER[
-                users[sender.getSteamID64()].language
-              ];
-            break;
-          case 'none':
-            message +=
-              messages.USERCHECK.REPUTATION.NONE[
+              messages.USERCHECK.REPUTATION.MISC[
                 users[sender.getSteamID64()].language
               ];
             break;
@@ -94,48 +120,24 @@ module.exports = (sender, msg, client, users, community, allCards) => {
                 users[sender.getSteamID64()].language
               ];
         }
-        if (u.steamrep.reputation.tags) {
-          switch (u.steamrep.reputation.tags.tag.category) {
-            case 'evil':
-              message +=
-                messages.USERCHECK.REPUTATION.EVIL[
-                  users[sender.getSteamID64()].language
-                ];
-              break;
-            case 'trusted':
-              message +=
-                messages.USERCHECK.REPUTATION.TRUSTED[
-                  users[sender.getSteamID64()].language
-                ];
-              break;
-            case 'misc':
-              message +=
-                messages.USERCHECK.REPUTATION.MISC[
-                  users[sender.getSteamID64()].language
-                ];
-              break;
-            default:
-              message +=
-                messages.USERCHECK.REPUTATION.UNKNOWN[
-                  users[sender.getSteamID64()].language
-                ];
-          }
-        }
-        if (u.steamrep.vacban === 1) {
-          message +=
-            messages.USERCHECK.REPUTATION.VACBAN[
-              users[sender.getSteamID64()].language
-            ];
-        }
-        if (u.steamrep.tradeban === 2) {
-          message +=
-            messages.USERCHECK.REPUTATION.TRADEBAN[
-              users[sender.getSteamID64()].language
-            ];
-        }
-        message += '\n';
       }
-    });
+      if (u.steamrep.vacban === 1) {
+        message +=
+          messages.USERCHECK.REPUTATION.VACBAN[
+            users[sender.getSteamID64()].language
+          ];
+      }
+      if (u.steamrep.tradeban === 2) {
+        message +=
+          messages.USERCHECK.REPUTATION.TRADEBAN[
+            users[sender.getSteamID64()].language
+          ];
+      }
+      message += '\n';
+    } catch (error) {
+      log.error(`An error occurred while getting user in Steamrep: ${error}`);
+    }
+
     const customer = {
       totalSets: 0,
       CSkeys: {
