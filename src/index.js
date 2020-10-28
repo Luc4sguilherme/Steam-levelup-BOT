@@ -19,6 +19,7 @@ const login = require('./Components/login');
 
 let allCards = {};
 let userMsgs = {};
+const timeouts = {};
 
 // Initialize SteamUser, TradeOfferManager and SteamCommunity
 const client = new SteamUser();
@@ -166,7 +167,6 @@ client.on('webSession', (_, cookies) => {
 
 // Console will show us login session error
 client.on('error', (error) => {
-  const timeouts = {};
   switch (error.eresult) {
     case SteamUser.EResult.AccountDisabled:
       log.error(`This account is disabled!`);
@@ -176,25 +176,25 @@ client.on('error', (error) => {
       break;
     case SteamUser.EResult.RateLimitExceeded:
       log.warn(`Rate Limit Exceeded, trying to login again in 5 minutes.`);
+      clearTimeout(timeouts.login_timeout);
       timeouts.login_timeout = setTimeout(function () {
         login.restart(client);
-        clearTimeout(timeouts.login_timeout);
       }, 1000 * 60 * 5);
       break;
     case SteamUser.EResult.LogonSessionReplaced:
       log.warn(
         `Unexpected Disconnection!, you have LoggedIn with this same account in another place..`
       );
+      clearTimeout(timeouts.login_timeout);
       timeouts.login_timeout = setTimeout(function () {
         login.restart(client);
-        clearTimeout(timeouts.login_timeout);
       }, 5000);
       break;
     default:
       log.warn('Unexpected Disconnection!');
+      clearTimeout(timeouts.login_Unexpected);
       timeouts.login_Unexpected = setTimeout(function () {
         login.restart(client);
-        clearTimeout(timeouts.login_Unexpected);
       }, 5000);
       break;
   }
@@ -202,10 +202,9 @@ client.on('error', (error) => {
 
 // Relog when the websession is expired
 community.on('sessionExpired', () => {
-  const timeouts = {};
+  clearTimeout(timeouts.session_timeout);
   timeouts.session_timeout = setTimeout(function () {
     login.webLogin(client);
-    clearTimeout(timeouts.session_timeout);
   }, 1000 * 60 * 5);
 });
 
@@ -579,7 +578,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       ].replace('{OFFERID}', OFFER.id)
     );
     log.tradeoffer(
-      `Tradeoffer aborted because user is in escrow and cant trade. TradeID:${OFFER.id}`
+      `Tradeoffer aborted because user is in escrow and can't trade. TradeID:${OFFER.id}`
     );
   }
 });
