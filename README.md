@@ -70,7 +70,10 @@ This is an advanced cardsets/levelup bot script.
 - <code>!PT</code> - Change the bot's language to portuguese. 
 - <code>!RU</code> - Change the bot's language to russian. 
 - <code>!ES</code> - Change the bot's language to spanish. 
-- <code>!CN</code> - Change the bot's language to chinese. 
+- <code>!CN</code> - Change the bot's language to chinese.
+- <code>!FR</code> - Change the bot's language to french. 
+- <code>!JA</code> - Change the bot's language to japanese. 
+- <code>!DE</code> - Change the bot's language to german. 
 - <code>!TUTORIAL</code> - Shows the video tutorial. 
 - <code>!GIVEAWAY</code> - Get info about giveaway and your entries. 
 - <code>!SETS4SETS (amount_of_sets)</code> - Trade your duplicate sets for new ones you can craft. 
