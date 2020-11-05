@@ -115,6 +115,45 @@ utils.getMonth = (value, language) => {
     arrayMonth[9] = '十月';
     arrayMonth[10] = '十一月';
     arrayMonth[11] = '十二月';
+  } else if (language === 'FR') {
+    arrayMonth[0] = 'Janvier';
+    arrayMonth[1] = 'Février';
+    arrayMonth[2] = 'Mars';
+    arrayMonth[3] = 'Avril';
+    arrayMonth[4] = 'Mai';
+    arrayMonth[5] = 'Juin';
+    arrayMonth[6] = 'Juillet';
+    arrayMonth[7] = 'Août';
+    arrayMonth[8] = 'Septembre';
+    arrayMonth[9] = 'Octobre';
+    arrayMonth[10] = 'Novembre';
+    arrayMonth[11] = 'Décembre';
+  } else if (language === 'JA') {
+    arrayMonth[0] = '1月';
+    arrayMonth[1] = '2月';
+    arrayMonth[2] = '3月';
+    arrayMonth[3] = '4月';
+    arrayMonth[4] = '5月';
+    arrayMonth[5] = '6月';
+    arrayMonth[6] = '7月';
+    arrayMonth[7] = '8月';
+    arrayMonth[8] = '9月';
+    arrayMonth[9] = '10月';
+    arrayMonth[10] = '11月';
+    arrayMonth[11] = '12月';
+  } else if (language === 'DE') {
+    arrayMonth[0] = 'Januar';
+    arrayMonth[1] = 'Februar';
+    arrayMonth[2] = 'März';
+    arrayMonth[3] = 'April';
+    arrayMonth[4] = 'Mai';
+    arrayMonth[5] = 'Juni';
+    arrayMonth[6] = 'Juli';
+    arrayMonth[7] = 'August';
+    arrayMonth[8] = 'September';
+    arrayMonth[9] = 'Oktober';
+    arrayMonth[10] = 'November';
+    arrayMonth[11] = 'Dezember';
   }
 
   return arrayMonth[value];

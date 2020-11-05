@@ -3,11 +3,18 @@ const HELPPT = require('./GENERAL/HELPPT');
 const HELPRU = require('./GENERAL/HELPRU');
 const HELPES = require('./GENERAL/HELPES');
 const HELPCN = require('./GENERAL/HELPCN');
+const HELPFR = require('./GENERAL/HELPFR');
+const HELPJA = require('./GENERAL/HELPJA');
+const HELPDE = require('./GENERAL/HELPDE');
+const LANG = require('./GENERAL/LANGUAGE');
 const EN = require('./GENERAL/LANGUAGE/EN');
 const ES = require('./GENERAL/LANGUAGE/ES');
 const PT = require('./GENERAL/LANGUAGE/PT');
 const CN = require('./GENERAL/LANGUAGE/CN');
 const RU = require('./GENERAL/LANGUAGE/RU');
+const FR = require('./GENERAL/LANGUAGE/FR');
+const JA = require('./GENERAL/LANGUAGE/JA');
+const DE = require('./GENERAL/LANGUAGE/DE');
 const BUYANYCSGO = require('./CSGO/BUYANY');
 const BUYANYGEMS = require('./GEMS/BUYANY');
 const BUYANYHYDRA = require('./HYDRA/BUYANY');
@@ -61,6 +68,18 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     case '!救命':
       HELPCN(sender, client);
       break;
+    case '!AIDER':
+      HELPFR(sender, client, users);
+      break;
+    case '!助けて':
+      HELPJA(sender, client, users);
+      break;
+    case '!HILFE':
+      HELPDE(sender, client, users);
+      break;
+    case '!LANG':
+      LANG(sender, client, users);
+      break;
     case '!EN':
       EN(sender, client, users);
       break;
@@ -75,6 +94,15 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       break;
     case '!RU':
       RU(sender, client, users);
+      break;
+    case '!FR':
+      FR(sender, client, users);
+      break;
+    case '!JA':
+      JA(sender, client, users);
+      break;
+    case '!DE':
+      DE(sender, client, users);
       break;
     case '!BUYANYCSGO':
       BUYANYCSGO(sender, msg, client, users, manager);
