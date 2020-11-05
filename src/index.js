@@ -356,14 +356,18 @@ client.on('friendRelationship', (SENDER, REL) => {
         );
       }
     });
-    chatMessage(client, SENDER, messages.WELCOME.EN);
-    chatMessage(client, SENDER, messages.WELCOME.PT);
-    chatMessage(client, SENDER, messages.WELCOME.RU);
-    chatMessage(client, SENDER, messages.WELCOME.ES);
-    chatMessage(client, SENDER, messages.WELCOME.CN);
-    chatMessage(client, SENDER, messages.WELCOME.FR);
-    chatMessage(client, SENDER, messages.WELCOME.JA);
-    chatMessage(client, SENDER, messages.WELCOME.DE);
+    chatMessage(
+      client,
+      SENDER,
+      `${messages.WELCOME.EN}
+      ${messages.WELCOME.PT}
+      ${messages.WELCOME.RU}
+      ${messages.WELCOME.ES}
+      ${messages.WELCOME.CN}
+      ${messages.WELCOME.FR}
+      ${messages.WELCOME.JA}
+      ${messages.WELCOME.DE}`
+    );
     chatMessage(client, SENDER, main.tutorial);
   }
 });
