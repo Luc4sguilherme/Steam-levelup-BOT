@@ -451,7 +451,7 @@ manager.on('sentOfferChanged', (OFFER) => {
         if (Object.prototype.hasOwnProperty.call(u, 'comments')) {
           if (
             Math.floor(new Date(utils.timeZone()).getTime() - u.comments) >
-            1000 * 60 * 60 * main.comment
+            1000 * 60 * 60 * main.comment.interval
           ) {
             canComment = 1;
           } else {
@@ -460,7 +460,7 @@ manager.on('sentOfferChanged', (OFFER) => {
         } else {
           canComment = 1;
         }
-        if (canComment && main.doComment) {
+        if (canComment && main.comment.enabled) {
           USER.comment(
             messages.COMMENT[users[OFFER.partner.getSteamID64()].language],
             (ERR1) => {

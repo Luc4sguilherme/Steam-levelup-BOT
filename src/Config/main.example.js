@@ -35,9 +35,6 @@ module.exports = {
   // Set to true if you want bot to accept any donations  (true or false)
   acceptDonations: true,
 
-  // Set to true if you want the bot to comment on customers profile
-  doComment: true,
-
   // Set to true if you want to invite customers to a desired GroupID64
   doGroupInvites: true,
 
@@ -62,8 +59,12 @@ module.exports = {
   // Set to true if you want to be warned in your steam chat about every sell/buy bot does
   getTradeMessages: true,
 
-  // Interval between user profile comments after negotiation. (in hours)
-  comment: 24,
+  comment: {
+    // Set to true if you want the bot to comment on customers profile
+    enabled: true,
+    // Interval between user profile comments after negotiation. (in hours)
+    interval: 24,
+  },
 
   // Max days an customer can be on friend list without interact with bot.
   maxDaysAdded: 180,
