@@ -35,17 +35,16 @@ module.exports = {
   // Set to true if you want bot to accept any donations  (true or false)
   acceptDonations: true,
 
-  // Set to true if you want to invite customers to a desired GroupID64
-  doGroupInvites: true,
-
-  // Target Group link
-  groupSteam: '',
-
-  // Target Group ID64
-  groupID: '',
-
-  // if you want to auto refuse all group invites, set this to true
-  refuseGroups: true,
+  steamGroup: {
+    // Set to true if you want to invite customers to a desired GroupID64
+    doInvites: true,
+    // Target Group link
+    link: '',
+    // Target Group ID64
+    ID: '',
+    // if you want to auto refuse all group invites, set this to true
+    refuseInvites: true,
+  },
 
   // If you want to automatically add rates to the bot name on startups, set to true, false otherwise.
   ratesInBotName: {

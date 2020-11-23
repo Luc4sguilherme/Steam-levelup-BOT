@@ -109,7 +109,7 @@ client.on('webSession', (_, cookies) => {
     }
   }
   // Refuse group invites
-  if (main.refuseGroups) {
+  if (main.steamGroup.refuseInvites) {
     for (let i = 0; i < Object.keys(client.myGroups).length; i += 1) {
       if (client.myGroups[Object.keys(client.myGroups)[i]] === 2) {
         client.respondToGroupInvite(Object.keys(client.myGroups)[i], false);
@@ -496,13 +496,17 @@ manager.on('sentOfferChanged', (OFFER) => {
           OFFER.partner.getSteamID64(),
           (err, isMember) => {
             if (!err) {
-              if (main.groupSteam && main.doGroupInvites && !isMember) {
+              if (
+                main.steamGroup.link &&
+                main.steamGroup.doInvites &&
+                !isMember
+              ) {
                 chatMessage(
                   client,
                   OFFER.partner.getSteamID64(),
                   messages.TRADE.DONE[0][
                     users[OFFER.partner.getSteamID64()].language
-                  ].replace('{GROUP}', main.groupSteam)
+                  ].replace('{GROUP}', main.steamGroup.link)
                 );
               } else {
                 chatMessage(

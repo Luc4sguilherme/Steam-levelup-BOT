@@ -18,7 +18,7 @@ module.exports = (sender, client, users, community) => {
   utils.checkUserinGroup(community, sender.getSteamID64(), (err, isMember) => {
     if (!err) {
       if (!isMember) {
-        client.inviteToGroup(sender.getSteamID64(), main.groupID);
+        client.inviteToGroup(sender.getSteamID64(), main.steamGroup.ID);
         chatMessage(
           client,
           sender.getSteamID64(),

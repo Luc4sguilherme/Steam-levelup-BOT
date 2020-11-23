@@ -308,7 +308,7 @@ utils.accesstosets4sets = (offer, users, callback) => {
 
 utils.checkUserinGroup = (community, target, callback) => {
   const customer = target;
-  community.getGroupMembers(main.groupID, (err, members) => {
+  community.getGroupMembers(main.steamGroup.ID, (err, members) => {
     if (!err) {
       const m = [];
       for (let i = 0; i < members.length; i += 1) {
@@ -326,12 +326,12 @@ utils.checkUserinGroup = (community, target, callback) => {
 };
 
 utils.inviteToGroup = (client, community, target, callback) => {
-  if (main.groupID && main.doGroupInvites) {
+  if (main.steamGroup.ID && main.steamGroup.doInvites) {
     const customer = target;
     utils.checkUserinGroup(community, customer, (err, isMember) => {
       if (!err) {
         if (!isMember) {
-          client.inviteToGroup(customer, main.groupID);
+          client.inviteToGroup(customer, main.steamGroup.ID);
         }
       } else {
         callback(err);
