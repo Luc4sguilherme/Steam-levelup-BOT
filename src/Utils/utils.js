@@ -223,10 +223,10 @@ utils.getBadges = (SID, callback) => {
         if (badges.badges) {
           badges.badges.forEach(function (badge) {
             if (
-              (badge.appid && badge.border_color === 0) ||
-              badge.border_color !== 1
+              'appid' in badge &&
+              (!badge.badge_border_color || badge.border_color !== 1)
             ) {
-              b[badge.appid] = parseInt(badge.level, 10);
+              b[badge.appid] = badge.level;
             }
           });
           callback(
