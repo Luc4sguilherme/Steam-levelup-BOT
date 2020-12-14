@@ -65,24 +65,16 @@ module.exports = (sender, msg, client, users, manager) => {
                 utils.getBadges(sender.getSteamID64(), (ERR2, DATA) => {
                   if (!ERR2) {
                     log.warn('Badge loaded without error');
+
                     const b = {}; // List with badges that CAN still be crafted
-                    if (DATA) {
-                      for (let i = 0; i < Object.keys(DATA).length; i += 1) {
-                        if (DATA[Object.keys(DATA)[i]] < 6) {
-                          b[Object.keys(DATA)[i]] =
-                            5 - DATA[Object.keys(DATA)[i]];
-                        }
-                      }
-                    } else {
-                      chatMessage(
-                        client,
-                        sender.getSteamID64(),
-                        messages.ERROR.BADGES[2][
-                          users[sender.getSteamID64()].language
-                        ]
-                      );
-                    }
                     let hisMaxSets = 0;
+
+                    for (let i = 0; i < Object.keys(DATA).length; i += 1) {
+                      if (DATA[Object.keys(DATA)[i]] < 6) {
+                        b[Object.keys(DATA)[i]] =
+                          5 - DATA[Object.keys(DATA)[i]];
+                      }
+                    }
 
                     // Loop for sets he has partially completed
                     for (let i = 0; i < Object.keys(b).length; i += 1) {

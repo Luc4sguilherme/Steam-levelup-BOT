@@ -219,7 +219,7 @@ utils.getBadges = (SID, callback) => {
       if (!ERR && RES.statusCode === 200 && BODY.response) {
         const badges = BODY.response;
         const b = {};
-        // console.log(badges);
+
         if (badges.badges) {
           badges.badges.forEach(function (badge) {
             if (
@@ -229,6 +229,7 @@ utils.getBadges = (SID, callback) => {
               b[badge.appid] = parseInt(badge.level, 10);
             }
           });
+
           callback(
             null,
             b,
@@ -237,7 +238,7 @@ utils.getBadges = (SID, callback) => {
             badges.player_xp
           );
         } else {
-          callback(null, 'nobadges');
+          callback('Empty Badge');
         }
       } else {
         callback(ERR);
