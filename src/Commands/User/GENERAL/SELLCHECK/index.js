@@ -24,11 +24,18 @@ module.exports = (sender, client, users, community, allCards) => {
         if (!ERR2) {
           let userNSets = 0;
           for (let i = 0; i < Object.keys(DDATA).length; i += 1) {
-            if (
+            if (!inventory.botSets[Object.keys(DDATA)[i]]) {
+              if (DDATA[Object.keys(DDATA)[i]].length >= main.maxStock) {
+                userNSets += main.maxStock;
+              } else {
+                userNSets += DDATA[Object.keys(DDATA)[i]].length;
+              }
+            } else if (DDATA[Object.keys(DDATA)[i]].length >= main.maxStock) {
+              userNSets +=
+                main.maxStock - inventory.botSets[Object.keys(DDATA)[i]].length;
+            } else if (
               DDATA[Object.keys(DDATA)[i]].length +
-                (inventory.botSets[Object.keys(DDATA)[i]]
-                  ? inventory.botSets[Object.keys(DDATA)[i]].length
-                  : 0) <=
+                inventory.botSets[Object.keys(DDATA)[i]].length <=
               main.maxStock
             ) {
               userNSets += DDATA[Object.keys(DDATA)[i]].length;
