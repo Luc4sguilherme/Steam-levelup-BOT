@@ -9,7 +9,7 @@ exec(`curl ${args}`, { maxBuffer: 1024 * 1024 * 5 }, function (error, stdout) {
     console.log(`exec error: ${error}`);
   } else {
     fs.writeFileSync(
-      path.resolve(__dirname, '..', '..', 'DATA', 'SETS', 'set_data.json'),
+      path.resolve(__dirname, '..', '..', 'Data', 'Sets', 'set_data.json'),
       stdout
     );
   }
