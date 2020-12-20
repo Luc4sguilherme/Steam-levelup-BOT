@@ -6,6 +6,7 @@ const _ = require('lodash');
 const async = require('async');
 const moment = require('moment');
 
+const main = require('../Config/main.js');
 const acceptedKeys = require('../Config/keys.js');
 const utils = require('../Utils/utils');
 const rates = require('../Config/rates.js');
@@ -171,11 +172,20 @@ inventory.getInventory = (SID, community, callback) => {
     if (ERR) {
       callback(ERR);
     } else {
-      const newInv = INV.filter(
+      
+      let newInv = INV.filter(
         (ITEM) => ITEM.getTag('item_class').internal_name === 'item_class_2'
-      ).filter(
-        (ITEM) => ITEM.getTag('cardborder').internal_name === 'cardborder_0'
-      );
+      )
+    
+      if(main.foilMode) {
+        newInv = newInv.filter(
+          (ITEM) => ITEM.getTag('cardborder').internal_name === 'cardborder_1'
+        );
+      } else {
+        newInv = newInv.filter(
+          (ITEM) => ITEM.getTag('cardborder').internal_name === 'cardborder_0'
+        );
+      }
 
       let sInventory = newInv;
       sInventory = _.groupBy(
