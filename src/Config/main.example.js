@@ -35,6 +35,9 @@ module.exports = {
   // Set to true if you want bot to accept any donations  (true or false)
   acceptDonations: true,
 
+  // Setup bot to only handle foil cards instead of normal ones, it will also make bot recognize normal cards as leftovers.
+  foilMode: false,
+
   steamGroup: {
     // Set to true if you want to invite customers to a desired GroupID64
     doInvites: true,
