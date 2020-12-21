@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const fs = require('fs');
 const log = require('./log');
+const main = require('../Config/main');
 
 const maxSets = (cardsFromSortedInventory) => {
   let cardCounts = _.mapValues(
@@ -33,8 +34,17 @@ const getCardsInSets = (callback) => {
 const getSets = (INV, DATA, callback) => {
   const s = {};
   _.forOwn(INV, (c, id) => {
+    const data = DATA;
+
+    if (main.steamSaleMode.enabled) {
+      data[main.steamSaleMode.appid] = {
+        appid: main.steamSaleMode.appid,
+        count: main.steamSaleMode.count,
+      };
+    }
+
     const uc = Object.keys(c).length;
-    if (DATA[id.toString()] && uc === DATA[id.toString()].count) {
+    if (data[id.toString()] && uc === data[id.toString()].count) {
       const r = maxSets(c);
       s[id.toString()] = [];
       for (let i = 0; i < r; i += 1) {
@@ -44,7 +54,7 @@ const getSets = (INV, DATA, callback) => {
         });
         s[id.toString()].push(set);
       }
-    } else if (!DATA[id.toString()]) {
+    } else if (!data[id.toString()]) {
       log.warn(`Card set non-existent, skipping it ${id.toString()} `);
     }
   });
