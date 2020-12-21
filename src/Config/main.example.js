@@ -38,6 +38,12 @@ module.exports = {
   // Setup bot to only handle foil cards instead of normal ones, it will also make bot recognize normal cards as leftovers.
   foilMode: false,
 
+  // Setup bot to only handle Steam sale event cards
+  steamSaleMode: {
+    enabled: false,
+    appid: '',
+  },
+
   steamGroup: {
     // Set to true if you want to invite customers to a desired GroupID64
     doInvites: true,

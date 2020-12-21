@@ -181,6 +181,15 @@ inventory.getInventory = (SID, community, callback) => {
         newInv = newInv.filter(
           (ITEM) => ITEM.getTag('cardborder').internal_name === 'cardborder_1'
         );
+      } else if(main.steamSaleMode.enabled) {
+        if(main.steamSaleMode.appid) {
+          newInv = newInv.filter(
+            (ITEM) => ITEM.getTag('Game').internal_name === `app_${main.steamSaleMode.appid}`
+          );
+        } else {
+          callback('appid invalid');
+          return
+        }
       } else {
         newInv = newInv.filter(
           (ITEM) => ITEM.getTag('cardborder').internal_name === 'cardborder_0'
