@@ -52,6 +52,8 @@ This is an advanced cardsets/levelup bot script.
 - Bot will be inviting every customer who completes a trade, grow up your community!
 ### Perfectly Handle Gems 
 - Perfectly parse any gems on inventories, even divided ones
+### Foil Mode
+- Setup the bot to perform as a foil bot (i.e bot will handle foil cardsets instead)
 ### Leftovers 
 - Bot has the ability to detect unset cards, and to handle them, a card is unset when there is extra cards that aren't able to complete another set.
 ### STM Support 
@@ -74,6 +76,7 @@ This is an advanced cardsets/levelup bot script.
 - <code>!FR</code> - Change the bot's language to french. 
 - <code>!JA</code> - Change the bot's language to japanese. 
 - <code>!DE</code> - Change the bot's language to german. 
+- <code>!LANG</code> - Change the bot's language. 
 - <code>!TUTORIAL</code> - Shows the video tutorial. 
 - <code>!GIVEAWAY</code> - Get info about giveaway and your entries. 
 - <code>!SETS4SETS (amount_of_sets)</code> - Trade your duplicate sets for new ones you can craft. 
