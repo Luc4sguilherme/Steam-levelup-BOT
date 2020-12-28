@@ -30,15 +30,24 @@ module.exports = (sender, client, users, community, allCards) => {
               } else {
                 userNSets += DDATA[Object.keys(DDATA)[i]].length;
               }
-            } else if (DDATA[Object.keys(DDATA)[i]].length >= main.maxStock) {
-              userNSets +=
-                main.maxStock - inventory.botSets[Object.keys(DDATA)[i]].length;
             } else if (
-              DDATA[Object.keys(DDATA)[i]].length +
-                inventory.botSets[Object.keys(DDATA)[i]].length <=
-              main.maxStock
+              inventory.botSets[Object.keys(DDATA)[i]].length < main.maxStock
             ) {
-              userNSets += DDATA[Object.keys(DDATA)[i]].length;
+              if (DDATA[Object.keys(DDATA)[i]].length >= main.maxStock) {
+                userNSets +=
+                  main.maxStock -
+                  inventory.botSets[Object.keys(DDATA)[i]].length;
+              } else if (
+                DDATA[Object.keys(DDATA)[i]].length +
+                  inventory.botSets[Object.keys(DDATA)[i]].length <=
+                main.maxStock
+              ) {
+                userNSets += DDATA[Object.keys(DDATA)[i]].length;
+              } else if (DDATA[Object.keys(DDATA)[i]].length > 0) {
+                userNSets +=
+                  main.maxStock -
+                  inventory.botSets[Object.keys(DDATA)[i]].length;
+              }
             }
           }
 
