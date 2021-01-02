@@ -41,7 +41,7 @@ const check = (client, community) => {
   setInterval(function checkSteamLogged() {
     community.loggedIn(function (err, loggedIn) {
       if (err) {
-        log.warn('checkSteamLogged');
+        log.error(err);
         if (
           err.message.indexOf('socket hang up') > -1 ||
           err.message.indexOf('ESOCKETTIMEDOUT') > -1
@@ -53,7 +53,6 @@ const check = (client, community) => {
       } else if (!loggedIn) {
         webLogin(client);
       } else {
-        /* log.warn('WebLogin check: LOGGED IN'); */
         client.setPersona(SteamUser.EPersonaState.LookingToTrade);
       }
     });
