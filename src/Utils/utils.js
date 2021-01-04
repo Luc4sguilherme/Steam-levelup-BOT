@@ -290,7 +290,7 @@ utils.accesstosets4sets = (offer, users, callback) => {
   if (
     typeof customer !== 'undefined' &&
     offer.data('amountofsets') !== 0 &&
-    offer.data('commandused').search(/SELL/) !== 0
+    offer.data('commandused').search(/SELL/) === -1
   ) {
     if (offer.data('commandused') === '!SETS4SETS') {
       customer.sets4sets.numsets -= parseInt(offer.data('amountofsets'), 10);
