@@ -200,14 +200,6 @@ client.on('error', (error) => {
   }
 });
 
-// Relog when the websession is expired
-community.on('sessionExpired', () => {
-  clearTimeout(timeouts.session_timeout);
-  timeouts.session_timeout = setTimeout(function () {
-    login.webLogin(client);
-  }, 1000 * 60 * 5);
-});
-
 // Constantly checking if you are logged in
 login.check(client, community);
 
