@@ -287,7 +287,11 @@ utils.addGiveawayEntry = (offer, callback) => {
 
 utils.accesstosets4sets = (offer, users, callback) => {
   const customer = users[offer.partner.getSteamID64()];
-  if (typeof customer !== 'undefined' && offer.data('amountofsets') !== 0) {
+  if (
+    typeof customer !== 'undefined' &&
+    offer.data('amountofsets') !== 0 &&
+    offer.data('commandused').search(/SELL/) !== 0
+  ) {
     if (offer.data('commandused') === '!SETS4SETS') {
       customer.sets4sets.numsets -= parseInt(offer.data('amountofsets'), 10);
     } else if (customer.hasOwnProperty('sets4sets') !== false) {
