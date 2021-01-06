@@ -10,6 +10,7 @@ const util = require('util');
 
 const main = require('../Config/main.js');
 const messages = require('../Config/messages.js');
+const rates = require('../Config/rates.js');
 
 const utils = {};
 
@@ -420,6 +421,21 @@ utils.playLoading = {
     this.count = 0;
     clearInterval(this.timer);
   },
+};
+
+utils.rate = () => {
+  if (main.ratesInBotName.currency === 'CSGO') {
+    return `${rates.csgo.sell}:1 CS:GO`;
+  }
+  if (main.ratesInBotName.currency === 'TF') {
+    return `${rates.tf.sell}:1 TF2`;
+  }
+  if (main.ratesInBotName.currency === 'HYDRA') {
+    return `${rates.hydra.sell}:1 HYDRA`;
+  }
+  if (main.ratesInBotName.currency === 'GEMS') {
+    return `1:${rates.gems.sell} GEMS`;
+  }
 };
 
 // Sorting Sets by Amout but reversed
