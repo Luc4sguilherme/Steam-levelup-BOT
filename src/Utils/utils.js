@@ -10,6 +10,7 @@ const util = require('util');
 
 const main = require('../Config/main.js');
 const messages = require('../Config/messages.js');
+const rates = require('../Config/rates.js');
 
 const utils = {};
 
@@ -217,26 +218,27 @@ utils.getBadges = (SID, callback) => {
     },
     (ERR, RES, BODY) => {
       if (!ERR && RES.statusCode === 200 && BODY.response) {
-        const badges = BODY.response;
-        const b = {};
+        const badges = {};
+        const data = BODY.response;
 
-        if (badges.badges) {
-          badges.badges.forEach(function (badge) {
+        if (data.badges) {
+          const {
+            player_level: currentLevel,
+            player_xp: totalXP,
+            player_xp_needed_current_level: XPNeededCurrentLevel,
+          } = data;
+          const currentLevelXP = totalXP - XPNeededCurrentLevel;
+
+          data.badges.forEach(function (badge) {
             if (
               (badge.appid && badge.border_color === 0) ||
               badge.border_color !== 1
             ) {
-              b[badge.appid] = parseInt(badge.level, 10);
+              badges[badge.appid] = parseInt(badge.level, 10);
             }
           });
 
-          callback(
-            null,
-            b,
-            badges.player_level,
-            badges.player_xp - badges.player_xp_needed_current_level,
-            badges.player_xp
-          );
+          callback(null, badges, currentLevel, currentLevelXP, totalXP);
         } else {
           callback('Empty Badge');
         }
@@ -420,6 +422,21 @@ utils.playLoading = {
     this.count = 0;
     clearInterval(this.timer);
   },
+};
+
+utils.rate = () => {
+  if (main.ratesInBotName.currency === 'CSGO') {
+    return `${rates.csgo.sell}:1 CS:GO`;
+  }
+  if (main.ratesInBotName.currency === 'TF') {
+    return `${rates.tf.sell}:1 TF2`;
+  }
+  if (main.ratesInBotName.currency === 'HYDRA') {
+    return `${rates.hydra.sell}:1 HYDRA`;
+  }
+  if (main.ratesInBotName.currency === 'GEMS') {
+    return `1:${rates.gems.sell} GEMS`;
+  }
 };
 
 // Sorting Sets by Amout but reversed

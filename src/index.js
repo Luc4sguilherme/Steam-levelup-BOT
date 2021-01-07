@@ -6,7 +6,6 @@ const fs = require('fs');
 const utils = require('./Utils/utils');
 const messages = require('./Config/messages.js');
 const main = require('./Config/main.js');
-const rates = require('./Config/rates.js');
 const inventory = require('./Components/inventory');
 const profit = require('./Components/profit');
 const log = require('./Components/log');
@@ -61,27 +60,10 @@ login.init(client);
 
 // When the WebSession logs in, we will set the Profile to Online, otherwise the Bot would appear offline while being online in the WebSession
 client.on('loggedOn', () => {
-  client.getPersonas([client.steamID], () => {
-    // log.info("Name: " + personas[client.steamID].player_name + " (" + client.steamID + ")");
-  });
   if (main.ratesInBotName.status) {
-    function rate() {
-      if (main.ratesInBotName.currency === 'CSGO') {
-        return rates.csgo.sell;
-      }
-      if (main.ratesInBotName.currency === 'TF') {
-        return rates.tf.sell;
-      }
-      if (main.ratesInBotName.currency === 'HYDRA') {
-        return rates.hydra.sell;
-      }
-      if (main.ratesInBotName.currency === 'GEMS') {
-        return rates.gems.sell;
-      }
-    }
     client.setPersona(
       SteamUser.EPersonaState.Online,
-      `${main.botName} ${rate()}:1`
+      `${main.botName} | ${utils.rate()}`
     );
   } else if (main.botName) {
     client.setPersona(SteamUser.EPersonaState.Online, main.botName);

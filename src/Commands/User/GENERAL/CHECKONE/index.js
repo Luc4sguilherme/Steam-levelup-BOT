@@ -18,7 +18,7 @@ module.exports = (sender, client, users) => {
   );
   utils.getBadges(
     sender.getSteamID64(),
-    (ERR, DATA, CURRENTLEVEL, XPNEEDED, TOTALXP) => {
+    (ERR, DATA, CURRENTLEVEL, CURRENTLEVELXP, TOTALXP) => {
       if (!ERR) {
         const b = {}; // List with badges that CAN still be crafted
         if (DATA) {

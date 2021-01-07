@@ -16,7 +16,7 @@ module.exports = (sender, msg, client, users) => {
     if (n <= main.maxLevel) {
       utils.getBadges(
         sender.getSteamID64(),
-        (ERR, DATA, CURRENTLEVEL, XPNEEDED) => {
+        (ERR, DATA, CURRENTLEVEL, CURRENTLEVELXP) => {
           if (!ERR) {
             if (DATA) {
               if (CURRENTLEVEL >= 0) {
@@ -29,26 +29,29 @@ module.exports = (sender, msg, client, users) => {
                   }
                   const cs = Math.ceil(
                     parseInt(
-                      ((s - Math.floor(XPNEEDED / 100)) / rates.csgo.sell) *
+                      ((s - Math.floor(CURRENTLEVELXP / 100)) /
+                        rates.csgo.sell) *
                         100,
                       10
                     ) / 100
                   );
                   const hydra = Math.ceil(
                     parseInt(
-                      ((s - Math.floor(XPNEEDED / 100)) / rates.hydra.sell) *
+                      ((s - Math.floor(CURRENTLEVELXP / 100)) /
+                        rates.hydra.sell) *
                         100,
                       10
                     ) / 100
                   );
                   const tf = Math.ceil(
                     parseInt(
-                      ((s - Math.floor(XPNEEDED / 100)) / rates.tf.sell) * 100,
+                      ((s - Math.floor(CURRENTLEVELXP / 100)) / rates.tf.sell) *
+                        100,
                       10
                     ) / 100
                   );
                   const gems = parseInt(
-                    (s - Math.floor(XPNEEDED / 100)) * rates.gems.sell,
+                    (s - Math.floor(CURRENTLEVELXP / 100)) * rates.gems.sell,
                     10
                   );
                   chatMessage(
@@ -58,11 +61,11 @@ module.exports = (sender, msg, client, users) => {
                       users[sender.getSteamID64()].language
                     ]
                       .replace('{level}', n)
-                      .replace('{sets1}', s - Math.floor(XPNEEDED / 100))
+                      .replace('{sets1}', s - Math.floor(CURRENTLEVELXP / 100))
                       .replace('{sets2}', cs * rates.csgo.sell)
                       .replace('{sets3}', hydra * rates.hydra.sell)
                       .replace('{sets4}', tf * rates.tf.sell)
-                      .replace(/{sets5}/g, s - Math.floor(XPNEEDED / 100))
+                      .replace(/{sets5}/g, s - Math.floor(CURRENTLEVELXP / 100))
                       .replace(/{cs}/g, cs)
                       .replace(/{hydra}/g, hydra)
                       .replace(/{tf}/g, tf)
