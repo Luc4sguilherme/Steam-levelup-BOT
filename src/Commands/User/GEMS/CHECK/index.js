@@ -17,7 +17,7 @@ module.exports = (sender, msg, client, users) => {
       if (main.maxCheck.gems >= n) {
         utils.getBadges(
           sender.getSteamID64(),
-          (ERR, DATA, CURRENTLEVEL, XPNEEDED, TOTALXP) => {
+          (ERR, DATA, CURRENTLEVEL, CURRENTLEVELXP, TOTALXP) => {
             if (!ERR) {
               if (DATA) {
                 if (CURRENTLEVEL >= 0) {
@@ -46,7 +46,7 @@ module.exports = (sender, msg, client, users) => {
                     let b;
                     if (
                       CURRENTLEVEL === 0 ||
-                      XPNEEDED === 0 ||
+                      CURRENTLEVELXP === 0 ||
                       d > n / rates.gems.sell ||
                       d <= parseInt(n / rates.gems.sell, 10)
                     ) {

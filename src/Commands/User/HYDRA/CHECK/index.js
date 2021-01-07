@@ -16,7 +16,7 @@ module.exports = (sender, msg, client, users) => {
     if (main.maxCheck.hydra >= n) {
       utils.getBadges(
         sender.getSteamID64(),
-        (ERR, DATA, CURRENTLEVEL, XPNEEDED, TOTALXP) => {
+        (ERR, DATA, CURRENTLEVEL, CURRENTLEVELXP, TOTALXP) => {
           if (!ERR) {
             if (DATA) {
               if (CURRENTLEVEL >= 0) {

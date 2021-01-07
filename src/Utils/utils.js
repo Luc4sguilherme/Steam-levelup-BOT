@@ -218,26 +218,27 @@ utils.getBadges = (SID, callback) => {
     },
     (ERR, RES, BODY) => {
       if (!ERR && RES.statusCode === 200 && BODY.response) {
-        const badges = BODY.response;
-        const b = {};
+        const badges = {};
+        const data = BODY.response;
 
-        if (badges.badges) {
-          badges.badges.forEach(function (badge) {
+        if (data.badges) {
+          const {
+            player_level: currentLevel,
+            player_xp: totalXP,
+            player_xp_needed_current_level: XPNeededCurrentLevel,
+          } = data;
+          const currentLevelXP = totalXP - XPNeededCurrentLevel;
+
+          data.badges.forEach(function (badge) {
             if (
               (badge.appid && badge.border_color === 0) ||
               badge.border_color !== 1
             ) {
-              b[badge.appid] = parseInt(badge.level, 10);
+              badges[badge.appid] = parseInt(badge.level, 10);
             }
           });
 
-          callback(
-            null,
-            b,
-            badges.player_level,
-            badges.player_xp - badges.player_xp_needed_current_level,
-            badges.player_xp
-          );
+          callback(null, badges, currentLevel, currentLevelXP, totalXP);
         } else {
           callback('Empty Badge');
         }
