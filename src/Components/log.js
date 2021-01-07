@@ -169,7 +169,7 @@ log.userChatFullMessages = (id64, msg) => {
 
   fs.appendFile(
     `${dir}/${id64}.txt`,
-    `${time} --> ${msg} \r`,
+    `${time} --> ${msg} \r\n`,
     {
       flags: 'a',
     },
