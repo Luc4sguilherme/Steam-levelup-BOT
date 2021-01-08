@@ -60,13 +60,15 @@ login.init(client);
 
 // When the WebSession logs in, we will set the Profile to Online, otherwise the Bot would appear offline while being online in the WebSession
 client.on('loggedOn', () => {
-  if (main.ratesInBotName.status) {
-    client.setPersona(
-      SteamUser.EPersonaState.Online,
-      `${main.botName} | ${utils.rate()}`
-    );
-  } else if (main.botName) {
-    client.setPersona(SteamUser.EPersonaState.Online, main.botName);
+  if (main.botName) {
+    if (main.ratesInBotName.status) {
+      client.setPersona(
+        SteamUser.EPersonaState.Online,
+        `${main.botName} | ${utils.rate()}`
+      );
+    } else {
+      client.setPersona(SteamUser.EPersonaState.Online, main.botName);
+    }
   } else {
     client.setPersona(SteamUser.EPersonaState.Online);
   }
