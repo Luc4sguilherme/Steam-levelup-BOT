@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const ADMIN = require('./GENERAL/ADMIN');
 const AUTHCODE = require('./GENERAL/AUTHCODE');
 const BLOCK = require('./GENERAL/BLOCK');

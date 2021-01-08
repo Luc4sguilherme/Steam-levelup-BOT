@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 const fs = require('fs');
 const log = require('./log');
 const main = require('../Config/main');
@@ -32,14 +33,18 @@ const read = () => {
 const inactive = (client, users) => {
   const listUsers = users;
   function addUsers(obj, prop) {
+    const user = obj;
     for (const p of prop) {
-      (obj[p] = {}), (obj[p].idleforhours = 0), (obj[p].language = 'EN');
+      user[p] = {};
+      user[p].idleforhours = 0;
+      user[p].language = 'EN';
     }
   }
 
   function deleteUsers(obj, prop) {
+    const user = obj;
     for (const p of prop) {
-      p in obj && delete obj[p];
+      if (p in user) delete user[p];
     }
   }
   setInterval(() => {

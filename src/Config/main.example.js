@@ -49,13 +49,13 @@ module.exports = {
     refuseInvites: true,
   },
 
-  // If you want to automatically add rates to the bot name on startups, set to true, false otherwise.
+  // If you want to automatically add rates to the bot name on startups, set to true, false otherwise. (It is necessary to define the botName variable)
   ratesInBotName: {
     status: false,
     currency: 'CSGO',
   },
 
-  // If you want to change the BOT name at startups, set the name here.
+  // Defines the name of the BOT on initializations.
   botName: '',
 
   // Set to true if you want to be warned in your steam chat about every sell/buy bot does
