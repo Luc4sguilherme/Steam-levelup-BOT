@@ -288,7 +288,7 @@ client.on('friendMessage', (SENDER, MSG) => {
       MSG.toUpperCase().search(/RELOAD/) !== -1 ||
       MSG.toUpperCase().search(/UNPACK/) !== -1)
   ) {
-    return chatMessage(
+    chatMessage(
       client,
       SENDER,
       messages.LOADING[users[SENDER.getSteamID64()].language]

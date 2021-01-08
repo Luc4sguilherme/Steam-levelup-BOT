@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const HELPEN = require('./GENERAL/HELPEN');
 const HELPPT = require('./GENERAL/HELPPT');
 const HELPRU = require('./GENERAL/HELPRU');
