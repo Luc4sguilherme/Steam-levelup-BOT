@@ -424,6 +424,7 @@ utils.playLoading = {
   },
 };
 
+// eslint-disable-next-line consistent-return
 utils.rate = () => {
   if (main.ratesInBotName.currency === 'CSGO') {
     return `${rates.csgo.sell}:1 CS:GO`;
