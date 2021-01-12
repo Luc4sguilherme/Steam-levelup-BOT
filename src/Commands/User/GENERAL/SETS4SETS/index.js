@@ -22,17 +22,21 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     ) !== false
   ) {
     if (Object.keys(inventory.botSets).length) {
-      let n = msg.toUpperCase().replace('!SETS4SETS ', '');
-      const amountofsets = parseInt(n, 10);
-      if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
+      const amountofsets = parseInt(
+        msg.toUpperCase().replace('!SETS4SETS ', ''),
+        10
+      );
+      if (!Number.isNaN(amountofsets) && amountofsets > 0) {
         log.userChat(
           sender.getSteamID64(),
           users[sender.getSteamID64()].language,
-          `[ !SETS4SETS ${n} ]`
+          `[ !SETS4SETS ${amountofsets} ]`
         );
-        if (admin || n <= main.maxSets4Sets) {
-          if (admin || n <= users[sender.getSteamID64()].sets4sets.numsets) {
-            n = parseInt(n, 10);
+        if (admin || amountofsets <= main.maxSets4Sets) {
+          if (
+            admin ||
+            amountofsets <= users[sender.getSteamID64()].sets4sets.numsets
+          ) {
             const mySets = [];
             const theirSets = [];
             chatMessage(
@@ -47,7 +51,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
               (ERR1, DATA1) => {
                 if (!ERR1) {
                   const s = DATA1;
-                  const setsSent = {};
+                  const requestedSets = {};
                   getSets(s, allCards, (ERR2, DATA2) => {
                     if (!ERR2) {
                       utils.sortSetsByAmountB(s, (DATA3) => {
@@ -59,11 +63,11 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                               j += 1
                             ) {
                               if (amountofB > 0) {
-                                if (!setsSent[DATA3[i]]) {
-                                  setsSent[DATA3[i]] = 0;
+                                if (!requestedSets[DATA3[i]]) {
+                                  requestedSets[DATA3[i]] = 0;
                                 }
                                 if (
-                                  setsSent[DATA3[i]] +
+                                  requestedSets[DATA3[i]] +
                                     (inventory.botSets[DATA3[i]]
                                       ? inventory.botSets[DATA3[i]].length
                                       : 0) <
@@ -71,7 +75,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                 ) {
                                   theirSets.push(DATA2[DATA3[i]][j]);
                                   amountofB -= 1;
-                                  setsSent[DATA3[i]] += 1;
+                                  requestedSets[DATA3[i]] += 1;
                                 } else {
                                   continue firsttLoop;
                                 }
@@ -99,7 +103,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                             if (!ERR3) {
                               log.warn('Badge loaded without error');
 
-                              const b = {}; // List with badges that CAN still be crafted
+                              const badges = {}; // List with badges that CAN still be crafted
                               let hisMaxSets = 0;
 
                               for (
@@ -108,7 +112,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                 i += 1
                               ) {
                                 if (DATA4[Object.keys(DATA4)[i]] < 6) {
-                                  b[Object.keys(DATA4)[i]] =
+                                  badges[Object.keys(DATA4)[i]] =
                                     5 - DATA4[Object.keys(DATA4)[i]];
                                 }
                               }
@@ -116,15 +120,15 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                               // Loop for sets he has partially completed
                               for (
                                 let i = 0;
-                                i < Object.keys(b).length;
+                                i < Object.keys(badges).length;
                                 i += 1
                               ) {
                                 if (
-                                  inventory.botSets[Object.keys(b)[i]] &&
-                                  inventory.botSets[Object.keys(b)[i]].length >=
-                                    b[Object.keys(b)[i]]
+                                  inventory.botSets[Object.keys(badges)[i]] &&
+                                  inventory.botSets[Object.keys(badges)[i]]
+                                    .length >= badges[Object.keys(badges)[i]]
                                 ) {
-                                  hisMaxSets += b[Object.keys(b)[i]];
+                                  hisMaxSets += badges[Object.keys(badges)[i]];
                                 }
                               }
                               // Loop for sets he has never crafted
@@ -134,7 +138,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                 i += 1
                               ) {
                                 if (
-                                  Object.keys(b).indexOf(
+                                  Object.keys(badges).indexOf(
                                     Object.keys(inventory.botSets)[i]
                                   ) < 0
                                 ) {
@@ -160,7 +164,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                   (DATA5) => {
                                     let DATA6 = DATA5;
                                     for (let i = 0; i < DATA6.length; i += 1) {
-                                      if (setsSent[DATA6[i]]) {
+                                      if (requestedSets[DATA6[i]]) {
                                         delete DATA6[i];
                                       }
                                     }
@@ -173,21 +177,21 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                       i < DATA6.length;
                                       i += 1
                                     ) {
-                                      if (b[DATA6[i]] === 0) {
+                                      if (badges[DATA6[i]] === 0) {
                                         continue;
                                       } else if (hisMaxSets > 0) {
                                         if (
-                                          b[DATA6[i]] &&
+                                          badges[DATA6[i]] &&
                                           inventory.botSets[DATA6[i]].length >=
-                                            b[DATA6[i]]
+                                            badges[DATA6[i]]
                                         ) {
                                           for (
                                             let j = 0;
-                                            j < 5 - b[DATA6[i]];
+                                            j < 5 - badges[DATA6[i]];
                                             j += 1
                                           ) {
                                             if (
-                                              j + 1 < b[DATA6[i]] &&
+                                              j + 1 < badges[DATA6[i]] &&
                                               hisMaxSets > 0
                                             ) {
                                               mySets.push(
@@ -199,18 +203,18 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                             }
                                           }
                                         } else if (
-                                          b[DATA6[i]] &&
+                                          badges[DATA6[i]] &&
                                           inventory.botSets[DATA6[i]].length <
-                                            b[DATA6[i]]
+                                            badges[DATA6[i]]
                                         ) {
                                           // BOT DOESNT HAVE ENOUGH SETS OF THIS KIND
                                           continue; // *
                                         } else if (
-                                          !b[DATA6[i]] &&
+                                          !badges[DATA6[i]] &&
                                           inventory.botSets[DATA6[i]].length <
                                             5 &&
                                           inventory.botSets[DATA6[i]].length -
-                                            b[DATA6[i]] >
+                                            badges[DATA6[i]] >
                                             0
                                         ) {
                                           // TODO NOT FOR LOOP WITH BOTSETS. IT SENDS ALL
@@ -219,7 +223,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                             let j = 0;
                                             j <
                                             inventory.botSets[DATA6[i]].length -
-                                              b[DATA6[i]];
+                                              badges[DATA6[i]];
                                             j += 1
                                           ) {
                                             if (
@@ -290,8 +294,8 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                       const message = messages.TRADE.SETMESSAGE[3].SETS[
                                         users[sender.getSteamID64()].language
                                       ]
-                                        .replace('{SETS1}', amountofsets)
-                                        .replace('{SETS2}', n);
+                                        .replace('{SETS1}', mySets.length)
+                                        .replace('{SETS2}', theirSets.length);
                                       makeOffer(
                                         client,
                                         users,

@@ -48,25 +48,25 @@ module.exports = (sender, msg, client, users) => {
       );
       utils.getBadges(
         sender.getSteamID64(),
-        (ERR, DATA, CURRENTLEVEL, CURRENTLEVELXP, TOTALXP) => {
+        (ERR, DATA, CURRENTLEVEL, _, TOTALXP) => {
           if (!ERR) {
-            const b = {}; // List with badges that CAN still be crafted
+            const badges = {}; // List with badges that CAN still be crafted
             if (DATA) {
               for (let i = 0; i < Object.keys(DATA).length; i += 1) {
                 if (DATA[Object.keys(DATA)[i]] < 6) {
-                  b[Object.keys(DATA)[i]] = 5 - DATA[Object.keys(DATA)[i]];
+                  badges[Object.keys(DATA)[i]] = 5 - DATA[Object.keys(DATA)[i]];
                 }
               }
               let hisMaxSets = 0;
 
               // Loop for sets he has partially completed
-              for (let i = 0; i < Object.keys(b).length; i += 1) {
+              for (let i = 0; i < Object.keys(badges).length; i += 1) {
                 if (
-                  inventory.botSets[Object.keys(b)[i]] &&
-                  inventory.botSets[Object.keys(b)[i]].length >=
-                    b[Object.keys(b)[i]]
+                  inventory.botSets[Object.keys(badges)[i]] &&
+                  inventory.botSets[Object.keys(badges)[i]].length >=
+                    badges[Object.keys(badges)[i]]
                 ) {
-                  hisMaxSets += b[Object.keys(b)[i]];
+                  hisMaxSets += badges[Object.keys(badges)[i]];
                 }
               }
               // Loop for sets he has never crafted
@@ -76,7 +76,9 @@ module.exports = (sender, msg, client, users) => {
                 i += 1
               ) {
                 if (
-                  Object.keys(b).indexOf(Object.keys(inventory.botSets)[i]) < 0
+                  Object.keys(badges).indexOf(
+                    Object.keys(inventory.botSets)[i]
+                  ) < 0
                 ) {
                   if (
                     inventory.botSets[Object.keys(inventory.botSets)[i]]

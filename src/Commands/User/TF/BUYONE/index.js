@@ -56,11 +56,12 @@ module.exports = (sender, msg, client, users, manager) => {
                   log.warn('Badge loaded without error');
 
                   let hisMaxSets = 0;
-                  const b = {}; // List with badges that CAN still be crafted
+                  const badges = {}; // List with badges that CAN still be crafted
 
                   for (let i = 0; i < Object.keys(DATA).length; i += 1) {
                     if (DATA[Object.keys(DATA)[i]] < 6) {
-                      b[Object.keys(DATA)[i]] = 5 - DATA[Object.keys(DATA)[i]];
+                      badges[Object.keys(DATA)[i]] =
+                        5 - DATA[Object.keys(DATA)[i]];
                     }
                   }
 
@@ -71,7 +72,7 @@ module.exports = (sender, msg, client, users, manager) => {
                     i += 1
                   ) {
                     if (
-                      Object.keys(b).indexOf(
+                      Object.keys(badges).indexOf(
                         Object.keys(inventory.botSets)[i]
                       ) < 0
                     ) {
@@ -88,11 +89,11 @@ module.exports = (sender, msg, client, users, manager) => {
                     hisMaxSets = amountofsets;
                     utils.sortSetsByAmount(inventory.botSets, (DDATA) => {
                       firstLoop: for (let i = 0; i < DDATA.length; i += 1) {
-                        if (b[DDATA[i]] === 0) {
+                        if (badges[DDATA[i]] === 0) {
                           continue;
                         } else if (hisMaxSets > 0) {
                           if (
-                            !b[DDATA[i]] &&
+                            !badges[DDATA[i]] &&
                             inventory.botSets[DDATA[i]].length > 0
                           ) {
                             // TODO NOT FOR LOOP WITH BOTSETS. IT SENDS ALL
