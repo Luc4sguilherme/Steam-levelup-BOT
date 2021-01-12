@@ -18,13 +18,13 @@ module.exports = (sender, client, users) => {
   );
   utils.getBadges(
     sender.getSteamID64(),
-    (ERR, DATA, CURRENTLEVEL, CURRENTLEVELXP, TOTALXP) => {
+    (ERR, DATA, CURRENTLEVEL, _, TOTALXP) => {
       if (!ERR) {
-        const b = {}; // List with badges that CAN still be crafted
+        const badges = {}; // List with badges that CAN still be crafted
         if (DATA) {
           for (let i = 0; i < Object.keys(DATA).length; i += 1) {
             if (DATA[Object.keys(DATA)[i]] < 6) {
-              b[Object.keys(DATA)[i]] = 5 - DATA[Object.keys(DATA)[i]];
+              badges[Object.keys(DATA)[i]] = 5 - DATA[Object.keys(DATA)[i]];
             }
           }
 
@@ -32,7 +32,9 @@ module.exports = (sender, client, users) => {
 
           // Loop for sets he has never crafted
           for (let i = 0; i < Object.keys(inventory.botSets).length; i += 1) {
-            if (Object.keys(b).indexOf(Object.keys(inventory.botSets)[i]) < 0) {
+            if (
+              Object.keys(badges).indexOf(Object.keys(inventory.botSets)[i]) < 0
+            ) {
               if (
                 inventory.botSets[Object.keys(inventory.botSets)[i]].length >= 1
               ) {

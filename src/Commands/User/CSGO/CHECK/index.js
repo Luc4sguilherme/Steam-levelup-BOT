@@ -16,7 +16,7 @@ module.exports = (sender, msg, client, users) => {
     if (main.maxCheck.csgo >= n) {
       utils.getBadges(
         sender.getSteamID64(),
-        (ERR, DATA, CURRENTLEVEL, CURRENTLEVELXP, TOTALXP) => {
+        (ERR, DATA, CURRENTLEVEL, _, TOTALXP) => {
           if (!ERR) {
             if (DATA) {
               if (CURRENTLEVEL >= 0) {
