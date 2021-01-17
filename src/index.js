@@ -143,8 +143,6 @@ client.on('webSession', (_, cookies) => {
           inventory.stock.tfKeys.tradable,
           inventory.stock.gemsQuantity.tradable
         );
-
-        log.warn('Updated steam.supply catalog');
       } catch (error) {
         log.error(
           `An error occurred while updating steam.supply catalog: ${error}`
