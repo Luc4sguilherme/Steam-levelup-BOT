@@ -29,6 +29,7 @@ module.exports = async (sender, client, users) => {
         .replace('{COUNTRYXP}', COUNTRYXP)
     );
   } catch (error) {
+    log.error(`An error occurred while getting the rank: ${error}`);
     chatMessage(
       client,
       sender,

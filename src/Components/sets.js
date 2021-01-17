@@ -1,6 +1,11 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 const _ = require('lodash');
 const fs = require('fs');
+
 const log = require('./log');
+const main = require('../Config/main');
+const steamSupply = require('./steamSupply');
 
 const maxSets = (cardsFromSortedInventory) => {
   let cardCounts = _.mapValues(
@@ -11,23 +16,56 @@ const maxSets = (cardsFromSortedInventory) => {
   return Math.min(...cardCounts);
 };
 
+const updateCardsDB = () => {
+  steamSupply
+    .getCardDB()
+    .then((data) => {
+      fs.writeFileSync('./Data/Sets/set_data.json', data);
+    })
+    .catch((error) => {
+      log.error(`An error occurred while updating cardsDB: ${error}`);
+    });
+};
+
+const parseCardsData = (data) => {
+  const db = JSON.parse(data);
+  const sets = {};
+
+  for (const appId in db) {
+    sets[appId] = {
+      appid: appId,
+      count: db[appId],
+    };
+  }
+
+  return sets;
+};
+
 const getCardsInSets = (callback) => {
-  fs.readFile('./Data/Sets/set_data.json', 'utf8', (err, data) => {
-    if (err) {
-      callback(err);
-    } else {
-      const c = JSON.parse(data);
-      const d = {};
-      for (let i = 0; i < c.sets.length; i += 1) {
-        d[c.sets[i].appid] = {
-          appid: c.sets[i].appid,
-          name: c.sets[i].game,
-          count: c.sets[i].normal.count,
-        };
+  const dir = './Data/Sets/set_data.json';
+  if (main.steamSupply.updateCardDB && !fs.existsSync(dir)) {
+    steamSupply
+      .getCardDB()
+      .then((data) => {
+        const sets = parseCardsData(data);
+
+        fs.writeFileSync(dir, data);
+
+        callback(null, sets);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  } else {
+    fs.readFile(dir, 'utf8', (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        const sets = parseCardsData(data);
+        callback(null, sets);
       }
-      callback(null, d);
-    }
-  });
+    });
+  }
 };
 
 const getSets = (INV, DATA, callback) => {
@@ -54,4 +92,5 @@ const getSets = (INV, DATA, callback) => {
 module.exports = {
   getCardsInSets,
   getSets,
+  updateCardsDB,
 };

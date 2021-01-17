@@ -20,6 +20,13 @@ module.exports = {
   // Steamladder API Key
   steamLadderApiKey: '',
 
+  // Steam.supply support to setup your bot in cardbot catalog list!
+  steamSupply: {
+    apiKey: '',
+    updateCardDB: false,
+    updateCatalog: false,
+  },
+
   // You can add multiple Administrators - example [ "SteamID64", "SteamID64" ]
   admins: [''],
 
