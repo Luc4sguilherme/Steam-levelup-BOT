@@ -58,6 +58,10 @@ This is an advanced cardsets/levelup bot script.
 - Bot has the ability to detect unset cards, and to handle them, a card is unset when there is extra cards that aren't able to complete another set.
 ### STM Support 
 - If you supply yourself, or if you have a 1:1 bot, setup this script to periodically request a desired amount of sets
+### SteamSupply Support
+- Automatic update the bot info in the steam.supply website catalog
+### Automatic update Cards Database
+- Automatic update the database to keep in track of every appid and his sets
 ### Handle donations 
 - You can enable/disable donates on your bot
 ### BBCodes 

@@ -2,6 +2,7 @@ const TradeOfferManager = require('steam-tradeoffer-manager');
 const SteamCommunity = require('steamcommunity');
 const SteamUser = require('steam-user');
 const fs = require('fs');
+const moment = require('moment');
 
 const utils = require('./Utils/utils');
 const messages = require('./Config/messages.js');
@@ -13,8 +14,9 @@ const user = require('./Components/user');
 const chatMessage = require('./Components/message');
 const commands = require('./Commands');
 const request = require('./Components/request');
-const { getCardsInSets } = require('./Components/sets');
+const { getCardsInSets, updateCardsDB } = require('./Components/sets');
 const login = require('./Components/login');
+const steamSupply = require('./Components/steamSupply');
 
 let allCards = {};
 let userMsgs = {};
@@ -44,8 +46,16 @@ getCardsInSets((ERR, DATA) => {
     log.warn(`Card data loaded. [${datalength}]`);
   } else {
     log.error(`An error occurred while getting cards: ${ERR}`);
+    process.exit(1);
   }
 });
+
+// Update cards Database
+if (main.steamSupply.updateCardDB) {
+  setInterval(() => {
+    updateCardsDB();
+  }, moment.duration(5, 'days'));
+}
 
 // Constantly checking for a too long inactivity of any user in our friendlist
 user.inactive(client, users);
@@ -122,6 +132,26 @@ client.on('webSession', (_, cookies) => {
       inventory.play(client);
     }
   );
+
+  // Update the steamSupply catalog
+  if (main.steamSupply.updateCatalog) {
+    setInterval(async () => {
+      try {
+        await steamSupply.updateCatalog(
+          inventory.stock.hydraKeys.tradable,
+          inventory.stock.csKeys.tradable,
+          inventory.stock.tfKeys.tradable,
+          inventory.stock.gemsQuantity.tradable
+        );
+
+        log.warn('Updated steam.supply catalog');
+      } catch (error) {
+        log.error(
+          `An error occurred while updating steam.supply catalog: ${error}`
+        );
+      }
+    }, moment.duration(25, 'minutes'));
+  }
 
   // Requester
   if (main.requester.enabled) {
