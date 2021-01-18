@@ -14,7 +14,7 @@ module.exports = (sender, client, users) => {
     sender,
     messages.REQUEST[users[sender.getSteamID64()].language]
   );
-  setTimeout(function () {
+  setTimeout(() => {
     chatMessage(
       client,
       sender,

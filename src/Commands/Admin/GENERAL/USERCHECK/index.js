@@ -284,7 +284,7 @@ module.exports = async (sender, msg, client, users, community, allCards) => {
         }
         const timeEnd = Date.now();
         const duration = timeEnd - timeStart;
-        setTimeout(function () {
+        setTimeout(() => {
           // Get all CardSets
           inventory.getInventory(n, community, (ERR1, DATA) => {
             if (!ERR1) {
@@ -310,7 +310,7 @@ module.exports = async (sender, msg, client, users, community, allCards) => {
     };
     customer.check((ERR) => {
       if (!ERR) {
-        setTimeout(function () {
+        setTimeout(() => {
           message += messages.USERCHECK.INVENTORY[
             users[sender.getSteamID64()].language
           ]

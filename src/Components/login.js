@@ -38,8 +38,8 @@ function webLogin(client) {
 }
 
 const check = (client, community) => {
-  setInterval(function checkSteamLogged() {
-    community.loggedIn(function (err, loggedIn) {
+  setInterval(() => {
+    community.loggedIn((err, loggedIn) => {
       if (err) {
         log.error(err);
         if (

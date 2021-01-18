@@ -169,9 +169,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                       }
                                     }
 
-                                    DATA6 = DATA6.filter(function () {
-                                      return true;
-                                    });
+                                    DATA6 = DATA6.filter(() => true);
                                     firstLoop: for (
                                       let i = 0;
                                       i < DATA6.length;

@@ -189,7 +189,7 @@ client.on('error', (error) => {
     case SteamUser.EResult.RateLimitExceeded:
       log.warn(`Rate Limit Exceeded, trying to login again in 5 minutes.`);
       clearTimeout(timeouts.login_timeout);
-      timeouts.login_timeout = setTimeout(function () {
+      timeouts.login_timeout = setTimeout(() => {
         login.restart(client);
       }, 1000 * 60 * 5);
       break;
@@ -198,14 +198,14 @@ client.on('error', (error) => {
         `Unexpected Disconnection!, you have LoggedIn with this same account in another place..`
       );
       clearTimeout(timeouts.login_timeout);
-      timeouts.login_timeout = setTimeout(function () {
+      timeouts.login_timeout = setTimeout(() => {
         login.restart(client);
       }, 5000);
       break;
     default:
       log.warn('Unexpected Disconnection!');
       clearTimeout(timeouts.login_Unexpected);
-      timeouts.login_Unexpected = setTimeout(function () {
+      timeouts.login_Unexpected = setTimeout(() => {
         login.restart(client);
       }, 5000);
       break;
@@ -216,47 +216,45 @@ client.on('error', (error) => {
 login.check(client, community);
 
 // Console will show us how much new Items we have
-client.on('newItems', function (count) {
+client.on('newItems', (count) => {
   log.info(`We have ${count} new Items in our Inventory`);
 });
 
 // Console will show the registred email from the Bot account
-client.on('emailInfo', function (address) {
+client.on('emailInfo', (address) => {
   log.info(`E-Mail: ${address}`);
 });
 
 // Console will show our current account limitations (ex. when we would be tradebanned, or could not access the market due to steam restrictions)
-client.on('accountLimitations', function (
-  limited,
-  communityBanned,
-  locked,
-  canInviteFriends
-) {
-  if (limited) {
-    log.info(
-      'Account is limited. Cannot send friend invites, use the market, open group chat, or access the web API.'
-    );
-    client.logOff();
+client.on(
+  'accountLimitations',
+  (limited, communityBanned, locked, canInviteFriends) => {
+    if (limited) {
+      log.info(
+        'Account is limited. Cannot send friend invites, use the market, open group chat, or access the web API.'
+      );
+      client.logOff();
+    }
+    if (communityBanned) {
+      log.info('Account is banned from Steam Community');
+      client.logOff();
+    }
+    if (locked) {
+      log.info(
+        'Account is locked. We cannot trade/gift/purchase items, play on VAC servers, or access Steam Community.  Shutting down.'
+      );
+      client.logOff();
+      process.exit(1);
+    }
+    if (!canInviteFriends) {
+      log.info('Account is unable to send friend requests.');
+      client.logOff();
+    }
   }
-  if (communityBanned) {
-    log.info('Account is banned from Steam Community');
-    client.logOff();
-  }
-  if (locked) {
-    log.info(
-      'Account is locked. We cannot trade/gift/purchase items, play on VAC servers, or access Steam Community.  Shutting down.'
-    );
-    client.logOff();
-    process.exit(1);
-  }
-  if (!canInviteFriends) {
-    log.info('Account is unable to send friend requests.');
-    client.logOff();
-  }
-});
+);
 
 // Console will show the current Wallet Balance of the Steam Account
-client.on('wallet', function (hasWallet, currency, balance) {
+client.on('wallet', (hasWallet, currency, balance) => {
   if (hasWallet) {
     log.info(
       `Wallet: ${SteamUser.formatCurrency(
