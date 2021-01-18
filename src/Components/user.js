@@ -115,7 +115,7 @@ const spam = (client, users, userMsgs) => {
         chatMessage(
           client,
           main.admins[j],
-          messages.SPAM[2][users[Object.keys(userMsgs)[i]].language].replace(
+          messages.SPAM[2][users[main.admins[j]].language].replace(
             '{STEAMID64}',
             Object.keys(userMsgs)[i]
           )

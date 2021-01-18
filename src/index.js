@@ -661,7 +661,7 @@ manager.on('newOffer', (OFFER) => {
               client,
               main.admins[j],
               messages.TRADE.NOTIFYADMIN.DONATION[
-                users[OFFER.partner.getSteamID64()].language
+                users[main.admins[j]].language
               ].replace('{ID64}', OFFER.partner.getSteamID64())
             );
           }
