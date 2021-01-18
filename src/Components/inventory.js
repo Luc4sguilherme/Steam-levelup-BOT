@@ -193,7 +193,7 @@ inventory.getInventory = (SID, community, callback) => {
         (CEconItem) => CEconItem.market_hash_name.split('-')[0]
       );
 
-      _.forOwn(sInventory, function (CEconItemArray, appid) {
+      _.forOwn(sInventory, (CEconItemArray, appid) => {
         sInventory[appid] = _.groupBy(CEconItemArray, 'classid');
       });
       callback(null, sInventory);

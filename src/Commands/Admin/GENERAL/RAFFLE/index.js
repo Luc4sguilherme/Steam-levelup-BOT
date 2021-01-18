@@ -52,7 +52,7 @@ module.exports = (sender, client, users) => {
           fs.writeFile(
             './Data/Giveaway/giveaway.json',
             JSON.stringify(giveawayJSON, null, '\t'),
-            function (err) {
+            (err) => {
               if (err) {
                 log.error(
                   `An error occurred while writing winner giveaway entry file: ${err}`

@@ -176,9 +176,7 @@ utils.getleftovercards = (SID, community, cards, callback) => {
               delete sInventory[i];
             }
           } else {
-            sInventory = sInventory.filter(function () {
-              return true;
-            });
+            sInventory = sInventory.filter(() => true);
           }
         }
       }
@@ -186,7 +184,7 @@ utils.getleftovercards = (SID, community, cards, callback) => {
         sInventory,
         (CEconItem) => CEconItem.market_hash_name.split('-')[0]
       );
-      _.forOwn(sInventory, function (CEconItemArray, appid) {
+      _.forOwn(sInventory, (CEconItemArray, appid) => {
         sInventory[appid] = _.groupBy(CEconItemArray, 'classid');
       });
       callback(null, sInventory);
@@ -229,7 +227,7 @@ utils.getBadges = (SID, callback) => {
           } = data;
           const currentLevelXP = totalXP - XPNeededCurrentLevel;
 
-          data.badges.forEach(function (badge) {
+          data.badges.forEach((badge) => {
             if (
               (badge.appid && badge.border_color === 0) ||
               badge.border_color !== 1
@@ -272,7 +270,7 @@ utils.addGiveawayEntry = (offer, callback) => {
         fs.writeFile(
           './Data/Giveaway/giveaway.json',
           JSON.stringify(giveawayEntry, null, '\t'),
-          function (ERR) {
+          (ERR) => {
             if (ERR) {
               callback(ERR);
             } else {

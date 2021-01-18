@@ -48,8 +48,8 @@ const updateCatalog = async (
   }
 };
 
-const getCardDB = () => {
-  return new Promise((resolve, reject) => {
+const getCardDB = () =>
+  new Promise((resolve, reject) => {
     if (steamSupply.apiKey === '') {
       reject(new Error('Steam.Supply APIKEY its empty!'));
     }
@@ -86,6 +86,5 @@ const getCardDB = () => {
       }
     );
   });
-};
 
 module.exports = { updateCatalog, getCardDB };

@@ -6,7 +6,7 @@
 
 ## 2° Install Node.js
 <pre>
-  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+  curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
   sudo apt-get install -y nodejs
 </pre>
@@ -74,7 +74,7 @@
 # Windows 10
 ## 1° Install Node.js
 <pre>
-  <a href=https://nodejs.org/dist/v12.18.4/node-v12.18.4-x64.msi>https://nodejs.org/dist/v12.18.4/node-v12.18.4-x64.msi</a>
+  <a href=https://nodejs.org/dist/v14.15.4/node-v14.15.4-x64.msi>https://nodejs.org/dist/v14.15.4/node-v14.15.4-x64.msi</a>
 </pre>
 
 ## 2° Download Bot files
