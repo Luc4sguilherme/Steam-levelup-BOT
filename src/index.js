@@ -20,7 +20,6 @@ const steamSupply = require('./Components/steamSupply');
 
 let allCards = {};
 let userMsgs = {};
-const timeouts = {};
 
 // Initialize SteamUser, TradeOfferManager and SteamCommunity
 const client = new SteamUser();
@@ -179,6 +178,9 @@ client.on('webSession', (_, cookies) => {
 
 // Console will show us login session error
 client.on('error', (error) => {
+  const minutes = 25;
+  const seconds = 5;
+
   switch (error.eresult) {
     case SteamUser.EResult.AccountDisabled:
       log.error(`This account is disabled!`);
@@ -187,27 +189,28 @@ client.on('error', (error) => {
       log.error(`Invalid Password detected!`);
       break;
     case SteamUser.EResult.RateLimitExceeded:
-      log.warn(`Rate Limit Exceeded, trying to login again in 5 minutes.`);
-      clearTimeout(timeouts.login_timeout);
-      timeouts.login_timeout = setTimeout(() => {
+      log.warn(
+        `Rate Limit Exceeded, trying to login again in ${minutes} minutes.`
+      );
+      setTimeout(() => {
         login.restart(client);
-      }, 1000 * 60 * 5);
+      }, moment.duration(minutes, 'minutes'));
       break;
     case SteamUser.EResult.LogonSessionReplaced:
       log.warn(
-        `Unexpected Disconnection!, you have LoggedIn with this same account in another place..`
+        `Unexpected Disconnection!, you have LoggedIn with this same account in another place. Trying to login again in ${seconds} seconds.`
       );
-      clearTimeout(timeouts.login_timeout);
-      timeouts.login_timeout = setTimeout(() => {
+      setTimeout(() => {
         login.restart(client);
-      }, 5000);
+      }, moment.duration(seconds, 'seconds'));
       break;
     default:
-      log.warn('Unexpected Disconnection!');
-      clearTimeout(timeouts.login_Unexpected);
-      timeouts.login_Unexpected = setTimeout(() => {
+      log.warn(
+        `Unexpected Disconnection!, trying to login again in ${seconds} seconds.`
+      );
+      setTimeout(() => {
         login.restart(client);
-      }, 5000);
+      }, moment.duration(seconds, 'seconds'));
       break;
   }
 });
