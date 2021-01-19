@@ -23,13 +23,15 @@ let userMsgs = {};
 
 // Initialize SteamUser, TradeOfferManager and SteamCommunity
 const client = new SteamUser();
+const community = new SteamCommunity();
 const manager = new TradeOfferManager({
   steam: client,
+  community: community,
   language: 'en',
-  pollInterval: '10000',
-  cancelTime: '7200000', // 2 hours in ms
+  pollInterval: moment.duration(20, 'seconds'),
+  cancelTime: moment.duration(2, 'hours'),
+  savePollData: true,
 });
-const community = new SteamCommunity();
 
 // Reading the Users.json File
 const users = user.read();
