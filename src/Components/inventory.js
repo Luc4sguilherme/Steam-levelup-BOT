@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 
@@ -43,19 +42,12 @@ inventory.play = (client) => {
   client.gamesPlayed(playThis);
 };
 
-inventory.loadInventory = (
-  client,
-  community,
-  allCards,
-  load,
-  playLoading,
-  callback
-) => {
+inventory.loadInventory = (client, community, allCards, load, callback) => {
   const SID = client.steamID.getSteamID64();
   const startedTime = Date.now();
   inventory.loading += 1;
-  playLoading.resetTimer();
-  playLoading.startTimer(client);
+  utils.playLoading.resetTimer();
+  utils.playLoading.startTimer(client);
   const Inventory = {
     GEMS: (callback) => {
       inventory.loadGEMS(SID, community, (ERR) => {
@@ -111,13 +103,13 @@ inventory.loadInventory = (
     },
   };
 
-  const LoadInventories = {};
-  for (let i = 0; i < Object.keys(load).length; i += 1) {
-    LoadInventories[i] = Inventory[load[i]];
+  const LoadInventories = [];
+  for (let i = 0; i < load.length; i += 1) {
+    LoadInventories.push(Inventory[load[i]]);
   }
 
   async.series(LoadInventories, () => {
-    playLoading.resetTimer();
+    utils.playLoading.resetTimer();
     inventory.loading -= 1;
     log.warn(
       `Inventory loaded in ${moment().diff(
@@ -131,39 +123,31 @@ inventory.loadInventory = (
 };
 
 inventory.updateStock = (offer, client, community, allCards) => {
-  let j = 0;
-  const load = {};
+  const load = [];
 
   function add(param) {
-    // eslint-disable-next-line no-plusplus
-    load[j++] = param; 
+    load.push(param);
   }
-  if ((offer.data('amountofgems')) > 0) {
+
+  if (offer.data('amountofgems') > 0) {
     add('GEMS');
   }
-  if ((offer.data('commandused')).search(/CSGO/) !== -1) {
+  if (offer.data('commandused').search(/CSGO/) !== -1) {
     add('CSGO');
   }
-  if ((offer.data('commandused')).search(/TF/) !== -1) {
+  if (offer.data('commandused').search(/TF/) !== -1) {
     add('TF2');
   }
-  if ((offer.data('amountofsets')) > 0 || (offer.data('amountofleftovers')) > 0) {
+  if (offer.data('amountofsets') > 0 || offer.data('amountofleftovers') > 0) {
     add('SETS');
   }
-  if ((offer.data('commandused')).search(/HYDRA/) !== -1) {
+  if (offer.data('commandused').search(/HYDRA/) !== -1) {
     add('HYDRA');
   }
-  if (Object.keys(load).length !== 0) {
-    inventory.loadInventory(
-      client,
-      community,
-      allCards,
-      load,
-      utils.playLoading,
-      () => {
-        inventory.play(client);
-      }
-    );
+  if (load.length !== 0) {
+    inventory.loadInventory(client, community, allCards, load, () => {
+      inventory.play(client);
+    });
   }
 };
 
@@ -172,12 +156,11 @@ inventory.getInventory = (SID, community, callback) => {
     if (ERR) {
       callback(ERR);
     } else {
-      
       let newInv = INV.filter(
         (ITEM) => ITEM.getTag('item_class').internal_name === 'item_class_2'
-      )
-    
-      if(main.foilMode) {
+      );
+
+      if (main.foilMode) {
         newInv = newInv.filter(
           (ITEM) => ITEM.getTag('cardborder').internal_name === 'cardborder_1'
         );
@@ -245,9 +228,7 @@ inventory.loadHYDRA = (SID, community, callback) => {
       );
       callback();
     } else {
-      log.error(
-        `An error occurred while getting bot HYDRA inventory: ${ERR}`
-      );
+      log.error(`An error occurred while getting bot HYDRA inventory: ${ERR}`);
       callback(ERR);
     }
   });
