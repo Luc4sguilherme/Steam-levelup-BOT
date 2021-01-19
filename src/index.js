@@ -120,22 +120,10 @@ client.on('webSession', (_, cookies) => {
   );
 
   // Update stock
-  inventory.loadInventory(
-    client,
-    community,
-    allCards,
-    {
-      0: 'GEMS',
-      1: 'CSGO',
-      2: 'TF2',
-      3: 'SETS',
-      4: 'HYDRA',
-    },
-    utils.playLoading,
-    () => {
-      inventory.play(client);
-    }
-  );
+  const load = ['GEMS', 'CSGO', 'TF2', 'SETS', 'HYDRA'];
+  inventory.loadInventory(client, community, allCards, load, () => {
+    inventory.play(client);
+  });
 
   // Update the steamSupply catalog
   if (main.steamSupply.updateCatalog) {
