@@ -114,7 +114,10 @@ client.on('webSession', (_, cookies) => {
 
   // Set Cookies and start the confirmation checker
   community.setCookies(cookies);
-  community.startConfirmationChecker(10000, main.identitySecret);
+  community.startConfirmationChecker(
+    moment.duration(20, 'seconds'),
+    main.identitySecret
+  );
 
   // Update stock
   inventory.loadInventory(
