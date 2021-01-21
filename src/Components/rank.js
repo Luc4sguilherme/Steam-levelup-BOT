@@ -1,7 +1,7 @@
+const moment = require('moment');
 const request = require('request-promise');
 
 const main = require('../Config/main.js');
-const log = require('./log');
 
 const apiKey = main.steamLadderApiKey;
 
@@ -22,6 +22,7 @@ const get = async (SID) => {
       WORLDWIDEXP: response.ladder_rank.worldwide_xp,
       REGIONXP: response.ladder_rank.region.region_xp,
       COUNTRYXP: response.ladder_rank.country.country_xp,
+      LASTUPDATE: response.steam_stats.last_update,
     };
   } catch (error) {
     throw new Error(error);
@@ -40,14 +41,30 @@ const update = async (SID) => {
       },
     };
 
-    await request(options);
-    log.warn('Rank updated');
+    const response = await request(options);
+    return {
+      WORLDWIDEXP: response.ladder_rank.worldwide_xp,
+      REGIONXP: response.ladder_rank.region.region_xp,
+      COUNTRYXP: response.ladder_rank.country.country_xp,
+    };
   } catch (error) {
-    log.error(`An error occurred while updating the rank: ${error}`);
+    throw new Error(error);
   }
 };
 
+const rank = (SID) =>
+  new Promise((resolve, reject) => {
+    get(SID)
+      .then((data) => {
+        if (moment().isAfter(moment(`${data.LASTUPDATE}Z`).add(4, 'hours'))) {
+          resolve(update(SID));
+        } else {
+          resolve(data);
+        }
+      })
+      .catch(reject);
+  });
+
 module.exports = {
-  get,
-  update,
+  rank,
 };
