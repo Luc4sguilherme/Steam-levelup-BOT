@@ -1,6 +1,6 @@
 const messages = require('../../../../Config/messages');
 const log = require('../../../../Components/log');
-const rank = require('../../../../Components/rank');
+const { rank } = require('../../../../Components/rank');
 const chatMessage = require('../../../../Components/message');
 
 module.exports = async (sender, client, users) => {
@@ -16,8 +16,7 @@ module.exports = async (sender, client, users) => {
   );
 
   try {
-    await rank.update(sender.getSteamID64());
-    const { WORLDWIDEXP, REGIONXP, COUNTRYXP } = await rank.get(
+    const { WORLDWIDEXP, REGIONXP, COUNTRYXP } = await rank(
       sender.getSteamID64()
     );
     chatMessage(
