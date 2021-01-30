@@ -72,7 +72,8 @@ const inactive = (client, users) => {
       }
       if (
         listUsers[Object.keys(listUsers)[i]].idleforhours >=
-        main.maxDaysAdded * 24
+          main.maxDaysAdded * 24 &&
+        main.admins.indexOf(Object.keys(listUsers)[i]) === -1
       ) {
         chatMessage(
           client,
