@@ -2,16 +2,11 @@ const utils = require('../../../../Utils/utils');
 const messages = require('../../../../Config/messages');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');
+const Profit = require('../../../../Components/profit');
 
 module.exports = async (sender, client, users) => {
   try {
-    const profit = JSON.parse(
-      await utils.readFileAsync(
-        `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
-          -2
-        )}-${new Date().getFullYear()}.json`
-      )
-    );
+    const profit = await Profit.read();
 
     log.adminChat(
       sender.getSteamID64(),
