@@ -2,7 +2,7 @@ const fs = require('fs');
 const utils = require('../Utils/utils');
 const log = require('./log');
 
-const init = () => {
+const initialize = () => {
   if (
     !fs.existsSync(
       `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
@@ -71,15 +71,24 @@ const init = () => {
   }
 };
 
-const calculate = async (offer) => {
+const read = async () => {
   try {
-    const profit = JSON.parse(
+    initialize();
+    return JSON.parse(
       await utils.readFileAsync(
         `./Data/History/Profit/${`0${new Date().getMonth() + 1}`.slice(
           -2
         )}-${new Date().getFullYear()}.json`
       )
     );
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const calculate = async (offer) => {
+  try {
+    const profit = await read();
 
     if (offer.data('commandused').search(/BUY/) !== -1) {
       profit.totaltrades += 1;
@@ -147,8 +156,8 @@ const calculate = async (offer) => {
       }
     );
   } catch (error) {
-    log.error(`An error occurred while getting profit.json : ${error}`);
+    log.error(`An error occurred while getting profit file: ${error}`);
   }
 };
 
-module.exports = { calculate, init };
+module.exports = { calculate, read };

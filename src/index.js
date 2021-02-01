@@ -36,9 +36,6 @@ const manager = new TradeOfferManager({
 // Reading the Users.json File
 const users = user.read();
 
-// create the profit.json File of the current month
-profit.init();
-
 // Loading Card Data in Sets
 getCardsInSets((ERR, DATA) => {
   if (!ERR) {
