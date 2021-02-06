@@ -1,4 +1,4 @@
-const utils = require('../Utils/utils');
+const utils = require('../Utils');
 
 async function reputation(id64) {
   const data = await utils.getRep(id64);

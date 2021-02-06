@@ -2,7 +2,7 @@
 const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
 const inventory = require('../../../../Components/inventory');
-const utils = require('../../../../Utils/utils');
+const utils = require('../../../../Utils');
 const chatMessage = require('../../../../Components/message');
 const makeOffer = require('../../../../Components/offer');
 const { getSets } = require('../../../../Components/sets');

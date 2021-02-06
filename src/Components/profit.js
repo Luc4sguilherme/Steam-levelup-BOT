@@ -1,5 +1,5 @@
 const fs = require('fs');
-const utils = require('../Utils/utils');
+const utils = require('../Utils');
 const log = require('./log');
 
 const initialize = () => {

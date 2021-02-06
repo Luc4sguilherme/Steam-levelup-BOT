@@ -1,7 +1,7 @@
 const chatMessage = require('../../../../Components/message');
 const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
-const utils = require('../../../../Utils/utils');
+const utils = require('../../../../Utils');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users, community) => {

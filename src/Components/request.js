@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 const main = require('../Config/main');
-const utils = require('../Utils/utils');
+const utils = require('../Utils');
 const log = require('./log');
 const { getSets } = require('./sets');
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-continue */
-const utils = require('../../../../Utils/utils');
+const utils = require('../../../../Utils');
 const messages = require('../../../../Config/messages');
 const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');

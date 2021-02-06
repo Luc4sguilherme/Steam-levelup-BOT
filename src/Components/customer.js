@@ -8,7 +8,7 @@ const log = require('./log');
 const acceptedKeys = require('../Config/keys');
 const { getSets } = require('./sets');
 const inventory = require('./inventory');
-const utils = require('../Utils/utils');
+const utils = require('../Utils');
 
 const customer = {};
 

@@ -7,7 +7,7 @@ const moment = require('moment');
 
 const main = require('../Config/main.js');
 const acceptedKeys = require('../Config/keys.js');
-const utils = require('../Utils/utils');
+const utils = require('../Utils');
 const rates = require('../Config/rates.js');
 const { getSets } = require('./sets.js');
 const log = require('./log');
