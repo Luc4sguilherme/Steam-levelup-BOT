@@ -2,7 +2,7 @@ const fs = require('fs');
 const colour = require('cli-color');
 
 const main = require('../Config/main');
-const utils = require('../Utils/utils');
+const utils = require('../Utils');
 
 const log = {};
 

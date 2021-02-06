@@ -4,7 +4,7 @@ const SteamUser = require('steam-user');
 const fs = require('fs');
 const moment = require('moment');
 
-const utils = require('./Utils/utils');
+const utils = require('./Utils');
 const messages = require('./Config/messages.js');
 const main = require('./Config/main.js');
 const inventory = require('./Components/inventory');

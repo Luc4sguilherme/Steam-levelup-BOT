@@ -1,4 +1,4 @@
-const utils = require('../../../../Utils/utils');
+const utils = require('../../../../Utils');
 const messages = require('../../../../Config/messages');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');

@@ -2,7 +2,7 @@ const chatMessage = require('../../../../Components/message');
 const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
 const rates = require('../../../../Config/rates');
-const utils = require('../../../../Utils/utils');
+const utils = require('../../../../Utils');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users) => {
