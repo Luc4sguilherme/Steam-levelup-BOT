@@ -26,9 +26,17 @@ const DEPOSITGEMS = require('./GEMS/DEPOSIT');
 const DEPOSITHYDRA = require('./HYDRA/DEPOSIT');
 const DEPOSITTF = require('./TF/DEPOSIT');
 const DEPOSITSETS = require('./SETS/DEPOSIT');
+const main = require('../../Config/main');
 
 function admin(sender, msg, client, users, community, allCards, manager) {
-  switch (msg.toUpperCase().split(' ')[0]) {
+  const input = msg.toUpperCase().split(' ')[0];
+  const ignoreCommands = main.ignoreCommands.map((el) => el.toUpperCase());
+
+  if (ignoreCommands.includes(input)) {
+    return 'UNKNOW';
+  }
+
+  switch (input) {
     case '!ADMIN':
       ADMIN(sender, client, users);
       break;

@@ -1,12 +1,5 @@
 /* eslint-disable consistent-return */
-const HELPEN = require('./GENERAL/HELPEN');
-const HELPPT = require('./GENERAL/HELPPT');
-const HELPRU = require('./GENERAL/HELPRU');
-const HELPES = require('./GENERAL/HELPES');
-const HELPCN = require('./GENERAL/HELPCN');
-const HELPFR = require('./GENERAL/HELPFR');
-const HELPJA = require('./GENERAL/HELPJA');
-const HELPDE = require('./GENERAL/HELPDE');
+const HELP = require('./GENERAL/HELP');
 const LANG = require('./GENERAL/LANGUAGE');
 const EN = require('./GENERAL/LANGUAGE/EN');
 const ES = require('./GENERAL/LANGUAGE/ES');
@@ -51,32 +44,40 @@ const REPORT = require('./GENERAL/REPORT');
 const STOCK = require('./GENERAL/STOCK');
 const TUTORIAL = require('./GENERAL/TUTORIAL');
 const SETS4SETS = require('./GENERAL/SETS4SETS');
+const main = require('../../Config/main');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
-  switch (msg.toUpperCase().split(' ')[0]) {
+  const input = msg.toUpperCase().split(' ')[0];
+  const ignoreCommands = main.ignoreCommands.map((el) => el.toUpperCase());
+
+  if (ignoreCommands.includes(input)) {
+    return 'UNKNOW';
+  }
+
+  switch (input) {
     case '!HELP':
-      HELPEN(sender, client, users);
+      HELP(sender, client, users);
       break;
     case '!AJUDA':
-      HELPPT(sender, client);
+      HELP(sender, client, users, 'PT');
       break;
     case '!ПОМОЩЬ':
-      HELPRU(sender, client);
+      HELP(sender, client, users, 'RU');
       break;
     case '!AYUDA':
-      HELPES(sender, client);
+      HELP(sender, client, users, 'ES');
       break;
     case '!救命':
-      HELPCN(sender, client);
+      HELP(sender, client, users, 'CN');
       break;
     case '!AIDER':
-      HELPFR(sender, client, users);
+      HELP(sender, client, users, 'FR');
       break;
     case '!助けて':
-      HELPJA(sender, client, users);
+      HELP(sender, client, users, 'JA');
       break;
     case '!HILFE':
-      HELPDE(sender, client, users);
+      HELP(sender, client, users, 'DE');
       break;
     case '!LANG':
       LANG(sender, client, users);

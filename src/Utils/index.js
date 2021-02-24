@@ -428,4 +428,18 @@ utils.sortSetsByAmountB = (SETS, callback) => {
   );
 };
 
+utils.filterCommands = (msg, filter) => {
+  const message = msg;
+
+  filter.forEach((com) => {
+    const command = com.toUpperCase().replace('!', '');
+    const regex = new RegExp(`\\b${command}\\b`);
+    const index = message.findIndex((el) => regex.test(el));
+
+    message.splice(index, 1);
+  });
+
+  return message;
+};
+
 module.exports = utils;
