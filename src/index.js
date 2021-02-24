@@ -419,23 +419,6 @@ manager.on('sentOfferChanged', (OFFER) => {
           log.warn('Giveaway entry added! ');
         }
       });
-
-      // Access to sets4sets command
-      utils.accesstosets4sets(OFFER, users, (ERR, numsets) => {
-        if (ERR) {
-          log.error(`An error occurred while writing UserData file: ${ERR}`);
-        } else if (numsets > 0) {
-          message += messages.SETS4SETS.CANUSE[1][
-            users[OFFER.partner.getSteamID64()].language
-          ].replace('{SETS}', numsets);
-        } else {
-          message += `• ${
-            messages.SETS4SETS.CANUSE[0][
-              users[OFFER.partner.getSteamID64()].language
-            ]
-          }`;
-        }
-      });
     }
     community.getSteamUser(OFFER.partner, (ERR, USER) => {
       if (ERR) {

@@ -1815,89 +1815,22 @@ module.exports = {
     },
   },
   SETS4SETS: {
-    NOTHAVEACCESS: {
-      EN:
-        'You do not have access to this command. You must perform an exchange to gain access this command.',
-      PT:
-        'Você não tem acesso a este comando. Você deve realizar uma troca para obter acesso a este comando.',
-      RU:
-        'У вас нет доступа к этой команда. Вы должны выполнить обмен, чтобы получить доступ к этой команда.',
-      ES:
-        'No tienes acceso a este comando. Debe realizar un intercambio para obtener acceso a este comando.',
-      CN: '您无权访问此命令。 您必须执行交换才能访问此命令。',
-      FR:
-        "Vous n'avez pas accès à cette commande. Vous devez effectuer un échange pour accéder à cette commande.",
-      JA:
-        'このコマンドにアクセスすることはできません。 このコマンドにアクセスするには、交換を実行する必要があります。',
-      DE:
-        'Sie haben keinen Zugriff auf diesen Befehl. Sie müssen einen Austausch durchführen, um Zugriff auf diesen Befehl zu erhalten.',
-    },
     AMOUNTOVER: {
-      0: {
-        EN:
-          'Please try a lower amount of Sets. You can only Exchange up to {SETS} Sets!',
-        PT:
-          'Tente uma quantidade menor de conjuntos. Você só pode trocar até {SETS} conjuntos!',
-        RU:
-          'Пожалуйста, попробуйте меньшее количество набор(ы) карточка. Вы можете обменять только до {SETS} набор(ы) карточка!',
-        ES:
-          'Por favor, intente una menor cantidad de conjuntos. ¡Solo puedes intercambiar hasta {SETS} conjuntos!',
-        CN: '请尝试较少的套卡牌数。 您最多只能交换 {SETS} 套卡牌！',
-        FR:
-          "Veuillez essayer un nombre inférieur d'ensembles. Vous ne pouvez échanger que {SETS} ensembles!",
-        JA:
-          'セットの量を減らしてみてください。 交換できるのは{SETS}セットまでです！',
-        DE:
-          'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Sie können nur bis zu {SETS} Sets austauschen!',
-      },
-      1: {
-        EN:
-          'Please try a lower amount of Sets. You can only Exchange up to {SETS} Sets at a time with this command!',
-        PT:
-          'Tente uma quantidade menor de conjuntos. Você pode trocar até {SETS} conjuntos por vez com este comando!',
-        RU:
-          'Пожалуйста, попробуйте меньшее количество набор(ы) карточка. С помощью этой команды вы можете одновременно обмениваться только {SETS} набор(ы) карточка!',
-        ES:
-          'Por favor, intente una menor cantidad de conjuntos. ¡Solo puedes intercambiar hasta {SETS} conjuntos a la vez con este comando!',
-        CN: '请尝试较少的套卡牌数。 使用此命令一次最多只能交换 {SETS} 套卡牌！',
-        FR:
-          "Veuillez essayer un nombre inférieur d'ensembles. Vous ne pouvez échanger que {SETS} ensembles à la fois avec cette commande!",
-        JA:
-          'セットの量を減らしてみてください。 このコマンドでは、一度に最大{SETS}セットしか交換できません。',
-        DE:
-          'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Mit diesem Befehl können Sie nur bis zu {SETS} Sätze gleichzeitig austauschen!',
-      },
-    },
-    CANUSE: {
-      0: {
-        EN: 'Now you can use the !SETS4SETS command only after an exchange!',
-        PT: 'Agora você pode usar o comando !SETS4SETS somente após uma troca!',
-        RU:
-          'Теперь вы можете использовать команду !SETS4SETS только после обмена!',
-        ES:
-          '¡Ahora puede usar el comando !SETS4SETS solo después de un intercambio!',
-        CN: '现在，只有在交换后才能使用 !SETS4SETS 命令！',
-        FR:
-          "Vous ne pouvez désormais utiliser la commande !SETS4SETS qu'après un échange!",
-        JA: 'これで、交換後にのみ!SETS4SETSコマンドを使用できます。',
-        DE:
-          'Jetzt können Sie den Befehl !SETS4SETS erst nach einem Austausch verwenden!',
-      },
-      1: {
-        EN: '• Now you can use the !SETS4SETS command for: {SETS} Set(s).\n',
-        PT:
-          '• Agora você pode usar o comando !SETS4SETS para: {SETS} conjuntos.\n',
-        RU:
-          '• Теперь вы можете использовать команду !SETS4SETS для: {SETS} набор(ы) карточка.\n',
-        ES:
-          '• Ahora puede usar el comando !SETS4SETS para: {SETS} conjunto(s).\n',
-        CN: '• 现在，您可以将 !SETS4SETS 命令用于： {SETS} 套卡牌。\n',
-        FR:
-          '• Vous pouvez maintenant utiliser la commande !SETS4SETS pour: {SETS} ensemble(s).\n',
-        JA: '• これで、「！SETS4SETS」コマンドを{SETS}セット使用できます。\n',
-        DE:
-          '• Jetzt können Sie den Befehl !SETS4SETS verwenden für: {SETS} Sätze.\n',
-      },
+      EN:
+        'Please try a lower amount of Sets. You can only Exchange up to {SETS} Sets at a time with this command!',
+      PT:
+        'Tente uma quantidade menor de conjuntos. Você pode trocar até {SETS} conjuntos por vez com este comando!',
+      RU:
+        'Пожалуйста, попробуйте меньшее количество набор(ы) карточка. С помощью этой команды вы можете одновременно обмениваться только {SETS} набор(ы) карточка!',
+      ES:
+        'Por favor, intente una menor cantidad de conjuntos. ¡Solo puedes intercambiar hasta {SETS} conjuntos a la vez con este comando!',
+      CN: '请尝试较少的套卡牌数。 使用此命令一次最多只能交换 {SETS} 套卡牌！',
+      FR:
+        "Veuillez essayer un nombre inférieur d'ensembles. Vous ne pouvez échanger que {SETS} ensembles à la fois avec cette commande!",
+      JA:
+        'セットの量を減らしてみてください。 このコマンドでは、一度に最大{SETS}セットしか交換できません。',
+      DE:
+        'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Mit diesem Befehl können Sie nur bis zu {SETS} Sätze gleichzeitig austauschen!',
     },
   },
   USERCHECK: {
