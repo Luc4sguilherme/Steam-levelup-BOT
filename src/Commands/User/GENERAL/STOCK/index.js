@@ -2,6 +2,7 @@ const messages = require('../../../../Config/messages');
 const log = require('../../../../Components/log');
 const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
+const { filterCommands } = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
   log.userChat(
@@ -18,7 +19,8 @@ module.exports = (sender, client, users) => {
     chatMessage(
       client,
       sender,
-      messages.STOCK[users[sender.getSteamID64()].language]
+      filterCommands(messages.STOCK[users[sender.getSteamID64()].language])
+        .join('\n')
         .replace('{TOTALBOTSETS}', inventory.stock.totalBotSets)
         .replace('{CSKEYSTRADABLE}', inventory.stock.csKeys.tradable)
         .replace('{HYDRAKEYSTRADABLE}', inventory.stock.hydraKeys.tradable)

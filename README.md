@@ -64,8 +64,14 @@ This is an advanced cardsets/levelup bot script.
 - Automatic update the database to keep in track of every appid and his sets
 ### Handle donations 
 - You can enable/disable donates on your bot
+### Suppliers 
+- You can enable/disable the bot to handle suppliers (!sell commands)
+### Currency Management 
+- You are able to enable/disable any type of currency, that way you can make a very specific bot (i.e a bot who only accept hydra keys)
+### Commands Management 
+- You can enable/disable commands specific
 ### BBCodes 
-- Some commands like !commands and !admin was builded to show in a stylized bbcode
+- Some commands like !help and !admin was builded to show in a stylized bbcode
 ### Booster Packs 
 - Easy Manage your booster packs, or just open them by using admin commands
 ### Trade Messages 

@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable consistent-return */
 const ADMIN = require('./GENERAL/ADMIN');
 const AUTHCODE = require('./GENERAL/AUTHCODE');
@@ -31,9 +33,20 @@ const main = require('../../Config/main');
 function admin(sender, msg, client, users, community, allCards, manager) {
   const input = msg.toUpperCase().split(' ')[0];
   const ignoreCommands = main.ignoreCommands.map((el) => el.toUpperCase());
+  const { acceptedCurrency } = main;
 
   if (ignoreCommands.includes(input)) {
     return 'UNKNOW';
+  }
+
+  for (const key in acceptedCurrency) {
+    if (typeof acceptedCurrency[key] !== 'boolean') {
+      throw new Error(
+        'Error in configuring accepted currencies: not is boolean'
+      );
+    } else if (input.includes(key.replace('2', '')) && !acceptedCurrency[key]) {
+      return 'UNKNOW';
+    }
   }
 
   switch (input) {

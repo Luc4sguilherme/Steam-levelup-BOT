@@ -428,18 +428,126 @@ utils.sortSetsByAmountB = (SETS, callback) => {
   );
 };
 
-utils.filterCommands = (msg, filter) => {
-  const message = msg;
+utils.filterCommands = (msg) => {
+  const filter = main.ignoreCommands;
+  let message = [];
 
-  filter.forEach((com) => {
-    const command = com.toUpperCase().replace('!', '');
-    const regex = new RegExp(`\\b${command}\\b`);
-    const index = message.findIndex((el) => regex.test(el));
+  if (typeof msg === 'string') {
+    message = [...String(msg).split(/\n/)];
+    utils.removeCurrency(message, false);
+  }
 
-    message.splice(index, 1);
-  });
+  if (Array.isArray(msg)) {
+    message = [...msg];
+    utils.removeSuppliersCommands(message);
+    utils.removeCurrency(message, true);
+  }
+
+  if (filter.every((el) => el !== '')) {
+    filter.forEach((com) => {
+      const command = com.toUpperCase().replace('!', '');
+      const regex = new RegExp(`\\b${command}\\b`);
+      const index = message.findIndex((el) => regex.test(el));
+
+      message.splice(index, 1);
+    });
+  }
+
+  if (message.length === 0) {
+    return msg;
+  }
 
   return message;
+};
+
+utils.removeCurrency = (msg, sectionType) => {
+  const currencies = main.acceptedCurrency;
+  const suppliers = main.handleSuppliers;
+  if (sectionType) {
+    if (utils.isFalseAllObjectKeys(currencies)) {
+      throw new Error(
+        'Error in configuring accepted currencies: all currencies are disabled'
+      );
+    }
+
+    for (const key in currencies) {
+      if (!currencies[key]) {
+        const currencySection = utils.parseCurrencies(key);
+        const regex1 = new RegExp(`${currencySection}`);
+        const items1 = msg.filter((el) => regex1.test(el));
+
+        if (items1.length !== 0) {
+          msg.remove(items1);
+        }
+
+        if (suppliers) {
+          const currencySuppliersSection = `!SELL${key.replace('2', '')}`;
+          const regex2 = new RegExp(`${currencySuppliersSection}`);
+          const items2 = msg.filter((el) => regex2.test(el));
+
+          if (items2.length !== 0) {
+            msg.remove(items2);
+          }
+        }
+      }
+    }
+  } else {
+    for (const key in currencies) {
+      if (!currencies[key]) {
+        const currency = utils.parseCurrencies(key);
+
+        const regex = new RegExp(`${currency}`);
+        const items = msg.filter((el) => regex.test(el));
+
+        if (items.length !== 0) {
+          msg.remove(items);
+        }
+      }
+    }
+  }
+};
+
+utils.removeSuppliersCommands = (msg) => {
+  const suppliers = main.handleSuppliers;
+  if (!suppliers) {
+    const indexSection = (cur) =>
+      messages.HELP.EN.findIndex((el) => el.includes(cur));
+    const section = msg[indexSection(`Suppliers Section.`)].replace('. \n', '');
+    const index = msg.findIndex((el) => el.includes(section));
+    if (index !== -1) {
+      msg.splice(index, 6);
+    }
+  }
+};
+
+utils.isFalseAllObjectKeys = (obj) =>
+  Object.values(obj).every((val) => val === false);
+
+// eslint-disable-next-line no-extend-native
+Array.prototype.remove = function (index = []) {
+  const array = this;
+
+  index.forEach((item) => {
+    if (array.includes(item)) {
+      array.splice(array.indexOf(item), 1);
+    }
+  });
+};
+
+utils.parseCurrencies = (currency) => {
+  let key = '';
+
+  if (currency === 'CSGO') {
+    key = 'CSGO|CS:GO|CS|《反恐精英：全球攻势》|„CS:GO“';
+  } else if (currency === 'TF2') {
+    key = 'TF2|TF|团队要塞2|„TF2“';
+  } else if (currency === 'HYDRA') {
+    key = 'HYDRA|Hydra|九头蛇|Гидра|Hidra|„Hydra“';
+  } else if (currency === 'GEMS') {
+    key = 'GEMS|gems|Gema|宝石|Самоцвет|Gemmes|ジェム|Edelsteine';
+  }
+
+  return key;
 };
 
 module.exports = utils;

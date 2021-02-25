@@ -48,6 +48,17 @@ module.exports = {
   // Setup the commands you want the bot to ignore
   ignoreCommands: [''],
 
+  // Setup the currencies you want the bot to accept
+  acceptedCurrency: {
+    CSGO: true,
+    HYDRA: true,
+    TF2: true,
+    GEMS: true,
+  },
+
+  // Set to true if you want to handle suppliers (!SELL commands).
+  handleSuppliers: true,
+
   steamGroup: {
     // Set to true if you want to invite customers to a desired GroupID64
     doInvites: true,

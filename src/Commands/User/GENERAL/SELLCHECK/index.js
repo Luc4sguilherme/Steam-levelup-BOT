@@ -5,6 +5,7 @@ const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
 const { getSets } = require('../../../../Components/sets');
 const log = require('../../../../Components/log');
+const { filterCommands } = require('../../../../Utils');
 
 module.exports = (sender, client, users, community, allCards) => {
   chatMessage(
@@ -86,6 +87,20 @@ module.exports = (sender, client, users, community, allCards) => {
                 .replace('{SETS4}', userNSets)
                 .replace('{SETS5}', parseInt(userNSets, 10));
             }
+
+            message = filterCommands(message).join('\n');
+
+            if (!message.includes('•')) {
+              chatMessage(
+                client,
+                sender,
+                messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][
+                  users[sender.getSteamID64()].language
+                ]
+              );
+              return;
+            }
+
             chatMessage(
               client,
               sender,
