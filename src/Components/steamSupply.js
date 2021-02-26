@@ -1,5 +1,5 @@
 const moment = require('moment');
-const request = require('request-promise');
+const axios = require('axios');
 
 const { steamSupply, maxStock, maxBuy } = require('../Config/main.js');
 const rates = require('../Config/rates.js');
@@ -39,12 +39,13 @@ const updateCatalog = async (
     SteamSupplyData.gembuyrate = rates.gems.buy;
 
     const options = {
-      baseUrl: 'https://steam.supply/API/',
-      uri: `${steamSupply.apiKey}/update/`,
-      qs: SteamSupplyData,
+      method: 'GET',
+      baseURL: 'https://steam.supply/API/',
+      url: `${steamSupply.apiKey}/update/`,
+      params: SteamSupplyData,
     };
 
-    await request(options);
+    await axios(options);
   }
 };
 
@@ -54,13 +55,15 @@ const getCardDB = () =>
       reject(new Error('Steam.Supply APIKEY its empty!'));
     }
 
-    request.get(
-      `https://steam.supply/API/${steamSupply.apiKey}/cardamount`,
-      {
-        json: true,
-      },
-      (err, res, data) => {
-        if (err || res.statusCode !== 200) {
+    const options = {
+      method: 'GET',
+      baseURL: 'https://steam.supply/API/',
+      url: `${steamSupply.apiKey}/cardamount`,
+    };
+
+    axios(options)
+      .then(({ status, data }) => {
+        if (status !== 200) {
           log.warn(
             `Failed to request steam.supply database, trying again in a minute.`
           );
@@ -70,21 +73,23 @@ const getCardDB = () =>
           return;
         }
 
-        if (
-          data.indexOf('Missing api type or key') > -1 ||
-          data.indexOf('you are not paid.') > -1 ||
-          data.indexOf('API key not found') > -1
-        ) {
-          reject(
-            new Error(
-              'Your steam.supply api its not correct, or you its not featured.'
-            )
-          );
+        if (typeof data === 'string') {
+          if (
+            data.indexOf('Missing api type or key') > -1 ||
+            data.indexOf('you are not paid.') > -1 ||
+            data.indexOf('API key not found') > -1
+          ) {
+            reject(
+              new Error(
+                'Your steam.supply api its not correct, or you its not featured.'
+              )
+            );
+          }
         }
 
-        resolve(data.trim());
-      }
-    );
+        resolve(JSON.stringify(data));
+      })
+      .catch(reject);
   });
 
 module.exports = { updateCatalog, getCardDB };

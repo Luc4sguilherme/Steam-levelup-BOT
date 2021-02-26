@@ -4,7 +4,7 @@
 /* eslint-disable no-labels */
 
 const _ = require('lodash');
-const request = require('request-promise');
+const axios = require('axios');
 const fs = require('fs');
 const util = require('util');
 
@@ -193,31 +193,40 @@ utils.getleftovercards = (SID, community, cards, callback) => {
 };
 
 utils.getRep = async (SID) => {
-  const url = 'https://steamrep.com/api/beta4/reputation/';
-  const options = {
-    method: 'GET',
-    uri: url + SID,
-    qs: {
-      tagdetails: 1,
-      extended: 1,
-      json: 1,
-    },
-  };
+  try {
+    const options = {
+      baseURL: 'https://steamrep.com/api/beta4/',
+      method: 'GET',
+      url: `reputation/${SID}`,
+      params: {
+        tagdetails: 1,
+        extended: 1,
+        json: 1,
+      },
+    };
 
-  const response = await request(options);
-  return response;
+    const { data } = await axios(options);
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 utils.getBadges = (SID, callback) => {
-  request(
-    `https://api.steampowered.com/IPlayerService/GetBadges/v1/?key=${main.steamApiKey}&steamid=${SID}`,
-    {
-      json: true,
+  const options = {
+    method: 'GET',
+    url: `https://api.steampowered.com/IPlayerService/GetBadges/v1/`,
+    params: {
+      key: main.steamApiKey,
+      steamid: SID,
     },
-    (ERR, RES, BODY) => {
-      if (!ERR && RES.statusCode === 200 && BODY.response) {
+  };
+
+  axios(options)
+    .then((response) => {
+      if (response.status === 200 && response.data) {
         const badges = {};
-        const data = BODY.response;
+        const { response: data } = response.data;
 
         if (data.badges) {
           const {
@@ -241,10 +250,12 @@ utils.getBadges = (SID, callback) => {
           callback('Empty Badge');
         }
       } else {
-        callback(ERR);
+        callback(`statuscode: ${response.status}`);
       }
-    }
-  );
+    })
+    .catch((error) => {
+      callback(error);
+    });
 };
 
 utils.getLevelExp = (level) => {
