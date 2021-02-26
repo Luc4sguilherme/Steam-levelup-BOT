@@ -439,7 +439,7 @@ utils.sortSetsByAmountB = (SETS, callback) => {
   );
 };
 
-utils.filterCommands = (msg) => {
+utils.filterCommands = (msg, admin = false) => {
   const filter = main.ignoreCommands;
   let message = [];
 
@@ -450,7 +450,11 @@ utils.filterCommands = (msg) => {
 
   if (Array.isArray(msg)) {
     message = [...msg];
-    utils.removeSuppliersCommands(message);
+
+    if (!admin) {
+      utils.removeSuppliersCommands(message);
+    }
+
     utils.removeCurrency(message, true);
   }
 
@@ -525,7 +529,10 @@ utils.removeSuppliersCommands = (msg) => {
   if (!suppliers) {
     const indexSection = (cur) =>
       messages.HELP.EN.findIndex((el) => el.includes(cur));
-    const section = msg[indexSection(`Suppliers Section.`)].replace('. \n', '');
+    const section = msg[indexSection(`Suppliers Section.`)]?.replace(
+      '. \n',
+      ''
+    );
     const index = msg.findIndex((el) => el.includes(section));
     if (index !== -1) {
       msg.splice(index, 6);

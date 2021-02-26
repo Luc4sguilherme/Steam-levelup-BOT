@@ -5,7 +5,7 @@ const { filterCommands } = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
   const { language } = users[sender.getSteamID64()];
-  const msg = filterCommands(messages.ADMIN[language]);
+  const msg = filterCommands(messages.ADMIN[language], true);
 
   log.adminChat(sender.getSteamID64(), language, '[ !ADMIN ]');
 
