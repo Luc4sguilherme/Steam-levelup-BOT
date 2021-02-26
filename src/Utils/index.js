@@ -544,10 +544,15 @@ utils.parseCurrencies = (currency) => {
   } else if (currency === 'HYDRA') {
     key = 'HYDRA|Hydra|九头蛇|Гидра|Hidra|„Hydra“';
   } else if (currency === 'GEMS') {
-    key = 'GEMS|gems|Gema|宝石|Самоцвет|Gemmes|ジェム|Edelsteine';
+    key = 'GEMS|gems|Gema|宝石|Самоцвет|Gemmes|gemmes|ジェム|Edelsteine';
   }
 
   return key;
+};
+
+utils.parseCommand = (input, command) => {
+  const regex = new RegExp(`^(${String(command).replace(/( )/g, '')})$`);
+  return (String(input).match(regex) || [])[0];
 };
 
 module.exports = utils;

@@ -46,6 +46,7 @@ const STOCK = require('./GENERAL/STOCK');
 const TUTORIAL = require('./GENERAL/TUTORIAL');
 const SETS4SETS = require('./GENERAL/SETS4SETS');
 const main = require('../../Config/main');
+const { parseCommand } = require('../../Utils');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
   const input = msg.toUpperCase().split(' ')[0];
@@ -71,10 +72,10 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
   }
 
   switch (input) {
-    case '!HELP':
+    case parseCommand(input, '!HELP | !COMMANDS | !COMMAND'):
       HELP(sender, client, users);
       break;
-    case '!AJUDA':
+    case parseCommand(input, '!AJUDA | !COMANDOS | !COMANDO'):
       HELP(sender, client, users, 'PT');
       break;
     case '!ПОМОЩЬ':
@@ -95,31 +96,58 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     case '!HILFE':
       HELP(sender, client, users, 'DE');
       break;
-    case '!LANG':
+    case parseCommand(
+      input,
+      '!LANG | !LANGUAGE | !SPRACHE | !IDIOMA | !LANGUE | !言語 | !ЯЗЫК'
+    ):
       LANG(sender, client, users);
       break;
-    case '!EN':
+    case parseCommand(
+      input,
+      '!EN | !ENGLISH | !ENGLISCHE | !INGLÊS | !英语 | !英語 | !АНГЛИЙСКИЙ'
+    ):
       EN(sender, client, users);
       break;
-    case '!ES':
+    case parseCommand(
+      input,
+      '!ES | !SPANISH | !SPANISCHE | !ESPANHOL | !西班牙语 | !スペイン語 | !ИСПАНСКИЙ'
+    ):
       ES(sender, client, users);
       break;
-    case '!PT':
+    case parseCommand(
+      input,
+      '!PT | !PORTUGUESE | !PORTUGIESISCHE | !PORTUGUÊS | !葡萄牙语语言 | !ポルトガル語 | !ПОРТУГАЛЬСКИЙ'
+    ):
       PT(sender, client, users);
       break;
-    case '!CN':
+    case parseCommand(
+      input,
+      '!CN | !CHINESE | !CHINESISCHE | !CHINÊS | !CHINO | !中文 | !中国語 | !КИТАЙСКИЙ'
+    ):
       CN(sender, client, users);
       break;
-    case '!RU':
+    case parseCommand(
+      input,
+      '!RU | !RUSSIAN | !RUSSISCHE | !RUSSO | !RUSO | !俄语 | !ロシア語 | !РУССКИЙ'
+    ):
       RU(sender, client, users);
       break;
-    case '!FR':
+    case parseCommand(
+      input,
+      '!FR | !FRANCE | !FRANKREICH | !FRANCÊS | !FRANCIA | !語言法國 | !言語フランス | !ФРАНЦИЯ'
+    ):
       FR(sender, client, users);
       break;
-    case '!JA':
+    case parseCommand(
+      input,
+      '!JA | !JAPANESE | !JAPANISCH | !JAPONÊS | !語言日語 | !日本語日本語 | !ЯПОНСКИЙ'
+    ):
       JA(sender, client, users);
       break;
-    case '!DE':
+    case parseCommand(
+      input,
+      '!DE | !GERMAN | !DEUTSCHE | !ALEMÂO | !德国的语言 | !ドイツ語 | !НЕМЕЦКИЙ'
+    ):
       DE(sender, client, users);
       break;
     case '!BUYANYCSGO':
@@ -209,7 +237,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     case '!OWNER':
       OWNER(sender, client, users);
       break;
-    case '!PRICES':
+    case parseCommand(input, '!PRICES | !PRICE | !RATES | !RATE'):
       PRICES(sender, client, users);
       break;
     case '!RANK':
@@ -218,13 +246,13 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     case '!REPORT':
       REPORT(sender, msg, client, users);
       break;
-    case '!STOCK':
+    case parseCommand(input, '!STOCK | !STATS'):
       STOCK(sender, client, users);
       break;
     case '!TUTORIAL':
       TUTORIAL(sender, client, users);
       break;
-    case '!SETS4SETS':
+    case parseCommand(input, '!SETS4SETS | !SET4SET'):
       SETS4SETS(sender, msg, client, users, community, allCards, manager);
       break;
     default:
