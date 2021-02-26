@@ -449,7 +449,9 @@ utils.filterCommands = (msg) => {
       const regex = new RegExp(`\\b${command}\\b`);
       const index = message.findIndex((el) => regex.test(el));
 
-      message.splice(index, 1);
+      if (index !== -1) {
+        message.splice(index, 1);
+      }
     });
   }
 
