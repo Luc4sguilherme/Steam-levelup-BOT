@@ -486,7 +486,7 @@ utils.removeCurrency = (msg, sectionType) => {
     for (const key in currencies) {
       if (!currencies[key]) {
         const currencySection = utils.parseCurrencies(key);
-        const regex1 = new RegExp(`${currencySection}`);
+        const regex1 = new RegExp(`${currencySection}`, 'i');
         const items1 = msg.filter((el) => regex1.test(el));
 
         if (items1.length !== 0) {
@@ -509,7 +509,7 @@ utils.removeCurrency = (msg, sectionType) => {
       if (!currencies[key]) {
         const currency = utils.parseCurrencies(key);
 
-        const regex = new RegExp(`${currency}`);
+        const regex = new RegExp(`${currency}`, 'i');
         const items = msg.filter((el) => regex.test(el));
 
         if (items.length !== 0) {
@@ -555,9 +555,9 @@ utils.parseCurrencies = (currency) => {
   } else if (currency === 'TF2') {
     key = 'TF2|TF|团队要塞2|„TF2“';
   } else if (currency === 'HYDRA') {
-    key = 'HYDRA|Hydra|九头蛇|Гидра|Hidra|„Hydra“';
+    key = 'HYDRA|九头蛇|Гидра|Hidra|„Hydra“';
   } else if (currency === 'GEMS') {
-    key = 'GEMS|gems|Gema|宝石|Самоцвет|Gemmes|gemmes|ジェム|Edelsteine';
+    key = 'gem|gema|宝石|Самоцвет|gemme|ジェム|edelsteine';
   }
 
   return key;
