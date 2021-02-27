@@ -57,6 +57,15 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     return 'UNKNOW';
   }
 
+  if (
+    input.includes(`!KEYLIST`) &&
+    !acceptedCurrency.CSGO &&
+    !acceptedCurrency.TF2 &&
+    !acceptedCurrency.HYDRA
+  ) {
+    return 'UNKNOW';
+  }
+
   for (const key in acceptedCurrency) {
     if (typeof acceptedCurrency[key] !== 'boolean') {
       throw new Error(

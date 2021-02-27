@@ -481,6 +481,16 @@ utils.filterCommands = (msg, admin = false) => {
 utils.removeCurrency = (msg, sectionType) => {
   const currencies = main.acceptedCurrency;
   const suppliers = main.handleSuppliers;
+
+  if (!currencies.CSGO && !currencies.TF2 && !currencies.HYDRA) {
+    const regex = new RegExp(`!KEYLIST`);
+    const items = msg.filter((el) => regex.test(el));
+
+    if (items.length !== 0) {
+      msg.remove(items);
+    }
+  }
+
   if (sectionType) {
     if (utils.isFalseAllObjectKeys(currencies)) {
       throw new Error(
@@ -560,6 +570,40 @@ utils.removeSuppliersCommands = (msg) => {
       msg.splice(index, 6);
     }
   }
+};
+
+utils.removeKeys = (msg) => {
+  const currencies = main.acceptedCurrency;
+  const message = [];
+  for (const key in currencies) {
+    if (!currencies[key]) {
+      const currency = utils.parseCurrencies(key);
+
+      const regex = new RegExp(`${currency}`, 'i');
+      message.push(...msg.split('\n'));
+      const index = message.findIndex((el) => regex.test(el));
+
+      if (index.length !== 0) {
+        if (key === 'CSGO') {
+          message.splice(index + 1, 25, message[17]);
+        }
+
+        if (key === 'HYDRA') {
+          message.splice(index, 1);
+        }
+
+        if (key === 'TF2') {
+          message.splice(index, 2);
+        }
+      }
+    }
+  }
+
+  if (message.length === 0) {
+    return [msg];
+  }
+
+  return message;
 };
 
 utils.isFalseAllObjectKeys = (obj) =>
