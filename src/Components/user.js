@@ -4,6 +4,7 @@ const log = require('./log');
 const main = require('../Config/main');
 const messages = require('../Config/messages');
 const chatMessage = require('./message');
+const { getDefaultLanguage } = require('../Utils');
 
 const read = () => {
   let users = {};
@@ -37,7 +38,7 @@ const inactive = (client, users) => {
     for (const p of prop) {
       user[p] = {};
       user[p].idleforhours = 0;
-      user[p].language = 'EN';
+      user[p].language = getDefaultLanguage();
     }
   }
 

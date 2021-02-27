@@ -446,6 +446,7 @@ utils.filterCommands = (msg, admin = false) => {
   if (typeof msg === 'string') {
     message = [...String(msg).split(/\n/)];
     utils.removeCurrency(message, false);
+    utils.removeLanguages(message);
   }
 
   if (Array.isArray(msg)) {
@@ -524,6 +525,27 @@ utils.removeCurrency = (msg, sectionType) => {
   }
 };
 
+utils.removeLanguages = (msg) => {
+  const languages = main.acceptedLanguages;
+
+  if (utils.isFalseAllObjectKeys(languages)) {
+    throw new Error(
+      'Error in configuring accepted languages: all languages are disabled'
+    );
+  }
+
+  for (const language in languages) {
+    if (!languages[language]) {
+      const regex1 = new RegExp(`!${language}`);
+      const items1 = msg.filter((el) => regex1.test(el));
+
+      if (items1.length !== 0) {
+        msg.remove(items1);
+      }
+    }
+  }
+};
+
 utils.removeSuppliersCommands = (msg) => {
   const suppliers = main.handleSuppliers;
   if (!suppliers) {
@@ -573,6 +595,19 @@ utils.parseCurrencies = (currency) => {
 utils.parseCommand = (input, command) => {
   const regex = new RegExp(`^(${String(command).replace(/( )/g, '')})$`);
   return (String(input).match(regex) || [])[0];
+};
+
+utils.getDefaultLanguage = () => {
+  const { acceptedLanguages } = main;
+
+  const defaultLanguage = Object.keys(acceptedLanguages).filter(
+    (value) => String(acceptedLanguages[value]).toUpperCase() === 'DEFAULT'
+  );
+
+  if (defaultLanguage.length !== 0) {
+    return defaultLanguage[0];
+  }
+  return 'EN';
 };
 
 module.exports = utils;

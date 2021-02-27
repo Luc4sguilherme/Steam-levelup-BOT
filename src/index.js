@@ -17,6 +17,7 @@ const request = require('./Components/request');
 const { getCardsInSets, updateCardsDB } = require('./Components/sets');
 const login = require('./Components/login');
 const steamSupply = require('./Components/steamSupply');
+const { getDefaultLanguage } = require('./Utils');
 
 let allCards = {};
 let userMsgs = {};
@@ -97,7 +98,7 @@ client.on('webSession', (_, cookies) => {
     if (client.myFriends[Object.keys(client.myFriends)[i]] === 2) {
       client.addFriend(Object.keys(client.myFriends)[i]);
       users[Object.keys(client.myFriends)[i]] = {};
-      users[Object.keys(client.myFriends)[i]].language = 'EN';
+      users[Object.keys(client.myFriends)[i]].language = getDefaultLanguage();
     }
   }
   // Refuse group invites
@@ -267,7 +268,7 @@ client.on('friendMessage', (SENDER, MSG) => {
 
   if (Object.keys(users).indexOf(SENDER.getSteamID64()) < 0) {
     users[SENDER.getSteamID64()] = {};
-    users[SENDER.getSteamID64()].language = 'EN';
+    users[SENDER.getSteamID64()].language = getDefaultLanguage();
     users[SENDER.getSteamID64()].idleforhours = 0;
     fs.writeFile('./Data/User/Users.json', JSON.stringify(users), (ERR) => {
       if (ERR) {
@@ -330,7 +331,7 @@ client.on('friendRelationship', (SENDER, REL) => {
         log.info(`Succesfully added ${SENDER.getSteamID64()} to friendlist.`);
         if (Object.keys(users).indexOf(SENDER.getSteamID64()) < 0) {
           users[SENDER.getSteamID64()] = {};
-          users[SENDER.getSteamID64()].language = 'EN';
+          users[SENDER.getSteamID64()].language = getDefaultLanguage();
           users[SENDER.getSteamID64()].idleforhours = 0;
         } else {
           users[SENDER.getSteamID64()].idleforhours = 0;

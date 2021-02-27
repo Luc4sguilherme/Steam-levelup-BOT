@@ -51,7 +51,7 @@ const { parseCommand } = require('../../Utils');
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
   const input = msg.toUpperCase().split(' ')[0];
   const ignoreCommands = main.ignoreCommands.map((el) => el.toUpperCase());
-  const { acceptedCurrency, handleSuppliers } = main;
+  const { acceptedCurrency, handleSuppliers, acceptedLanguages } = main;
 
   if (ignoreCommands.includes(input)) {
     return 'UNKNOW';
@@ -63,6 +63,12 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         'Error in configuring accepted currencies: not is boolean'
       );
     } else if (input.includes(key.replace('2', '')) && !acceptedCurrency[key]) {
+      return 'UNKNOW';
+    }
+  }
+
+  for (const lang in acceptedLanguages) {
+    if (!acceptedLanguages[lang] && input.includes(`!${lang}`)) {
       return 'UNKNOW';
     }
   }

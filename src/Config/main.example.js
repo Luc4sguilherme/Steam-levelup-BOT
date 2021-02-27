@@ -59,6 +59,19 @@ module.exports = {
   // Set to true if you want to handle suppliers (!SELL commands).
   handleSuppliers: true,
 
+  // Setup the languages you want the bot to accept. Values ( true or false or 'DEFAULT' )
+  // Set the value to 'DEFAULT' to be the primary language
+  acceptedLanguages: {
+    EN: 'DEFAULT',
+    PT: true,
+    ES: true,
+    FR: true,
+    DE: true,
+    RU: true,
+    JA: true,
+    CN: true,
+  },
+
   steamGroup: {
     // Set to true if you want to invite customers to a desired GroupID64
     doInvites: true,
