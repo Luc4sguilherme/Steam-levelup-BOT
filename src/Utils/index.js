@@ -574,13 +574,12 @@ utils.removeSuppliersCommands = (msg) => {
 
 utils.removeKeys = (msg) => {
   const currencies = main.acceptedCurrency;
-  const message = [];
+  const message = msg.split('\n');
   for (const key in currencies) {
     if (!currencies[key]) {
       const currency = utils.parseCurrencies(key);
 
       const regex = new RegExp(`${currency}`, 'i');
-      message.push(...msg.split('\n'));
       const index = message.findIndex((el) => regex.test(el));
 
       if (index.length !== 0) {
