@@ -70,6 +70,8 @@ This is an advanced cardsets/levelup bot script.
 - You are able to enable/disable any type of currency, that way you can make a very specific bot (i.e a bot who only accept hydra keys)
 ### Commands Management 
 - You can enable/disable commands specific
+### Languages Management 
+- You can enable/disable languages specific
 ### BBCodes 
 - Some commands like !help and !admin was builded to show in a stylized bbcode
 ### Booster Packs 
