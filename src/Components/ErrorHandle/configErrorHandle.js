@@ -18,7 +18,7 @@ const schemaMain = Joi.object().keys({
     updateCatalog: Joi.boolean().required(),
   }),
   admins: Joi.array().min(1).items(Joi.string().required()),
-  owner: Joi.string().uri().required(),
+  owner: Joi.string().uri().allow(''),
   tutorial: Joi.string().uri().allow(''),
   timeZone: Joi.string().allow(''),
   acceptDonations: Joi.boolean().required(),

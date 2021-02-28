@@ -69,6 +69,10 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     return 'UNKNOW';
   }
 
+  if (input.includes(`!OWNER`) && main.owner === '') {
+    return 'UNKNOW';
+  }
+
   for (const key in acceptedCurrency) {
     if (typeof acceptedCurrency[key] !== 'boolean') {
       throw new Error(

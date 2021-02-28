@@ -437,6 +437,15 @@ utils.filterCommands = (msg, admin = false) => {
         message.remove(items);
       }
     }
+
+    if (main.owner === '') {
+      const regex = new RegExp(`!OWNER`);
+      const items = message.filter((el) => regex.test(el));
+
+      if (items.length !== 0) {
+        message.remove(items);
+      }
+    }
   }
 
   if (filter.every((el) => el !== '')) {
