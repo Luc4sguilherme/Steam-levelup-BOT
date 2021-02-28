@@ -1,21 +1,21 @@
 module.exports = {
   WELCOME: {
     EN:
-      '[EN] Welcome to my Trading Service, thank you for choosing me. Quick Start: Type !HELP via SteamChat',
+      '[EN] Welcome to my Trading Service, thank you for choosing me. Quick Start: Type !HELP via SteamChat \n\n',
     PT:
-      '[PT-BR] Bem-vindo ao meu serviço de negociação, obrigado por me escolher. Início rápido: digite !AJUDA no chat da Steam',
+      '[PT-BR] Bem-vindo ao meu serviço de negociação, obrigado por me escolher. Início rápido: digite !AJUDA no chat da Steam \n\n',
     RU:
-      '[PY] Добро пожаловать в мою торговую службу, спасибо, что выбрали меня. Быстрый старт: Используй !ПОМОЩЬ',
+      '[PY] Добро пожаловать в мою торговую службу, спасибо, что выбрали меня. Быстрый старт: Используй !ПОМОЩЬ \n\n',
     ES:
-      '[ESP] Bienvenido a mi servicio comercial, gracias por elegirme. Inicio rápido: escriba !AYUDA a través de steam chat',
+      '[ESP] Bienvenido a mi servicio comercial, gracias por elegirme. Inicio rápido: escriba !AYUDA a través de steam chat \n\n',
     CN:
-      '[CN] 欢迎使用我的交易服务，谢谢您选择我。 快速开始：写《!救命》通过Steam聊天',
+      '[CN] 欢迎使用我的交易服务，谢谢您选择我。 快速开始：写《!救命》通过Steam聊天 \n\n',
     FR:
-      "[FR] Bienvenue sur mon service de trading, merci de m'avoir choisi. Démarrage rapide: tapez !AIDER via Steam Chat",
+      "[FR] Bienvenue sur mon service de trading, merci de m'avoir choisi. Démarrage rapide: tapez !AIDER via Steam Chat \n\n",
     JA:
-      '[JA] 私のトレーディングサービスへようこそ、私を選んでくれてありがとう。 クイックスタート： Steamチャットで「!助けて」と入力します',
+      '[JA] 私のトレーディングサービスへようこそ、私を選んでくれてありがとう。 クイックスタート： Steamチャットで「!助けて」と入力します \n\n',
     DE:
-      '[DE] Willkommen bei meinem Handelsservice, danke, dass Sie sich für mich entschieden haben. Schnellstart: Geben Sie !HILFE via Steam Chat ein',
+      '[DE] Willkommen bei meinem Handelsservice, danke, dass Sie sich für mich entschieden haben. Schnellstart: Geben Sie !HILFE via Steam Chat ein \n\n',
   },
   TRADEMSG: {
     EN: 'Please check your Trade and accept it to receive your Items.',
@@ -3206,6 +3206,41 @@ module.exports = {
     ],
   },
   HELP: {
+    EN:
+      "Hello there, i'm a bot to easy level up your steam profile! \n\n" +
+      ' • You may type !COMMANDS for see the list of commands. \n' +
+      ' • You may type !LANG for change language. \n\n',
+    PT:
+      'Olá, sou um bot para subir de nível facilmente seu perfil do Steam! \n\n' +
+      ' • Você pode digitar !COMMANDS para ver a lista de comandos. \n' +
+      ' • Você pode digitar !LANG para alterar o idioma. \n\n',
+    RU:
+      'Привет, я бот, чтобы легко повысить свой уровень в Steam! \n\n' +
+      ' • Вы можете ввести !COMMANDS для получения списка команд. \n' +
+      ' • Вы можете ввести !LANG, чтобы изменить язык. \n\n',
+    ES:
+      'Hola, soy una bot para subir de nivel fácilmente tu perfil de vapor! \n\n' +
+      ' • Puede escribir !COMMANDS para la lista de comandos. \n' +
+      ' • Puede escribir !LANG para cambiar el idioma. \n\n',
+    CN:
+      '您好，我是一个轻松升级您的Steam个人资料的机器人！ \n\n' +
+      ' • 您可以键入《!COMMANDS》以查看命令列表。 \n' +
+      ' • 您可以输入《!LANG》更改语言。 \n\n',
+    FR:
+      'Bonjour, je suis un robot pour améliorer facilement votre profil Steam! \n\n' +
+      ' • Vous pouvez taper !COMMANDS pour la liste des commandes. \n' +
+      ' • Vous pouvez taper !LANG pour changer de langue. \n\n',
+    JA:
+      'こんにちは、私はあなたのスチームプロファイルを簡単にレベルアップするボットです！ \n\n' +
+      ' • コマンドのリストを表示するには、「!COMMANDS」と入力できます。 \n' +
+      ' • 言語を変更するには、「!LANG」と入力できます。 \n\n',
+    DE:
+      'Hallo, ich bin ein Bot, um dein Steam-Profil ganz einfach zu verbessern! \n\n' +
+      ' • Sie können !COMMANDS eingeben, um die Liste der Befehle anzuzeigen. \n' +
+      ' • Sie können !LANG eingeben, um die Sprache zu ändern. \n\n',
+  },
+
+  COMMANDS: {
     EN: [
       'Commands: \n',
       '► !LANG = Change the bot language. \n',

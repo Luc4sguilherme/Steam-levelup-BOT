@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable consistent-return */
 const HELP = require('./GENERAL/HELP');
+const COMMANDS = require('./GENERAL/COMMANDS');
 const LANG = require('./GENERAL/LANGUAGE');
 const EN = require('./GENERAL/LANGUAGE/EN');
 const ES = require('./GENERAL/LANGUAGE/ES');
@@ -87,10 +88,13 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
   }
 
   switch (input) {
-    case parseCommand(input, '!HELP | !COMMANDS | !COMMAND'):
-      HELP(sender, client, users);
+    case parseCommand(input, '!COMMANDS | !COMMAND'):
+      COMMANDS(sender, client, users);
       break;
-    case parseCommand(input, '!AJUDA | !COMANDOS | !COMANDO'):
+    case '!HELP':
+      HELP(sender, client, users, 'EN');
+      break;
+    case '!AJUDA':
       HELP(sender, client, users, 'PT');
       break;
     case '!ПОМОЩЬ':

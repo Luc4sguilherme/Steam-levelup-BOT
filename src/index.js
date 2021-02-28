@@ -352,19 +352,17 @@ client.on('friendRelationship', (SENDER, REL) => {
         );
       }
     });
-    chatMessage(
-      client,
-      SENDER,
-      `${messages.WELCOME.EN}
-      ${messages.WELCOME.PT}
-      ${messages.WELCOME.RU}
-      ${messages.WELCOME.ES}
-      ${messages.WELCOME.CN}
-      ${messages.WELCOME.FR}
-      ${messages.WELCOME.JA}
-      ${messages.WELCOME.DE}`
-    );
-    chatMessage(client, SENDER, main.tutorial);
+
+    const language =
+      users[SENDER.getSteamID64()].language || getDefaultLanguage();
+
+    let message = messages.WELCOME[language];
+
+    if (main.tutorial) {
+      message += main.tutorial;
+    }
+
+    chatMessage(client, SENDER, message);
   }
 });
 

@@ -567,7 +567,7 @@ utils.removeSuppliersCommands = (msg) => {
 
   if (!suppliers) {
     const indexSection = (cur) =>
-      messages.HELP.EN.findIndex((el) => el.includes(cur));
+      messages.COMMANDS.EN.findIndex((el) => el.includes(cur));
     const section = message[indexSection(`Suppliers Section.`)]?.replace(
       '. \n',
       ''
