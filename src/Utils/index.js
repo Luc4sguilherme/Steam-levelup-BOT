@@ -445,18 +445,18 @@ utils.filterCommands = (msg, admin = false) => {
 
   if (typeof msg === 'string') {
     message = [...String(msg).split(/\n/)];
-    utils.removeCurrency(message, false);
-    utils.removeLanguages(message);
+    message = utils.removeCurrency(message, false);
+    message = utils.removeLanguages(message);
   }
 
   if (Array.isArray(msg)) {
     message = [...msg];
 
     if (!admin) {
-      utils.removeSuppliersCommands(message);
+      message = utils.removeSuppliersCommands(message);
     }
 
-    utils.removeCurrency(message, true);
+    message = utils.removeCurrency(message, true);
   }
 
   if (filter.every((el) => el !== '')) {
@@ -481,40 +481,41 @@ utils.filterCommands = (msg, admin = false) => {
 utils.removeCurrency = (msg, sectionType) => {
   const currencies = main.acceptedCurrency;
   const suppliers = main.handleSuppliers;
+  const message = [...msg];
+
+  if (utils.isFalseAllObjectKeys(currencies)) {
+    throw new Error(
+      'Error in configuring accepted currencies: all currencies are disabled'
+    );
+  }
 
   if (!currencies.CSGO && !currencies.TF2 && !currencies.HYDRA) {
     const regex = new RegExp(`!KEYLIST`);
-    const items = msg.filter((el) => regex.test(el));
+    const items = message.filter((el) => regex.test(el));
 
     if (items.length !== 0) {
-      msg.remove(items);
+      message.remove(items);
     }
   }
 
   if (sectionType) {
-    if (utils.isFalseAllObjectKeys(currencies)) {
-      throw new Error(
-        'Error in configuring accepted currencies: all currencies are disabled'
-      );
-    }
-
     for (const key in currencies) {
       if (!currencies[key]) {
         const currencySection = utils.parseCurrencies(key);
         const regex1 = new RegExp(`${currencySection}`, 'i');
-        const items1 = msg.filter((el) => regex1.test(el));
+        const items1 = message.filter((el) => regex1.test(el));
 
         if (items1.length !== 0) {
-          msg.remove(items1);
+          message.remove(items1);
         }
 
         if (suppliers) {
           const currencySuppliersSection = `!SELL${key.replace('2', '')}`;
           const regex2 = new RegExp(`${currencySuppliersSection}`);
-          const items2 = msg.filter((el) => regex2.test(el));
+          const items2 = message.filter((el) => regex2.test(el));
 
           if (items2.length !== 0) {
-            msg.remove(items2);
+            message.remove(items2);
           }
         }
       }
@@ -525,18 +526,21 @@ utils.removeCurrency = (msg, sectionType) => {
         const currency = utils.parseCurrencies(key);
 
         const regex = new RegExp(`${currency}`, 'i');
-        const items = msg.filter((el) => regex.test(el));
+        const items = message.filter((el) => regex.test(el));
 
         if (items.length !== 0) {
-          msg.remove(items);
+          message.remove(items);
         }
       }
     }
   }
+
+  return message;
 };
 
 utils.removeLanguages = (msg) => {
   const languages = main.acceptedLanguages;
+  const message = [...msg];
 
   if (utils.isFalseAllObjectKeys(languages)) {
     throw new Error(
@@ -547,29 +551,34 @@ utils.removeLanguages = (msg) => {
   for (const language in languages) {
     if (!languages[language]) {
       const regex1 = new RegExp(`!${language}`);
-      const items1 = msg.filter((el) => regex1.test(el));
+      const items1 = message.filter((el) => regex1.test(el));
 
       if (items1.length !== 0) {
-        msg.remove(items1);
+        message.remove(items1);
       }
     }
   }
+  return message;
 };
 
 utils.removeSuppliersCommands = (msg) => {
   const suppliers = main.handleSuppliers;
+  const message = [...msg];
+
   if (!suppliers) {
     const indexSection = (cur) =>
       messages.HELP.EN.findIndex((el) => el.includes(cur));
-    const section = msg[indexSection(`Suppliers Section.`)]?.replace(
+    const section = message[indexSection(`Suppliers Section.`)]?.replace(
       '. \n',
       ''
     );
-    const index = msg.findIndex((el) => el.includes(section));
+    const index = message.findIndex((el) => el.includes(section));
     if (index !== -1) {
-      msg.splice(index, 6);
+      message.splice(index, 6);
     }
   }
+
+  return message;
 };
 
 utils.removeKeys = (msg) => {

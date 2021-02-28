@@ -11,6 +11,7 @@ const utils = require('../Utils');
 const rates = require('../Config/rates.js');
 const { getSets } = require('./sets.js');
 const log = require('./log');
+const { removeCurrency } = require('../Utils');
 
 const inventory = {};
 
@@ -38,7 +39,14 @@ inventory.stock = {
 
 inventory.play = (client) => {
   const playThis = ['', true];
-  playThis[0] = `${inventory.stock.totalBotSets} Sets ► ${rates.csgo.sell}:1 CS:GO ► ${rates.tf.sell}:1 TF2 ► 1:${rates.gems.sell} Gems`;
+  const ratesText = removeCurrency(
+    `${rates.csgo.sell}:1 CS:GO, ${rates.hydra.sell}:1 HYDRA, ${rates.tf.sell}:1 TF2, 1:${rates.gems.sell} Gems`.split(
+      ','
+    ),
+    false
+  ).join(',');
+
+  playThis[0] = `${inventory.stock.totalBotSets} Sets ► ${ratesText}`;
   client.gamesPlayed(playThis);
 };
 
