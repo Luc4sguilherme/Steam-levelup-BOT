@@ -398,29 +398,14 @@ manager.on('sentOfferChanged', (OFFER) => {
     // Trades history
     log.tradesHistory(OFFER);
 
-    let message = '/pre ';
     if (main.admins.indexOf(OFFER.partner.getSteamID64()) === -1) {
       // Notify the administrator of the exchanges made
       utils.notifyAdmin(client, users, OFFER);
 
       // Calculate profit
       profit.calculate(OFFER);
-
-      // Add giveaway entry if user entered
-      utils.addGiveawayEntry(OFFER, (ERR) => {
-        if (ERR) {
-          log.error(
-            `An error occurred while writing giveaway entry file: ${ERR}`
-          );
-        } else {
-          message +=
-            messages.GIVEAWAY.ENTER[2][
-              users[OFFER.partner.getSteamID64()].language
-            ];
-          log.warn('Giveaway entry added! ');
-        }
-      });
     }
+
     community.getSteamUser(OFFER.partner, (ERR, USER) => {
       if (ERR) {
         log.error(`An error occurred while getting user profile: ${ERR}`);
@@ -467,9 +452,7 @@ manager.on('sentOfferChanged', (OFFER) => {
             }
           );
         }
-        if (message.length > 5) {
-          chatMessage(client, OFFER.partner.getSteamID64(), message);
-        }
+
         utils.checkUserinGroup(
           community,
           OFFER.partner.getSteamID64(),

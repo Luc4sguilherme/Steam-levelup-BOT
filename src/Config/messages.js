@@ -1414,172 +1414,6 @@ module.exports = {
         'Beim Lesen des Ranges ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal',
     },
   },
-  GIVEAWAY: {
-    NOTACTIVE: {
-      EN: "\nI currently don't have any giveaway. Try again later...",
-      PT:
-        '\nNão tenho nenhum sorteio no momento. Tente novamente mais tarde...',
-      RU:
-        '\nУ меня в настоящее время нет никакой Нарисовать. Попробуйте позже...',
-      ES:
-        '\nActualmente no tengo ningún sorteo. Intenta nuevamente más tarde...',
-      CN: '\n我目前没有任何抽奖。 稍后再试...',
-      FR: "\nJe n'ai actuellement aucun cadeau. Réessayez plus tard...",
-      JA: '\n現在、景品はありません。 あとでもう一度試してみてください...',
-      DE:
-        '\nIch habe derzeit kein Werbegeschenk. Versuchen Sie es später erneut...',
-    },
-    DEFAULT: {
-      0: {
-        EN: '\r\nYour entries: {ENTRIES}',
-        PT: '\r\nSuas entries: {ENTRIES}',
-        RU: '\r\nВаши записи: {ENTRIES}',
-        ES: '\r\nSus entradas: {ENTRIES}',
-        CN: '\r\n您的输入: {ENTRIES}',
-        FR: '\r\nVos entrées: {ENTRIES}',
-        JA: '\r\nあなたのエントリ： {ENTRIES}',
-        DE: '\r\nIhre Einträge: {ENTRIES}',
-      },
-      1: {
-        EN: '\r\nEnter using !ENTER command',
-        PT: '\r\nEntre usando o comando !ENTER',
-        RU: '\r\nВойдите с помощью команды !ENTER',
-        ES: '\r\nIngrese usando el comando !ENTER',
-        CN: '\r\n使用 !ENTER 进入',
-        FR: '\r\nEntrez en utilisant la commande !ENTER',
-        JA: '\r\n!ENTERコマンドを使用して入力します',
-        DE: '\r\nGeben Sie mit dem Befehl !ENTER ein',
-      },
-      2: {
-        EN: '\nRunning giveaway:\r\nPrice: {PRICE}\r\nEnd: {DATE}',
-        PT: '\nSorteio:\r\nPrêmio: {PRICE}\r\nFim: {DATE}',
-        RU: '\nРозыгрыш призов:\r\nПриз: {PRICE}\r\nКонец: {DATE}',
-        ES: '\nSorteo:\r\nPrecio: {PRICE}\r\nFinal: {DATE}',
-        CN: '\n抽奖:\r\n奖: {PRICE}\r\n结束: {DATE}',
-        FR: '\nLaufen Werbegeschenk:\r\nPrix: {PRICE}\r\nFin: {DATE}',
-        JA: '\nプレゼントの実行：\r\n価格：{PRICE}\r\n終わり：{DATE}',
-        DE: '\nLaufen Werbegeschenk:\r\nPreis: {PRICE}\r\nEnde: {DATE}',
-      },
-    },
-    ENTER: {
-      0: {
-        EN:
-          '\nYou have successfully entered the giveaway!' +
-          '\r\nPrice: {PRICE}' +
-          '\r\nEnd: {DATE}' +
-          '\r\n\nYou can get more entries by trading with me!',
-        PT:
-          '\nVocê entrou com sucesso no sorteio!' +
-          '\r\nPrêmio: {PRICE}' +
-          '\r\nFim: {DATE}' +
-          '\r\n\nVocê pode obter mais entradas negociando comigo!',
-        RU:
-          '\nВы успешно вошли в розыгрыш призов!' +
-          '\r\nПриз: {PRICE}' +
-          '\r\nКонец: {DATE}' +
-          '\r\n\nВы можете получить больше записей, торгуя со мной!',
-        ES:
-          '\n¡Has entrado con éxito en el sorteo!' +
-          '\r\nPrecio: {PRICE}' +
-          '\r\nFinal: {DATE}' +
-          '\r\n\n¡Puedes obtener más entradas comerciando conmigo!',
-        CN:
-          '\n您已成功进入抽奖！' +
-          '\r\n奖: {PRICE}' +
-          '\r\n结束: {DATE}' +
-          '\r\n\n您可以通过与我交易获得更多条目！',
-        FR:
-          '\nVous avez réussi à participer au concours!' +
-          '\r\nPrix: {PRICE}' +
-          '\r\nFin: {DATE}' +
-          "\r\n\nVous pouvez obtenir plus d'entrées en échangeant avec moi!",
-        JA:
-          '\n景品の入力に成功しました。' +
-          '\r\n価格： {PRICE}' +
-          '\r\n終わり： {DATE}' +
-          '\r\n\nあなたは私と取引することによってより多くのエントリーを得ることができます！',
-        DE:
-          '\nSie haben das Werbegeschenk erfolgreich eingegeben!' +
-          '\r\nPreis: {PRICE}' +
-          '\r\nEnde: {DATE}' +
-          '\r\n\nSie können mehr Einträge erhalten, indem Sie mit mir handeln!',
-      },
-      1: {
-        EN:
-          '\nYou already entered giveaway!' +
-          '\r\nYou can get more entries by trading with me!',
-        PT:
-          '\nVocê já entrou no sorteio!' +
-          '\r\nVocê pode obter mais entradas negociando comigo!',
-        RU:
-          '\nВы уже вошли в поддавку!' +
-          '\r\nВы можете получить больше записей, торгуя со мной!',
-        ES:
-          '\nYa entraste en el sorteo!' +
-          '\r\n¡Puedes obtener más entradas comerciando conmigo!',
-        CN: '\n您已经输入抽奖！\r\n您可以通过与我交易获得更多条目！',
-        FR:
-          '\nVous avez déjà participé au concours!' +
-          "\r\nVous pouvez obtenir plus d'entrées en échangeant avec moi!",
-        JA:
-          '\nあなたはすでに景品に入っています！' +
-          '\r\nあなたは私と取引することによってより多くのエントリーを得ることができます！',
-        DE:
-          '\nSie haben bereits Werbegeschenk eingegeben!' +
-          '\r\nSie können mehr Einträge erhalten, indem Sie mit mir handeln!',
-      },
-      2: {
-        EN: '• New giveaway entry added!\n',
-        PT: '• Nova entrada adicionada ao sorteio!\n',
-        RU: '• Новая запись добавлена!\n',
-        ES: '• Nueva entrada de sorteo añadido!\n',
-        CN: '• 添加了新的抽奖条目！\n',
-        FR: '• Nouvelle entrée gratuite ajoutée!\n',
-        JA: '• 新しい景品エントリーが追加されました！\n',
-        DE: '• Neuer Werbegeschenkeintrag hinzugefügt!\n',
-      },
-    },
-    RAFFLE: {
-      0: {
-        EN:
-          'Winner is: \n Username: {USERNAME}\n ID64: {ID64}\n Entries: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        PT:
-          'O vencedor é: \n Nome do usuário: {USERNAME}\n ID64: {ID64}\n Entradas: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        RU:
-          'Победитель: \n Имя пользователя: {USERNAME}\n ID64: {ID64}\n билеты: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        ES:
-          'El ganador es: \n Nombre de usuario: {USERNAME}\n ID64: {ID64}\n Entradas: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        CN:
-          '优胜者是: \n 用户名: {USERNAME}\n ID64: {ID64}\n 抽奖条目: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        FR:
-          "Le gagnant est: \n Nom d'utilisateur: {USERNAME}\n ID64: {ID64}\n Entrées: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}",
-        JA:
-          '勝者は: \n ユーザー名: {USERNAME}\n ID64: {ID64}\n エントリー: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        DE:
-          'Gewinner ist: \n Nutzername: {USERNAME}\n ID64: {ID64}\n Einträge: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-      },
-      1: {
-        EN: '\nThere are no participants',
-        PT: '\nNão há participantes',
-        RU: '\nНет участников',
-        ES: '\nNo hay participantes',
-        CN: '\n没有参加者',
-        FR: "\nIl n'y a pas de participants",
-        JA: '\n参加者はいません',
-        DE: '\nEs gibt keine Teilnehmer',
-      },
-      2: {
-        EN: '\nThere is already a winner',
-        PT: '\nJá existe um vencedor',
-        RU: '\nУже есть победитель',
-        ES: '\nYa hay un ganador',
-        CN: '\n已经有一个赢家',
-        FR: '\nIl y a déjà un gagnant',
-        JA: '\nすでに勝者がいます',
-        DE: '\nEs gibt bereits einen Gewinner',
-      },
-    },
-  },
   PROFIT: {
     PROFITED: {
       EN: 'Profited',
@@ -3245,7 +3079,6 @@ module.exports = {
       'Commands: \n',
       '► !LANG = Change the bot language. \n',
       '► !TUTORIAL = Shows the video tutorial. \n',
-      '► !GIVEAWAY = Get info about giveaway and your entries. \n',
       '► !SETS4SETS (amount_of_sets) = Trade your duplicate sets for new ones you can craft. \n',
       '► !PRICES = Shows our current rates. \n',
       '► !STOCK = Shows currencies stock of the bot. \n',
@@ -3288,7 +3121,6 @@ module.exports = {
       'Comandos: \n',
       '► !LANG = Altere o idioma do bot. \n',
       '► !TUTORIAL = Mostra o video tutorial. \n',
-      '► !GIVEAWAY = Obtenha informações sobre o sorteio e suas entradas. \n',
       '► !SETS4SETS (quantidade_de_conjuntos) = Troque seus conjuntos duplicados por novos que você pode criar. \n',
       '► !PRICES = Mostra os preços atuais. \n',
       '► !STOCK = Verifica o estoque do bot. \n',
@@ -3331,7 +3163,6 @@ module.exports = {
       'команды: \n',
       '► !LANG = Измените язык бота. \n',
       '► !TUTORIAL = Показывает видеоурок. \n',
-      '► !GIVEAWAY = Получить информацию о поддавки и ваши записи. \n',
       '► !SETS4SETS (количество наборы) = Обменяйте дубликаты наборы на новые, которые вы сможете создать. \n',
       '► !PRICES = Показывает наши текущие цены. \n',
       '► !STOCK = Показывает сток бота. \n',
@@ -3374,7 +3205,6 @@ module.exports = {
       'Comandos: \n',
       '► !LANG = Cambia el idioma del bot. \n',
       '► !TUTORIAL = Muestra el video tutorial. \n',
-      '► !GIVEAWAY = Obtenga información sobre el sorteo y sus entradas. \n',
       '► !SETS4SETS (número_de_llaves) = Cambia tus conjuntos duplicados por otros nuevos que puedas crear. \n',
       '► !PRICES = Muestra nuestras tarifas actuales. \n',
       '► !STOCK = Verifique el stock del bot. \n',
@@ -3417,7 +3247,6 @@ module.exports = {
       '命令： \n',
       '► !LANG = 更改机器人语言。 \n',
       '► !TUTORIAL = 显示视频教程。 \n',
-      '► !GIVEAWAY = 获取有关抽奖及其条目的信息。 \n',
       '► !SETS4SETS (套数) = 将您的重复套卡牌装换成可以制作的新套装。 \n',
       '► !PRICES = 显示我们当前的汇率。 \n',
       '► !STOCK = 显示机器人的库存。 \n',
@@ -3460,7 +3289,6 @@ module.exports = {
       'Commandes: \n',
       '► !LANG = Changez la langue du bot. \n',
       '► !TUTORIAL = Affiche le didacticiel vidéo. \n',
-      '► !GIVEAWAY = Obtenez des informations sur les cadeaux et vos entrées. \n',
       '► !SETS4SETS (quantité_de_ensembles) = Échangez vos ensembles en double contre de nouveaux que vous pouvez fabriquer. \n',
       '► !PRICES = Affiche nos tarifs actuels. \n',
       '► !STOCK = Affiche le stock de devises du bot. \n',
@@ -3503,7 +3331,6 @@ module.exports = {
       'コマンド： \n',
       '► !LANG = ボットの言語を変更します。 \n',
       '► !TUTORIAL = ビデオチュートリアルを表示します。 \n',
-      '► !GIVEAWAY = 景品とあなたのエントリーについての情報を入手してください。 \n',
       '► !SETS4SETS (カードセットの量) = 複製したセットを、作成できる新しいセットと交換します。 \n',
       '► !PRICES = 現在の料金を表示します。 \n',
       '► !STOCK = ボットの通貨ストックを表示します。 \n',
@@ -3546,7 +3373,6 @@ module.exports = {
       'Commands: \n',
       '► !LANG = Ändern Sie die Bot-Sprache. \n',
       '► !TUTORIAL = Zeigt das Video-Tutorial. \n',
-      '► !GIVEAWAY = Holen Sie sich Informationen über Werbegeschenk und Ihre Einträge. \n',
       '► !SETS4SETS (anzahl_der_setz) = Tauschen Sie Ihre doppelten Sets gegen neue, die Sie herstellen können. \n',
       '► !PRICES = Zeigt unsere aktuellen Preise an. \n',
       '► !STOCK = Zeigt den Währungsbestand des Bots an. \n',
@@ -3606,7 +3432,6 @@ module.exports = {
       '► !BLOCK (ID64) = Block user. \n',
       '► !UNBLOCK (ID64) = Unlock user. \n',
       '► !RELOAD = Reload Inventory. \n',
-      '► !RAFFLE = Choose the winner of the raffle. \n',
       '► !REQUESTER = Forces the automatic request to be triggered. \n',
       '► !PROFIT = Shows bot transactions this month. \n',
       '► !AUTHCODE = Shows auth code. \n',
@@ -3634,7 +3459,6 @@ module.exports = {
       '► !BLOCK (ID64) = Bloquea usuário. \n',
       '► !UNBLOCK (ID64) = Desbloquea usuário. \n',
       '► !RELOAD = Recarrega o inventário. \n',
-      '► !RAFFLE = Escolhe o vencedor do sorteio. \n',
       '► !REQUESTER = Força a solicitação automática a ser acionada. \n',
       '► !PROFIT = Mostra as transações feitas pelo bot nesse mês. \n',
       '► !AUTHCODE = Mostra o código de autenticação. \n',
@@ -3662,7 +3486,6 @@ module.exports = {
       '► !BLOCK (ID64) = Заблокировать пользователя. \n',
       '► !UNBLOCK (ID64) = Разблокировать пользователя. \n',
       '► !RELOAD = Перезагрузить инвентарь. \n',
-      '► !RAFFLE = Выберите победителя розыгрыша. \n',
       '► !REQUESTER = Принудительно инициирует автоматический запрос. \n',
       '► !PROFIT = Показывает транзакции ботов в этом месяце. \n',
       '► !AUTHCODE = Показывает код аутентификатора. \n',
@@ -3690,7 +3513,6 @@ module.exports = {
       '► !BLOCK (ID64) = Bloquear usuario. \n',
       '► !UNBLOCK (ID64) = Desbloquear usuario. \n',
       '► !RELOAD = Recargar inventario. \n',
-      '► !RAFFLE = Elige al ganador del sorteo. \n',
       '► !REQUESTER = Obliga a que se active la solicitud automática.. \n',
       '► !PROFIT = Muestra las transacciones de bot este mes. \n',
       '► !AUTHCODE = Muestra el código de autenticación. \n',
@@ -3718,7 +3540,6 @@ module.exports = {
       '► !BLOCK (ID64) = 阻止用户。 \n',
       '► !UNBLOCK (ID64) = 解锁用户。 \n',
       '► !RELOAD = 重新加载库存。 \n',
-      '► !RAFFLE = 选择抽奖的获胜者。 \n',
       '► !REQUESTER = 强制触发自动请求。\n',
       '► !PROFIT = 显示本月的机器人交易。 \n',
       '► !AUTHCODE = 显示验证码。 \n',
@@ -3746,7 +3567,6 @@ module.exports = {
       '► !BLOCK (ID64) = Bloquer un utilisateur. \n',
       "► !UNBLOCK (ID64) = Déverrouillez l'utilisateur. \n",
       "► !RELOAD = Recharger l'inventaire. \n",
-      '► !RAFFLE = Choisissez le gagnant du tirage au sort. \n',
       '► !REQUESTER = Force le déclenchement de la requête automatique. \n',
       '► !PROFIT = Affiche les transactions de bot ce mois-ci. \n',
       "► !AUTHCODE = Affiche le code d'authentification. \n",
@@ -3774,7 +3594,6 @@ module.exports = {
       '► !BLOCK (ID64) = ユーザをブロックする。 \n',
       '► !UNBLOCK (ID64) = ユーザーのロックを解除します。 \n',
       '► !RELOAD = インベントリをリロードします。 \n',
-      '► !RAFFLE = ラッフルの勝者を選択してください。 \n',
       '► !REQUESTER = 自動リクエストを強制的にトリガーします。 \n',
       '► !PROFIT = 今月のボットトランザクションを表示します。 \n',
       '► !AUTHCODE = 認証コードを表示します。 \n',
@@ -3802,7 +3621,6 @@ module.exports = {
       '► !BLOCK (ID64) = Benutzer blockieren. \n',
       '► !UNBLOCK (ID64) = Benutzer entsperren. \n',
       '► !RELOAD = Inventar neu laden. \n',
-      '► !RAFFLE = Wählen Sie den Gewinner der Verlosung. \n',
       '► !REQUESTER = Erzwingt das Auslösen der automatischen Anforderung. \n',
       '► !PROFIT = Zeigt Bot-Transaktionen in diesem Monat an. \n',
       '► !AUTHCODE = Zeigt den Authentifizierungscode an. \n',

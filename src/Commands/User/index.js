@@ -34,8 +34,6 @@ const CHECKGEMS = require('./GEMS/CHECK');
 const CHECKHYDRA = require('./HYDRA/CHECK');
 const CHECKTF = require('./TF/CHECK');
 const SELLCHECK = require('./GENERAL/SELLCHECK');
-const ENTER = require('./GENERAL/ENTER');
-const GIVEAWAY = require('./GENERAL/GIVEAWAY');
 const INVITE = require('./GENERAL/INVITE');
 const KEYLIST = require('./GENERAL/KEYLIST');
 const LEVEL = require('./GENERAL/LEVEL');
@@ -237,12 +235,6 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       break;
     case '!SELLCHECK':
       SELLCHECK(sender, client, users, community, allCards);
-      break;
-    case '!ENTER':
-      ENTER(sender, client, users);
-      break;
-    case '!GIVEAWAY':
-      GIVEAWAY(sender, client, users);
       break;
     case '!INVITE':
       INVITE(sender, client, users, community);

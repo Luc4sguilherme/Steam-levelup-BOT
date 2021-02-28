@@ -90,7 +90,6 @@ This is an advanced cardsets/levelup bot script.
 - <code>!DE</code> - Change the bot's language to german. 
 - <code>!LANG</code> - Change the bot's language. 
 - <code>!TUTORIAL</code> - Shows the video tutorial. 
-- <code>!GIVEAWAY</code> - Get info about giveaway and your entries. 
 - <code>!SETS4SETS (amount_of_sets)</code> - Trade your duplicate sets for new ones you can craft. 
 - <code>!PRICES</code> - Shows our current rates. 
 - <code>!STOCK</code> - Shows currencies stock of the bot. 
@@ -148,7 +147,6 @@ This is an advanced cardsets/levelup bot script.
 - <code>!BLOCK (ID64)</code> - Block user. 
 - <code>!UNBLOCK (ID64)</code> - Unlock user. 
 - <code>!RELOAD</code> - Reload Inventory. 
-- <code>!RAFFLE</code> - Choose the winner of the raffle. 
 - <code>!REQUESTER</code> - Forces the automatic request to be triggered. 
 - <code>!PROFIT</code> - Shows bot transactions this month. 
 - <code>!AUTHCODE</code> - Shows auth code. 

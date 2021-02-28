@@ -267,35 +267,6 @@ utils.getLevelExp = (level) => {
   return exp;
 };
 
-utils.addGiveawayEntry = (offer, callback) => {
-  try {
-    const giveawayEntry = JSON.parse(
-      fs.readFileSync('./Data/Giveaway/giveaway.json')
-    );
-    if (giveawayEntry.active) {
-      if (
-        typeof giveawayEntry.entries[offer.partner.getSteamID64()] !==
-        'undefined'
-      ) {
-        giveawayEntry.entries[offer.partner.getSteamID64()] += 1;
-        fs.writeFile(
-          './Data/Giveaway/giveaway.json',
-          JSON.stringify(giveawayEntry, null, '\t'),
-          (ERR) => {
-            if (ERR) {
-              callback(ERR);
-            } else {
-              callback(null);
-            }
-          }
-        );
-      }
-    }
-  } catch (error) {
-    callback(error);
-  }
-};
-
 utils.checkUserinGroup = (community, target, callback) => {
   const customer = target;
   community.getGroupMembers(main.steamGroup.ID, (err, members) => {

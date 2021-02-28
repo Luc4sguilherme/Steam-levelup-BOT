@@ -7,7 +7,6 @@ const BLOCK = require('./GENERAL/BLOCK');
 const BROADCAST = require('./GENERAL/BROADCAST');
 const DIE = require('./GENERAL/DIE');
 const PROFIT = require('./GENERAL/PROFIT');
-const RAFFLE = require('./GENERAL/RAFFLE');
 const RELOAD = require('./GENERAL/RELOAD');
 const REQUESTER = require('./GENERAL/REQUESTER');
 const RESTART = require('./GENERAL/RESTART');
@@ -67,9 +66,6 @@ function admin(sender, msg, client, users, community, allCards, manager) {
       break;
     case '!PROFIT':
       PROFIT(sender, client, users);
-      break;
-    case '!RAFFLE':
-      RAFFLE(sender, client, users);
       break;
     case '!RELOAD':
       RELOAD(sender, client, users, community, allCards);
