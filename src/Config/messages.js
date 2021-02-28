@@ -1551,9 +1551,9 @@ module.exports = {
           '  • {SETS4} conjunto(s) por {TFSELL} llave(s) TF2 \n' +
           '  • {SETS3} conjunto(s) por {GEMSSELL} Gema(s) \n\n' +
           ' - Ya vendimos: \n' +
-          '  • {SETS5} conjunto(s) por {CSGOBUY} CS:GO llave(s) \n' +
-          '  • {SETS6} conjunto(s) por {HYDRABUY} Hydra llave(s) \n' +
-          '  • {SETS7} conjunto(s) por {TFBUY} TF2 llave(s) \n' +
+          '  • {SETS5} conjunto(s) por {CSGOBUY} llave(s) CS:GO \n' +
+          '  • {SETS6} conjunto(s) por {HYDRABUY} llave(s) Hydra \n' +
+          '  • {SETS7} conjunto(s) por {TFBUY} llave(s) TF2 \n' +
           '  • {SETS8} conjunto(s) por {GEMSBUY} Gema(s) \n',
         CN:
           '\n' +
