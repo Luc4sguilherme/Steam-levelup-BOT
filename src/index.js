@@ -1,3 +1,5 @@
+require('./Components/ErrorHandle/configErrorHandle').validate();
+
 const TradeOfferManager = require('steam-tradeoffer-manager');
 const SteamCommunity = require('steamcommunity');
 const SteamUser = require('steam-user');
