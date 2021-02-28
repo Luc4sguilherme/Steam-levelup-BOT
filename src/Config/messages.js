@@ -812,7 +812,7 @@ module.exports = {
       '- Вы можете продать: \n' +
       ' • {CSGOBUY} набор(ы) карточка за 1 CS:GO ключ \n' +
       ' • {TFBUY} набор(ы) карточка за 1 TF ключ \n' +
-      ' • {HYDRABUY} набор(ы) карточка за 1 HYDRA ключ \n' +
+      ' • {HYDRABUY} набор(ы) карточка за 1 Гидра ключ \n' +
       ' • 1 набор карточка за {GEMSBUY} Самоцветы \n',
     ES:
       '/pre Actualmente, los precios son: \n\n' +
