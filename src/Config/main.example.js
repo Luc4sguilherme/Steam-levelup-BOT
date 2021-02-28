@@ -50,10 +50,10 @@ module.exports = {
 
   // Setup the currencies you want the bot to accept
   acceptedCurrency: {
-    CSGO: true,
-    HYDRA: true,
     TF2: true,
+    CSGO: true,
     GEMS: true,
+    HYDRA: true,
   },
 
   // Set to true if you want to handle suppliers (!SELL commands).

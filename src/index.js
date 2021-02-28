@@ -120,7 +120,18 @@ client.on('webSession', (_, cookies) => {
   );
 
   // Update stock
-  const load = ['GEMS', 'CSGO', 'TF2', 'SETS', 'HYDRA'];
+  const load = ['SETS'];
+
+  Object.keys(main.acceptedCurrency).forEach((currency) => {
+    if (main.acceptedCurrency[currency]) {
+      if (currency === 'HYDRA') {
+        load.push(currency);
+      } else {
+        load.unshift(currency);
+      }
+    }
+  });
+
   inventory.loadInventory(client, community, allCards, load, () => {
     inventory.play(client);
   });
