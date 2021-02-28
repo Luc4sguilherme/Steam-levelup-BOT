@@ -65,6 +65,10 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     return 'UNKNOW';
   }
 
+  if (input.includes(`!TUTORIAL`) && main.tutorial === '') {
+    return 'UNKNOW';
+  }
+
   for (const key in acceptedCurrency) {
     if (typeof acceptedCurrency[key] !== 'boolean') {
       throw new Error(

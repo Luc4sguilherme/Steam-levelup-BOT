@@ -428,6 +428,15 @@ utils.filterCommands = (msg, admin = false) => {
     }
 
     message = utils.removeCurrency(message, true);
+
+    if (main.tutorial === '') {
+      const regex = new RegExp(`!TUTORIAL`);
+      const items = message.filter((el) => regex.test(el));
+
+      if (items.length !== 0) {
+        message.remove(items);
+      }
+    }
   }
 
   if (filter.every((el) => el !== '')) {
