@@ -98,7 +98,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       COMMANDS(sender, client, users);
       break;
     case '!HELP':
-      HELP(sender, client, users, 'EN');
+      HELP(sender, client, users);
       break;
     case '!AJUDA':
       HELP(sender, client, users, 'PT');
