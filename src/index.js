@@ -367,7 +367,7 @@ client.on('friendRelationship', (SENDER, REL) => {
     });
 
     const language =
-      users[SENDER.getSteamID64()].language || getDefaultLanguage();
+      users[SENDER.getSteamID64()]?.language || getDefaultLanguage();
 
     let message = messages.WELCOME[language];
 
