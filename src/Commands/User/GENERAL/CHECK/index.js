@@ -102,7 +102,7 @@ module.exports = (sender, msg, client, users) => {
                 const tf = parseInt(hisMaxSets / rates.tf.sell, 10);
                 const gems = parseInt(hisMaxSets * rates.gems.sell, 10);
 
-                let message = '';
+                let message = ' ';
                 if (cs > 0) {
                   message += messages.CHECK.DEFAULT.CURRENCIES.CSGO[
                     users[sender.getSteamID64()].language

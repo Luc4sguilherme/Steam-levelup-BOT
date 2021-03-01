@@ -48,7 +48,7 @@ module.exports = (sender, client, users) => {
             const hydra = parseInt(hisMaxSets / rates.hydra.sell, 10);
             const tf = parseInt(hisMaxSets / rates.tf.sell, 10);
             const gems = parseInt(hisMaxSets * rates.gems.sell, 10);
-            let message = '';
+            let message = ' ';
             if (cs > 0) {
               message += messages.CHECKONE.CURRENCIES.CSGO[
                 users[sender.getSteamID64()].language

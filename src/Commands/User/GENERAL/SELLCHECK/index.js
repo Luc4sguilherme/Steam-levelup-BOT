@@ -57,7 +57,7 @@ module.exports = (sender, client, users, community, allCards) => {
             const hydra = parseInt(userNSets / rates.hydra.buy, 10);
             const tf = parseInt(userNSets / rates.tf.buy, 10);
             const gems = parseInt(userNSets * rates.gems.buy, 10);
-            let message = '';
+            let message = ' ';
             if (cs > 0) {
               message += messages.SELLCHECK.CURRENCIES.CSGO[
                 users[sender.getSteamID64()].language

@@ -944,54 +944,54 @@ module.exports = {
         0: {
           EN:
             '/pre There are currently {SETS} sets available which you have not fully crafted yet. Crafting all of them will get you to level {LEVEL} \n\n' +
-            ' - You can get the sets by paying one of the following currencies: \n {MESSAGE}',
+            ' - You can get the sets by paying one of the following currencies: \n{MESSAGE}',
           PT:
             '/pre Atualmente, existem {SETS} conjuntos disponíveis que você ainda não criou totalmente. A criação de todos eles levará você ao nível {LEVEL} \n\n' +
-            ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n {MESSAGE}',
+            ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n{MESSAGE}',
           RU:
             '/pre В настоящее время доступны наборы карточка {SETS}, которые вы еще не полностью создали. Изготовление всех из них приведет вас к уровню {LEVEL} \n\n' +
-            ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n {MESSAGE}',
+            ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n{MESSAGE}',
           ES:
             '/pre Actualmente hay {SETS} conjuntos disponibles que aún no ha creado completamente. Crearlos todos te llevará al nivel {LEVEL} \n\n' +
-            ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n {MESSAGE}',
+            ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n{MESSAGE}',
           CN:
             '/pre 当前有{SETS}套卡牌可用，您尚未完全制作。 精心制作所有这些，将使您达到{LEVEL}级 \n\n' +
-            ' - 您可以通过支付以下货币之一来获得套卡牌： \n {MESSAGE}',
+            ' - 您可以通过支付以下货币之一来获得套卡牌： \n{MESSAGE}',
           FR:
             "/pre Il y a actuellement {SETS} ensembles disponibles que vous n'avez pas encore entièrement fabriqués. Les fabriquer tous vous amènera au niveau {LEVEL} \n\n" +
-            " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n {MESSAGE}",
+            " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n{MESSAGE}",
           JA:
             '/pre 現在、まだ完全に作成されていない{SETS}カードセットが利用可能です。 それらすべてを作成すると、レベル{LEVEL}になります \n\n' +
-            ' - 次の通貨のいずれかを支払うことでカードセットを入手できます。 \n {MESSAGE}',
+            ' - 次の通貨のいずれかを支払うことでカードセットを入手できます。 \n{MESSAGE}',
           DE:
             '/pre Derzeit sind {SETS} Sets verfügbar, die Sie noch nicht vollständig hergestellt haben. Wenn Sie alle herstellen, erreichen Sie Level {LEVEL} \n\n' +
-            ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n {MESSAGE}',
+            ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n{MESSAGE}',
         },
         1: {
           EN:
             '/pre There are currently {SETS} sets available which you have not fully crafted yet. Crafting all of them you will remain at level {LEVEL} \n\n' +
-            ' - You can get the sets by paying one of the following currencies: \n {MESSAGE}',
+            ' - You can get the sets by paying one of the following currencies: \n{MESSAGE}',
           PT:
             '/pre Atualmente, existem {SETS} conjuntos disponíveis que você ainda não criou totalmente. Ao criar todos eles, você permanecerá no nível {LEVEL} \n\n' +
-            ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n {MESSAGE}',
+            ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n{MESSAGE}',
           RU:
             '/pre В настоящее время доступны наборы карточка {SETS}, которые вы еще не полностью создали. Создав их, вы останетесь на уровне {LEVEL} \n\n' +
-            ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n {MESSAGE}',
+            ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n{MESSAGE}',
           ES:
             '/pre Actualmente hay {SETS} conjuntos disponibles que aún no ha creado completamente. Creando todos ellos, permanecerás en el nivel {LEVEL} \n\n' +
-            ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n {MESSAGE}',
+            ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n{MESSAGE}',
           CN:
             '/pre 当前有{SETS}套卡牌可用，您尚未完全制作。 精制作所有这些套卡牌，您将保持在 {LEVEL} 级 \n\n' +
-            ' - 您可以通过支付以下货币之一来获得套卡牌： \n {MESSAGE}',
+            ' - 您可以通过支付以下货币之一来获得套卡牌： \n{MESSAGE}',
           FR:
             "/pre Il y a actuellement {SETS} ensembles disponibles que vous n'avez pas encore entièrement fabriqués. En les fabriquant tous, vous resterez au niveau {LEVEL} \n\n" +
-            " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n {MESSAGE}",
+            " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n{MESSAGE}",
           JA:
             '/pre 現在、まだ完全に作成されていない{SETS}カードセットが利用可能です。 それらすべてを作成すると、レベル{LEVEL}のままになります \n\n' +
-            ' - 次の通貨のいずれかを支払うことでカードセットを入手できます。 \n {MESSAGE}',
+            ' - 次の通貨のいずれかを支払うことでカードセットを入手できます。 \n{MESSAGE}',
           DE:
             '/pre Derzeit sind {SETS} Sets verfügbar, die Sie noch nicht vollständig hergestellt haben. Wenn du sie alle herstellst, bleibst du auf Stufe {LEVEL} \n\n' +
-            ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n {MESSAGE}',
+            ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n{MESSAGE}',
         },
       },
     },
@@ -1244,54 +1244,54 @@ module.exports = {
       0: {
         EN:
           "/pre I currently have {SETS} unique Sets which you haven't crafted. Crafting all of them will get you to level {LEVEL} \n\n" +
-          ' - You can get the sets by paying one of the following currencies: \n {MESSAGE}',
+          ' - You can get the sets by paying one of the following currencies: \n{MESSAGE}',
         PT:
           '/pre No momento, tenho {SETS} conjuntos unicos que você não criou. A criação de todos eles levará você ao nível {LEVEL} \n\n' +
-          ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n {MESSAGE}',
+          ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n{MESSAGE}',
         RU:
           '/pre В настоящее время у меня есть {SETS} уникальных наборов карточка, которые вы не создали. Изготовление всех из них приведет вас к уровню {LEVEL} \n\n' +
-          ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n {MESSAGE}',
+          ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n{MESSAGE}',
         ES:
           '/pre Actualmente tengo {SETS} conjuntos únicos que no has creado. Crearlos todos te llevará al nivel {LEVEL} \n\n' +
-          ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n {MESSAGE}',
+          ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n{MESSAGE}',
         CN:
           '/pre 我目前有 {SETS} 种您尚未制作的独特套卡牌。精心制作所有这些，将使您达到 {LEVEL} 级 \n\n' +
-          ' - 您可以通过支付以下货币之一来获得套卡牌： \n {MESSAGE}',
+          ' - 您可以通过支付以下货币之一来获得套卡牌： \n{MESSAGE}',
         FR:
           "/pre J'ai actuellement {SETS} ensembles uniques que vous n'avez pas créés. Les fabriquer tous vous amènera au niveau {LEVEL} \n\n" +
-          " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n {MESSAGE}",
+          " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n{MESSAGE}",
         JA:
           '/pre 私は現在、あなたが作成していない{SETS}のユニークなセットを持っています。 それらすべてを作成すると、レベル{LEVEL}になります \n\n' +
-          ' - 次の通貨のいずれかを支払うことでセットを入手できます。 \n {MESSAGE}',
+          ' - 次の通貨のいずれかを支払うことでセットを入手できます。 \n{MESSAGE}',
         DE:
           '/pre Ich habe derzeit {SETS} einzigartige Sets, die Sie nicht hergestellt haben. Wenn Sie alle herstellen, erreichen Sie Niveau {LEVEL} \n\n' +
-          ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n {MESSAGE}',
+          ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n{MESSAGE}',
       },
       1: {
         EN:
           "/pre I currently have unique {SETS} Sets which you haven't crafted. Crafting all of them you will remain at level {LEVEL} \n\n" +
-          ' - You can get the sets by paying one of the following currencies: \n {MESSAGE}',
+          ' - You can get the sets by paying one of the following currencies: \n{MESSAGE}',
         PT:
           '/pre No momento, tenho {SETS} conjuntos unicos que você não criou. Ao criar todos eles, você permanecerá no nível {LEVEL} \n\n' +
-          ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n {MESSAGE}',
+          ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n{MESSAGE}',
         RU:
           '/pre В настоящее время у меня есть {SETS} уникальных наборов карточка, которые вы не создали. Создав все их, вы останетесь на уровне {LEVEL} \n\n' +
-          ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n {MESSAGE}',
+          ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n{MESSAGE}',
         ES:
           '/pre Actualmente tengo {SETS} conjuntos únicos que no has creado. Creando todos ellos, permanecerás en el nivel {LEVEL} \n\n' +
-          ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n {MESSAGE}',
+          ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n{MESSAGE}',
         CN:
           '/pre 我目前有 {SETS} 种您尚未制作的独特套卡牌。精心制作所有这些，您将保持在 {LEVEL} 级 \n\n' +
-          ' - 您可以通过支付以下货币之一来获得套卡牌： \n {MESSAGE}',
+          ' - 您可以通过支付以下货币之一来获得套卡牌： \n{MESSAGE}',
         FR:
           "/pre J'ai actuellement {SETS} ensembles uniques que vous n'avez pas créés. En les fabriquant tous, vous resterez au niveau {LEVEL} \n\n" +
-          " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n {MESSAGE}",
+          " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n{MESSAGE}",
         JA:
           '/pre 私は現在、あなたが作成していないユニークな{SETS}セットを持っています。 それらすべてを作成すると、レベル{LEVEL}のままになります \n\n' +
-          ' - 次の通貨のいずれかを支払うことでセットを入手できます。 \n {MESSAGE}',
+          ' - 次の通貨のいずれかを支払うことでセットを入手できます。 \n{MESSAGE}',
         DE:
           '/pre Ich habe derzeit einzigartige {SETS} Sets, die du nicht hergestellt hast. Wenn du sie alle herstellst, bleibst du auf Stufe {LEVEL} \n\n' +
-          ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n {MESSAGE}',
+          ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n{MESSAGE}',
       },
     },
   },
@@ -1355,28 +1355,28 @@ module.exports = {
     RESPONSE: {
       EN:
         '/pre You currently have {SETS} sets i can request. \n\n' +
-        ' - I can get it by paying  one of the following currencies: \n {MESSAGE}',
+        ' - I can get it by paying  one of the following currencies: \n{MESSAGE}',
       PT:
         '/pre No momento, você tem {SETS} conjuntos que posso solicitar. \n\n' +
-        ' - Eu posso obtê-los pagando uma das seguintes moedas: \n {MESSAGE}',
+        ' - Eu posso obtê-los pagando uma das seguintes moedas: \n{MESSAGE}',
       RU:
         '/pre В настоящее время у вас есть {SETS} наборы карточка, которые я могу запросить. \n\n' +
-        ' - Я могу получить его, заплатив одну из следующих валют: \n {MESSAGE}',
+        ' - Я могу получить его, заплатив одну из следующих валют: \n{MESSAGE}',
       ES:
         '/pre Actualmente tiene {SETS} conjuntos que puedo solicitar. \n\n' +
-        ' - Puedo obtenerlo pagando una de las siguientes monedas: \n {MESSAGE}',
+        ' - Puedo obtenerlo pagando una de las siguientes monedas: \n{MESSAGE}',
       CN:
         '/pre 您目前有 {SETS} 套卡牌我可以要求。 \n\n' +
-        ' - 我可以通过以下货币之一来获得：\n {MESSAGE}',
+        ' - 我可以通过以下货币之一来获得：\n{MESSAGE}',
       FR:
         '/pre Vous avez actuellement {SETS} ensembles que je peux demander. \n\n' +
-        " - Je peux l'obtenir en payant l'une des devises suivantes: \n {MESSAGE}",
+        " - Je peux l'obtenir en payant l'une des devises suivantes: \n{MESSAGE}",
       JA:
         '/pre あなたは現在私が要求できる{SETS}セットを持っています。 \n\n' +
-        ' - 次のいずれかの通貨を支払うことで取得できます。 \n {MESSAGE}',
+        ' - 次のいずれかの通貨を支払うことで取得できます。 \n{MESSAGE}',
       DE:
         '/pre Sie haben derzeit {SETS} Sets, die ich anfordern kann. \n\n' +
-        ' - Ich kann es bekommen, indem ich eine der folgenden Währungen bezahle: \n {MESSAGE}',
+        ' - Ich kann es bekommen, indem ich eine der folgenden Währungen bezahle: \n{MESSAGE}',
     },
   },
   RANK: {
