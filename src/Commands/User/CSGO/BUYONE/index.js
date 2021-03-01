@@ -201,7 +201,7 @@ module.exports = (sender, msg, client, users, manager) => {
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.CSGO[
           users[sender.getSteamID64()].language
-        ]
+        ].replace('{KEYS}', maxKeys)
       );
     }
   } else {

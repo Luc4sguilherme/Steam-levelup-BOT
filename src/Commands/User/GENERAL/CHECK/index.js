@@ -35,7 +35,7 @@ module.exports = (sender, msg, client, users) => {
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.CSGO[
           users[sender.getSteamID64()].language
-        ]
+        ].replace('{KEYS}', main.maxCheck.csgo)
       );
     }
   } else if (m === '!CHECK') {

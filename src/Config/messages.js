@@ -1651,7 +1651,7 @@ module.exports = {
   SETS4SETS: {
     AMOUNTOVER: {
       EN:
-        'Please try a lower amount of Sets. You can only Exchange up to {SETS} Sets at a time with this command!',
+        'Please try a lower amount of Sets. You can only exchange up to {SETS} Sets at a time with this command!',
       PT:
         'Tente uma quantidade menor de conjuntos. Você pode trocar até {SETS} conjuntos por vez com este comando!',
       RU:
@@ -2348,68 +2348,105 @@ module.exports = {
       },
       AMOUNTOVER: {
         SETS: {
-          EN: 'Please try a lower amount of sets.',
-          PT: 'Por favor, tente uma quantidade menor de conjuntos.',
-          RU: 'Пожалуйста, попробуйте меньшее количество наборы карточка.',
-          ES: 'Por favor, intente una menor cantidad de conjuntos.',
-          CN: '请尝试减少套卡牌牌。',
-          FR: "Veuillez essayer un nombre inférieur d'ensembles.",
-          JA: '少量のセットをお試しください。',
-          DE: 'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets.',
+          EN:
+            'Please try a lower amount of sets. The maximum amount for this command is {SETS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de conjuntos. A quantidade maxima para esse comando é {SETS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество наборы карточка. Максимальное количество для этой команды {SETS}.',
+          ES:
+            'Por favor, intente una menor cantidad de conjuntos. La cantidad máxima para este comando es {SETS}.',
+          CN: '请尝试减少套卡牌牌。此命令的最大数量为{SETS}。',
+          FR:
+            "Veuillez essayer un nombre inférieur d'ensembles. Le montant maximum pour cette commande est de {SETS}.",
+          JA:
+            '少量のセットをお試しください。このコマンドの最大量は{SETS}です。',
+          DE:
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Der maximale Betrag für diesen Befehl beträgt {SETS}.',
         },
         CSGO: {
-          EN: 'Please try a lower amount of keys.',
-          PT: 'Por favor, tente uma quantidade menor de chaves.',
-          RU: 'Пожалуйста, попробуйте меньшее количество ключи.',
-          ES: 'Por favor, intente una menor cantidad de llaves.',
-          CN: '请尝试减少钥匙数。',
-          FR: 'Veuillez essayer un nombre inférieur de clés.',
-          JA: 'キーの数を減らしてみてください。',
+          EN:
+            'Please try a lower amount of keys. The maximum amount for this command is {KEYS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de chaves. A quantidade maxima para esse comando é {KEYS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество ключи. Максимальное количество для этой команды {KEYS}.',
+          ES:
+            'Por favor, intente una menor cantidad de llaves. La cantidad máxima para este comando es {KEYS}.',
+          CN: '请尝试减少钥匙数。此命令的最大数量为{KEYS}。',
+          FR:
+            'Veuillez essayer un nombre inférieur de clés. Le montant maximum pour cette commande est de {KEYS}.',
+          JA:
+            'キーの数を減らしてみてください。このコマンドの最大量は{KEYS}です。',
           DE:
-            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln.',
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln. Der maximale Betrag für diesen Befehl beträgt {KEYS}.',
         },
         HYDRA: {
-          EN: 'Please try a lower amount of keys.',
-          PT: 'Por favor, tente uma quantidade menor de chaves.',
-          RU: 'Пожалуйста, попробуйте меньшее количество ключи.',
-          ES: 'Por favor, intente una menor cantidad de llaves.',
-          CN: '请尝试减少钥匙数。',
-          FR: 'Veuillez essayer un nombre inférieur de clés.',
-          JA: 'キーの数を減らしてみてください。',
+          EN:
+            'Please try a lower amount of keys. The maximum amount for this command is {KEYS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de chaves. A quantidade maxima para esse comando é {KEYS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество ключи. Максимальное количество для этой команды {KEYS}.',
+          ES:
+            'Por favor, intente una menor cantidad de llaves. La cantidad máxima para este comando es {KEYS}.',
+          CN: '请尝试减少钥匙数。此命令的最大数量为{KEYS}。',
+          FR:
+            'Veuillez essayer un nombre inférieur de clés. Le montant maximum pour cette commande est de {KEYS}.',
+          JA:
+            'キーの数を減らしてみてください。このコマンドの最大量は{KEYS}です。',
           DE:
-            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln.',
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln. Der maximale Betrag für diesen Befehl beträgt {KEYS}.',
         },
         TF: {
-          EN: 'Please try a lower amount of keys.',
-          PT: 'Por favor, tente uma quantidade menor de chaves.',
-          RU: 'Пожалуйста, попробуйте меньшее количество ключи.',
-          ES: 'Por favor, intente una menor cantidad de llaves.',
-          CN: '请尝试减少钥匙数。',
-          FR: 'Veuillez essayer un nombre inférieur de clés.',
-          JA: 'キーの数を減らしてみてください。',
+          EN:
+            'Please try a lower amount of keys. The maximum amount for this command is {KEYS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de chaves. A quantidade maxima para esse comando é {KEYS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество ключи. Максимальное количество для этой команды {KEYS}.',
+          ES:
+            'Por favor, intente una menor cantidad de llaves. La cantidad máxima para este comando es {KEYS}.',
+          CN: '请尝试减少钥匙数。此命令的最大数量为{KEYS}。',
+          FR:
+            'Veuillez essayer un nombre inférieur de clés. Le montant maximum pour cette commande est de {KEYS}.',
+          JA:
+            'キーの数を減らしてみてください。このコマンドの最大量は{KEYS}です。',
           DE:
-            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln.',
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln. Der maximale Betrag für diesen Befehl beträgt {KEYS}.',
         },
         GEMS: {
-          EN: 'Please try a lower amount of gems.',
-          PT: 'Por favor, tente uma quantidade menor de gemas.',
-          RU: 'Пожалуйста, попробуйте меньшее количество самоцветы.',
-          ES: 'Por favor, intente una menor cantidad de gemas.',
-          CN: '请尝试减少宝石数。',
-          FR: 'Veuillez essayer une quantité inférieure de gemmes.',
-          JA: '宝石の量を減らしてみてください。',
+          EN:
+            'Please try a lower amount of gems. The maximum amount for this command is {GEMS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de gemas. A quantidade maxima para esse comando é {GEMS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество самоцветы. Максимальное количество для этой команды {GEMS}.',
+          ES:
+            'Por favor, intente una menor cantidad de gemas. La cantidad máxima para este comando es {GEMS}.',
+          CN: '请尝试减少宝石数。此命令的最大数量为{GEMS}',
+          FR:
+            'Veuillez essayer une quantité inférieure de gemmes. Le montant maximum pour cette commande est de {GEMS}.',
+          JA:
+            '宝石の量を減らしてみてください。このコマンドの最大量は{GEMS}です。',
           DE:
-            'Bitte versuchen Sie es mit einer geringeren Anzahl von Edelsteinen.',
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Edelsteinen. Der maximale Betrag für diesen Befehl beträgt {GEMS}.',
         },
         LEVEL: {
-          EN: 'Please try a lower level.',
-          PT: 'Por favor, tente um nível mais baixo.',
-          RU: 'Пожалуйста, попробуйте более низкий уровень.',
-          ES: 'Por favor, intente un nivel inferior.',
-          CN: '请尝试较低的级别。',
-          FR: 'Veuillez essayer un niveau inférieur.',
-          JA: '低いレベルを試してください。',
-          DE: 'Bitte versuchen Sie es mit einer niedrigeren Ebene.',
+          EN:
+            'Please try a lower level. The maximum amount for this command is {LEVEL}.',
+          PT:
+            'Por favor, tente um nível mais baixo. A quantidade maxima para esse comando é {LEVEL}.',
+          RU:
+            'Пожалуйста, попробуйте более низкий уровень. Максимальное количество для этой команды {LEVEL}.',
+          ES:
+            'Por favor, intente un nivel inferior. La cantidad máxima para este comando es {LEVEL}.',
+          CN: '请尝试较低的级别。此命令的最大数量为{LEVEL}',
+          FR:
+            'Veuillez essayer un niveau inférieur. Le montant maximum pour cette commande est de {LEVEL}.',
+          JA: '低いレベルを試してください。このコマンドの最大量は{LEVEL}です。',
+          DE:
+            'Bitte versuchen Sie es mit einer niedrigeren Ebene. Der maximale Betrag für diesen Befehl beträgt {LEVEL}.',
         },
       },
     },

@@ -35,7 +35,7 @@ module.exports = (sender, msg, client, users) => {
                         sender,
                         messages.ERROR.INPUT.AMOUNTOVER.GEMS[
                           users[sender.getSteamID64()].language
-                        ]
+                        ].replace('{GEMS}', main.maxCheck.gems)
                       );
                       can += 1;
                       break;
@@ -110,7 +110,7 @@ module.exports = (sender, msg, client, users) => {
           sender,
           messages.ERROR.INPUT.AMOUNTOVER.GEMS[
             users[sender.getSteamID64()].language
-          ]
+          ].replace('{GEMS}', main.maxCheck.gems)
         );
       }
     } else {

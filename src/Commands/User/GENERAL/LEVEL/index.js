@@ -120,7 +120,7 @@ module.exports = (sender, msg, client, users) => {
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.LEVEL[
           users[sender.getSteamID64()].language
-        ]
+        ].replace('{LEVEL}', main.maxLevel)
       );
     }
   } else {
