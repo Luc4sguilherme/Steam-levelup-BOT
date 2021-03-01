@@ -782,48 +782,48 @@ module.exports = {
       '/pre Currently, prices are: \n\n' +
       '- You can buy: \n' +
       ' • {CSGOSELL} sets for 1 CS:GO Key \n' +
-      ' • {TFSELL} sets for 1 TF Key \n' +
+      ' • {TFSELL} sets for 1 TF2 Key \n' +
       ' • {HYDRASELL} sets for 1 HYDRA Key \n' +
       ' • 1 set for {GEMSSELL} GEMS \n\n' +
       '- You can sell: \n' +
       ' • {CSGOBUY} sets for 1 CS:GO Key \n' +
-      ' • {TFBUY} sets for 1 TF Key \n' +
+      ' • {TFBUY} sets for 1 TF2 Key \n' +
       ' • {HYDRABUY} sets for 1 HYDRA Key \n' +
       ' • 1 set for {GEMSBUY} GEMS \n',
     PT:
       '/pre Atualmente, os preços são: \n\n' +
       '- Você pode comprar: \n' +
       ' • {CSGOSELL} conjuntos por 1 chave CS:GO \n' +
-      ' • {TFSELL} conjuntos por 1 chave TF \n' +
+      ' • {TFSELL} conjuntos por 1 chave TF2 \n' +
       ' • {HYDRASELL} conjuntos por 1 chave HYDRA \n' +
       ' • 1 conjunto por {GEMSSELL} GEMAS \n\n' +
       '- Você pode vender: \n' +
       ' • {CSGOBUY} conjuntos por 1 chave CS:GO \n' +
-      ' • {TFBUY} conjuntos por 1 chave TF \n' +
+      ' • {TFBUY} conjuntos por 1 chave TF2 \n' +
       ' • {HYDRABUY} conjuntos por 1 chave HYDRA \n' +
       ' • 1 conjunto por {GEMSBUY} GEMAS \n',
     RU:
       '/pre Цены на данный момент: \n\n' +
       '- Вы можете купить: \n' +
       ' • {CSGOSELL} набор(ы) карточка за 1 CS:GO ключ \n' +
-      ' • {TFSELL} набор(ы) карточка за 1 TF ключ \n' +
+      ' • {TFSELL} набор(ы) карточка за 1 TF2 ключ \n' +
       ' • {HYDRASELL} набор(ы) карточка за 1 Гидра ключ \n' +
       ' • 1 набор карточка за {GEMSSELL} Самоцветы \n\n' +
       '- Вы можете продать: \n' +
       ' • {CSGOBUY} набор(ы) карточка за 1 CS:GO ключ \n' +
-      ' • {TFBUY} набор(ы) карточка за 1 TF ключ \n' +
+      ' • {TFBUY} набор(ы) карточка за 1 TF2 ключ \n' +
       ' • {HYDRABUY} набор(ы) карточка за 1 Гидра ключ \n' +
       ' • 1 набор карточка за {GEMSBUY} Самоцветы \n',
     ES:
       '/pre Actualmente, los precios son: \n\n' +
       '- Tú puedes comprar: \n' +
       ' • {CSGOSELL} conjuntos por 1 llave CS:GO \n' +
-      ' • {TFSELL} conjuntos por 1 llave TF \n' +
+      ' • {TFSELL} conjuntos por 1 llave TF2 \n' +
       ' • {HYDRASELL} conjuntos por 1 llave HYDRA \n' +
       ' • 1 conjunto por {GEMSSELL} Gemas \n\n' +
       '- Tú puedes vender: \n' +
       ' • {CSGOBUY} conjuntos por 1 llave CS:GO \n' +
-      ' • {TFBUY} conjuntos por 1 llave TF \n' +
+      ' • {TFBUY} conjuntos por 1 llave TF2 \n' +
       ' • {HYDRABUY} conjuntos por 1 llave HYDRA \n' +
       ' • 1 conjunto por {GEMSBUY} Gemas \n',
     CN:
@@ -847,7 +847,7 @@ module.exports = {
       ' • 1 ensemble de cartes pour {GEMSSELL} gemmes \n\n' +
       '- Vous pouvez vendre: \n' +
       ' • {CSGOBUY} ensembles de cartes pour 1 clé CS:GO \n' +
-      ' • {TFBUY} ensembles de cartes pour 1 clé TF \n' +
+      ' • {TFBUY} ensembles de cartes pour 1 clé TF2 \n' +
       ' • {HYDRABUY} ensembles de cartes pour 1 clé HYDRA \n' +
       ' • 1 ensemble de cartes pour {GEMSBUY} gemmes \n',
     JA:
@@ -3130,29 +3130,29 @@ module.exports = {
       'CSGO Section. \n',
       '► !CHECKCSGO (amount_of_keys) = Shows how many sets and what level you would reach for a specific amount of keys. \n',
       '► !BUYCSGO (amount_of_keys) = Buy uncrafted Cardsets for a specific amount of CS:GO Keys. \n',
-      '► !BUYANYCSGO (amount_of_keys) = Buy any Cardsets for a specific amount of CS:GO Keys. \n',
+      '► !BUYANYCSGO (amount_of_keys) = Buy any Cardsets for a specific amount of CS:GO Keys. The bot will ignore your current badges. \n',
       '► !BUYONECSGO (amount_of_keys) = Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  \n\n',
       'Hydra Section. \n',
       '► !CHECKHYDRA (amount_of_keys) = Shows how many sets and what level you would reach for a specific amount of HYDRA keys. \n',
       '► !BUYHYDRA (amount_of_keys) = Buy uncrafted Cardsets for a specific amount of HYDRA Keys. \n',
-      '► !BUYANYHYDRA (amount_of_keys) = Buy any Cardsets for a specific amount of HYDRA Keys. \n',
+      '► !BUYANYHYDRA (amount_of_keys) = Buy any Cardsets for a specific amount of HYDRA Keys. The bot will ignore your current badges. \n',
       '► !BUYONEHYDRA (amount_of_keys) = Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  \n\n',
       'TF2 Section. \n',
-      '► !CHECKTF (amount_of_keys) = Shows how many sets and what level you would reach for a specific amount of tf2 keys. \n',
+      '► !CHECKTF (amount_of_keys) = Shows how many sets and what level you would reach for a specific amount of TF2 keys. \n',
       '► !BUYTF (amount_of_keys) = Buy uncrafted Cardsets for a specific amount of TF2 Keys. \n',
-      '► !BUYANYTF (amount_of_keys) = Buy any Cardsets for a specific amount of TF2 Keys. \n',
+      '► !BUYANYTF (amount_of_keys) = Buy any Cardsets for a specific amount of TF2 Keys. The bot will ignore your current badges. \n',
       '► !BUYONETF (amount_of_keys) = Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  \n\n',
       'GEMS Section. \n',
-      '► !CHECKGEMS (amount_of_gems) = Shows how many sets and what level you would reach for a specific amount of gems. \n',
-      '► !BUYGEMS (amount_of_sets) = Buy a specific amount of uncrafted Cardsets for GEMS. \n',
-      '► !BUYANYGEMS (amount_of_sets) = Buy a specific amount of amount of Cardsets per gems. \n',
+      '► !CHECKGEMS (amount_of_gems) = Shows how many sets and what level you would reach for a specific amount of Gems. \n',
+      '► !BUYGEMS (amount_of_sets) = Buy a specific amount of uncrafted Cardsets for Gems. \n',
+      '► !BUYANYGEMS (amount_of_sets) = Buy any Cardsets for a specific amount of Gems. The bot will ignore your current badges. \n',
       '► !BUYONEGEMS (amount_of_sets) = Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate. \n\n',
       'Suppliers Section. \n',
       '► !SELLCHECK = Checks for Sets the Bot can buy from you. \n',
       '► !SELLCSGO (amount_of_keys) = Sell Cardsets and get a specific amount of CS:GO Keys. \n',
       '► !SELLTF (amount_of_keys) = Sell Cardsets and get a specific amount of TF2 Keys. \n',
       '► !SELLHYDRA (amount_of_keys) = Sell Cardsets and get a specific amount of HYDRA Keys. \n',
-      '► !SELLGEMS (amount_of_sets) = Sell a specific amount of Cardsets and get GEMS. \n',
+      '► !SELLGEMS (amount_of_sets) = Sell a specific amount of Cardsets and get Gems. \n',
     ],
     PT: [
       'Comandos: \n',
@@ -3172,29 +3172,29 @@ module.exports = {
       'Seção de CSGO. \n',
       '► !CHECKCSGO (quantidade_de_chaves) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de chaves. \n',
       '► !BUYCSGO (quantidade_de_chaves) = Compra conjuntos de cartas não fabricados por uma quantidade específica de chaves de CS:GO. \n',
-      '► !BUYANYCSGO (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves de CS:GO. \n',
+      '► !BUYANYCSGO (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves de CS:GO. O bot irá ignorar seus emblemas atuais. \n',
       '► !BUYONECSGO (quantidade_de_chaves) = Use isso se você for um colecionador de insígnias. O BOT enviará apenas um conjunto de cada jogo, seguindo a taxa atual do BOT.  \n\n',
       'Seção de Hydra. \n',
       '► !CHECKHYDRA (quantidade_de_chaves) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de chaves. \n',
       '► !BUYHYDRA (quantidade_de_chaves) = Compra conjuntos de cartas não fabricados por uma quantidade específica de chaves HYDRA. \n',
-      '► !BUYANYHYDRA (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves HYDRA. \n',
+      '► !BUYANYHYDRA (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves HYDRA. O bot irá ignorar seus emblemas atuais. \n',
       '► !BUYONEHYDRA (quantidade_de_chaves) = Use isso se você for um colecionador de insígnias. O BOT enviará apenas um conjunto de cada jogo, seguindo a taxa atual do BOT.  \n\n',
       'Seção de TF2. \n',
       '► !CHECKTF (quantidade_de_chaves) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de chaves. \n',
       '► !BUYTF (quantidade_de_chaves) = Compra conjuntos de cartas não fabricados por uma quantidade específica de chaves de TF2. \n',
-      '► !BUYANYTF (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves de TF2. \n',
+      '► !BUYANYTF (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves de TF2. O bot irá ignorar seus emblemas atuais. \n',
       '► !BUYONETF (quantidade_de_chaves) = Use isso se você for um colecionador de insígnias. O BOT enviará apenas um conjunto de cada jogo, seguindo a taxa atual do BOT.  \n\n',
       'Seção de GEMS. \n',
-      '► !CHECKGEMS (quantidade_de_gemas) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de gemas. \n',
-      '► !BUYGEMS (quantidade_de_conjuntos) = Compra uma quantidade específica de conjuntos de cartas não fabricados por gemas. \n',
-      '► !BUYANYGEMS (quantidade_de_conjuntos) = Compra uma quantidade uma quantidade específica de conjunto de cartas por gemas. \n',
+      '► !CHECKGEMS (quantidade_de_gemas) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de Gemas. \n',
+      '► !BUYGEMS (quantidade_de_conjuntos) = Compra uma quantidade específica de conjuntos de cartas não fabricados por Gemas. \n',
+      '► !BUYANYGEMS (quantidade_de_conjuntos) = Compra uma quantidade uma quantidade específica de conjunto de cartas por Gemas. O bot irá ignorar seus emblemas atuais. \n',
       '► !BUYONEGEMS (quantidade_de_conjuntos) = Use isso se você for um colecionador de insígnias. O BOT enviará apenas um conjunto de cada jogo, seguindo a taxa atual do BOT. \n\n',
       'Seção Fornecedores. \n',
       '► !SELLCHECK = Verifica quantos conjuntos o Bot pode comprar de você. \n',
       '► !SELLCSGO (quantidade_de_chaves) = Venda conjuntos de cartas e receba uma quantidade específica de chaves de CS:GO. \n',
       '► !SELLTF (quantidade_de_chaves) = Venda conjuntos de cartas e receba uma quantidade específica de chaves de TF2. \n',
       '► !SELLHYDRA (quantidade_de_chaves) = Venda conjuntos de cartas e receba uma quantidade específica de chaves HYDRA. \n',
-      '► !SELLGEMS (quantidade_de_conjuntos) = Venda uma quantidade específica de conjuntos de cartas e receba gemas. \n',
+      '► !SELLGEMS (quantidade_de_conjuntos) = Venda uma quantidade específica de conjuntos de cartas e receba Gemas. \n',
     ],
     RU: [
       'команды: \n',
@@ -3214,22 +3214,22 @@ module.exports = {
       'Раздел CSGO. \n',
       '► !CHECKCSGO (количество ключей) = Показывает, сколько наборы и какой уровень вы бы достигли для определенного количества ключей. \n',
       '► !BUYCSGO (количество ключей) = Используйте эту команду чтобы купить сеты за CS:GO ключи. \n',
-      '► !BUYANYCSGO (количество ключей) = Используйте эту команду чтобы купить купить сеты за CS:GO ключи, без учета ваших текущих значки. \n',
+      '► !BUYANYCSGO (количество ключей) = Используйте эту команду чтобы купить купить сеты за CS:GO ключи, без учета ваших текущих значки. бот проигнорирует ваши текущие значки. \n',
       '► !BUYONECSGO (количество ключей) = Используйте эту команду если вы коллекционер значки. Бот отправит вам по 1 сету каждой игры значка которой у вас нет по текущим ценам. \n\n',
       'Раздел Гидра. \n',
       '► !CHECKHYDRA (количество ключей) = Показывает, сколько наборы и какой уровень вы бы достигли для определенного количества ключей. \n',
       '► !BUYHYDRA (количество ключей) = Используйте эту команду чтобы купить сеты за Гидра ключи. \n',
-      '► !BUYANYHYDRA (количество ключей) = Используйте эту команду чтобы купить купить сеты за Гидра ключи, без учета ваших текущих значки. \n',
+      '► !BUYANYHYDRA (количество ключей) = Используйте эту команду чтобы купить купить сеты за Гидра ключи, без учета ваших текущих значки. бот проигнорирует ваши текущие значки. \n',
       '► !BUYONEHYDRA (количество ключей) = Используйте эту команду если вы коллекционер значки. Бот отправит вам по 1 сету каждой игры значка которой у вас нет по текущим ценам. \n\n',
       'Раздел TF2. \n',
       '► !CHECKTF (количество ключей) = Показывает, сколько наборы и какой уровень вы бы достигли для определенного количества ключей. \n',
       '► !BUYTF (количество ключей) = Используйте эту команду чтобы купить сеты за TF2 ключи. \n',
-      '► !BUYANYTF (количество ключей) = Используйте эту команду чтобы купить купить сеты за TF2 ключи, без учета ваших текущих значки. \n',
+      '► !BUYANYTF (количество ключей) = Используйте эту команду чтобы купить купить сеты за TF2 ключи, без учета ваших текущих значки. бот проигнорирует ваши текущие значки. \n',
       '► !BUYONETF (количество ключей) = Используйте эту команду если вы коллекционер значки. Бот отправит вам по 1 сету каждой игры значка которой у вас нет по текущим ценам. \n\n',
       'Раздел Самоцветы. \n',
       '► !CHECKGEMS (количество самоцветами) = Показывает, сколько наборы и какой уровень вы бы достигли для определенного количества самоцветами. \n',
       '► !BUYGEMS (количество наборы) = Используйте эту команду чтобы купить сеты за самоцветами. \n',
-      '► !BUYANYGEMS (количество наборы) = Используйте эту команду чтобы купить купить сеты за самоцветами, без учета ваших текущих значки. \n',
+      '► !BUYANYGEMS (количество наборы) = Используйте эту команду чтобы купить купить сеты за самоцветами, без учета ваших текущих значки. бот проигнорирует ваши текущие значки. \n',
       '► !BUYONEGEMS (количество наборы) = Используйте эту команду если вы коллекционер значки. Бот отправит вам по 1 сету каждой игры значка которой у вас нет по текущим ценам. \n\n',
       'Раздел поставщиков. \n',
       '► !SELLCHECK = Подсчитывает сколько наборы вы можете продать. \n',
@@ -3256,22 +3256,22 @@ module.exports = {
       'Sección CSGO. \n',
       '► !CHECKCSGO (número_de_llaves) = Muestra cuántos conjuntos y qué nivel alcanzarías para  una cantidad específica de llaves. \n',
       '► !BUYCSGO (número_de_llaves) = Compre conjuntos de cromos no fabricados por una cantidad específica de llaves CS:GO. \n',
-      '► !BUYANYCSGO (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves CS:GO. \n',
+      '► !BUYANYCSGO (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves CS:GO. El bot ignorará tus insignias actuales. \n',
       '► !BUYONECSGO (número_de_llaves) = Use esto si es un coleccionista de insignias. BOT enviará solo un conjuntos de cada juego, siguiendo la tasa actual de BOT.  \n\n',
       'Sección Hydra. \n',
       '► !CHECKHYDRA (número_de_llaves) = Muestra cuántos conjuntos y qué nivel alcanzarías para  una cantidad específica de llaves. \n',
       '► !BUYHYDRA (número_de_llaves) = Compre conjuntos de cromos no fabricados por una cantidad específica de llaves HYDRA. \n',
-      '► !BUYANYHYDRA (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves HYDRA. \n',
+      '► !BUYANYHYDRA (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves HYDRA. El bot ignorará tus insignias actuales. \n',
       '► !BUYONEHYDRA (número_de_llaves) = Use esto si es un coleccionista de insignias. BOT enviará solo un conjuntos de cada juego, siguiendo la tasa actual de BOT.  \n\n',
       'Sección TF2. \n',
       '► !CHECKTF (número_de_llaves) = Muestra cuántos conjuntos y qué nivel alcanzarías para  una cantidad específica de llaves. \n',
       '► !BUYTF (número_de_llaves) = Compre conjuntos de cromos no fabricados por una cantidad específica de llaves TF2. \n',
-      '► !BUYANYTF (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves TF2. \n',
+      '► !BUYANYTF (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves TF2. El bot ignorará tus insignias actuales. \n',
       '► !BUYONETF (número_de_llaves) = Use esto si es un coleccionista de insignias. BOT enviará solo un conjuntos de cada juego, siguiendo la tasa actual de BOT.  \n\n',
       'Sección GEMS. \n',
       '► !CHECKGEMS (número_de_gemas) = Muestra cuántos conjuntos y qué nivel alcanzarías para una cantidad específica de gemas. \n',
       '► !BUYGEMS (número_de_conjuntos) = Compre una cantidad específica de conjuntos de cromos no fabricados por gems. \n',
-      '► !BUYANYGEMS (número_de_conjuntos) = Compre una cantidad específica de cualquier conjuntos de cromos por gems. \n',
+      '► !BUYANYGEMS (número_de_conjuntos) = Compre una cantidad específica de cualquier conjuntos de cromos por gems. El bot ignorará tus insignias actuales. \n',
       '► !BUYONEGEMS (número_de_conjuntos) = Use esto si es un coleccionista de insignias. BOT enviará solo un conjuntos de cada juego, siguiendo la tasa actual de BOT. \n\n',
       'Sección Proveedores. \n',
       '► !SELLCHECK = Cheques de conjuntos que el Bot puede comprarle. \n',
@@ -3298,22 +3298,22 @@ module.exports = {
       '《反恐精英：全球攻势》科。 \n',
       '► !CHECKCSGO (钥匙数) = 显示您可以用特定数量的钥匙购买多少套卡牌。 \n',
       '► !BUYCSGO (钥匙数) = 购买未制造套卡牌带有《反恐精英：全球攻势》钥匙。 \n',
-      '► !BUYANYCSGO (钥匙数) = 购买任何卡套卡牌带有《反恐精英：全球攻势》钥匙。 \n',
+      '► !BUYANYCSGO (钥匙数) = 购买任何卡套卡牌带有《反恐精英：全球攻势》钥匙。该机器人将忽略您当前的徽章。 \n',
       '► !BUYONECSGO (钥匙数) = 如果您是套卡牌收集者，请使用它。该机器人每个游戏只会发送一套卡牌。\n\n',
       '九头蛇科。 \n',
       '► !CHECKHYDRA (钥匙数) = 显示您可以用特定数量的钥匙购买多少套卡牌。 \n',
       '► !BUYHYDRA (钥匙数) = 购买未制造套卡牌带有九头蛇钥匙。 \n',
-      '► !BUYANYHYDRA (钥匙数) = 购买任何套卡牌带有九头蛇钥匙。 \n',
+      '► !BUYANYHYDRA (钥匙数) = 购买任何套卡牌带有九头蛇钥匙。该机器人将忽略您当前的徽章。 \n',
       '► !BUYONEHYDRA (钥匙数) = 如果您是套卡牌收集者，请使用它。该机器人每个游戏只会发送一套卡牌。\n\n',
       '团队要塞2科。 \n',
       '► !CHECKTF (钥匙数) = 显示您可以用特定数量的钥匙购买多少套卡牌。 \n',
       '► !BUYTF (钥匙数) = 购买未制造套卡牌带有团队要塞2钥匙。 \n',
-      '► !BUYANYTF (钥匙数) =购买任何套卡牌带有团队要塞2钥匙。 \n',
+      '► !BUYANYTF (钥匙数) =购买任何套卡牌带有团队要塞2钥匙。该机器人将忽略您当前的徽章。 \n',
       '► !BUYONETF (钥匙数) = 如果您是套卡牌收集者，请使用它。该机器人每个游戏只会发送一套卡牌。\n\n',
       '宝石科。 \n',
       '► !CHECKGEMS (宝石数) = 显示您可以用特定数量的宝石购买多少套卡牌。 \n',
       '► !BUYGEMS (套数) = 购买未制造套卡牌带有宝石。 \n',
-      '► !BUYANYGEMS (套数) = 购买任何套卡牌带有宝石。 \n',
+      '► !BUYANYGEMS (套数) = 购买任何套卡牌带有宝石。该机器人将忽略您当前的徽章。 \n',
       '► !BUYONEGEMS (套数) = 如果您是套卡牌收集者，请使用它。该机器人每个游戏只会发送一套卡牌。\n\n',
       '供应商部分。 \n',
       '► !SELLCHECK = 检查机器人可以从您那里购买的卡牌。 \n',
@@ -3340,22 +3340,22 @@ module.exports = {
       'Section CSGO. \n',
       "► !CHECKCSGO (quantité_de_clés) = Affiche le nombre d'ensembles et le niveau que vous atteindrez pour un nombre spécifique de clés. \n",
       '► !BUYCSGO (quantité_de_clés) = Acheter des ensembles de cartes non fabriqués pour une quantité spécifique de clés CS:GO. \n',
-      "► !BUYANYCSGO (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés CS:GO. \n",
+      "► !BUYANYCSGO (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés CS:GO. Le bot ignorera vos badges actuels. \n",
       "► !BUYONECSGO (quantité_de_clés) = Utilisez ceci si vous êtes un collectionneur de badges. Le BOT n'enverra qu'un seul jeu de chaque jeu, suivant le taux de BOT actuel.  \n\n",
       'Section Hydra. \n',
       "► !CHECKHYDRA (quantité_de_clés) = Affiche le nombre d'ensembles et le niveau que vous atteindriez pour une quantité spécifique de clés. \n",
       '► !BUYHYDRA (quantité_de_clés) = Acheter des ensembles de cartes non fabriqués pour une quantité spécifique de clés HYDRA. \n',
-      "► !BUYANYHYDRA (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés HYDRA. \n",
+      "► !BUYANYHYDRA (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés HYDRA. Le bot ignorera vos badges actuels. \n",
       "► !BUYONEHYDRA (quantité_de_clés) = Utilisez ceci si vous êtes un collectionneur de badges. Le BOT n'enverra qu'un seul jeu de chaque jeu, suivant le taux de BOT actuel.  \n\n",
       'Section TF2. \n',
       "► !CHECKTF (quantité_de_clés) = Affiche le nombre d'ensembles et le niveau que vous atteindriez pour une quantité spécifique de clés. \n",
       '► !BUYTF (quantité_de_clés) = Acheter des ensembles de cartes non fabriqués pour une quantité spécifique de clés TF2. \n',
-      "► !BUYANYTF (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés TF2. \n",
+      "► !BUYANYTF (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés TF2. Le bot ignorera vos badges actuels. \n",
       "► !BUYONETF (quantité_de_clés) = Utilisez ceci si vous êtes un collectionneur de badges. Le BOT n'enverra qu'un seul jeu de chaque jeu, suivant le taux de BOT actuel.  \n\n",
       'Section des gemmes. \n',
       "► !CHECKGEMS (quantité_de_gemmes) = Affiche le nombre d'ensembles et le niveau que vous atteindriez pour une quantité spécifique de gemmes. \n",
-      '► !BUYGEMS (quantité_de_ensembles) = Acheter une quantité spécifique de ensembles de cartes non fabriqués pour GEMS. \n',
-      '► !BUYANYGEMS (quantité_de_ensembles) = Acheter une quantité spécifique de ensembles de cartes par gemmes. \n',
+      '► !BUYGEMS (quantité_de_ensembles) = Acheter une quantité spécifique de ensembles de cartes non fabriqués pour gemmes. \n',
+      '► !BUYANYGEMS (quantité_de_ensembles) = Acheter une quantité spécifique de ensembles de cartes par gemmes. Le bot ignorera vos badges actuels. \n',
       "► !BUYONEGEMS (quantité_de_ensembles) = Utilisez ceci si vous êtes un collectionneur de badges. Le BOT n'enverra qu'un seul jeu de chaque jeu, suivant le taux de BOT actuel. \n\n",
       'Section des fournisseurs. \n',
       '► !SELLCHECK = Vérifie les ensembles que le bot peut acheter chez vous. \n',
@@ -3382,22 +3382,22 @@ module.exports = {
       'CS:GOセクション。 \n',
       '► !CHECKCSGO (キーの量) = これは、取得するセットの数と、特定の数のCSGOキーに対して到達するレベルを示しています。 \n',
       '► !BUYCSGO (キーの量) = CS:GOキーの特定の量のために細工されていないカードセットを購入します。 \n',
-      '► !BUYANYCSGO (キーの量) = 特定の量のCS:GOキーに対して任意のカードのセットを描画します。 \n',
+      '► !BUYANYCSGO (キーの量) = 特定の量のCS:GOキーに対して任意のカードのセットを描画します。ボットは現在のバッジを無視します。 \n',
       '► !BUYONECSGO (キーの量) = バッジコレクターの場合は、これを使用してください。 ボットは、現在のボットレートに従って、各ゲームの1セットのみを送信します。  \n\n',
       'Hydraセクション。 \n',
       '► !CHECKHYDRA (キーの量) = これは、取得するセットの数と、特定の数のHYDRAキーに対して到達するレベルを示しています。 \n',
       '► !BUYHYDRA (キーの量) = HYDRAキーの特定の量のために細工されていないカードセットを購入します。 \n',
-      '► !BUYANYHYDRA (キーの量) = 特定の量のHYDRAキーに対して任意のカードのセットを描画します。 \n',
+      '► !BUYANYHYDRA (キーの量) = 特定の量のHYDRAキーに対して任意のカードのセットを描画します。ボットは現在のバッジを無視します。 \n',
       '► !BUYONEHYDRA (キーの量) = バッジコレクターの場合は、これを使用してください。 ボットは、現在のボットレートに従って、各ゲームの1セットのみを送信します。  \n\n',
       'TF2セクション。 \n',
       '► !CHECKTF (キーの量) = これは、取得するセットの数と、特定の数のTF2キーに対して到達するレベルを示しています。 \n',
       '► !BUYTF (キーの量) = TF2キーの特定の量のために細工されていないカードセットを購入します。 \n',
-      '► !BUYANYTF (キーの量) = 特定の量のTF2キーに対して任意のカードのセットを描画します。 \n',
+      '► !BUYANYTF (キーの量) = 特定の量のTF2キーに対して任意のカードのセットを描画します。ボットは現在のバッジを無視します。 \n',
       '► !BUYONETF (キーの量) = バッジコレクターの場合は、これを使用してください。 ボットは、現在のボットレートに従って、各ゲームの1セットのみを送信します。  \n\n',
       'ジェムセクション。 \n',
       '► !CHECKGEMS (ジェムの量) = 取得するセットの数と、特定の量のジェムに対して到達するレベルを示します。 \n',
       '► !BUYGEMS (カードセットの量) = ジェム用の未加工のカードセットを特定量購入します。 \n',
-      '► !BUYANYGEMS (カードセットの量) = ジェムごとに特定の量のカードセットを購入します。 \n',
+      '► !BUYANYGEMS (カードセットの量) = ジェムごとに特定の量のカードセットを購入します。ボットは現在のバッジを無視します。 \n',
       '► !BUYONEGEMS (カードセットの量) = バッジコレクターの場合は、これを使用してください。 ボットは、現在のボットレートに従って、各ゲームの1セットのみを送信します。 \n\n',
       'サプライヤーセクション。 \n',
       '► !SELLCHECK = ボットがあなたから購入できるカードセットをチェックします。 \n',
@@ -3424,22 +3424,22 @@ module.exports = {
       'CSGO-Sektion. \n',
       '► !CHECKCSGO (anzahl_der_schlüssel) = Zeigt an, wie viele setz und welche Niveau Sie für eine bestimmte Anzahl von Schlüsseln erreichen würden. \n',
       '► !BUYCSGO (anzahl_der_schlüssel) = Kaufen Sie nicht gefertigte Kartensätze für eine bestimmte Anzahl von CS:GO-Schlüssel. \n',
-      '► !BUYANYCSGO (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von CS:GO-Schlüssel. \n',
+      '► !BUYANYCSGO (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von CS:GO-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONECSGO (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',
       'Hydra-Sektion. \n',
       '► !CHECKHYDRA (anzahl_der_schlüssel) = Shows how many sets and what level you would reach for a specific amount of HYDRA keys. \n',
       '► !BUYHYDRA (anzahl_der_schlüssel) = Kaufen Sie nicht gefertigte Kartensätze für eine bestimmte Anzahl von HYDRA-Schlüssel. \n',
-      '► !BUYANYHYDRA (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von HYDRA-Schlüssel. \n',
+      '► !BUYANYHYDRA (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von HYDRA-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONEHYDRA (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',
       'TF2-Sektion. \n',
       '► !CHECKTF (anzahl_der_schlüssel) = Shows how many sets and what level you would reach for a specific amount of TF2 keys. \n',
       '► !BUYTF (anzahl_der_schlüssel) = Kaufen Sie nicht gefertigte Kartensätze für eine bestimmte Anzahl von TF2-Schlüssel. \n',
-      '► !BUYANYTF (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von TF2-Schlüssel. \n',
+      '► !BUYANYTF (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von TF2-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONETF (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',
       'Edelsteine-Sektion. \n',
       '► !CHECKGEMS (anzahl_der_edelsteine) = Zeigt an, wie viele Sätze und welche Stufe Sie für eine bestimmte Anzahl von Edelsteinen erreichen würden. \n',
       '► !BUYGEMS (anzahl_der_setz) = Kaufen Sie eine bestimmte Menge nicht gefertigter Kartensätze für Edelsteine. \n',
-      '► !BUYANYGEMS (anzahl_der_setz) = Kaufen Sie eine bestimmte Menge an Kartensets pro Edelstein. \n',
+      '► !BUYANYGEMS (anzahl_der_setz) = Kaufen Sie eine bestimmte Menge an Kartensets pro Edelstein. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONEGEMS (anzahl_der_setz) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate. \n\n',
       'Lieferanten-Sektion. \n',
       '► !SELLCHECK = Überprüft, ob Sets vorhanden sind, die der Bot bei Ihnen kaufen kann. \n',
