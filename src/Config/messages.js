@@ -3078,7 +3078,7 @@ module.exports = {
   },
   HELP: {
     EN:
-      "Hello there, i'm a bot to easy level up your steam profile! \n\n" +
+      "Hello there, i'm a bot to easy level up your Steam profile! \n\n" +
       ' • You may type !COMMANDS for see the list of commands. \n' +
       ' • You may type !LANG for change language. \n\n',
     PT:
@@ -3090,7 +3090,7 @@ module.exports = {
       ' • Вы можете ввести !COMMANDS для получения списка команд. \n' +
       ' • Вы можете ввести !LANG, чтобы изменить язык. \n\n',
     ES:
-      'Hola, soy una bot para subir de nivel fácilmente tu perfil de vapor! \n\n' +
+      'Hola, soy una bot para subir de nivel fácilmente tu perfil de Steam! \n\n' +
       ' • Puede escribir !COMMANDS para la lista de comandos. \n' +
       ' • Puede escribir !LANG para cambiar el idioma. \n\n',
     CN:
@@ -3102,7 +3102,7 @@ module.exports = {
       ' • Vous pouvez taper !COMMANDS pour la liste des commandes. \n' +
       ' • Vous pouvez taper !LANG pour changer de langue. \n\n',
     JA:
-      'こんにちは、私はあなたのスチームプロファイルを簡単にレベルアップするボットです！ \n\n' +
+      'こんにちは、私はあなたのSteamプロファイルを簡単に更新するボットです！ \n\n' +
       ' • コマンドのリストを表示するには、「!COMMANDS」と入力できます。 \n' +
       ' • 言語を変更するには、「!LANG」と入力できます。 \n\n',
     DE:
