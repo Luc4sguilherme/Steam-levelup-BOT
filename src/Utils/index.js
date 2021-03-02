@@ -510,6 +510,18 @@ utils.removeCurrency = (msg, sectionType) => {
       }
     }
   } else {
+    if (!suppliers) {
+      const regex = new RegExp(
+        `\\bsell|vender|продать|售|vendre|売る|verkaufen\\b`,
+        'i'
+      );
+      const index = message.findIndex((el) => regex.test(el));
+
+      if (index !== -1) {
+        message.splice(index, 6);
+      }
+    }
+
     for (const key in currencies) {
       if (!currencies[key]) {
         const currency = utils.parseCurrencies(key);
