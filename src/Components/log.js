@@ -244,7 +244,7 @@ log.tradesHistory = (offer) => {
   data += `\nItemsReceived: ${JSON.stringify(itemsReceived, null, 2)}`;
 
   fs.writeFile(
-    `./Data/TradesAccepted/${offer.id}-${offer.partner.getSteamID64()}.txt`,
+    `./Data/AcceptedTrades/${offer.id}-${offer.partner.getSteamID64()}.txt`,
     data,
     (ERR) => {
       if (ERR) {

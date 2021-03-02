@@ -9,7 +9,7 @@ lerna-debug.log*
 Data/ChatLogs/**/*.txt
 Data/History/**/*.txt
 Data/History/**/*.json
-Data/TradesAccepted/*.txt
+Data/AcceptedTrades/*.txt
 Data/User/*.json
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
