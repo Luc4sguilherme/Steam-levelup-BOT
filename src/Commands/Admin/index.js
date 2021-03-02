@@ -10,6 +10,7 @@ const PROFIT = require('./GENERAL/PROFIT');
 const RELOAD = require('./GENERAL/RELOAD');
 const REQUESTER = require('./GENERAL/REQUESTER');
 const RESTART = require('./GENERAL/RESTART');
+const CANCEL = require('./GENERAL/CANCEL');
 const RESTOCK = require('./GENERAL/RESTOCK');
 const UNBLOCK = require('./GENERAL/UNBLOCK');
 const UNPACK = require('./GENERAL/UNPACK');
@@ -75,6 +76,9 @@ function admin(sender, msg, client, users, community, allCards, manager) {
       break;
     case '!RESTART':
       RESTART(sender, client, users);
+      break;
+    case '!CANCEL':
+      CANCEL(sender, msg, client, users, manager);
       break;
     case '!RESTOCK':
       RESTOCK(sender, client, users, community, allCards, manager);

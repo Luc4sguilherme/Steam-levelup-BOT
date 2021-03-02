@@ -192,6 +192,16 @@ module.exports = {
           'Wir haben das Angebot storniert, es ist möglicherweise abgelaufen. Bitte versuchen Sie es erneut, wenn Sie dies wünschen. TradeID:{OFFERID}',
       },
     },
+    CANCELED: {
+      EN: 'Trade offer with ID:{OFFERID} canceled!',
+      PT: 'Oferta comercial com ID:{OFFERID} cancelada!',
+      RU: 'Торговое предложение с ID:{OFFERID} отменено!',
+      ES: '¡Oferta comercial con ID:{OFFERID} cancelada!',
+      CN: 'ID:{OFFERID}的贸易报价已取消！',
+      FR: 'Offre commerciale avec ID:{OFFERID} annulée!',
+      JA: 'ID:{OFFERID}のトレードオファーはキャンセルされました！',
+      DE: 'Handelsangebot mit Ausweis:{OFFERID} storniert!',
+    },
     DECLINED: {
       US: {
         0: {
@@ -2030,6 +2040,55 @@ module.exports = {
       'Ich lade gerade mein Inventar. Bitte versuchen Sie es später noch einmal',
   },
   ERROR: {
+    GETOFFER: {
+      EN:
+        'An error occurred while getting your offers. Please try again later!',
+      PT:
+        'Ocorreu um erro ao obter suas ofertas. Por favor, tente novamente mais tarde!',
+      RU:
+        'При получении ваших предложений произошла ошибка. Пожалуйста, повторите попытку позже!',
+      ES:
+        'Se produjo un error al recibir sus ofertas. ¡Por favor, inténtelo de nuevo más tarde!',
+      CN: '获取报价时发生错误。 请稍后再试！',
+      FR:
+        "Une erreur s'est produite lors de l'obtention de vos offres. Veuillez réessayer plus tard!",
+      JA:
+        'オファーの取得中にエラーが発生しました。 後でもう一度やり直してください。',
+      DE:
+        'Beim Abrufen Ihrer Angebote ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal!',
+    },
+    CANCELOFFER: {
+      EN:
+        'An error occurred while canceling your offers. Please try again later!',
+      PT:
+        'Ocorreu um erro ao cancelar suas ofertas. Por favor, tente novamente mais tarde!',
+      RU:
+        'Произошла ошибка при отмене ваших предложений. Пожалуйста, повторите попытку позже!',
+      ES:
+        'Se produjo un error al cancelar sus ofertas. ¡Por favor, inténtelo de nuevo más tarde!',
+      CN: '取消报价时发生错误。 请稍后再试！',
+      FR:
+        "Une erreur s'est produite lors de l'annulation de vos offres. Veuillez réessayer plus tard!",
+      JA:
+        'オファーのキャンセル中にエラーが発生しました。 後でもう一度やり直してください。',
+      DE:
+        'Beim Stornieren Ihrer Angebote ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal!',
+    },
+    NONEXISTENTOFFER: {
+      EN: 'Offer with ID:{OFFERID} is not active, so it may not be cancelled.',
+      PT:
+        'A oferta com ID:{OFFERID} não está ativa, portanto não pode ser cancelada.',
+      RU: 'Оффер с ID:{OFFERID} не активен, поэтому его нельзя отменить.',
+      ES:
+        'La oferta con ID:{OFFERID} no está activa, por lo que no se puede cancelar.',
+      CN: 'ID:{OFFERID}的优惠未激活，因此可能不会被取消。',
+      FR:
+        "L'offre avec ID:{OFFERID} n'est pas active, elle ne peut donc pas être annulée.",
+      JA:
+        'ID:{OFFERID}のオファーはアクティブではないため、キャンセルされない場合があります。',
+      DE:
+        'Angebot mit ID:{OFFERID} ist nicht aktiv und kann daher nicht storniert werden.',
+    },
     TRADEHOLD: {
       EN:
         'An error occurred while getting your trade holds. Make sure you have no trade hold. Please try again!',
@@ -2203,6 +2262,17 @@ module.exports = {
         },
       },
       INVALID: {
+        OFFERID: {
+          EN: 'Please enter a valid offerID - example: {command}',
+          PT: 'Insira um ID de oferta válido - exemplo: {command}',
+          RU:
+            'Введите действительный идентификатор предложения - пример: {command}',
+          ES: 'Ingrese un ID de oferta válido - ejemplo: {command}',
+          CN: '请输入有效的offerID-例如： {command}',
+          FR: "Saisissez un identifiant d'offre valide - exemple: {command}",
+          JA: '有効なオファーIDを入力してください-例： {command}',
+          DE: 'Geben Sie eine gültige Angebots-ID ein - Beispiel: {command}',
+        },
         MESSAGE: {
           EN: 'Please enter a message',
           PT: 'Digite uma mensagem',
@@ -3468,6 +3538,7 @@ module.exports = {
       '► !USERCHECK (ID64) = Verify User. \n',
       '► !BLOCK (ID64) = Block user. \n',
       '► !UNBLOCK (ID64) = Unlock user. \n',
+      '► !CANCEL (OFFERID) = Cancel the trade offer. \n',
       '► !RELOAD = Reload Inventory. \n',
       '► !REQUESTER = Forces the automatic request to be triggered. \n',
       '► !PROFIT = Shows bot transactions this month. \n',
@@ -3495,6 +3566,7 @@ module.exports = {
       '► !USERCHECK (ID64) = Verifica o usuário. \n',
       '► !BLOCK (ID64) = Bloquea usuário. \n',
       '► !UNBLOCK (ID64) = Desbloquea usuário. \n',
+      '► !CANCEL (OFFERID) = Cancela a oferta comercial. \n',
       '► !RELOAD = Recarrega o inventário. \n',
       '► !REQUESTER = Força a solicitação automática a ser acionada. \n',
       '► !PROFIT = Mostra as transações feitas pelo bot nesse mês. \n',
@@ -3522,6 +3594,7 @@ module.exports = {
       '► !USERCHECK (ID64) = Проверить пользователя. \n',
       '► !BLOCK (ID64) = Заблокировать пользователя. \n',
       '► !UNBLOCK (ID64) = Разблокировать пользователя. \n',
+      '► !CANCEL (OFFERID) = Отменить коммерческое предложение. \n',
       '► !RELOAD = Перезагрузить инвентарь. \n',
       '► !REQUESTER = Принудительно инициирует автоматический запрос. \n',
       '► !PROFIT = Показывает транзакции ботов в этом месяце. \n',
@@ -3549,6 +3622,7 @@ module.exports = {
       '► !USERCHECK (ID64) = Verificar usuario. \n',
       '► !BLOCK (ID64) = Bloquear usuario. \n',
       '► !UNBLOCK (ID64) = Desbloquear usuario. \n',
+      '► !CANCEL (OFFERID) = Cancelar la oferta comercial. \n',
       '► !RELOAD = Recargar inventario. \n',
       '► !REQUESTER = Obliga a que se active la solicitud automática.. \n',
       '► !PROFIT = Muestra las transacciones de bot este mes. \n',
@@ -3576,6 +3650,7 @@ module.exports = {
       '► !USERCHECK (ID64) = 验证用户。 \n',
       '► !BLOCK (ID64) = 阻止用户。 \n',
       '► !UNBLOCK (ID64) = 解锁用户。 \n',
+      '► !CANCEL (OFFERID) = 取消商业报价。 \n',
       '► !RELOAD = 重新加载库存。 \n',
       '► !REQUESTER = 强制触发自动请求。\n',
       '► !PROFIT = 显示本月的机器人交易。 \n',
@@ -3603,6 +3678,7 @@ module.exports = {
       "► !USERCHECK (ID64) = Vérifier l'utilisateur. \n",
       '► !BLOCK (ID64) = Bloquer un utilisateur. \n',
       "► !UNBLOCK (ID64) = Déverrouillez l'utilisateur. \n",
+      "► !CANCEL (OFFERID) = Annulez l'offre commerciale. \n",
       "► !RELOAD = Recharger l'inventaire. \n",
       '► !REQUESTER = Force le déclenchement de la requête automatique. \n',
       '► !PROFIT = Affiche les transactions de bot ce mois-ci. \n',
@@ -3630,6 +3706,7 @@ module.exports = {
       '► !USERCHECK (ID64) = ユーザーを確認します。 \n',
       '► !BLOCK (ID64) = ユーザをブロックする。 \n',
       '► !UNBLOCK (ID64) = ユーザーのロックを解除します。 \n',
+      '► !CANCEL (OFFERID) = 商用オファーをキャンセルします。 \n',
       '► !RELOAD = インベントリをリロードします。 \n',
       '► !REQUESTER = 自動リクエストを強制的にトリガーします。 \n',
       '► !PROFIT = 今月のボットトランザクションを表示します。 \n',
@@ -3657,6 +3734,7 @@ module.exports = {
       '► !USERCHECK (ID64) = Benutzer überprüfen. \n',
       '► !BLOCK (ID64) = Benutzer blockieren. \n',
       '► !UNBLOCK (ID64) = Benutzer entsperren. \n',
+      '► !CANCEL (OFFERID) = Kündigen Sie das kommerzielle Angebot. \n',
       '► !RELOAD = Inventar neu laden. \n',
       '► !REQUESTER = Erzwingt das Auslösen der automatischen Anforderung. \n',
       '► !PROFIT = Zeigt Bot-Transaktionen in diesem Monat an. \n',

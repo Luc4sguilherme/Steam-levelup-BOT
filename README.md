@@ -146,6 +146,7 @@ This is an advanced cardsets/levelup bot script.
 - <code>!USERCHECK (ID64)</code> - Verify User. 
 - <code>!BLOCK (ID64)</code> - Block user. 
 - <code>!UNBLOCK (ID64)</code> - Unlock user. 
+- <code>!CANCEL (OFFERID)</code> - Cancel a trade offer. 
 - <code>!RELOAD</code> - Reload Inventory. 
 - <code>!REQUESTER</code> - Forces the automatic request to be triggered. 
 - <code>!PROFIT</code> - Shows bot transactions this month. 

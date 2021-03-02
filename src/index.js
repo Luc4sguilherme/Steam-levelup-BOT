@@ -24,6 +24,9 @@ const { getDefaultLanguage } = require('./Utils');
 let allCards = {};
 let userMsgs = {};
 
+// The time after which the offer must be automatically canceled.
+const cancelTime = moment.duration(2, 'hours');
+
 // Initialize SteamUser, TradeOfferManager and SteamCommunity
 const client = new SteamUser();
 const community = new SteamCommunity();
@@ -32,7 +35,7 @@ const manager = new TradeOfferManager({
   community: community,
   language: 'en',
   pollInterval: moment.duration(20, 'seconds'),
-  cancelTime: moment.duration(2, 'hours'),
+  cancelTime: cancelTime,
   savePollData: true,
 });
 
@@ -409,7 +412,7 @@ manager.on('sentOfferChanged', (OFFER) => {
     // Trades history
     log.tradesHistory(OFFER);
 
-    if (main.admins.indexOf(OFFER.partner.getSteamID64()) === -1) {
+    if (!main.admins.includes(OFFER.partner.getSteamID64())) {
       // Notify the administrator of the exchanges made
       utils.notifyAdmin(client, users, OFFER);
 
@@ -525,14 +528,37 @@ manager.on('sentOfferChanged', (OFFER) => {
     );
     log.tradeoffer(`Tradeoffer expired. TradeID:${OFFER.id}`);
   } else if (OFFER.state === 6) {
-    chatMessage(
-      client,
-      OFFER.partner,
-      messages.TRADE.EXPIRED[1][
-        users[OFFER.partner.getSteamID64()].language
-      ].replace('{OFFERID}', OFFER.id)
-    );
-    log.tradeoffer(`Tradeoffer canceled by Bot (expired). TradeID:${OFFER.id}`);
+    const expiresDate = moment(OFFER.expires).toISOString();
+    const createdDate = moment(OFFER.created).toISOString();
+    const currentDate = moment(new Date());
+
+    if (
+      currentDate.isSameOrAfter(expiresDate) ||
+      currentDate.isSameOrAfter(moment(createdDate).add(cancelTime))
+    ) {
+      chatMessage(
+        client,
+        OFFER.partner,
+        messages.TRADE.EXPIRED[1][
+          users[OFFER.partner.getSteamID64()].language
+        ].replace('{OFFERID}', OFFER.id)
+      );
+
+      log.tradeoffer(
+        `Trade offer canceled by Bot (expired). TradeID:${OFFER.id}`
+      );
+    } else if (!main.admins.includes(OFFER.partner.getSteamID64())) {
+      chatMessage(
+        client,
+        OFFER.partner,
+        messages.TRADE.CANCELED[
+          users[OFFER.partner.getSteamID64()].language
+        ].replace('{OFFERID}', OFFER.id)
+      );
+      log.tradeoffer(`Trade offer canceled by Bot. TradeID:${OFFER.id}`);
+    } else {
+      log.tradeoffer(`Trade offer canceled by admin. TradeID:${OFFER.id}`);
+    }
   } else if (OFFER.state === 7 || OFFER.state === 10) {
     chatMessage(
       client,
@@ -569,10 +595,7 @@ manager.on('sentOfferChanged', (OFFER) => {
 
 // If we get a new offer and no error we check the escrow, if we and our partner are able to trade and WE dont send any items to the user we have a donation and accept it.
 manager.on('newOffer', (OFFER) => {
-  if (
-    main.admins.indexOf(OFFER.partner.getSteamID64()) >= 0 ||
-    main.admins.indexOf(parseInt(OFFER.partner.getSteamID64(), 10)) >= 0
-  ) {
+  if (main.admins.includes(OFFER.partner.getSteamID64())) {
     OFFER.getUserDetails((ERR1, ME, THEM) => {
       if (ERR1) {
         log.error(`An error occurred while getting trade holds: ${ERR1}`);
