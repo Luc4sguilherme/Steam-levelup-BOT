@@ -12,10 +12,10 @@ const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
   if (Object.keys(inventory.botSets).length) {
-    const amountofsets = parseInt(
-      msg.toUpperCase().replace('!SETS4SETS ', ''),
-      10
-    );
+    const input = msg.toUpperCase();
+    const command = input.match('!SETS4SETS') || input.match('!SET4SET') || [];
+    const amountofsets = parseInt(input.replace(`${command[0]} `, ''), 10);
+
     if (!Number.isNaN(amountofsets) && amountofsets > 0) {
       log.userChat(
         sender.getSteamID64(),
@@ -354,7 +354,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         sender,
         messages.ERROR.INPUT.INVALID.SETS[
           users[sender.getSteamID64()].language
-        ].replace('{command}', '!SETS4SETS 1')
+        ].replace('{command}', `${command} 1`)
       );
     }
   } else {
