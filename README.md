@@ -79,7 +79,7 @@ This is an advanced cardsets/levelup bot script.
 ### Trade Messages 
 - Every trade will have a message containing the currencies and sets that will be exchange
 
-## Commands: !help
+## Commands: !commands
 - <code>!EN</code> - Change the bot's language to english. 
 - <code>!PT</code> - Change the bot's language to portuguese. 
 - <code>!RU</code> - Change the bot's language to russian. 
