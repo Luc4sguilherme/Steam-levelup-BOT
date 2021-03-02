@@ -273,7 +273,7 @@ module.exports = (sender, msg, client, users, manager) => {
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.SETS[
           users[sender.getSteamID64()].language
-        ]
+        ].replace('{SETS}', main.maxBuy)
       );
     }
   } else {

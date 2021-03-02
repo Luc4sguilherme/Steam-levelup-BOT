@@ -4,6 +4,7 @@ const messages = require('../../../../Config/messages');
 const rates = require('../../../../Config/rates');
 const utils = require('../../../../Utils');
 const log = require('../../../../Components/log');
+const { filterCommands } = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users) => {
   const n = parseInt(msg.toUpperCase().replace('!LEVEL ', ''), 10);
@@ -57,19 +58,28 @@ module.exports = (sender, msg, client, users) => {
                   chatMessage(
                     client,
                     sender,
-                    messages.LEVEL.RESPONSE[
-                      users[sender.getSteamID64()].language
-                    ]
-                      .replace('{level}', n)
-                      .replace('{sets1}', s - Math.floor(CURRENTLEVELXP / 100))
-                      .replace('{sets2}', cs * rates.csgo.sell)
-                      .replace('{sets3}', hydra * rates.hydra.sell)
-                      .replace('{sets4}', tf * rates.tf.sell)
-                      .replace(/{sets5}/g, s - Math.floor(CURRENTLEVELXP / 100))
-                      .replace(/{cs}/g, cs)
-                      .replace(/{hydra}/g, hydra)
-                      .replace(/{tf}/g, tf)
-                      .replace('{gems}', gems)
+                    filterCommands(
+                      messages.LEVEL.RESPONSE[
+                        users[sender.getSteamID64()].language
+                      ]
+
+                        .replace('{level}', n)
+                        .replace(
+                          '{sets1}',
+                          s - Math.floor(CURRENTLEVELXP / 100)
+                        )
+                        .replace('{sets2}', cs * rates.csgo.sell)
+                        .replace('{sets3}', hydra * rates.hydra.sell)
+                        .replace('{sets4}', tf * rates.tf.sell)
+                        .replace(
+                          /{sets5}/g,
+                          s - Math.floor(CURRENTLEVELXP / 100)
+                        )
+                        .replace(/{cs}/g, cs)
+                        .replace(/{hydra}/g, hydra)
+                        .replace(/{tf}/g, tf)
+                        .replace('{gems}', gems)
+                    ).join('\n')
                   );
                 } else {
                   chatMessage(
@@ -110,7 +120,7 @@ module.exports = (sender, msg, client, users) => {
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.LEVEL[
           users[sender.getSteamID64()].language
-        ]
+        ].replace('{LEVEL}', main.maxLevel)
       );
     }
   } else {

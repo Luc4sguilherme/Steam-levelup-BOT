@@ -64,8 +64,16 @@ This is an advanced cardsets/levelup bot script.
 - Automatic update the database to keep in track of every appid and his sets
 ### Handle donations 
 - You can enable/disable donates on your bot
+### Suppliers 
+- You can enable/disable the bot to handle suppliers (!sell commands)
+### Currency Management 
+- You are able to enable/disable any type of currency, that way you can make a very specific bot (i.e a bot who only accept hydra keys)
+### Commands Management 
+- You can enable/disable commands specific
+### Languages Management 
+- You can enable/disable languages specific
 ### BBCodes 
-- Some commands like !commands and !admin was builded to show in a stylized bbcode
+- Some commands like !help and !admin was builded to show in a stylized bbcode
 ### Booster Packs 
 - Easy Manage your booster packs, or just open them by using admin commands
 ### Trade Messages 
@@ -82,7 +90,6 @@ This is an advanced cardsets/levelup bot script.
 - <code>!DE</code> - Change the bot's language to german. 
 - <code>!LANG</code> - Change the bot's language. 
 - <code>!TUTORIAL</code> - Shows the video tutorial. 
-- <code>!GIVEAWAY</code> - Get info about giveaway and your entries. 
 - <code>!SETS4SETS (amount_of_sets)</code> - Trade your duplicate sets for new ones you can craft. 
 - <code>!PRICES</code> - Shows our current rates. 
 - <code>!STOCK</code> - Shows currencies stock of the bot. 
@@ -139,8 +146,8 @@ This is an advanced cardsets/levelup bot script.
 - <code>!USERCHECK (ID64)</code> - Verify User. 
 - <code>!BLOCK (ID64)</code> - Block user. 
 - <code>!UNBLOCK (ID64)</code> - Unlock user. 
+- <code>!CANCEL (OFFERID)</code> - Cancel a trade offer. 
 - <code>!RELOAD</code> - Reload Inventory. 
-- <code>!RAFFLE</code> - Choose the winner of the raffle. 
 - <code>!REQUESTER</code> - Forces the automatic request to be triggered. 
 - <code>!PROFIT</code> - Shows bot transactions this month. 
 - <code>!AUTHCODE</code> - Shows auth code. 

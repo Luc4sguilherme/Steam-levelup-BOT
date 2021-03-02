@@ -1,3 +1,5 @@
+require('./Components/ErrorHandle/configErrorHandle').validate();
+
 const TradeOfferManager = require('steam-tradeoffer-manager');
 const SteamCommunity = require('steamcommunity');
 const SteamUser = require('steam-user');
@@ -17,9 +19,13 @@ const request = require('./Components/request');
 const { getCardsInSets, updateCardsDB } = require('./Components/sets');
 const login = require('./Components/login');
 const steamSupply = require('./Components/steamSupply');
+const { getDefaultLanguage } = require('./Utils');
 
 let allCards = {};
 let userMsgs = {};
+
+// The time after which the offer must be automatically canceled.
+const cancelTime = moment.duration(2, 'hours');
 
 // Initialize SteamUser, TradeOfferManager and SteamCommunity
 const client = new SteamUser();
@@ -29,7 +35,7 @@ const manager = new TradeOfferManager({
   community: community,
   language: 'en',
   pollInterval: moment.duration(20, 'seconds'),
-  cancelTime: moment.duration(2, 'hours'),
+  cancelTime: cancelTime,
   savePollData: true,
 });
 
@@ -97,7 +103,7 @@ client.on('webSession', (_, cookies) => {
     if (client.myFriends[Object.keys(client.myFriends)[i]] === 2) {
       client.addFriend(Object.keys(client.myFriends)[i]);
       users[Object.keys(client.myFriends)[i]] = {};
-      users[Object.keys(client.myFriends)[i]].language = 'EN';
+      users[Object.keys(client.myFriends)[i]].language = getDefaultLanguage();
     }
   }
   // Refuse group invites
@@ -117,7 +123,18 @@ client.on('webSession', (_, cookies) => {
   );
 
   // Update stock
-  const load = ['GEMS', 'CSGO', 'TF2', 'SETS', 'HYDRA'];
+  const load = ['SETS'];
+
+  Object.keys(main.acceptedCurrency).forEach((currency) => {
+    if (main.acceptedCurrency[currency]) {
+      if (currency === 'HYDRA') {
+        load.push(currency);
+      } else {
+        load.unshift(currency);
+      }
+    }
+  });
+
   inventory.loadInventory(client, community, allCards, load, () => {
     inventory.play(client);
   });
@@ -267,7 +284,7 @@ client.on('friendMessage', (SENDER, MSG) => {
 
   if (Object.keys(users).indexOf(SENDER.getSteamID64()) < 0) {
     users[SENDER.getSteamID64()] = {};
-    users[SENDER.getSteamID64()].language = 'EN';
+    users[SENDER.getSteamID64()].language = getDefaultLanguage();
     users[SENDER.getSteamID64()].idleforhours = 0;
     fs.writeFile('./Data/User/Users.json', JSON.stringify(users), (ERR) => {
       if (ERR) {
@@ -330,7 +347,7 @@ client.on('friendRelationship', (SENDER, REL) => {
         log.info(`Succesfully added ${SENDER.getSteamID64()} to friendlist.`);
         if (Object.keys(users).indexOf(SENDER.getSteamID64()) < 0) {
           users[SENDER.getSteamID64()] = {};
-          users[SENDER.getSteamID64()].language = 'EN';
+          users[SENDER.getSteamID64()].language = getDefaultLanguage();
           users[SENDER.getSteamID64()].idleforhours = 0;
         } else {
           users[SENDER.getSteamID64()].idleforhours = 0;
@@ -351,19 +368,17 @@ client.on('friendRelationship', (SENDER, REL) => {
         );
       }
     });
-    chatMessage(
-      client,
-      SENDER,
-      `${messages.WELCOME.EN}
-      ${messages.WELCOME.PT}
-      ${messages.WELCOME.RU}
-      ${messages.WELCOME.ES}
-      ${messages.WELCOME.CN}
-      ${messages.WELCOME.FR}
-      ${messages.WELCOME.JA}
-      ${messages.WELCOME.DE}`
-    );
-    chatMessage(client, SENDER, main.tutorial);
+
+    const language =
+      users[SENDER.getSteamID64()]?.language || getDefaultLanguage();
+
+    let message = messages.WELCOME[language];
+
+    if (main.tutorial) {
+      message += main.tutorial;
+    }
+
+    chatMessage(client, SENDER, message);
   }
 });
 
@@ -397,46 +412,14 @@ manager.on('sentOfferChanged', (OFFER) => {
     // Trades history
     log.tradesHistory(OFFER);
 
-    let message = '/pre ';
-    if (main.admins.indexOf(OFFER.partner.getSteamID64()) === -1) {
+    if (!main.admins.includes(OFFER.partner.getSteamID64())) {
       // Notify the administrator of the exchanges made
       utils.notifyAdmin(client, users, OFFER);
 
       // Calculate profit
       profit.calculate(OFFER);
-
-      // Add giveaway entry if user entered
-      utils.addGiveawayEntry(OFFER, (ERR) => {
-        if (ERR) {
-          log.error(
-            `An error occurred while writing giveaway entry file: ${ERR}`
-          );
-        } else {
-          message +=
-            messages.GIVEAWAY.ENTER[2][
-              users[OFFER.partner.getSteamID64()].language
-            ];
-          log.warn('Giveaway entry added! ');
-        }
-      });
-
-      // Access to sets4sets command
-      utils.accesstosets4sets(OFFER, users, (ERR, numsets) => {
-        if (ERR) {
-          log.error(`An error occurred while writing UserData file: ${ERR}`);
-        } else if (numsets > 0) {
-          message += messages.SETS4SETS.CANUSE[1][
-            users[OFFER.partner.getSteamID64()].language
-          ].replace('{SETS}', numsets);
-        } else {
-          message += `• ${
-            messages.SETS4SETS.CANUSE[0][
-              users[OFFER.partner.getSteamID64()].language
-            ]
-          }`;
-        }
-      });
     }
+
     community.getSteamUser(OFFER.partner, (ERR, USER) => {
       if (ERR) {
         log.error(`An error occurred while getting user profile: ${ERR}`);
@@ -483,9 +466,7 @@ manager.on('sentOfferChanged', (OFFER) => {
             }
           );
         }
-        if (message.length > 5) {
-          chatMessage(client, OFFER.partner.getSteamID64(), message);
-        }
+
         utils.checkUserinGroup(
           community,
           OFFER.partner.getSteamID64(),
@@ -547,14 +528,37 @@ manager.on('sentOfferChanged', (OFFER) => {
     );
     log.tradeoffer(`Tradeoffer expired. TradeID:${OFFER.id}`);
   } else if (OFFER.state === 6) {
-    chatMessage(
-      client,
-      OFFER.partner,
-      messages.TRADE.EXPIRED[1][
-        users[OFFER.partner.getSteamID64()].language
-      ].replace('{OFFERID}', OFFER.id)
-    );
-    log.tradeoffer(`Tradeoffer canceled by Bot (expired). TradeID:${OFFER.id}`);
+    const expiresDate = moment(OFFER.expires).toISOString();
+    const createdDate = moment(OFFER.created).toISOString();
+    const currentDate = moment(new Date());
+
+    if (
+      currentDate.isSameOrAfter(expiresDate) ||
+      currentDate.isSameOrAfter(moment(createdDate).add(cancelTime))
+    ) {
+      chatMessage(
+        client,
+        OFFER.partner,
+        messages.TRADE.EXPIRED[1][
+          users[OFFER.partner.getSteamID64()].language
+        ].replace('{OFFERID}', OFFER.id)
+      );
+
+      log.tradeoffer(
+        `Trade offer canceled by Bot (expired). TradeID:${OFFER.id}`
+      );
+    } else if (!main.admins.includes(OFFER.partner.getSteamID64())) {
+      chatMessage(
+        client,
+        OFFER.partner,
+        messages.TRADE.CANCELED[
+          users[OFFER.partner.getSteamID64()].language
+        ].replace('{OFFERID}', OFFER.id)
+      );
+      log.tradeoffer(`Trade offer canceled by Bot. TradeID:${OFFER.id}`);
+    } else {
+      log.tradeoffer(`Trade offer canceled by admin. TradeID:${OFFER.id}`);
+    }
   } else if (OFFER.state === 7 || OFFER.state === 10) {
     chatMessage(
       client,
@@ -591,10 +595,7 @@ manager.on('sentOfferChanged', (OFFER) => {
 
 // If we get a new offer and no error we check the escrow, if we and our partner are able to trade and WE dont send any items to the user we have a donation and accept it.
 manager.on('newOffer', (OFFER) => {
-  if (
-    main.admins.indexOf(OFFER.partner.getSteamID64()) >= 0 ||
-    main.admins.indexOf(parseInt(OFFER.partner.getSteamID64(), 10)) >= 0
-  ) {
+  if (main.admins.includes(OFFER.partner.getSteamID64())) {
     OFFER.getUserDetails((ERR1, ME, THEM) => {
       if (ERR1) {
         log.error(`An error occurred while getting trade holds: ${ERR1}`);

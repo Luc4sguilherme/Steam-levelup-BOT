@@ -1,5 +1,5 @@
 const moment = require('moment');
-const request = require('request-promise');
+const axios = require('axios');
 
 const main = require('../Config/main.js');
 
@@ -7,22 +7,21 @@ const apiKey = main.steamLadderApiKey;
 
 const get = async (SID) => {
   try {
-    const baseURL = 'https://steamladder.com/api/v1';
     const options = {
       method: 'GET',
-      uri: `${baseURL}/profile/${SID}`,
-      json: true,
+      baseURL: 'https://steamladder.com/api/v1/',
+      url: `profile/${SID}`,
       headers: {
         Authorization: `Token ${apiKey}`,
       },
     };
 
-    const response = await request(options);
+    const { data } = await axios(options);
     return {
-      WORLDWIDEXP: response.ladder_rank.worldwide_xp,
-      REGIONXP: response.ladder_rank.region.region_xp,
-      COUNTRYXP: response.ladder_rank.country.country_xp,
-      LASTUPDATE: response.steam_stats.last_update,
+      WORLDWIDEXP: data.ladder_rank.worldwide_xp,
+      REGIONXP: data.ladder_rank.region.region_xp,
+      COUNTRYXP: data.ladder_rank.country.country_xp,
+      LASTUPDATE: data.steam_stats.last_update,
     };
   } catch (error) {
     throw new Error(error);
@@ -31,21 +30,20 @@ const get = async (SID) => {
 
 const update = async (SID) => {
   try {
-    const baseURL = 'https://steamladder.com/api/v1';
     const options = {
       method: 'POST',
-      uri: `${baseURL}/profile/${SID}/`,
-      json: true,
+      baseURL: 'https://steamladder.com/api/v1/',
+      url: `profile/${SID}/`,
       headers: {
         Authorization: `Token ${apiKey}`,
       },
     };
 
-    const response = await request(options);
+    const { data } = await axios(options);
     return {
-      WORLDWIDEXP: response.ladder_rank.worldwide_xp,
-      REGIONXP: response.ladder_rank.region.region_xp,
-      COUNTRYXP: response.ladder_rank.country.country_xp,
+      WORLDWIDEXP: data.ladder_rank.worldwide_xp,
+      REGIONXP: data.ladder_rank.region.region_xp,
+      COUNTRYXP: data.ladder_rank.country.country_xp,
     };
   } catch (error) {
     throw new Error(error);

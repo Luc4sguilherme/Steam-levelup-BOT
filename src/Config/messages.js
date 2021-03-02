@@ -1,21 +1,21 @@
 module.exports = {
   WELCOME: {
     EN:
-      '[EN] Welcome to my Trading Service, thank you for choosing me. Quick Start: Type !HELP via SteamChat',
+      '[EN] Welcome to my Trading Service, thank you for choosing me. Quick Start: Type !HELP via SteamChat \n\n',
     PT:
-      '[PT-BR] Bem-vindo ao meu serviço de negociação, obrigado por me escolher. Início rápido: digite !AJUDA no chat da Steam',
+      '[PT-BR] Bem-vindo ao meu serviço de negociação, obrigado por me escolher. Início rápido: digite !AJUDA no chat da Steam \n\n',
     RU:
-      '[PY] Добро пожаловать в мою торговую службу, спасибо, что выбрали меня. Быстрый старт: Используй !ПОМОЩЬ',
+      '[PY] Добро пожаловать в мою торговую службу, спасибо, что выбрали меня. Быстрый старт: Используй !ПОМОЩЬ \n\n',
     ES:
-      '[ESP] Bienvenido a mi servicio comercial, gracias por elegirme. Inicio rápido: escriba !AYUDA a través de steam chat',
+      '[ESP] Bienvenido a mi servicio comercial, gracias por elegirme. Inicio rápido: escriba !AYUDA a través de steam chat \n\n',
     CN:
-      '[CN] 欢迎使用我的交易服务，谢谢您选择我。 快速开始：写《!救命》通过Steam聊天',
+      '[CN] 欢迎使用我的交易服务，谢谢您选择我。 快速开始：写《!救命》通过Steam聊天 \n\n',
     FR:
-      "[FR] Bienvenue sur mon service de trading, merci de m'avoir choisi. Démarrage rapide: tapez !AIDER via Steam Chat",
+      "[FR] Bienvenue sur mon service de trading, merci de m'avoir choisi. Démarrage rapide: tapez !AIDER via Steam Chat \n\n",
     JA:
-      '[JA] 私のトレーディングサービスへようこそ、私を選んでくれてありがとう。 クイックスタート： Steamチャットで「!助けて」と入力します',
+      '[JA] 私のトレーディングサービスへようこそ、私を選んでくれてありがとう。 クイックスタート： Steamチャットで「!助けて」と入力します \n\n',
     DE:
-      '[DE] Willkommen bei meinem Handelsservice, danke, dass Sie sich für mich entschieden haben. Schnellstart: Geben Sie !HILFE via Steam Chat ein',
+      '[DE] Willkommen bei meinem Handelsservice, danke, dass Sie sich für mich entschieden haben. Schnellstart: Geben Sie !HILFE via Steam Chat ein \n\n',
   },
   TRADEMSG: {
     EN: 'Please check your Trade and accept it to receive your Items.',
@@ -191,6 +191,16 @@ module.exports = {
         DE:
           'Wir haben das Angebot storniert, es ist möglicherweise abgelaufen. Bitte versuchen Sie es erneut, wenn Sie dies wünschen. TradeID:{OFFERID}',
       },
+    },
+    CANCELED: {
+      EN: 'Trade offer with ID:{OFFERID} canceled!',
+      PT: 'Oferta comercial com ID:{OFFERID} cancelada!',
+      RU: 'Торговое предложение с ID:{OFFERID} отменено!',
+      ES: '¡Oferta comercial con ID:{OFFERID} cancelada!',
+      CN: 'ID:{OFFERID}的贸易报价已取消！',
+      FR: 'Offre commerciale avec ID:{OFFERID} annulée!',
+      JA: 'ID:{OFFERID}のトレードオファーはキャンセルされました！',
+      DE: 'Handelsangebot mit Ausweis:{OFFERID} storniert!',
     },
     DECLINED: {
       US: {
@@ -782,48 +792,48 @@ module.exports = {
       '/pre Currently, prices are: \n\n' +
       '- You can buy: \n' +
       ' • {CSGOSELL} sets for 1 CS:GO Key \n' +
-      ' • {TFSELL} sets for 1 TF Key \n' +
+      ' • {TFSELL} sets for 1 TF2 Key \n' +
       ' • {HYDRASELL} sets for 1 HYDRA Key \n' +
       ' • 1 set for {GEMSSELL} GEMS \n\n' +
       '- You can sell: \n' +
       ' • {CSGOBUY} sets for 1 CS:GO Key \n' +
-      ' • {TFBUY} sets for 1 TF Key \n' +
+      ' • {TFBUY} sets for 1 TF2 Key \n' +
       ' • {HYDRABUY} sets for 1 HYDRA Key \n' +
       ' • 1 set for {GEMSBUY} GEMS \n',
     PT:
       '/pre Atualmente, os preços são: \n\n' +
       '- Você pode comprar: \n' +
       ' • {CSGOSELL} conjuntos por 1 chave CS:GO \n' +
-      ' • {TFSELL} conjuntos por 1 chave TF \n' +
+      ' • {TFSELL} conjuntos por 1 chave TF2 \n' +
       ' • {HYDRASELL} conjuntos por 1 chave HYDRA \n' +
       ' • 1 conjunto por {GEMSSELL} GEMAS \n\n' +
       '- Você pode vender: \n' +
       ' • {CSGOBUY} conjuntos por 1 chave CS:GO \n' +
-      ' • {TFBUY} conjuntos por 1 chave TF \n' +
+      ' • {TFBUY} conjuntos por 1 chave TF2 \n' +
       ' • {HYDRABUY} conjuntos por 1 chave HYDRA \n' +
       ' • 1 conjunto por {GEMSBUY} GEMAS \n',
     RU:
       '/pre Цены на данный момент: \n\n' +
       '- Вы можете купить: \n' +
       ' • {CSGOSELL} набор(ы) карточка за 1 CS:GO ключ \n' +
-      ' • {TFSELL} набор(ы) карточка за 1 TF ключ \n' +
+      ' • {TFSELL} набор(ы) карточка за 1 TF2 ключ \n' +
       ' • {HYDRASELL} набор(ы) карточка за 1 Гидра ключ \n' +
       ' • 1 набор карточка за {GEMSSELL} Самоцветы \n\n' +
       '- Вы можете продать: \n' +
       ' • {CSGOBUY} набор(ы) карточка за 1 CS:GO ключ \n' +
-      ' • {TFBUY} набор(ы) карточка за 1 TF ключ \n' +
-      ' • {HYDRABUY} набор(ы) карточка за 1 HYDRA ключ \n' +
+      ' • {TFBUY} набор(ы) карточка за 1 TF2 ключ \n' +
+      ' • {HYDRABUY} набор(ы) карточка за 1 Гидра ключ \n' +
       ' • 1 набор карточка за {GEMSBUY} Самоцветы \n',
     ES:
       '/pre Actualmente, los precios son: \n\n' +
       '- Tú puedes comprar: \n' +
       ' • {CSGOSELL} conjuntos por 1 llave CS:GO \n' +
-      ' • {TFSELL} conjuntos por 1 llave TF \n' +
+      ' • {TFSELL} conjuntos por 1 llave TF2 \n' +
       ' • {HYDRASELL} conjuntos por 1 llave HYDRA \n' +
       ' • 1 conjunto por {GEMSSELL} Gemas \n\n' +
       '- Tú puedes vender: \n' +
       ' • {CSGOBUY} conjuntos por 1 llave CS:GO \n' +
-      ' • {TFBUY} conjuntos por 1 llave TF \n' +
+      ' • {TFBUY} conjuntos por 1 llave TF2 \n' +
       ' • {HYDRABUY} conjuntos por 1 llave HYDRA \n' +
       ' • 1 conjunto por {GEMSBUY} Gemas \n',
     CN:
@@ -847,7 +857,7 @@ module.exports = {
       ' • 1 ensemble de cartes pour {GEMSSELL} gemmes \n\n' +
       '- Vous pouvez vendre: \n' +
       ' • {CSGOBUY} ensembles de cartes pour 1 clé CS:GO \n' +
-      ' • {TFBUY} ensembles de cartes pour 1 clé TF \n' +
+      ' • {TFBUY} ensembles de cartes pour 1 clé TF2 \n' +
       ' • {HYDRABUY} ensembles de cartes pour 1 clé HYDRA \n' +
       ' • 1 ensemble de cartes pour {GEMSBUY} gemmes \n',
     JA:
@@ -944,54 +954,54 @@ module.exports = {
         0: {
           EN:
             '/pre There are currently {SETS} sets available which you have not fully crafted yet. Crafting all of them will get you to level {LEVEL} \n\n' +
-            ' - You can get the sets by paying one of the following currencies: \n {MESSAGE}',
+            ' - You can get the sets by paying one of the following currencies: \n{MESSAGE}',
           PT:
             '/pre Atualmente, existem {SETS} conjuntos disponíveis que você ainda não criou totalmente. A criação de todos eles levará você ao nível {LEVEL} \n\n' +
-            ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n {MESSAGE}',
+            ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n{MESSAGE}',
           RU:
             '/pre В настоящее время доступны наборы карточка {SETS}, которые вы еще не полностью создали. Изготовление всех из них приведет вас к уровню {LEVEL} \n\n' +
-            ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n {MESSAGE}',
+            ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n{MESSAGE}',
           ES:
             '/pre Actualmente hay {SETS} conjuntos disponibles que aún no ha creado completamente. Crearlos todos te llevará al nivel {LEVEL} \n\n' +
-            ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n {MESSAGE}',
+            ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n{MESSAGE}',
           CN:
             '/pre 当前有{SETS}套卡牌可用，您尚未完全制作。 精心制作所有这些，将使您达到{LEVEL}级 \n\n' +
-            ' - 您可以通过支付以下货币之一来获得套卡牌： \n {MESSAGE}',
+            ' - 您可以通过支付以下货币之一来获得套卡牌： \n{MESSAGE}',
           FR:
             "/pre Il y a actuellement {SETS} ensembles disponibles que vous n'avez pas encore entièrement fabriqués. Les fabriquer tous vous amènera au niveau {LEVEL} \n\n" +
-            " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n {MESSAGE}",
+            " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n{MESSAGE}",
           JA:
             '/pre 現在、まだ完全に作成されていない{SETS}カードセットが利用可能です。 それらすべてを作成すると、レベル{LEVEL}になります \n\n' +
-            ' - 次の通貨のいずれかを支払うことでカードセットを入手できます。 \n {MESSAGE}',
+            ' - 次の通貨のいずれかを支払うことでカードセットを入手できます。 \n{MESSAGE}',
           DE:
             '/pre Derzeit sind {SETS} Sets verfügbar, die Sie noch nicht vollständig hergestellt haben. Wenn Sie alle herstellen, erreichen Sie Level {LEVEL} \n\n' +
-            ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n {MESSAGE}',
+            ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n{MESSAGE}',
         },
         1: {
           EN:
             '/pre There are currently {SETS} sets available which you have not fully crafted yet. Crafting all of them you will remain at level {LEVEL} \n\n' +
-            ' - You can get the sets by paying one of the following currencies: \n {MESSAGE}',
+            ' - You can get the sets by paying one of the following currencies: \n{MESSAGE}',
           PT:
             '/pre Atualmente, existem {SETS} conjuntos disponíveis que você ainda não criou totalmente. Ao criar todos eles, você permanecerá no nível {LEVEL} \n\n' +
-            ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n {MESSAGE}',
+            ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n{MESSAGE}',
           RU:
             '/pre В настоящее время доступны наборы карточка {SETS}, которые вы еще не полностью создали. Создав их, вы останетесь на уровне {LEVEL} \n\n' +
-            ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n {MESSAGE}',
+            ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n{MESSAGE}',
           ES:
             '/pre Actualmente hay {SETS} conjuntos disponibles que aún no ha creado completamente. Creando todos ellos, permanecerás en el nivel {LEVEL} \n\n' +
-            ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n {MESSAGE}',
+            ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n{MESSAGE}',
           CN:
             '/pre 当前有{SETS}套卡牌可用，您尚未完全制作。 精制作所有这些套卡牌，您将保持在 {LEVEL} 级 \n\n' +
-            ' - 您可以通过支付以下货币之一来获得套卡牌： \n {MESSAGE}',
+            ' - 您可以通过支付以下货币之一来获得套卡牌： \n{MESSAGE}',
           FR:
             "/pre Il y a actuellement {SETS} ensembles disponibles que vous n'avez pas encore entièrement fabriqués. En les fabriquant tous, vous resterez au niveau {LEVEL} \n\n" +
-            " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n {MESSAGE}",
+            " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n{MESSAGE}",
           JA:
             '/pre 現在、まだ完全に作成されていない{SETS}カードセットが利用可能です。 それらすべてを作成すると、レベル{LEVEL}のままになります \n\n' +
-            ' - 次の通貨のいずれかを支払うことでカードセットを入手できます。 \n {MESSAGE}',
+            ' - 次の通貨のいずれかを支払うことでカードセットを入手できます。 \n{MESSAGE}',
           DE:
             '/pre Derzeit sind {SETS} Sets verfügbar, die Sie noch nicht vollständig hergestellt haben. Wenn du sie alle herstellst, bleibst du auf Stufe {LEVEL} \n\n' +
-            ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n {MESSAGE}',
+            ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n{MESSAGE}',
         },
       },
     },
@@ -1244,54 +1254,54 @@ module.exports = {
       0: {
         EN:
           "/pre I currently have {SETS} unique Sets which you haven't crafted. Crafting all of them will get you to level {LEVEL} \n\n" +
-          ' - You can get the sets by paying one of the following currencies: \n {MESSAGE}',
+          ' - You can get the sets by paying one of the following currencies: \n{MESSAGE}',
         PT:
           '/pre No momento, tenho {SETS} conjuntos unicos que você não criou. A criação de todos eles levará você ao nível {LEVEL} \n\n' +
-          ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n {MESSAGE}',
+          ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n{MESSAGE}',
         RU:
           '/pre В настоящее время у меня есть {SETS} уникальных наборов карточка, которые вы не создали. Изготовление всех из них приведет вас к уровню {LEVEL} \n\n' +
-          ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n {MESSAGE}',
+          ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n{MESSAGE}',
         ES:
           '/pre Actualmente tengo {SETS} conjuntos únicos que no has creado. Crearlos todos te llevará al nivel {LEVEL} \n\n' +
-          ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n {MESSAGE}',
+          ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n{MESSAGE}',
         CN:
           '/pre 我目前有 {SETS} 种您尚未制作的独特套卡牌。精心制作所有这些，将使您达到 {LEVEL} 级 \n\n' +
-          ' - 您可以通过支付以下货币之一来获得套卡牌： \n {MESSAGE}',
+          ' - 您可以通过支付以下货币之一来获得套卡牌： \n{MESSAGE}',
         FR:
           "/pre J'ai actuellement {SETS} ensembles uniques que vous n'avez pas créés. Les fabriquer tous vous amènera au niveau {LEVEL} \n\n" +
-          " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n {MESSAGE}",
+          " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n{MESSAGE}",
         JA:
           '/pre 私は現在、あなたが作成していない{SETS}のユニークなセットを持っています。 それらすべてを作成すると、レベル{LEVEL}になります \n\n' +
-          ' - 次の通貨のいずれかを支払うことでセットを入手できます。 \n {MESSAGE}',
+          ' - 次の通貨のいずれかを支払うことでセットを入手できます。 \n{MESSAGE}',
         DE:
           '/pre Ich habe derzeit {SETS} einzigartige Sets, die Sie nicht hergestellt haben. Wenn Sie alle herstellen, erreichen Sie Niveau {LEVEL} \n\n' +
-          ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n {MESSAGE}',
+          ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n{MESSAGE}',
       },
       1: {
         EN:
           "/pre I currently have unique {SETS} Sets which you haven't crafted. Crafting all of them you will remain at level {LEVEL} \n\n" +
-          ' - You can get the sets by paying one of the following currencies: \n {MESSAGE}',
+          ' - You can get the sets by paying one of the following currencies: \n{MESSAGE}',
         PT:
           '/pre No momento, tenho {SETS} conjuntos unicos que você não criou. Ao criar todos eles, você permanecerá no nível {LEVEL} \n\n' +
-          ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n {MESSAGE}',
+          ' - Você pode obter os conjuntos pagando uma das seguintes moedas: \n{MESSAGE}',
         RU:
           '/pre В настоящее время у меня есть {SETS} уникальных наборов карточка, которые вы не создали. Создав все их, вы останетесь на уровне {LEVEL} \n\n' +
-          ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n {MESSAGE}',
+          ' - Вы можете получить наборы карточка, заплатив одну из следующих валют: \n{MESSAGE}',
         ES:
           '/pre Actualmente tengo {SETS} conjuntos únicos que no has creado. Creando todos ellos, permanecerás en el nivel {LEVEL} \n\n' +
-          ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n {MESSAGE}',
+          ' - Puede obtener los conjuntos pagando una de las siguientes monedas: \n{MESSAGE}',
         CN:
           '/pre 我目前有 {SETS} 种您尚未制作的独特套卡牌。精心制作所有这些，您将保持在 {LEVEL} 级 \n\n' +
-          ' - 您可以通过支付以下货币之一来获得套卡牌： \n {MESSAGE}',
+          ' - 您可以通过支付以下货币之一来获得套卡牌： \n{MESSAGE}',
         FR:
           "/pre J'ai actuellement {SETS} ensembles uniques que vous n'avez pas créés. En les fabriquant tous, vous resterez au niveau {LEVEL} \n\n" +
-          " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n {MESSAGE}",
+          " - Vous pouvez obtenir les sets en payant l'une des devises suivantes: \n{MESSAGE}",
         JA:
           '/pre 私は現在、あなたが作成していないユニークな{SETS}セットを持っています。 それらすべてを作成すると、レベル{LEVEL}のままになります \n\n' +
-          ' - 次の通貨のいずれかを支払うことでセットを入手できます。 \n {MESSAGE}',
+          ' - 次の通貨のいずれかを支払うことでセットを入手できます。 \n{MESSAGE}',
         DE:
           '/pre Ich habe derzeit einzigartige {SETS} Sets, die du nicht hergestellt hast. Wenn du sie alle herstellst, bleibst du auf Stufe {LEVEL} \n\n' +
-          ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n {MESSAGE}',
+          ' - Sie können die Sets erhalten, indem Sie eine der folgenden Währungen bezahlen: \n{MESSAGE}',
       },
     },
   },
@@ -1355,28 +1365,28 @@ module.exports = {
     RESPONSE: {
       EN:
         '/pre You currently have {SETS} sets i can request. \n\n' +
-        ' - I can get it by paying  one of the following currencies: \n {MESSAGE}',
+        ' - I can get it by paying  one of the following currencies: \n{MESSAGE}',
       PT:
         '/pre No momento, você tem {SETS} conjuntos que posso solicitar. \n\n' +
-        ' - Eu posso obtê-los pagando uma das seguintes moedas: \n {MESSAGE}',
+        ' - Eu posso obtê-los pagando uma das seguintes moedas: \n{MESSAGE}',
       RU:
         '/pre В настоящее время у вас есть {SETS} наборы карточка, которые я могу запросить. \n\n' +
-        ' - Я могу получить его, заплатив одну из следующих валют: \n {MESSAGE}',
+        ' - Я могу получить его, заплатив одну из следующих валют: \n{MESSAGE}',
       ES:
         '/pre Actualmente tiene {SETS} conjuntos que puedo solicitar. \n\n' +
-        ' - Puedo obtenerlo pagando una de las siguientes monedas: \n {MESSAGE}',
+        ' - Puedo obtenerlo pagando una de las siguientes monedas: \n{MESSAGE}',
       CN:
         '/pre 您目前有 {SETS} 套卡牌我可以要求。 \n\n' +
-        ' - 我可以通过以下货币之一来获得：\n {MESSAGE}',
+        ' - 我可以通过以下货币之一来获得：\n{MESSAGE}',
       FR:
         '/pre Vous avez actuellement {SETS} ensembles que je peux demander. \n\n' +
-        " - Je peux l'obtenir en payant l'une des devises suivantes: \n {MESSAGE}",
+        " - Je peux l'obtenir en payant l'une des devises suivantes: \n{MESSAGE}",
       JA:
         '/pre あなたは現在私が要求できる{SETS}セットを持っています。 \n\n' +
-        ' - 次のいずれかの通貨を支払うことで取得できます。 \n {MESSAGE}',
+        ' - 次のいずれかの通貨を支払うことで取得できます。 \n{MESSAGE}',
       DE:
         '/pre Sie haben derzeit {SETS} Sets, die ich anfordern kann. \n\n' +
-        ' - Ich kann es bekommen, indem ich eine der folgenden Währungen bezahle: \n {MESSAGE}',
+        ' - Ich kann es bekommen, indem ich eine der folgenden Währungen bezahle: \n{MESSAGE}',
     },
   },
   RANK: {
@@ -1412,172 +1422,6 @@ module.exports = {
         'ランクの読み取り中にエラーが発生しました。 後でもう一度やり直してください',
       DE:
         'Beim Lesen des Ranges ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal',
-    },
-  },
-  GIVEAWAY: {
-    NOTACTIVE: {
-      EN: "\nI currently don't have any giveaway. Try again later...",
-      PT:
-        '\nNão tenho nenhum sorteio no momento. Tente novamente mais tarde...',
-      RU:
-        '\nУ меня в настоящее время нет никакой Нарисовать. Попробуйте позже...',
-      ES:
-        '\nActualmente no tengo ningún sorteo. Intenta nuevamente más tarde...',
-      CN: '\n我目前没有任何抽奖。 稍后再试...',
-      FR: "\nJe n'ai actuellement aucun cadeau. Réessayez plus tard...",
-      JA: '\n現在、景品はありません。 あとでもう一度試してみてください...',
-      DE:
-        '\nIch habe derzeit kein Werbegeschenk. Versuchen Sie es später erneut...',
-    },
-    DEFAULT: {
-      0: {
-        EN: '\r\nYour entries: {ENTRIES}',
-        PT: '\r\nSuas entries: {ENTRIES}',
-        RU: '\r\nВаши записи: {ENTRIES}',
-        ES: '\r\nSus entradas: {ENTRIES}',
-        CN: '\r\n您的输入: {ENTRIES}',
-        FR: '\r\nVos entrées: {ENTRIES}',
-        JA: '\r\nあなたのエントリ： {ENTRIES}',
-        DE: '\r\nIhre Einträge: {ENTRIES}',
-      },
-      1: {
-        EN: '\r\nEnter using !ENTER command',
-        PT: '\r\nEntre usando o comando !ENTER',
-        RU: '\r\nВойдите с помощью команды !ENTER',
-        ES: '\r\nIngrese usando el comando !ENTER',
-        CN: '\r\n使用 !ENTER 进入',
-        FR: '\r\nEntrez en utilisant la commande !ENTER',
-        JA: '\r\n!ENTERコマンドを使用して入力します',
-        DE: '\r\nGeben Sie mit dem Befehl !ENTER ein',
-      },
-      2: {
-        EN: '\nRunning giveaway:\r\nPrice: {PRICE}\r\nEnd: {DATE}',
-        PT: '\nSorteio:\r\nPrêmio: {PRICE}\r\nFim: {DATE}',
-        RU: '\nРозыгрыш призов:\r\nПриз: {PRICE}\r\nКонец: {DATE}',
-        ES: '\nSorteo:\r\nPrecio: {PRICE}\r\nFinal: {DATE}',
-        CN: '\n抽奖:\r\n奖: {PRICE}\r\n结束: {DATE}',
-        FR: '\nLaufen Werbegeschenk:\r\nPrix: {PRICE}\r\nFin: {DATE}',
-        JA: '\nプレゼントの実行：\r\n価格：{PRICE}\r\n終わり：{DATE}',
-        DE: '\nLaufen Werbegeschenk:\r\nPreis: {PRICE}\r\nEnde: {DATE}',
-      },
-    },
-    ENTER: {
-      0: {
-        EN:
-          '\nYou have successfully entered the giveaway!' +
-          '\r\nPrice: {PRICE}' +
-          '\r\nEnd: {DATE}' +
-          '\r\n\nYou can get more entries by trading with me!',
-        PT:
-          '\nVocê entrou com sucesso no sorteio!' +
-          '\r\nPrêmio: {PRICE}' +
-          '\r\nFim: {DATE}' +
-          '\r\n\nVocê pode obter mais entradas negociando comigo!',
-        RU:
-          '\nВы успешно вошли в розыгрыш призов!' +
-          '\r\nПриз: {PRICE}' +
-          '\r\nКонец: {DATE}' +
-          '\r\n\nВы можете получить больше записей, торгуя со мной!',
-        ES:
-          '\n¡Has entrado con éxito en el sorteo!' +
-          '\r\nPrecio: {PRICE}' +
-          '\r\nFinal: {DATE}' +
-          '\r\n\n¡Puedes obtener más entradas comerciando conmigo!',
-        CN:
-          '\n您已成功进入抽奖！' +
-          '\r\n奖: {PRICE}' +
-          '\r\n结束: {DATE}' +
-          '\r\n\n您可以通过与我交易获得更多条目！',
-        FR:
-          '\nVous avez réussi à participer au concours!' +
-          '\r\nPrix: {PRICE}' +
-          '\r\nFin: {DATE}' +
-          "\r\n\nVous pouvez obtenir plus d'entrées en échangeant avec moi!",
-        JA:
-          '\n景品の入力に成功しました。' +
-          '\r\n価格： {PRICE}' +
-          '\r\n終わり： {DATE}' +
-          '\r\n\nあなたは私と取引することによってより多くのエントリーを得ることができます！',
-        DE:
-          '\nSie haben das Werbegeschenk erfolgreich eingegeben!' +
-          '\r\nPreis: {PRICE}' +
-          '\r\nEnde: {DATE}' +
-          '\r\n\nSie können mehr Einträge erhalten, indem Sie mit mir handeln!',
-      },
-      1: {
-        EN:
-          '\nYou already entered giveaway!' +
-          '\r\nYou can get more entries by trading with me!',
-        PT:
-          '\nVocê já entrou no sorteio!' +
-          '\r\nVocê pode obter mais entradas negociando comigo!',
-        RU:
-          '\nВы уже вошли в поддавку!' +
-          '\r\nВы можете получить больше записей, торгуя со мной!',
-        ES:
-          '\nYa entraste en el sorteo!' +
-          '\r\n¡Puedes obtener más entradas comerciando conmigo!',
-        CN: '\n您已经输入抽奖！\r\n您可以通过与我交易获得更多条目！',
-        FR:
-          '\nVous avez déjà participé au concours!' +
-          "\r\nVous pouvez obtenir plus d'entrées en échangeant avec moi!",
-        JA:
-          '\nあなたはすでに景品に入っています！' +
-          '\r\nあなたは私と取引することによってより多くのエントリーを得ることができます！',
-        DE:
-          '\nSie haben bereits Werbegeschenk eingegeben!' +
-          '\r\nSie können mehr Einträge erhalten, indem Sie mit mir handeln!',
-      },
-      2: {
-        EN: '• New giveaway entry added!\n',
-        PT: '• Nova entrada adicionada ao sorteio!\n',
-        RU: '• Новая запись добавлена!\n',
-        ES: '• Nueva entrada de sorteo añadido!\n',
-        CN: '• 添加了新的抽奖条目！\n',
-        FR: '• Nouvelle entrée gratuite ajoutée!\n',
-        JA: '• 新しい景品エントリーが追加されました！\n',
-        DE: '• Neuer Werbegeschenkeintrag hinzugefügt!\n',
-      },
-    },
-    RAFFLE: {
-      0: {
-        EN:
-          'Winner is: \n Username: {USERNAME}\n ID64: {ID64}\n Entries: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        PT:
-          'O vencedor é: \n Nome do usuário: {USERNAME}\n ID64: {ID64}\n Entradas: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        RU:
-          'Победитель: \n Имя пользователя: {USERNAME}\n ID64: {ID64}\n билеты: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        ES:
-          'El ganador es: \n Nombre de usuario: {USERNAME}\n ID64: {ID64}\n Entradas: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        CN:
-          '优胜者是: \n 用户名: {USERNAME}\n ID64: {ID64}\n 抽奖条目: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        FR:
-          "Le gagnant est: \n Nom d'utilisateur: {USERNAME}\n ID64: {ID64}\n Entrées: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}",
-        JA:
-          '勝者は: \n ユーザー名: {USERNAME}\n ID64: {ID64}\n エントリー: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-        DE:
-          'Gewinner ist: \n Nutzername: {USERNAME}\n ID64: {ID64}\n Einträge: {ENTRIES}\n Steam: https://steamcommunity.com/profiles/{WINNER}',
-      },
-      1: {
-        EN: '\nThere are no participants',
-        PT: '\nNão há participantes',
-        RU: '\nНет участников',
-        ES: '\nNo hay participantes',
-        CN: '\n没有参加者',
-        FR: "\nIl n'y a pas de participants",
-        JA: '\n参加者はいません',
-        DE: '\nEs gibt keine Teilnehmer',
-      },
-      2: {
-        EN: '\nThere is already a winner',
-        PT: '\nJá existe um vencedor',
-        RU: '\nУже есть победитель',
-        ES: '\nYa hay un ganador',
-        CN: '\n已经有一个赢家',
-        FR: '\nIl y a déjà un gagnant',
-        JA: '\nすでに勝者がいます',
-        DE: '\nEs gibt bereits einen Gewinner',
-      },
     },
   },
   PROFIT: {
@@ -1717,9 +1561,9 @@ module.exports = {
           '  • {SETS4} conjunto(s) por {TFSELL} llave(s) TF2 \n' +
           '  • {SETS3} conjunto(s) por {GEMSSELL} Gema(s) \n\n' +
           ' - Ya vendimos: \n' +
-          '  • {SETS5} conjunto(s) por {CSGOBUY} CS:GO key(s) \n' +
-          '  • {SETS6} conjunto(s) por {HYDRABUY} Hydra key(s) \n' +
-          '  • {SETS7} conjunto(s) por {TFBUY} TF2 key(s) \n' +
+          '  • {SETS5} conjunto(s) por {CSGOBUY} llave(s) CS:GO \n' +
+          '  • {SETS6} conjunto(s) por {HYDRABUY} llave(s) Hydra \n' +
+          '  • {SETS7} conjunto(s) por {TFBUY} llave(s) TF2 \n' +
           '  • {SETS8} conjunto(s) por {GEMSBUY} Gema(s) \n',
         CN:
           '\n' +
@@ -1815,89 +1659,22 @@ module.exports = {
     },
   },
   SETS4SETS: {
-    NOTHAVEACCESS: {
-      EN:
-        'You do not have access to this command. You must perform an exchange to gain access this command.',
-      PT:
-        'Você não tem acesso a este comando. Você deve realizar uma troca para obter acesso a este comando.',
-      RU:
-        'У вас нет доступа к этой команда. Вы должны выполнить обмен, чтобы получить доступ к этой команда.',
-      ES:
-        'No tienes acceso a este comando. Debe realizar un intercambio para obtener acceso a este comando.',
-      CN: '您无权访问此命令。 您必须执行交换才能访问此命令。',
-      FR:
-        "Vous n'avez pas accès à cette commande. Vous devez effectuer un échange pour accéder à cette commande.",
-      JA:
-        'このコマンドにアクセスすることはできません。 このコマンドにアクセスするには、交換を実行する必要があります。',
-      DE:
-        'Sie haben keinen Zugriff auf diesen Befehl. Sie müssen einen Austausch durchführen, um Zugriff auf diesen Befehl zu erhalten.',
-    },
     AMOUNTOVER: {
-      0: {
-        EN:
-          'Please try a lower amount of Sets. You can only Exchange up to {SETS} Sets!',
-        PT:
-          'Tente uma quantidade menor de conjuntos. Você só pode trocar até {SETS} conjuntos!',
-        RU:
-          'Пожалуйста, попробуйте меньшее количество набор(ы) карточка. Вы можете обменять только до {SETS} набор(ы) карточка!',
-        ES:
-          'Por favor, intente una menor cantidad de conjuntos. ¡Solo puedes intercambiar hasta {SETS} conjuntos!',
-        CN: '请尝试较少的套卡牌数。 您最多只能交换 {SETS} 套卡牌！',
-        FR:
-          "Veuillez essayer un nombre inférieur d'ensembles. Vous ne pouvez échanger que {SETS} ensembles!",
-        JA:
-          'セットの量を減らしてみてください。 交換できるのは{SETS}セットまでです！',
-        DE:
-          'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Sie können nur bis zu {SETS} Sets austauschen!',
-      },
-      1: {
-        EN:
-          'Please try a lower amount of Sets. You can only Exchange up to {SETS} Sets at a time with this command!',
-        PT:
-          'Tente uma quantidade menor de conjuntos. Você pode trocar até {SETS} conjuntos por vez com este comando!',
-        RU:
-          'Пожалуйста, попробуйте меньшее количество набор(ы) карточка. С помощью этой команды вы можете одновременно обмениваться только {SETS} набор(ы) карточка!',
-        ES:
-          'Por favor, intente una menor cantidad de conjuntos. ¡Solo puedes intercambiar hasta {SETS} conjuntos a la vez con este comando!',
-        CN: '请尝试较少的套卡牌数。 使用此命令一次最多只能交换 {SETS} 套卡牌！',
-        FR:
-          "Veuillez essayer un nombre inférieur d'ensembles. Vous ne pouvez échanger que {SETS} ensembles à la fois avec cette commande!",
-        JA:
-          'セットの量を減らしてみてください。 このコマンドでは、一度に最大{SETS}セットしか交換できません。',
-        DE:
-          'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Mit diesem Befehl können Sie nur bis zu {SETS} Sätze gleichzeitig austauschen!',
-      },
-    },
-    CANUSE: {
-      0: {
-        EN: 'Now you can use the !SETS4SETS command only after an exchange!',
-        PT: 'Agora você pode usar o comando !SETS4SETS somente após uma troca!',
-        RU:
-          'Теперь вы можете использовать команду !SETS4SETS только после обмена!',
-        ES:
-          '¡Ahora puede usar el comando !SETS4SETS solo después de un intercambio!',
-        CN: '现在，只有在交换后才能使用 !SETS4SETS 命令！',
-        FR:
-          "Vous ne pouvez désormais utiliser la commande !SETS4SETS qu'après un échange!",
-        JA: 'これで、交換後にのみ!SETS4SETSコマンドを使用できます。',
-        DE:
-          'Jetzt können Sie den Befehl !SETS4SETS erst nach einem Austausch verwenden!',
-      },
-      1: {
-        EN: '• Now you can use the !SETS4SETS command for: {SETS} Set(s).\n',
-        PT:
-          '• Agora você pode usar o comando !SETS4SETS para: {SETS} conjuntos.\n',
-        RU:
-          '• Теперь вы можете использовать команду !SETS4SETS для: {SETS} набор(ы) карточка.\n',
-        ES:
-          '• Ahora puede usar el comando !SETS4SETS para: {SETS} conjunto(s).\n',
-        CN: '• 现在，您可以将 !SETS4SETS 命令用于： {SETS} 套卡牌。\n',
-        FR:
-          '• Vous pouvez maintenant utiliser la commande !SETS4SETS pour: {SETS} ensemble(s).\n',
-        JA: '• これで、「！SETS4SETS」コマンドを{SETS}セット使用できます。\n',
-        DE:
-          '• Jetzt können Sie den Befehl !SETS4SETS verwenden für: {SETS} Sätze.\n',
-      },
+      EN:
+        'Please try a lower amount of Sets. You can only exchange up to {SETS} Sets at a time with this command!',
+      PT:
+        'Tente uma quantidade menor de conjuntos. Você pode trocar até {SETS} conjuntos por vez com este comando!',
+      RU:
+        'Пожалуйста, попробуйте меньшее количество набор(ы) карточка. С помощью этой команды вы можете одновременно обмениваться только {SETS} набор(ы) карточка!',
+      ES:
+        'Por favor, intente una menor cantidad de conjuntos. ¡Solo puedes intercambiar hasta {SETS} conjuntos a la vez con este comando!',
+      CN: '请尝试较少的套卡牌数。 使用此命令一次最多只能交换 {SETS} 套卡牌！',
+      FR:
+        "Veuillez essayer un nombre inférieur d'ensembles. Vous ne pouvez échanger que {SETS} ensembles à la fois avec cette commande!",
+      JA:
+        'セットの量を減らしてみてください。 このコマンドでは、一度に最大{SETS}セットしか交換できません。',
+      DE:
+        'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Mit diesem Befehl können Sie nur bis zu {SETS} Sätze gleichzeitig austauschen!',
     },
   },
   USERCHECK: {
@@ -2263,6 +2040,55 @@ module.exports = {
       'Ich lade gerade mein Inventar. Bitte versuchen Sie es später noch einmal',
   },
   ERROR: {
+    GETOFFER: {
+      EN:
+        'An error occurred while getting your offers. Please try again later!',
+      PT:
+        'Ocorreu um erro ao obter suas ofertas. Por favor, tente novamente mais tarde!',
+      RU:
+        'При получении ваших предложений произошла ошибка. Пожалуйста, повторите попытку позже!',
+      ES:
+        'Se produjo un error al recibir sus ofertas. ¡Por favor, inténtelo de nuevo más tarde!',
+      CN: '获取报价时发生错误。 请稍后再试！',
+      FR:
+        "Une erreur s'est produite lors de l'obtention de vos offres. Veuillez réessayer plus tard!",
+      JA:
+        'オファーの取得中にエラーが発生しました。 後でもう一度やり直してください。',
+      DE:
+        'Beim Abrufen Ihrer Angebote ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal!',
+    },
+    CANCELOFFER: {
+      EN:
+        'An error occurred while canceling your offers. Please try again later!',
+      PT:
+        'Ocorreu um erro ao cancelar suas ofertas. Por favor, tente novamente mais tarde!',
+      RU:
+        'Произошла ошибка при отмене ваших предложений. Пожалуйста, повторите попытку позже!',
+      ES:
+        'Se produjo un error al cancelar sus ofertas. ¡Por favor, inténtelo de nuevo más tarde!',
+      CN: '取消报价时发生错误。 请稍后再试！',
+      FR:
+        "Une erreur s'est produite lors de l'annulation de vos offres. Veuillez réessayer plus tard!",
+      JA:
+        'オファーのキャンセル中にエラーが発生しました。 後でもう一度やり直してください。',
+      DE:
+        'Beim Stornieren Ihrer Angebote ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal!',
+    },
+    NONEXISTENTOFFER: {
+      EN: 'Offer with ID:{OFFERID} is not active, so it may not be cancelled.',
+      PT:
+        'A oferta com ID:{OFFERID} não está ativa, portanto não pode ser cancelada.',
+      RU: 'Оффер с ID:{OFFERID} не активен, поэтому его нельзя отменить.',
+      ES:
+        'La oferta con ID:{OFFERID} no está activa, por lo que no se puede cancelar.',
+      CN: 'ID:{OFFERID}的优惠未激活，因此可能不会被取消。',
+      FR:
+        "L'offre avec ID:{OFFERID} n'est pas active, elle ne peut donc pas être annulée.",
+      JA:
+        'ID:{OFFERID}のオファーはアクティブではないため、キャンセルされない場合があります。',
+      DE:
+        'Angebot mit ID:{OFFERID} ist nicht aktiv und kann daher nicht storniert werden.',
+    },
     TRADEHOLD: {
       EN:
         'An error occurred while getting your trade holds. Make sure you have no trade hold. Please try again!',
@@ -2436,6 +2262,17 @@ module.exports = {
         },
       },
       INVALID: {
+        OFFERID: {
+          EN: 'Please enter a valid offerID - example: {command}',
+          PT: 'Insira um ID de oferta válido - exemplo: {command}',
+          RU:
+            'Введите действительный идентификатор предложения - пример: {command}',
+          ES: 'Ingrese un ID de oferta válido - ejemplo: {command}',
+          CN: '请输入有效的offerID-例如： {command}',
+          FR: "Saisissez un identifiant d'offre valide - exemple: {command}",
+          JA: '有効なオファーIDを入力してください-例： {command}',
+          DE: 'Geben Sie eine gültige Angebots-ID ein - Beispiel: {command}',
+        },
         MESSAGE: {
           EN: 'Please enter a message',
           PT: 'Digite uma mensagem',
@@ -2581,68 +2418,105 @@ module.exports = {
       },
       AMOUNTOVER: {
         SETS: {
-          EN: 'Please try a lower amount of sets.',
-          PT: 'Por favor, tente uma quantidade menor de conjuntos.',
-          RU: 'Пожалуйста, попробуйте меньшее количество наборы карточка.',
-          ES: 'Por favor, intente una menor cantidad de conjuntos.',
-          CN: '请尝试减少套卡牌牌。',
-          FR: "Veuillez essayer un nombre inférieur d'ensembles.",
-          JA: '少量のセットをお試しください。',
-          DE: 'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets.',
+          EN:
+            'Please try a lower amount of sets. The maximum amount for this command is {SETS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de conjuntos. A quantidade maxima para esse comando é {SETS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество наборы карточка. Максимальное количество для этой команды {SETS}.',
+          ES:
+            'Por favor, intente una menor cantidad de conjuntos. La cantidad máxima para este comando es {SETS}.',
+          CN: '请尝试减少套卡牌牌。此命令的最大数量为{SETS}。',
+          FR:
+            "Veuillez essayer un nombre inférieur d'ensembles. Le montant maximum pour cette commande est de {SETS}.",
+          JA:
+            '少量のセットをお試しください。このコマンドの最大量は{SETS}です。',
+          DE:
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Der maximale Betrag für diesen Befehl beträgt {SETS}.',
         },
         CSGO: {
-          EN: 'Please try a lower amount of keys.',
-          PT: 'Por favor, tente uma quantidade menor de chaves.',
-          RU: 'Пожалуйста, попробуйте меньшее количество ключи.',
-          ES: 'Por favor, intente una menor cantidad de llaves.',
-          CN: '请尝试减少钥匙数。',
-          FR: 'Veuillez essayer un nombre inférieur de clés.',
-          JA: 'キーの数を減らしてみてください。',
+          EN:
+            'Please try a lower amount of keys. The maximum amount for this command is {KEYS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de chaves. A quantidade maxima para esse comando é {KEYS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество ключи. Максимальное количество для этой команды {KEYS}.',
+          ES:
+            'Por favor, intente una menor cantidad de llaves. La cantidad máxima para este comando es {KEYS}.',
+          CN: '请尝试减少钥匙数。此命令的最大数量为{KEYS}。',
+          FR:
+            'Veuillez essayer un nombre inférieur de clés. Le montant maximum pour cette commande est de {KEYS}.',
+          JA:
+            'キーの数を減らしてみてください。このコマンドの最大量は{KEYS}です。',
           DE:
-            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln.',
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln. Der maximale Betrag für diesen Befehl beträgt {KEYS}.',
         },
         HYDRA: {
-          EN: 'Please try a lower amount of keys.',
-          PT: 'Por favor, tente uma quantidade menor de chaves.',
-          RU: 'Пожалуйста, попробуйте меньшее количество ключи.',
-          ES: 'Por favor, intente una menor cantidad de llaves.',
-          CN: '请尝试减少钥匙数。',
-          FR: 'Veuillez essayer un nombre inférieur de clés.',
-          JA: 'キーの数を減らしてみてください。',
+          EN:
+            'Please try a lower amount of keys. The maximum amount for this command is {KEYS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de chaves. A quantidade maxima para esse comando é {KEYS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество ключи. Максимальное количество для этой команды {KEYS}.',
+          ES:
+            'Por favor, intente una menor cantidad de llaves. La cantidad máxima para este comando es {KEYS}.',
+          CN: '请尝试减少钥匙数。此命令的最大数量为{KEYS}。',
+          FR:
+            'Veuillez essayer un nombre inférieur de clés. Le montant maximum pour cette commande est de {KEYS}.',
+          JA:
+            'キーの数を減らしてみてください。このコマンドの最大量は{KEYS}です。',
           DE:
-            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln.',
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln. Der maximale Betrag für diesen Befehl beträgt {KEYS}.',
         },
         TF: {
-          EN: 'Please try a lower amount of keys.',
-          PT: 'Por favor, tente uma quantidade menor de chaves.',
-          RU: 'Пожалуйста, попробуйте меньшее количество ключи.',
-          ES: 'Por favor, intente una menor cantidad de llaves.',
-          CN: '请尝试减少钥匙数。',
-          FR: 'Veuillez essayer un nombre inférieur de clés.',
-          JA: 'キーの数を減らしてみてください。',
+          EN:
+            'Please try a lower amount of keys. The maximum amount for this command is {KEYS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de chaves. A quantidade maxima para esse comando é {KEYS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество ключи. Максимальное количество для этой команды {KEYS}.',
+          ES:
+            'Por favor, intente una menor cantidad de llaves. La cantidad máxima para este comando es {KEYS}.',
+          CN: '请尝试减少钥匙数。此命令的最大数量为{KEYS}。',
+          FR:
+            'Veuillez essayer un nombre inférieur de clés. Le montant maximum pour cette commande est de {KEYS}.',
+          JA:
+            'キーの数を減らしてみてください。このコマンドの最大量は{KEYS}です。',
           DE:
-            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln.',
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Schlüsseln. Der maximale Betrag für diesen Befehl beträgt {KEYS}.',
         },
         GEMS: {
-          EN: 'Please try a lower amount of gems.',
-          PT: 'Por favor, tente uma quantidade menor de gemas.',
-          RU: 'Пожалуйста, попробуйте меньшее количество самоцветы.',
-          ES: 'Por favor, intente una menor cantidad de gemas.',
-          CN: '请尝试减少宝石数。',
-          FR: 'Veuillez essayer une quantité inférieure de gemmes.',
-          JA: '宝石の量を減らしてみてください。',
+          EN:
+            'Please try a lower amount of gems. The maximum amount for this command is {GEMS}.',
+          PT:
+            'Por favor, tente uma quantidade menor de gemas. A quantidade maxima para esse comando é {GEMS}.',
+          RU:
+            'Пожалуйста, попробуйте меньшее количество самоцветы. Максимальное количество для этой команды {GEMS}.',
+          ES:
+            'Por favor, intente una menor cantidad de gemas. La cantidad máxima para este comando es {GEMS}.',
+          CN: '请尝试减少宝石数。此命令的最大数量为{GEMS}',
+          FR:
+            'Veuillez essayer une quantité inférieure de gemmes. Le montant maximum pour cette commande est de {GEMS}.',
+          JA:
+            '宝石の量を減らしてみてください。このコマンドの最大量は{GEMS}です。',
           DE:
-            'Bitte versuchen Sie es mit einer geringeren Anzahl von Edelsteinen.',
+            'Bitte versuchen Sie es mit einer geringeren Anzahl von Edelsteinen. Der maximale Betrag für diesen Befehl beträgt {GEMS}.',
         },
         LEVEL: {
-          EN: 'Please try a lower level.',
-          PT: 'Por favor, tente um nível mais baixo.',
-          RU: 'Пожалуйста, попробуйте более низкий уровень.',
-          ES: 'Por favor, intente un nivel inferior.',
-          CN: '请尝试较低的级别。',
-          FR: 'Veuillez essayer un niveau inférieur.',
-          JA: '低いレベルを試してください。',
-          DE: 'Bitte versuchen Sie es mit einer niedrigeren Ebene.',
+          EN:
+            'Please try a lower level. The maximum amount for this command is {LEVEL}.',
+          PT:
+            'Por favor, tente um nível mais baixo. A quantidade maxima para esse comando é {LEVEL}.',
+          RU:
+            'Пожалуйста, попробуйте более низкий уровень. Максимальное количество для этой команды {LEVEL}.',
+          ES:
+            'Por favor, intente un nivel inferior. La cantidad máxima para este comando es {LEVEL}.',
+          CN: '请尝试较低的级别。此命令的最大数量为{LEVEL}',
+          FR:
+            'Veuillez essayer un niveau inférieur. Le montant maximum pour cette commande est de {LEVEL}.',
+          JA: '低いレベルを試してください。このコマンドの最大量は{LEVEL}です。',
+          DE:
+            'Bitte versuchen Sie es mit einer niedrigeren Ebene. Der maximale Betrag für diesen Befehl beträgt {LEVEL}.',
         },
       },
     },
@@ -3273,11 +3147,45 @@ module.exports = {
     ],
   },
   HELP: {
+    EN:
+      "Hello there, i'm a bot to easy level up your Steam profile! \n\n" +
+      ' • You may type !COMMANDS for see the list of commands. \n' +
+      ' • You may type !LANG for change language. \n\n',
+    PT:
+      'Olá, sou um bot para subir de nível facilmente seu perfil do Steam! \n\n' +
+      ' • Você pode digitar !COMMANDS para ver a lista de comandos. \n' +
+      ' • Você pode digitar !LANG para alterar o idioma. \n\n',
+    RU:
+      'Привет, я бот, чтобы легко повысить свой уровень в Steam! \n\n' +
+      ' • Вы можете ввести !COMMANDS для получения списка команд. \n' +
+      ' • Вы можете ввести !LANG, чтобы изменить язык. \n\n',
+    ES:
+      'Hola, soy una bot para subir de nivel fácilmente tu perfil de Steam! \n\n' +
+      ' • Puede escribir !COMMANDS para la lista de comandos. \n' +
+      ' • Puede escribir !LANG para cambiar el idioma. \n\n',
+    CN:
+      '您好，我是一个轻松升级您的Steam个人资料的机器人！ \n\n' +
+      ' • 您可以键入《!COMMANDS》以查看命令列表。 \n' +
+      ' • 您可以输入《!LANG》更改语言。 \n\n',
+    FR:
+      'Bonjour, je suis un robot pour améliorer facilement votre profil Steam! \n\n' +
+      ' • Vous pouvez taper !COMMANDS pour la liste des commandes. \n' +
+      ' • Vous pouvez taper !LANG pour changer de langue. \n\n',
+    JA:
+      'こんにちは、私はあなたのSteamプロファイルを簡単に更新するボットです！ \n\n' +
+      ' • コマンドのリストを表示するには、「!COMMANDS」と入力できます。 \n' +
+      ' • 言語を変更するには、「!LANG」と入力できます。 \n\n',
+    DE:
+      'Hallo, ich bin ein Bot, um dein Steam-Profil ganz einfach zu verbessern! \n\n' +
+      ' • Sie können !COMMANDS eingeben, um die Liste der Befehle anzuzeigen. \n' +
+      ' • Sie können !LANG eingeben, um die Sprache zu ändern. \n\n',
+  },
+
+  COMMANDS: {
     EN: [
       'Commands: \n',
       '► !LANG = Change the bot language. \n',
       '► !TUTORIAL = Shows the video tutorial. \n',
-      '► !GIVEAWAY = Get info about giveaway and your entries. \n',
       '► !SETS4SETS (amount_of_sets) = Trade your duplicate sets for new ones you can craft. \n',
       '► !PRICES = Shows our current rates. \n',
       '► !STOCK = Shows currencies stock of the bot. \n',
@@ -3292,35 +3200,34 @@ module.exports = {
       'CSGO Section. \n',
       '► !CHECKCSGO (amount_of_keys) = Shows how many sets and what level you would reach for a specific amount of keys. \n',
       '► !BUYCSGO (amount_of_keys) = Buy uncrafted Cardsets for a specific amount of CS:GO Keys. \n',
-      '► !BUYANYCSGO (amount_of_keys) = Buy any Cardsets for a specific amount of CS:GO Keys. \n',
+      '► !BUYANYCSGO (amount_of_keys) = Buy any Cardsets for a specific amount of CS:GO Keys. The bot will ignore your current badges. \n',
       '► !BUYONECSGO (amount_of_keys) = Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  \n\n',
       'Hydra Section. \n',
       '► !CHECKHYDRA (amount_of_keys) = Shows how many sets and what level you would reach for a specific amount of HYDRA keys. \n',
       '► !BUYHYDRA (amount_of_keys) = Buy uncrafted Cardsets for a specific amount of HYDRA Keys. \n',
-      '► !BUYANYHYDRA (amount_of_keys) = Buy any Cardsets for a specific amount of HYDRA Keys. \n',
+      '► !BUYANYHYDRA (amount_of_keys) = Buy any Cardsets for a specific amount of HYDRA Keys. The bot will ignore your current badges. \n',
       '► !BUYONEHYDRA (amount_of_keys) = Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  \n\n',
       'TF2 Section. \n',
-      '► !CHECKTF (amount_of_keys) = Shows how many sets and what level you would reach for a specific amount of tf2 keys. \n',
+      '► !CHECKTF (amount_of_keys) = Shows how many sets and what level you would reach for a specific amount of TF2 keys. \n',
       '► !BUYTF (amount_of_keys) = Buy uncrafted Cardsets for a specific amount of TF2 Keys. \n',
-      '► !BUYANYTF (amount_of_keys) = Buy any Cardsets for a specific amount of TF2 Keys. \n',
+      '► !BUYANYTF (amount_of_keys) = Buy any Cardsets for a specific amount of TF2 Keys. The bot will ignore your current badges. \n',
       '► !BUYONETF (amount_of_keys) = Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate.  \n\n',
       'GEMS Section. \n',
-      '► !CHECKGEMS (amount_of_gems) = Shows how many sets and what level you would reach for a specific amount of gems. \n',
-      '► !BUYGEMS (amount_of_sets) = Buy a specific amount of uncrafted Cardsets for GEMS. \n',
-      '► !BUYANYGEMS (amount_of_sets) = Buy a specific amount of amount of Cardsets per gems. \n',
+      '► !CHECKGEMS (amount_of_gems) = Shows how many sets and what level you would reach for a specific amount of Gems. \n',
+      '► !BUYGEMS (amount_of_sets) = Buy a specific amount of uncrafted Cardsets for Gems. \n',
+      '► !BUYANYGEMS (amount_of_sets) = Buy any Cardsets for a specific amount of Gems. The bot will ignore your current badges. \n',
       '► !BUYONEGEMS (amount_of_sets) = Use this if you are a badge collector. BOT will send only one set of each game, following the current BOT rate. \n\n',
       'Suppliers Section. \n',
       '► !SELLCHECK = Checks for Sets the Bot can buy from you. \n',
       '► !SELLCSGO (amount_of_keys) = Sell Cardsets and get a specific amount of CS:GO Keys. \n',
       '► !SELLTF (amount_of_keys) = Sell Cardsets and get a specific amount of TF2 Keys. \n',
       '► !SELLHYDRA (amount_of_keys) = Sell Cardsets and get a specific amount of HYDRA Keys. \n',
-      '► !SELLGEMS (amount_of_sets) = Sell a specific amount of Cardsets and get GEMS. \n',
+      '► !SELLGEMS (amount_of_sets) = Sell a specific amount of Cardsets and get Gems. \n',
     ],
     PT: [
       'Comandos: \n',
       '► !LANG = Altere o idioma do bot. \n',
       '► !TUTORIAL = Mostra o video tutorial. \n',
-      '► !GIVEAWAY = Obtenha informações sobre o sorteio e suas entradas. \n',
       '► !SETS4SETS (quantidade_de_conjuntos) = Troque seus conjuntos duplicados por novos que você pode criar. \n',
       '► !PRICES = Mostra os preços atuais. \n',
       '► !STOCK = Verifica o estoque do bot. \n',
@@ -3335,35 +3242,34 @@ module.exports = {
       'Seção de CSGO. \n',
       '► !CHECKCSGO (quantidade_de_chaves) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de chaves. \n',
       '► !BUYCSGO (quantidade_de_chaves) = Compra conjuntos de cartas não fabricados por uma quantidade específica de chaves de CS:GO. \n',
-      '► !BUYANYCSGO (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves de CS:GO. \n',
+      '► !BUYANYCSGO (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves de CS:GO. O bot irá ignorar seus emblemas atuais. \n',
       '► !BUYONECSGO (quantidade_de_chaves) = Use isso se você for um colecionador de insígnias. O BOT enviará apenas um conjunto de cada jogo, seguindo a taxa atual do BOT.  \n\n',
       'Seção de Hydra. \n',
       '► !CHECKHYDRA (quantidade_de_chaves) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de chaves. \n',
       '► !BUYHYDRA (quantidade_de_chaves) = Compra conjuntos de cartas não fabricados por uma quantidade específica de chaves HYDRA. \n',
-      '► !BUYANYHYDRA (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves HYDRA. \n',
+      '► !BUYANYHYDRA (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves HYDRA. O bot irá ignorar seus emblemas atuais. \n',
       '► !BUYONEHYDRA (quantidade_de_chaves) = Use isso se você for um colecionador de insígnias. O BOT enviará apenas um conjunto de cada jogo, seguindo a taxa atual do BOT.  \n\n',
       'Seção de TF2. \n',
       '► !CHECKTF (quantidade_de_chaves) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de chaves. \n',
       '► !BUYTF (quantidade_de_chaves) = Compra conjuntos de cartas não fabricados por uma quantidade específica de chaves de TF2. \n',
-      '► !BUYANYTF (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves de TF2. \n',
+      '► !BUYANYTF (quantidade_de_chaves) = Compra qualquer conjunto de cartas por uma quantidade específica de chaves de TF2. O bot irá ignorar seus emblemas atuais. \n',
       '► !BUYONETF (quantidade_de_chaves) = Use isso se você for um colecionador de insígnias. O BOT enviará apenas um conjunto de cada jogo, seguindo a taxa atual do BOT.  \n\n',
       'Seção de GEMS. \n',
-      '► !CHECKGEMS (quantidade_de_gemas) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de gemas. \n',
-      '► !BUYGEMS (quantidade_de_conjuntos) = Compra uma quantidade específica de conjuntos de cartas não fabricados por gemas. \n',
-      '► !BUYANYGEMS (quantidade_de_conjuntos) = Compra uma quantidade uma quantidade específica de conjunto de cartas por gemas. \n',
+      '► !CHECKGEMS (quantidade_de_gemas) = Mostra quantos conjuntos e qual nível você alcançaria para uma quantidade específica de Gemas. \n',
+      '► !BUYGEMS (quantidade_de_conjuntos) = Compra uma quantidade específica de conjuntos de cartas não fabricados por Gemas. \n',
+      '► !BUYANYGEMS (quantidade_de_conjuntos) = Compra uma quantidade uma quantidade específica de conjunto de cartas por Gemas. O bot irá ignorar seus emblemas atuais. \n',
       '► !BUYONEGEMS (quantidade_de_conjuntos) = Use isso se você for um colecionador de insígnias. O BOT enviará apenas um conjunto de cada jogo, seguindo a taxa atual do BOT. \n\n',
       'Seção Fornecedores. \n',
       '► !SELLCHECK = Verifica quantos conjuntos o Bot pode comprar de você. \n',
       '► !SELLCSGO (quantidade_de_chaves) = Venda conjuntos de cartas e receba uma quantidade específica de chaves de CS:GO. \n',
       '► !SELLTF (quantidade_de_chaves) = Venda conjuntos de cartas e receba uma quantidade específica de chaves de TF2. \n',
       '► !SELLHYDRA (quantidade_de_chaves) = Venda conjuntos de cartas e receba uma quantidade específica de chaves HYDRA. \n',
-      '► !SELLGEMS (quantidade_de_conjuntos) = Venda uma quantidade específica de conjuntos de cartas e receba gemas. \n',
+      '► !SELLGEMS (quantidade_de_conjuntos) = Venda uma quantidade específica de conjuntos de cartas e receba Gemas. \n',
     ],
     RU: [
       'команды: \n',
       '► !LANG = Измените язык бота. \n',
       '► !TUTORIAL = Показывает видеоурок. \n',
-      '► !GIVEAWAY = Получить информацию о поддавки и ваши записи. \n',
       '► !SETS4SETS (количество наборы) = Обменяйте дубликаты наборы на новые, которые вы сможете создать. \n',
       '► !PRICES = Показывает наши текущие цены. \n',
       '► !STOCK = Показывает сток бота. \n',
@@ -3378,22 +3284,22 @@ module.exports = {
       'Раздел CSGO. \n',
       '► !CHECKCSGO (количество ключей) = Показывает, сколько наборы и какой уровень вы бы достигли для определенного количества ключей. \n',
       '► !BUYCSGO (количество ключей) = Используйте эту команду чтобы купить сеты за CS:GO ключи. \n',
-      '► !BUYANYCSGO (количество ключей) = Используйте эту команду чтобы купить купить сеты за CS:GO ключи, без учета ваших текущих значки. \n',
+      '► !BUYANYCSGO (количество ключей) = Используйте эту команду чтобы купить купить сеты за CS:GO ключи, без учета ваших текущих значки. бот проигнорирует ваши текущие значки. \n',
       '► !BUYONECSGO (количество ключей) = Используйте эту команду если вы коллекционер значки. Бот отправит вам по 1 сету каждой игры значка которой у вас нет по текущим ценам. \n\n',
       'Раздел Гидра. \n',
       '► !CHECKHYDRA (количество ключей) = Показывает, сколько наборы и какой уровень вы бы достигли для определенного количества ключей. \n',
       '► !BUYHYDRA (количество ключей) = Используйте эту команду чтобы купить сеты за Гидра ключи. \n',
-      '► !BUYANYHYDRA (количество ключей) = Используйте эту команду чтобы купить купить сеты за Гидра ключи, без учета ваших текущих значки. \n',
+      '► !BUYANYHYDRA (количество ключей) = Используйте эту команду чтобы купить купить сеты за Гидра ключи, без учета ваших текущих значки. бот проигнорирует ваши текущие значки. \n',
       '► !BUYONEHYDRA (количество ключей) = Используйте эту команду если вы коллекционер значки. Бот отправит вам по 1 сету каждой игры значка которой у вас нет по текущим ценам. \n\n',
       'Раздел TF2. \n',
       '► !CHECKTF (количество ключей) = Показывает, сколько наборы и какой уровень вы бы достигли для определенного количества ключей. \n',
       '► !BUYTF (количество ключей) = Используйте эту команду чтобы купить сеты за TF2 ключи. \n',
-      '► !BUYANYTF (количество ключей) = Используйте эту команду чтобы купить купить сеты за TF2 ключи, без учета ваших текущих значки. \n',
+      '► !BUYANYTF (количество ключей) = Используйте эту команду чтобы купить купить сеты за TF2 ключи, без учета ваших текущих значки. бот проигнорирует ваши текущие значки. \n',
       '► !BUYONETF (количество ключей) = Используйте эту команду если вы коллекционер значки. Бот отправит вам по 1 сету каждой игры значка которой у вас нет по текущим ценам. \n\n',
       'Раздел Самоцветы. \n',
       '► !CHECKGEMS (количество самоцветами) = Показывает, сколько наборы и какой уровень вы бы достигли для определенного количества самоцветами. \n',
       '► !BUYGEMS (количество наборы) = Используйте эту команду чтобы купить сеты за самоцветами. \n',
-      '► !BUYANYGEMS (количество наборы) = Используйте эту команду чтобы купить купить сеты за самоцветами, без учета ваших текущих значки. \n',
+      '► !BUYANYGEMS (количество наборы) = Используйте эту команду чтобы купить купить сеты за самоцветами, без учета ваших текущих значки. бот проигнорирует ваши текущие значки. \n',
       '► !BUYONEGEMS (количество наборы) = Используйте эту команду если вы коллекционер значки. Бот отправит вам по 1 сету каждой игры значка которой у вас нет по текущим ценам. \n\n',
       'Раздел поставщиков. \n',
       '► !SELLCHECK = Подсчитывает сколько наборы вы можете продать. \n',
@@ -3406,8 +3312,7 @@ module.exports = {
       'Comandos: \n',
       '► !LANG = Cambia el idioma del bot. \n',
       '► !TUTORIAL = Muestra el video tutorial. \n',
-      '► !GIVEAWAY = Obtenga información sobre el sorteo y sus entradas. \n',
-      '► !SETS4SETS X = Cambia tus conjuntos duplicados por otros nuevos que puedas crear. \n',
+      '► !SETS4SETS (número_de_llaves) = Cambia tus conjuntos duplicados por otros nuevos que puedas crear. \n',
       '► !PRICES = Muestra nuestras tarifas actuales. \n',
       '► !STOCK = Verifique el stock del bot. \n',
       '► !REPORT (mensaje) = Utilícelo para enviar mensajes directamente a mi propietario. \n',
@@ -3421,22 +3326,22 @@ module.exports = {
       'Sección CSGO. \n',
       '► !CHECKCSGO (número_de_llaves) = Muestra cuántos conjuntos y qué nivel alcanzarías para  una cantidad específica de llaves. \n',
       '► !BUYCSGO (número_de_llaves) = Compre conjuntos de cromos no fabricados por una cantidad específica de llaves CS:GO. \n',
-      '► !BUYANYCSGO (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves CS:GO. \n',
+      '► !BUYANYCSGO (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves CS:GO. El bot ignorará tus insignias actuales. \n',
       '► !BUYONECSGO (número_de_llaves) = Use esto si es un coleccionista de insignias. BOT enviará solo un conjuntos de cada juego, siguiendo la tasa actual de BOT.  \n\n',
       'Sección Hydra. \n',
       '► !CHECKHYDRA (número_de_llaves) = Muestra cuántos conjuntos y qué nivel alcanzarías para  una cantidad específica de llaves. \n',
       '► !BUYHYDRA (número_de_llaves) = Compre conjuntos de cromos no fabricados por una cantidad específica de llaves HYDRA. \n',
-      '► !BUYANYHYDRA (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves HYDRA. \n',
+      '► !BUYANYHYDRA (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves HYDRA. El bot ignorará tus insignias actuales. \n',
       '► !BUYONEHYDRA (número_de_llaves) = Use esto si es un coleccionista de insignias. BOT enviará solo un conjuntos de cada juego, siguiendo la tasa actual de BOT.  \n\n',
       'Sección TF2. \n',
       '► !CHECKTF (número_de_llaves) = Muestra cuántos conjuntos y qué nivel alcanzarías para  una cantidad específica de llaves. \n',
       '► !BUYTF (número_de_llaves) = Compre conjuntos de cromos no fabricados por una cantidad específica de llaves TF2. \n',
-      '► !BUYANYTF (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves TF2. \n',
+      '► !BUYANYTF (número_de_llaves) = Compre cualquier conjuntos de cromos por una cantidad específica de llaves TF2. El bot ignorará tus insignias actuales. \n',
       '► !BUYONETF (número_de_llaves) = Use esto si es un coleccionista de insignias. BOT enviará solo un conjuntos de cada juego, siguiendo la tasa actual de BOT.  \n\n',
       'Sección GEMS. \n',
       '► !CHECKGEMS (número_de_gemas) = Muestra cuántos conjuntos y qué nivel alcanzarías para una cantidad específica de gemas. \n',
       '► !BUYGEMS (número_de_conjuntos) = Compre una cantidad específica de conjuntos de cromos no fabricados por gems. \n',
-      '► !BUYANYGEMS (número_de_conjuntos) = Compre una cantidad específica de cualquier conjuntos de cromos por gems. \n',
+      '► !BUYANYGEMS (número_de_conjuntos) = Compre una cantidad específica de cualquier conjuntos de cromos por gems. El bot ignorará tus insignias actuales. \n',
       '► !BUYONEGEMS (número_de_conjuntos) = Use esto si es un coleccionista de insignias. BOT enviará solo un conjuntos de cada juego, siguiendo la tasa actual de BOT. \n\n',
       'Sección Proveedores. \n',
       '► !SELLCHECK = Cheques de conjuntos que el Bot puede comprarle. \n',
@@ -3449,7 +3354,6 @@ module.exports = {
       '命令： \n',
       '► !LANG = 更改机器人语言。 \n',
       '► !TUTORIAL = 显示视频教程。 \n',
-      '► !GIVEAWAY = 获取有关抽奖及其条目的信息。 \n',
       '► !SETS4SETS (套数) = 将您的重复套卡牌装换成可以制作的新套装。 \n',
       '► !PRICES = 显示我们当前的汇率。 \n',
       '► !STOCK = 显示机器人的库存。 \n',
@@ -3464,22 +3368,22 @@ module.exports = {
       '《反恐精英：全球攻势》科。 \n',
       '► !CHECKCSGO (钥匙数) = 显示您可以用特定数量的钥匙购买多少套卡牌。 \n',
       '► !BUYCSGO (钥匙数) = 购买未制造套卡牌带有《反恐精英：全球攻势》钥匙。 \n',
-      '► !BUYANYCSGO (钥匙数) = 购买任何卡套卡牌带有《反恐精英：全球攻势》钥匙。 \n',
+      '► !BUYANYCSGO (钥匙数) = 购买任何卡套卡牌带有《反恐精英：全球攻势》钥匙。该机器人将忽略您当前的徽章。 \n',
       '► !BUYONECSGO (钥匙数) = 如果您是套卡牌收集者，请使用它。该机器人每个游戏只会发送一套卡牌。\n\n',
       '九头蛇科。 \n',
       '► !CHECKHYDRA (钥匙数) = 显示您可以用特定数量的钥匙购买多少套卡牌。 \n',
       '► !BUYHYDRA (钥匙数) = 购买未制造套卡牌带有九头蛇钥匙。 \n',
-      '► !BUYANYHYDRA (钥匙数) = 购买任何套卡牌带有九头蛇钥匙。 \n',
+      '► !BUYANYHYDRA (钥匙数) = 购买任何套卡牌带有九头蛇钥匙。该机器人将忽略您当前的徽章。 \n',
       '► !BUYONEHYDRA (钥匙数) = 如果您是套卡牌收集者，请使用它。该机器人每个游戏只会发送一套卡牌。\n\n',
       '团队要塞2科。 \n',
       '► !CHECKTF (钥匙数) = 显示您可以用特定数量的钥匙购买多少套卡牌。 \n',
       '► !BUYTF (钥匙数) = 购买未制造套卡牌带有团队要塞2钥匙。 \n',
-      '► !BUYANYTF (钥匙数) =购买任何套卡牌带有团队要塞2钥匙。 \n',
+      '► !BUYANYTF (钥匙数) =购买任何套卡牌带有团队要塞2钥匙。该机器人将忽略您当前的徽章。 \n',
       '► !BUYONETF (钥匙数) = 如果您是套卡牌收集者，请使用它。该机器人每个游戏只会发送一套卡牌。\n\n',
       '宝石科。 \n',
       '► !CHECKGEMS (宝石数) = 显示您可以用特定数量的宝石购买多少套卡牌。 \n',
       '► !BUYGEMS (套数) = 购买未制造套卡牌带有宝石。 \n',
-      '► !BUYANYGEMS (套数) = 购买任何套卡牌带有宝石。 \n',
+      '► !BUYANYGEMS (套数) = 购买任何套卡牌带有宝石。该机器人将忽略您当前的徽章。 \n',
       '► !BUYONEGEMS (套数) = 如果您是套卡牌收集者，请使用它。该机器人每个游戏只会发送一套卡牌。\n\n',
       '供应商部分。 \n',
       '► !SELLCHECK = 检查机器人可以从您那里购买的卡牌。 \n',
@@ -3492,7 +3396,6 @@ module.exports = {
       'Commandes: \n',
       '► !LANG = Changez la langue du bot. \n',
       '► !TUTORIAL = Affiche le didacticiel vidéo. \n',
-      '► !GIVEAWAY = Obtenez des informations sur les cadeaux et vos entrées. \n',
       '► !SETS4SETS (quantité_de_ensembles) = Échangez vos ensembles en double contre de nouveaux que vous pouvez fabriquer. \n',
       '► !PRICES = Affiche nos tarifs actuels. \n',
       '► !STOCK = Affiche le stock de devises du bot. \n',
@@ -3507,22 +3410,22 @@ module.exports = {
       'Section CSGO. \n',
       "► !CHECKCSGO (quantité_de_clés) = Affiche le nombre d'ensembles et le niveau que vous atteindrez pour un nombre spécifique de clés. \n",
       '► !BUYCSGO (quantité_de_clés) = Acheter des ensembles de cartes non fabriqués pour une quantité spécifique de clés CS:GO. \n',
-      "► !BUYANYCSGO (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés CS:GO. \n",
+      "► !BUYANYCSGO (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés CS:GO. Le bot ignorera vos badges actuels. \n",
       "► !BUYONECSGO (quantité_de_clés) = Utilisez ceci si vous êtes un collectionneur de badges. Le BOT n'enverra qu'un seul jeu de chaque jeu, suivant le taux de BOT actuel.  \n\n",
       'Section Hydra. \n',
       "► !CHECKHYDRA (quantité_de_clés) = Affiche le nombre d'ensembles et le niveau que vous atteindriez pour une quantité spécifique de clés. \n",
       '► !BUYHYDRA (quantité_de_clés) = Acheter des ensembles de cartes non fabriqués pour une quantité spécifique de clés HYDRA. \n',
-      "► !BUYANYHYDRA (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés HYDRA. \n",
+      "► !BUYANYHYDRA (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés HYDRA. Le bot ignorera vos badges actuels. \n",
       "► !BUYONEHYDRA (quantité_de_clés) = Utilisez ceci si vous êtes un collectionneur de badges. Le BOT n'enverra qu'un seul jeu de chaque jeu, suivant le taux de BOT actuel.  \n\n",
       'Section TF2. \n',
       "► !CHECKTF (quantité_de_clés) = Affiche le nombre d'ensembles et le niveau que vous atteindriez pour une quantité spécifique de clés. \n",
       '► !BUYTF (quantité_de_clés) = Acheter des ensembles de cartes non fabriqués pour une quantité spécifique de clés TF2. \n',
-      "► !BUYANYTF (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés TF2. \n",
+      "► !BUYANYTF (quantité_de_clés) = Acheter n'importe quel ensembles de cartes pour une quantité spécifique de clés TF2. Le bot ignorera vos badges actuels. \n",
       "► !BUYONETF (quantité_de_clés) = Utilisez ceci si vous êtes un collectionneur de badges. Le BOT n'enverra qu'un seul jeu de chaque jeu, suivant le taux de BOT actuel.  \n\n",
       'Section des gemmes. \n',
       "► !CHECKGEMS (quantité_de_gemmes) = Affiche le nombre d'ensembles et le niveau que vous atteindriez pour une quantité spécifique de gemmes. \n",
-      '► !BUYGEMS (quantité_de_ensembles) = Acheter une quantité spécifique de ensembles de cartes non fabriqués pour GEMS. \n',
-      '► !BUYANYGEMS (quantité_de_ensembles) = Acheter une quantité spécifique de ensembles de cartes par gemmes. \n',
+      '► !BUYGEMS (quantité_de_ensembles) = Acheter une quantité spécifique de ensembles de cartes non fabriqués pour gemmes. \n',
+      '► !BUYANYGEMS (quantité_de_ensembles) = Acheter une quantité spécifique de ensembles de cartes par gemmes. Le bot ignorera vos badges actuels. \n',
       "► !BUYONEGEMS (quantité_de_ensembles) = Utilisez ceci si vous êtes un collectionneur de badges. Le BOT n'enverra qu'un seul jeu de chaque jeu, suivant le taux de BOT actuel. \n\n",
       'Section des fournisseurs. \n',
       '► !SELLCHECK = Vérifie les ensembles que le bot peut acheter chez vous. \n',
@@ -3535,7 +3438,6 @@ module.exports = {
       'コマンド： \n',
       '► !LANG = ボットの言語を変更します。 \n',
       '► !TUTORIAL = ビデオチュートリアルを表示します。 \n',
-      '► !GIVEAWAY = 景品とあなたのエントリーについての情報を入手してください。 \n',
       '► !SETS4SETS (カードセットの量) = 複製したセットを、作成できる新しいセットと交換します。 \n',
       '► !PRICES = 現在の料金を表示します。 \n',
       '► !STOCK = ボットの通貨ストックを表示します。 \n',
@@ -3550,22 +3452,22 @@ module.exports = {
       'CS:GOセクション。 \n',
       '► !CHECKCSGO (キーの量) = これは、取得するセットの数と、特定の数のCSGOキーに対して到達するレベルを示しています。 \n',
       '► !BUYCSGO (キーの量) = CS:GOキーの特定の量のために細工されていないカードセットを購入します。 \n',
-      '► !BUYANYCSGO (キーの量) = 特定の量のCS:GOキーに対して任意のカードのセットを描画します。 \n',
+      '► !BUYANYCSGO (キーの量) = 特定の量のCS:GOキーに対して任意のカードのセットを描画します。ボットは現在のバッジを無視します。 \n',
       '► !BUYONECSGO (キーの量) = バッジコレクターの場合は、これを使用してください。 ボットは、現在のボットレートに従って、各ゲームの1セットのみを送信します。  \n\n',
       'Hydraセクション。 \n',
       '► !CHECKHYDRA (キーの量) = これは、取得するセットの数と、特定の数のHYDRAキーに対して到達するレベルを示しています。 \n',
       '► !BUYHYDRA (キーの量) = HYDRAキーの特定の量のために細工されていないカードセットを購入します。 \n',
-      '► !BUYANYHYDRA (キーの量) = 特定の量のHYDRAキーに対して任意のカードのセットを描画します。 \n',
+      '► !BUYANYHYDRA (キーの量) = 特定の量のHYDRAキーに対して任意のカードのセットを描画します。ボットは現在のバッジを無視します。 \n',
       '► !BUYONEHYDRA (キーの量) = バッジコレクターの場合は、これを使用してください。 ボットは、現在のボットレートに従って、各ゲームの1セットのみを送信します。  \n\n',
       'TF2セクション。 \n',
       '► !CHECKTF (キーの量) = これは、取得するセットの数と、特定の数のTF2キーに対して到達するレベルを示しています。 \n',
       '► !BUYTF (キーの量) = TF2キーの特定の量のために細工されていないカードセットを購入します。 \n',
-      '► !BUYANYTF (キーの量) = 特定の量のTF2キーに対して任意のカードのセットを描画します。 \n',
+      '► !BUYANYTF (キーの量) = 特定の量のTF2キーに対して任意のカードのセットを描画します。ボットは現在のバッジを無視します。 \n',
       '► !BUYONETF (キーの量) = バッジコレクターの場合は、これを使用してください。 ボットは、現在のボットレートに従って、各ゲームの1セットのみを送信します。  \n\n',
       'ジェムセクション。 \n',
       '► !CHECKGEMS (ジェムの量) = 取得するセットの数と、特定の量のジェムに対して到達するレベルを示します。 \n',
       '► !BUYGEMS (カードセットの量) = ジェム用の未加工のカードセットを特定量購入します。 \n',
-      '► !BUYANYGEMS (カードセットの量) = ジェムごとに特定の量のカードセットを購入します。 \n',
+      '► !BUYANYGEMS (カードセットの量) = ジェムごとに特定の量のカードセットを購入します。ボットは現在のバッジを無視します。 \n',
       '► !BUYONEGEMS (カードセットの量) = バッジコレクターの場合は、これを使用してください。 ボットは、現在のボットレートに従って、各ゲームの1セットのみを送信します。 \n\n',
       'サプライヤーセクション。 \n',
       '► !SELLCHECK = ボットがあなたから購入できるカードセットをチェックします。 \n',
@@ -3578,7 +3480,6 @@ module.exports = {
       'Commands: \n',
       '► !LANG = Ändern Sie die Bot-Sprache. \n',
       '► !TUTORIAL = Zeigt das Video-Tutorial. \n',
-      '► !GIVEAWAY = Holen Sie sich Informationen über Werbegeschenk und Ihre Einträge. \n',
       '► !SETS4SETS (anzahl_der_setz) = Tauschen Sie Ihre doppelten Sets gegen neue, die Sie herstellen können. \n',
       '► !PRICES = Zeigt unsere aktuellen Preise an. \n',
       '► !STOCK = Zeigt den Währungsbestand des Bots an. \n',
@@ -3593,22 +3494,22 @@ module.exports = {
       'CSGO-Sektion. \n',
       '► !CHECKCSGO (anzahl_der_schlüssel) = Zeigt an, wie viele setz und welche Niveau Sie für eine bestimmte Anzahl von Schlüsseln erreichen würden. \n',
       '► !BUYCSGO (anzahl_der_schlüssel) = Kaufen Sie nicht gefertigte Kartensätze für eine bestimmte Anzahl von CS:GO-Schlüssel. \n',
-      '► !BUYANYCSGO (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von CS:GO-Schlüssel. \n',
+      '► !BUYANYCSGO (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von CS:GO-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONECSGO (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',
       'Hydra-Sektion. \n',
       '► !CHECKHYDRA (anzahl_der_schlüssel) = Shows how many sets and what level you would reach for a specific amount of HYDRA keys. \n',
       '► !BUYHYDRA (anzahl_der_schlüssel) = Kaufen Sie nicht gefertigte Kartensätze für eine bestimmte Anzahl von HYDRA-Schlüssel. \n',
-      '► !BUYANYHYDRA (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von HYDRA-Schlüssel. \n',
+      '► !BUYANYHYDRA (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von HYDRA-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONEHYDRA (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',
       'TF2-Sektion. \n',
       '► !CHECKTF (anzahl_der_schlüssel) = Shows how many sets and what level you would reach for a specific amount of TF2 keys. \n',
       '► !BUYTF (anzahl_der_schlüssel) = Kaufen Sie nicht gefertigte Kartensätze für eine bestimmte Anzahl von TF2-Schlüssel. \n',
-      '► !BUYANYTF (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von TF2-Schlüssel. \n',
+      '► !BUYANYTF (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von TF2-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONETF (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',
       'Edelsteine-Sektion. \n',
       '► !CHECKGEMS (anzahl_der_edelsteine) = Zeigt an, wie viele Sätze und welche Stufe Sie für eine bestimmte Anzahl von Edelsteinen erreichen würden. \n',
       '► !BUYGEMS (anzahl_der_setz) = Kaufen Sie eine bestimmte Menge nicht gefertigter Kartensätze für Edelsteine. \n',
-      '► !BUYANYGEMS (anzahl_der_setz) = Kaufen Sie eine bestimmte Menge an Kartensets pro Edelstein. \n',
+      '► !BUYANYGEMS (anzahl_der_setz) = Kaufen Sie eine bestimmte Menge an Kartensets pro Edelstein. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONEGEMS (anzahl_der_setz) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate. \n\n',
       'Lieferanten-Sektion. \n',
       '► !SELLCHECK = Überprüft, ob Sets vorhanden sind, die der Bot bei Ihnen kaufen kann. \n',
@@ -3637,8 +3538,8 @@ module.exports = {
       '► !USERCHECK (ID64) = Verify User. \n',
       '► !BLOCK (ID64) = Block user. \n',
       '► !UNBLOCK (ID64) = Unlock user. \n',
+      '► !CANCEL (OFFERID) = Cancel the trade offer. \n',
       '► !RELOAD = Reload Inventory. \n',
-      '► !RAFFLE = Choose the winner of the raffle. \n',
       '► !REQUESTER = Forces the automatic request to be triggered. \n',
       '► !PROFIT = Shows bot transactions this month. \n',
       '► !AUTHCODE = Shows auth code. \n',
@@ -3665,8 +3566,8 @@ module.exports = {
       '► !USERCHECK (ID64) = Verifica o usuário. \n',
       '► !BLOCK (ID64) = Bloquea usuário. \n',
       '► !UNBLOCK (ID64) = Desbloquea usuário. \n',
+      '► !CANCEL (OFFERID) = Cancela a oferta comercial. \n',
       '► !RELOAD = Recarrega o inventário. \n',
-      '► !RAFFLE = Escolhe o vencedor do sorteio. \n',
       '► !REQUESTER = Força a solicitação automática a ser acionada. \n',
       '► !PROFIT = Mostra as transações feitas pelo bot nesse mês. \n',
       '► !AUTHCODE = Mostra o código de autenticação. \n',
@@ -3693,8 +3594,8 @@ module.exports = {
       '► !USERCHECK (ID64) = Проверить пользователя. \n',
       '► !BLOCK (ID64) = Заблокировать пользователя. \n',
       '► !UNBLOCK (ID64) = Разблокировать пользователя. \n',
+      '► !CANCEL (OFFERID) = Отменить коммерческое предложение. \n',
       '► !RELOAD = Перезагрузить инвентарь. \n',
-      '► !RAFFLE = Выберите победителя розыгрыша. \n',
       '► !REQUESTER = Принудительно инициирует автоматический запрос. \n',
       '► !PROFIT = Показывает транзакции ботов в этом месяце. \n',
       '► !AUTHCODE = Показывает код аутентификатора. \n',
@@ -3721,8 +3622,8 @@ module.exports = {
       '► !USERCHECK (ID64) = Verificar usuario. \n',
       '► !BLOCK (ID64) = Bloquear usuario. \n',
       '► !UNBLOCK (ID64) = Desbloquear usuario. \n',
+      '► !CANCEL (OFFERID) = Cancelar la oferta comercial. \n',
       '► !RELOAD = Recargar inventario. \n',
-      '► !RAFFLE = Elige al ganador del sorteo. \n',
       '► !REQUESTER = Obliga a que se active la solicitud automática.. \n',
       '► !PROFIT = Muestra las transacciones de bot este mes. \n',
       '► !AUTHCODE = Muestra el código de autenticación. \n',
@@ -3749,8 +3650,8 @@ module.exports = {
       '► !USERCHECK (ID64) = 验证用户。 \n',
       '► !BLOCK (ID64) = 阻止用户。 \n',
       '► !UNBLOCK (ID64) = 解锁用户。 \n',
+      '► !CANCEL (OFFERID) = 取消商业报价。 \n',
       '► !RELOAD = 重新加载库存。 \n',
-      '► !RAFFLE = 选择抽奖的获胜者。 \n',
       '► !REQUESTER = 强制触发自动请求。\n',
       '► !PROFIT = 显示本月的机器人交易。 \n',
       '► !AUTHCODE = 显示验证码。 \n',
@@ -3777,8 +3678,8 @@ module.exports = {
       "► !USERCHECK (ID64) = Vérifier l'utilisateur. \n",
       '► !BLOCK (ID64) = Bloquer un utilisateur. \n',
       "► !UNBLOCK (ID64) = Déverrouillez l'utilisateur. \n",
+      "► !CANCEL (OFFERID) = Annulez l'offre commerciale. \n",
       "► !RELOAD = Recharger l'inventaire. \n",
-      '► !RAFFLE = Choisissez le gagnant du tirage au sort. \n',
       '► !REQUESTER = Force le déclenchement de la requête automatique. \n',
       '► !PROFIT = Affiche les transactions de bot ce mois-ci. \n',
       "► !AUTHCODE = Affiche le code d'authentification. \n",
@@ -3805,8 +3706,8 @@ module.exports = {
       '► !USERCHECK (ID64) = ユーザーを確認します。 \n',
       '► !BLOCK (ID64) = ユーザをブロックする。 \n',
       '► !UNBLOCK (ID64) = ユーザーのロックを解除します。 \n',
+      '► !CANCEL (OFFERID) = 商用オファーをキャンセルします。 \n',
       '► !RELOAD = インベントリをリロードします。 \n',
-      '► !RAFFLE = ラッフルの勝者を選択してください。 \n',
       '► !REQUESTER = 自動リクエストを強制的にトリガーします。 \n',
       '► !PROFIT = 今月のボットトランザクションを表示します。 \n',
       '► !AUTHCODE = 認証コードを表示します。 \n',
@@ -3833,8 +3734,8 @@ module.exports = {
       '► !USERCHECK (ID64) = Benutzer überprüfen. \n',
       '► !BLOCK (ID64) = Benutzer blockieren. \n',
       '► !UNBLOCK (ID64) = Benutzer entsperren. \n',
+      '► !CANCEL (OFFERID) = Kündigen Sie das kommerzielle Angebot. \n',
       '► !RELOAD = Inventar neu laden. \n',
-      '► !RAFFLE = Wählen Sie den Gewinner der Verlosung. \n',
       '► !REQUESTER = Erzwingt das Auslösen der automatischen Anforderung. \n',
       '► !PROFIT = Zeigt Bot-Transaktionen in diesem Monat an. \n',
       '► !AUTHCODE = Zeigt den Authentifizierungscode an. \n',

@@ -5,6 +5,7 @@ const utils = require('../../../../Utils');
 const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');
+const { filterCommands } = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users) => {
   const m = msg.toUpperCase().replace('!CHECK ', '');
@@ -16,14 +17,17 @@ module.exports = (sender, msg, client, users) => {
         users[sender.getSteamID64()].language,
         `[ !CHECK ${n} ]`
       );
+
       chatMessage(
         client,
         sender,
-        messages.CHECK.AMOUNT[users[sender.getSteamID64()].language]
-          .replace(/{AMOUNT}/g, n)
-          .replace('{CSGOSELL}', n * rates.csgo.sell)
-          .replace('{TFSELL}', n * rates.tf.sell)
-          .replace('{HYDRASELL}', n * rates.hydra.sell)
+        filterCommands(
+          messages.CHECK.AMOUNT[users[sender.getSteamID64()].language]
+            .replace(/{AMOUNT}/g, n)
+            .replace('{CSGOSELL}', n * rates.csgo.sell)
+            .replace('{TFSELL}', n * rates.tf.sell)
+            .replace('{HYDRASELL}', n * rates.hydra.sell)
+        ).join('\n')
       );
     } else {
       chatMessage(
@@ -31,7 +35,7 @@ module.exports = (sender, msg, client, users) => {
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.CSGO[
           users[sender.getSteamID64()].language
-        ]
+        ].replace('{KEYS}', main.maxCheck.csgo)
       );
     }
   } else if (m === '!CHECK') {
@@ -97,7 +101,8 @@ module.exports = (sender, msg, client, users) => {
                 const hydra = parseInt(hisMaxSets / rates.hydra.sell, 10);
                 const tf = parseInt(hisMaxSets / rates.tf.sell, 10);
                 const gems = parseInt(hisMaxSets * rates.gems.sell, 10);
-                let message = '';
+
+                let message = ' ';
                 if (cs > 0) {
                   message += messages.CHECK.DEFAULT.CURRENCIES.CSGO[
                     users[sender.getSteamID64()].language
@@ -127,6 +132,20 @@ module.exports = (sender, msg, client, users) => {
                     .replace('{SETS4}', hisMaxSets)
                     .replace('{SETS5}', parseInt(hisMaxSets, 10));
                 }
+
+                message = filterCommands(message).join('\n');
+
+                if (!message.includes('•')) {
+                  chatMessage(
+                    client,
+                    sender,
+                    messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[3][
+                      users[sender.getSteamID64()].language
+                    ]
+                  );
+                  return;
+                }
+
                 if (CURRENTLEVEL >= 0) {
                   const xpWon = 100 * hisMaxSets;
                   const totalExp = TOTALXP + xpWon;

@@ -4,7 +4,7 @@
 /* eslint-disable no-labels */
 
 const _ = require('lodash');
-const request = require('request-promise');
+const axios = require('axios');
 const fs = require('fs');
 const util = require('util');
 
@@ -193,31 +193,40 @@ utils.getleftovercards = (SID, community, cards, callback) => {
 };
 
 utils.getRep = async (SID) => {
-  const url = 'https://steamrep.com/api/beta4/reputation/';
-  const options = {
-    method: 'GET',
-    uri: url + SID,
-    qs: {
-      tagdetails: 1,
-      extended: 1,
-      json: 1,
-    },
-  };
+  try {
+    const options = {
+      baseURL: 'https://steamrep.com/api/beta4/',
+      method: 'GET',
+      url: `reputation/${SID}`,
+      params: {
+        tagdetails: 1,
+        extended: 1,
+        json: 1,
+      },
+    };
 
-  const response = await request(options);
-  return response;
+    const { data } = await axios(options);
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 utils.getBadges = (SID, callback) => {
-  request(
-    `https://api.steampowered.com/IPlayerService/GetBadges/v1/?key=${main.steamApiKey}&steamid=${SID}`,
-    {
-      json: true,
+  const options = {
+    method: 'GET',
+    url: `https://api.steampowered.com/IPlayerService/GetBadges/v1/`,
+    params: {
+      key: main.steamApiKey,
+      steamid: SID,
     },
-    (ERR, RES, BODY) => {
-      if (!ERR && RES.statusCode === 200 && BODY.response) {
+  };
+
+  axios(options)
+    .then((response) => {
+      if (response.status === 200 && response.data) {
         const badges = {};
-        const data = BODY.response;
+        const { response: data } = response.data;
 
         if (data.badges) {
           const {
@@ -241,10 +250,12 @@ utils.getBadges = (SID, callback) => {
           callback('Empty Badge');
         }
       } else {
-        callback(ERR);
+        callback(`statuscode: ${response.status}`);
       }
-    }
-  );
+    })
+    .catch((error) => {
+      callback(error);
+    });
 };
 
 utils.getLevelExp = (level) => {
@@ -254,61 +265,6 @@ utils.getLevelExp = (level) => {
     exp += ExpForLevel(i);
   }
   return exp;
-};
-
-utils.addGiveawayEntry = (offer, callback) => {
-  try {
-    const giveawayEntry = JSON.parse(
-      fs.readFileSync('./Data/Giveaway/giveaway.json')
-    );
-    if (giveawayEntry.active) {
-      if (
-        typeof giveawayEntry.entries[offer.partner.getSteamID64()] !==
-        'undefined'
-      ) {
-        giveawayEntry.entries[offer.partner.getSteamID64()] += 1;
-        fs.writeFile(
-          './Data/Giveaway/giveaway.json',
-          JSON.stringify(giveawayEntry, null, '\t'),
-          (ERR) => {
-            if (ERR) {
-              callback(ERR);
-            } else {
-              callback(null);
-            }
-          }
-        );
-      }
-    }
-  } catch (error) {
-    callback(error);
-  }
-};
-
-utils.accesstosets4sets = (offer, users, callback) => {
-  const customer = users[offer.partner.getSteamID64()];
-  if (
-    typeof customer !== 'undefined' &&
-    offer.data('amountofsets') !== 0 &&
-    offer.data('commandused').search(/SELL/) === -1
-  ) {
-    if (offer.data('commandused') === '!SETS4SETS') {
-      customer.sets4sets.numsets -= parseInt(offer.data('amountofsets'), 10);
-    } else if (customer.hasOwnProperty('sets4sets') !== false) {
-      customer.sets4sets.numsets += parseInt(offer.data('amountofsets'), 10);
-    } else {
-      customer.sets4sets = {};
-      customer.sets4sets.numsets = 0;
-      customer.sets4sets.numsets += parseInt(offer.data('amountofsets'), 10);
-    }
-    fs.writeFile('./Data/User/Users.json', JSON.stringify(users), (ERR) => {
-      if (ERR) {
-        callback(ERR);
-      } else {
-        callback(null, customer.sets4sets.numsets);
-      }
-    });
-  }
 };
 
 utils.checkUserinGroup = (community, target, callback) => {
@@ -452,6 +408,247 @@ utils.sortSetsByAmountB = (SETS, callback) => {
   callback(
     Object.keys(SETS).sort((k1, k2) => SETS[k1].length - SETS[k2].length)
   );
+};
+
+utils.filterCommands = (msg, admin = false) => {
+  const filter = main.ignoreCommands;
+  let message = [];
+
+  if (typeof msg === 'string') {
+    message = [...String(msg).split(/\n/)];
+    message = utils.removeCurrency(message, false);
+    message = utils.removeLanguages(message);
+  }
+
+  if (Array.isArray(msg)) {
+    message = [...msg];
+
+    if (!admin) {
+      message = utils.removeSuppliersCommands(message);
+    }
+
+    message = utils.removeCurrency(message, true);
+
+    if (main.tutorial === '') {
+      const regex = new RegExp(`!TUTORIAL`);
+      const items = message.filter((el) => regex.test(el));
+
+      if (items.length !== 0) {
+        message.remove(items);
+      }
+    }
+
+    if (main.owner === '') {
+      const regex = new RegExp(`!OWNER`);
+      const items = message.filter((el) => regex.test(el));
+
+      if (items.length !== 0) {
+        message.remove(items);
+      }
+    }
+  }
+
+  if (filter.every((el) => el !== '')) {
+    filter.forEach((com) => {
+      const command = com.toUpperCase().replace('!', '');
+      const regex = new RegExp(`\\b${command}\\b`);
+      const index = message.findIndex((el) => regex.test(el));
+
+      if (index !== -1) {
+        message.splice(index, 1);
+      }
+    });
+  }
+
+  if (message.length === 0) {
+    return msg;
+  }
+
+  return message;
+};
+
+utils.removeCurrency = (msg, sectionType) => {
+  const currencies = main.acceptedCurrency;
+  const suppliers = main.handleSuppliers;
+  const message = [...msg];
+
+  if (utils.isFalseAllObjectKeys(currencies)) {
+    throw new Error(
+      'Error in configuring accepted currencies: all currencies are disabled'
+    );
+  }
+
+  if (!currencies.CSGO && !currencies.TF2 && !currencies.HYDRA) {
+    const regex = new RegExp(`!KEYLIST`);
+    const items = message.filter((el) => regex.test(el));
+
+    if (items.length !== 0) {
+      message.remove(items);
+    }
+  }
+
+  if (sectionType) {
+    for (const key in currencies) {
+      if (!currencies[key]) {
+        const currencySection = utils.parseCurrencies(key);
+        const regex1 = new RegExp(`${currencySection}`, 'i');
+        const items1 = message.filter((el) => regex1.test(el));
+
+        if (items1.length !== 0) {
+          message.remove(items1);
+        }
+
+        if (suppliers) {
+          const currencySuppliersSection = `!SELL${key.replace('2', '')}`;
+          const regex2 = new RegExp(`${currencySuppliersSection}`);
+          const items2 = message.filter((el) => regex2.test(el));
+
+          if (items2.length !== 0) {
+            message.remove(items2);
+          }
+        }
+      }
+    }
+  } else {
+    for (const key in currencies) {
+      if (!currencies[key]) {
+        const currency = utils.parseCurrencies(key);
+
+        const regex = new RegExp(`${currency}`, 'i');
+        const items = message.filter((el) => regex.test(el));
+
+        if (items.length !== 0) {
+          message.remove(items);
+        }
+      }
+    }
+  }
+
+  return message;
+};
+
+utils.removeLanguages = (msg) => {
+  const languages = main.acceptedLanguages;
+  const message = [...msg];
+
+  if (utils.isFalseAllObjectKeys(languages)) {
+    throw new Error(
+      'Error in configuring accepted languages: all languages are disabled'
+    );
+  }
+
+  for (const language in languages) {
+    if (!languages[language]) {
+      const regex1 = new RegExp(`!${language}`);
+      const items1 = message.filter((el) => regex1.test(el));
+
+      if (items1.length !== 0) {
+        message.remove(items1);
+      }
+    }
+  }
+  return message;
+};
+
+utils.removeSuppliersCommands = (msg) => {
+  const suppliers = main.handleSuppliers;
+  const message = [...msg];
+
+  if (!suppliers) {
+    const indexSection = (cur) =>
+      messages.COMMANDS.EN.findIndex((el) => el.includes(cur));
+    const section = message[indexSection(`Suppliers Section.`)]?.replace(
+      '. \n',
+      ''
+    );
+    const index = message.findIndex((el) => el.includes(section));
+    if (index !== -1) {
+      message.splice(index, 6);
+    }
+  }
+
+  return message;
+};
+
+utils.removeKeys = (msg) => {
+  const currencies = main.acceptedCurrency;
+  const message = msg.split('\n');
+  for (const key in currencies) {
+    if (!currencies[key]) {
+      const currency = utils.parseCurrencies(key);
+
+      const regex = new RegExp(`${currency}`, 'i');
+      const index = message.findIndex((el) => regex.test(el));
+
+      if (index.length !== 0) {
+        if (key === 'CSGO') {
+          message.splice(index + 1, 25, message[17]);
+        }
+
+        if (key === 'HYDRA') {
+          message.splice(index, 1);
+        }
+
+        if (key === 'TF2') {
+          message.splice(index, 2);
+        }
+      }
+    }
+  }
+
+  if (message.length === 0) {
+    return [msg];
+  }
+
+  return message;
+};
+
+utils.isFalseAllObjectKeys = (obj) =>
+  Object.values(obj).every((val) => val === false);
+
+// eslint-disable-next-line no-extend-native
+Array.prototype.remove = function (index = []) {
+  const array = this;
+
+  index.forEach((item) => {
+    if (array.includes(item)) {
+      array.splice(array.indexOf(item), 1);
+    }
+  });
+};
+
+utils.parseCurrencies = (currency) => {
+  let key = '';
+
+  if (currency === 'CSGO') {
+    key = 'CSGO|CS:GO|CS|《反恐精英：全球攻势》|„CS:GO“';
+  } else if (currency === 'TF2') {
+    key = 'TF2|TF|团队要塞2|„TF2“';
+  } else if (currency === 'HYDRA') {
+    key = 'HYDRA|九头蛇|Гидра|Hidra|„Hydra“';
+  } else if (currency === 'GEMS') {
+    key = 'gem|gema|宝石|Самоцвет|gemme|ジェム|edelsteine';
+  }
+
+  return key;
+};
+
+utils.parseCommand = (input, command) => {
+  const regex = new RegExp(`^(${String(command).replace(/( )/g, '')})$`);
+  return (String(input).match(regex) || [])[0];
+};
+
+utils.getDefaultLanguage = () => {
+  const { acceptedLanguages } = main;
+
+  const defaultLanguage = Object.keys(acceptedLanguages).filter(
+    (value) => String(acceptedLanguages[value]).toUpperCase() === 'DEFAULT'
+  );
+
+  if (defaultLanguage.length !== 0) {
+    return defaultLanguage[0];
+  }
+  return 'EN';
 };
 
 module.exports = utils;

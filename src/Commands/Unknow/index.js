@@ -3,10 +3,7 @@ const main = require('../../Config/main');
 const messages = require('../../Config/messages');
 
 module.exports = (sender, client, users) => {
-  if (
-    main.admins.indexOf(sender.getSteamID64()) >= 0 ||
-    main.admins.indexOf(parseInt(sender.getSteamID64(), 10)) >= 0
-  ) {
+  if (main.admins.includes(sender.getSteamID64())) {
     chatMessage(
       client,
       sender,

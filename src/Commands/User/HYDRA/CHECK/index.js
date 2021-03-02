@@ -32,7 +32,7 @@ module.exports = (sender, msg, client, users) => {
                       sender,
                       messages.ERROR.INPUT.AMOUNTOVER.HYDRA[
                         users[sender.getSteamID64()].language
-                      ]
+                      ].replace('{KEYS}', main.maxCheck.hydra)
                     );
                     can += 1;
                     break;
@@ -93,7 +93,7 @@ module.exports = (sender, msg, client, users) => {
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.HYDRA[
           users[sender.getSteamID64()].language
-        ]
+        ].replace('{KEYS}', main.maxCheck.hydra)
       );
     }
   } else {

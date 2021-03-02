@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable consistent-return */
 const ADMIN = require('./GENERAL/ADMIN');
 const AUTHCODE = require('./GENERAL/AUTHCODE');
@@ -5,10 +7,10 @@ const BLOCK = require('./GENERAL/BLOCK');
 const BROADCAST = require('./GENERAL/BROADCAST');
 const DIE = require('./GENERAL/DIE');
 const PROFIT = require('./GENERAL/PROFIT');
-const RAFFLE = require('./GENERAL/RAFFLE');
 const RELOAD = require('./GENERAL/RELOAD');
 const REQUESTER = require('./GENERAL/REQUESTER');
 const RESTART = require('./GENERAL/RESTART');
+const CANCEL = require('./GENERAL/CANCEL');
 const RESTOCK = require('./GENERAL/RESTOCK');
 const UNBLOCK = require('./GENERAL/UNBLOCK');
 const UNPACK = require('./GENERAL/UNPACK');
@@ -26,9 +28,28 @@ const DEPOSITGEMS = require('./GEMS/DEPOSIT');
 const DEPOSITHYDRA = require('./HYDRA/DEPOSIT');
 const DEPOSITTF = require('./TF/DEPOSIT');
 const DEPOSITSETS = require('./SETS/DEPOSIT');
+const main = require('../../Config/main');
 
 function admin(sender, msg, client, users, community, allCards, manager) {
-  switch (msg.toUpperCase().split(' ')[0]) {
+  const input = msg.toUpperCase().split(' ')[0];
+  const ignoreCommands = main.ignoreCommands.map((el) => el.toUpperCase());
+  const { acceptedCurrency } = main;
+
+  if (ignoreCommands.includes(input)) {
+    return 'UNKNOW';
+  }
+
+  for (const key in acceptedCurrency) {
+    if (typeof acceptedCurrency[key] !== 'boolean') {
+      throw new Error(
+        'Error in configuring accepted currencies: not is boolean'
+      );
+    } else if (input.includes(key.replace('2', '')) && !acceptedCurrency[key]) {
+      return 'UNKNOW';
+    }
+  }
+
+  switch (input) {
     case '!ADMIN':
       ADMIN(sender, client, users);
       break;
@@ -47,9 +68,6 @@ function admin(sender, msg, client, users, community, allCards, manager) {
     case '!PROFIT':
       PROFIT(sender, client, users);
       break;
-    case '!RAFFLE':
-      RAFFLE(sender, client, users);
-      break;
     case '!RELOAD':
       RELOAD(sender, client, users, community, allCards);
       break;
@@ -58,6 +76,9 @@ function admin(sender, msg, client, users, community, allCards, manager) {
       break;
     case '!RESTART':
       RESTART(sender, client, users);
+      break;
+    case '!CANCEL':
+      CANCEL(sender, msg, client, users, manager);
       break;
     case '!RESTOCK':
       RESTOCK(sender, client, users, community, allCards, manager);

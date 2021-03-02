@@ -4,6 +4,7 @@ const utils = require('../../../../Utils');
 const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');
+const { filterCommands } = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
   chatMessage(
@@ -47,7 +48,7 @@ module.exports = (sender, client, users) => {
             const hydra = parseInt(hisMaxSets / rates.hydra.sell, 10);
             const tf = parseInt(hisMaxSets / rates.tf.sell, 10);
             const gems = parseInt(hisMaxSets * rates.gems.sell, 10);
-            let message = '';
+            let message = ' ';
             if (cs > 0) {
               message += messages.CHECKONE.CURRENCIES.CSGO[
                 users[sender.getSteamID64()].language
@@ -76,6 +77,19 @@ module.exports = (sender, client, users) => {
                 .replace('{GEMS}', gems)
                 .replace('{SETS4}', hisMaxSets)
                 .replace('{SETS5}', parseInt(hisMaxSets, 10));
+            }
+
+            message = filterCommands(message).join('\n');
+
+            if (!message.includes('•')) {
+              chatMessage(
+                client,
+                sender,
+                messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[1][
+                  users[sender.getSteamID64()].language
+                ]
+              );
+              return;
             }
 
             if (CURRENTLEVEL >= 0) {

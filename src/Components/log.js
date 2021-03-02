@@ -1,5 +1,6 @@
 const fs = require('fs');
 const colour = require('cli-color');
+const moment = require('moment');
 
 const main = require('../Config/main');
 const utils = require('../Utils');
@@ -182,23 +183,69 @@ log.userChatFullMessages = (id64, msg) => {
 };
 
 log.tradesHistory = (offer) => {
-  let d = `Command: ${offer.data('commandused')}`;
+  let data = `Command: ${offer.data('commandused')}`;
   if (offer.data('amountofsets')) {
-    d += `\nSets: ${offer.data('amountofsets')}`;
+    data += `\nSets: ${offer.data('amountofsets')}`;
   }
   if (offer.data('amountofleftovers')) {
-    d += `\nLeftovers: ${offer.data('amountofleftovers')}`;
+    data += `\nLeftovers: ${offer.data('amountofleftovers')}`;
   }
   if (offer.data('amountofkeys')) {
-    d += `\nKeys: ${offer.data('amountofkeys')}`;
+    data += `\nKeys: ${offer.data('amountofkeys')}`;
   }
   if (offer.data('amountofgems')) {
-    d += `\nGems: ${offer.data('amountofgems')}`;
+    data += `\nGems: ${offer.data('amountofgems')}`;
   }
-  d += `\nSteamID: ${offer.partner.getSteamID64()}`;
+  data += `\nSteamID: ${offer.partner.getSteamID64()}`;
+
+  const itemsSent = offer.itemsToGive.map((item) => {
+    const {
+      appid,
+      contextid,
+      assetid,
+      classid,
+      market_fee_app: marketFeeApp,
+      amount,
+    } = item;
+
+    return {
+      appid,
+      contextid,
+      assetid,
+      classid,
+      marketFeeApp,
+      amount,
+    };
+  });
+
+  const itemsReceived = offer.itemsToReceive.map((item) => {
+    const {
+      appid,
+      contextid,
+      assetid,
+      classid,
+      market_fee_app: marketFeeApp,
+      amount,
+    } = item;
+
+    return {
+      appid,
+      contextid,
+      assetid,
+      classid,
+      marketFeeApp,
+      amount,
+    };
+  });
+
+  data += `\nCreatedDate: ${moment(offer.created).toISOString()}`;
+  data += `\nCompletedDate: ${moment(offer.updated).toISOString()}`;
+  data += `\nItemsSent: ${JSON.stringify(itemsSent, null, 2)}`;
+  data += `\nItemsReceived: ${JSON.stringify(itemsReceived, null, 2)}`;
+
   fs.writeFile(
-    `./Data/TradesAccepted/${offer.id}-${offer.partner.getSteamID64()}.txt`,
-    d,
+    `./Data/AcceptedTrades/${offer.id}-${offer.partner.getSteamID64()}.txt`,
+    data,
     (ERR) => {
       if (ERR) {
         log.error(`An error occurred while writing trade file: ${ERR}`);

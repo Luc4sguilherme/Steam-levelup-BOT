@@ -45,6 +45,33 @@ module.exports = {
   // Setup bot to only handle foil cards instead of normal ones, it will also make bot recognize normal cards as leftovers.
   foilMode: false,
 
+  // Setup the commands you want the bot to ignore
+  ignoreCommands: [''],
+
+  // Setup the currencies you want the bot to accept
+  acceptedCurrency: {
+    TF2: true,
+    CSGO: true,
+    GEMS: true,
+    HYDRA: true,
+  },
+
+  // Set to true if you want to handle suppliers (!SELL commands).
+  handleSuppliers: true,
+
+  // Setup the languages you want the bot to accept. Values ( true or false or 'DEFAULT' )
+  // Set the value to 'DEFAULT' to be the primary language
+  acceptedLanguages: {
+    EN: 'DEFAULT',
+    PT: true,
+    ES: true,
+    FR: true,
+    DE: true,
+    RU: true,
+    JA: true,
+    CN: true,
+  },
+
   steamGroup: {
     // Set to true if you want to invite customers to a desired GroupID64
     doInvites: true,

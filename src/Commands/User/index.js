@@ -1,12 +1,7 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable consistent-return */
-const HELPEN = require('./GENERAL/HELPEN');
-const HELPPT = require('./GENERAL/HELPPT');
-const HELPRU = require('./GENERAL/HELPRU');
-const HELPES = require('./GENERAL/HELPES');
-const HELPCN = require('./GENERAL/HELPCN');
-const HELPFR = require('./GENERAL/HELPFR');
-const HELPJA = require('./GENERAL/HELPJA');
-const HELPDE = require('./GENERAL/HELPDE');
+const HELP = require('./GENERAL/HELP');
+const COMMANDS = require('./GENERAL/COMMANDS');
 const LANG = require('./GENERAL/LANGUAGE');
 const EN = require('./GENERAL/LANGUAGE/EN');
 const ES = require('./GENERAL/LANGUAGE/ES');
@@ -39,8 +34,6 @@ const CHECKGEMS = require('./GEMS/CHECK');
 const CHECKHYDRA = require('./HYDRA/CHECK');
 const CHECKTF = require('./TF/CHECK');
 const SELLCHECK = require('./GENERAL/SELLCHECK');
-const ENTER = require('./GENERAL/ENTER');
-const GIVEAWAY = require('./GENERAL/GIVEAWAY');
 const INVITE = require('./GENERAL/INVITE');
 const KEYLIST = require('./GENERAL/KEYLIST');
 const LEVEL = require('./GENERAL/LEVEL');
@@ -51,58 +44,135 @@ const REPORT = require('./GENERAL/REPORT');
 const STOCK = require('./GENERAL/STOCK');
 const TUTORIAL = require('./GENERAL/TUTORIAL');
 const SETS4SETS = require('./GENERAL/SETS4SETS');
+const main = require('../../Config/main');
+const { parseCommand } = require('../../Utils');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
-  switch (msg.toUpperCase().split(' ')[0]) {
+  const input = msg.toUpperCase().split(' ')[0];
+  const ignoreCommands = main.ignoreCommands.map((el) => el.toUpperCase());
+  const { acceptedCurrency, handleSuppliers, acceptedLanguages } = main;
+
+  if (ignoreCommands.includes(input)) {
+    return 'UNKNOW';
+  }
+
+  if (
+    input.includes(`!KEYLIST`) &&
+    !acceptedCurrency.CSGO &&
+    !acceptedCurrency.TF2 &&
+    !acceptedCurrency.HYDRA
+  ) {
+    return 'UNKNOW';
+  }
+
+  if (input.includes(`!TUTORIAL`) && main.tutorial === '') {
+    return 'UNKNOW';
+  }
+
+  if (input.includes(`!OWNER`) && main.owner === '') {
+    return 'UNKNOW';
+  }
+
+  for (const key in acceptedCurrency) {
+    if (typeof acceptedCurrency[key] !== 'boolean') {
+      throw new Error(
+        'Error in configuring accepted currencies: not is boolean'
+      );
+    } else if (input.includes(key.replace('2', '')) && !acceptedCurrency[key]) {
+      return 'UNKNOW';
+    }
+  }
+
+  for (const lang in acceptedLanguages) {
+    if (!acceptedLanguages[lang] && input.includes(`!${lang}`)) {
+      return 'UNKNOW';
+    }
+  }
+
+  if (!handleSuppliers && input.includes('!SELL')) {
+    return 'UNKNOW';
+  }
+
+  switch (input) {
+    case parseCommand(input, '!COMMANDS | !COMMAND'):
+      COMMANDS(sender, client, users);
+      break;
     case '!HELP':
-      HELPEN(sender, client, users);
+      HELP(sender, client, users);
       break;
     case '!AJUDA':
-      HELPPT(sender, client);
+      HELP(sender, client, users, 'PT');
       break;
     case '!ПОМОЩЬ':
-      HELPRU(sender, client);
+      HELP(sender, client, users, 'RU');
       break;
     case '!AYUDA':
-      HELPES(sender, client);
+      HELP(sender, client, users, 'ES');
       break;
     case '!救命':
-      HELPCN(sender, client);
+      HELP(sender, client, users, 'CN');
       break;
     case '!AIDER':
-      HELPFR(sender, client, users);
+      HELP(sender, client, users, 'FR');
       break;
     case '!助けて':
-      HELPJA(sender, client, users);
+      HELP(sender, client, users, 'JA');
       break;
     case '!HILFE':
-      HELPDE(sender, client, users);
+      HELP(sender, client, users, 'DE');
       break;
-    case '!LANG':
+    case parseCommand(
+      input,
+      '!LANG | !LANGUAGE | !SPRACHE | !IDIOMA | !LANGUE | !言語 | !ЯЗЫК'
+    ):
       LANG(sender, client, users);
       break;
-    case '!EN':
+    case parseCommand(
+      input,
+      '!EN | !ENGLISH | !ENGLISCHE | !INGLÊS | !英语 | !英語 | !АНГЛИЙСКИЙ'
+    ):
       EN(sender, client, users);
       break;
-    case '!ES':
+    case parseCommand(
+      input,
+      '!ES | !SPANISH | !SPANISCHE | !ESPANHOL | !西班牙语 | !スペイン語 | !ИСПАНСКИЙ'
+    ):
       ES(sender, client, users);
       break;
-    case '!PT':
+    case parseCommand(
+      input,
+      '!PT | !PORTUGUESE | !PORTUGIESISCHE | !PORTUGUÊS | !葡萄牙语语言 | !ポルトガル語 | !ПОРТУГАЛЬСКИЙ'
+    ):
       PT(sender, client, users);
       break;
-    case '!CN':
+    case parseCommand(
+      input,
+      '!CN | !CHINESE | !CHINESISCHE | !CHINÊS | !CHINO | !中文 | !中国語 | !КИТАЙСКИЙ'
+    ):
       CN(sender, client, users);
       break;
-    case '!RU':
+    case parseCommand(
+      input,
+      '!RU | !RUSSIAN | !RUSSISCHE | !RUSSO | !RUSO | !俄语 | !ロシア語 | !РУССКИЙ'
+    ):
       RU(sender, client, users);
       break;
-    case '!FR':
+    case parseCommand(
+      input,
+      '!FR | !FRANCE | !FRANKREICH | !FRANCÊS | !FRANCIA | !語言法國 | !言語フランス | !ФРАНЦИЯ'
+    ):
       FR(sender, client, users);
       break;
-    case '!JA':
+    case parseCommand(
+      input,
+      '!JA | !JAPANESE | !JAPANISCH | !JAPONÊS | !語言日語 | !日本語日本語 | !ЯПОНСКИЙ'
+    ):
       JA(sender, client, users);
       break;
-    case '!DE':
+    case parseCommand(
+      input,
+      '!DE | !GERMAN | !DEUTSCHE | !ALEMÂO | !德国的语言 | !ドイツ語 | !НЕМЕЦКИЙ'
+    ):
       DE(sender, client, users);
       break;
     case '!BUYANYCSGO':
@@ -174,12 +244,6 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     case '!SELLCHECK':
       SELLCHECK(sender, client, users, community, allCards);
       break;
-    case '!ENTER':
-      ENTER(sender, client, users);
-      break;
-    case '!GIVEAWAY':
-      GIVEAWAY(sender, client, users);
-      break;
     case '!INVITE':
       INVITE(sender, client, users, community);
       break;
@@ -192,7 +256,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     case '!OWNER':
       OWNER(sender, client, users);
       break;
-    case '!PRICES':
+    case parseCommand(input, '!PRICES | !PRICE | !RATES | !RATE'):
       PRICES(sender, client, users);
       break;
     case '!RANK':
@@ -201,13 +265,13 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     case '!REPORT':
       REPORT(sender, msg, client, users);
       break;
-    case '!STOCK':
+    case parseCommand(input, '!STOCK | !STATS'):
       STOCK(sender, client, users);
       break;
     case '!TUTORIAL':
       TUTORIAL(sender, client, users);
       break;
-    case '!SETS4SETS':
+    case parseCommand(input, '!SETS4SETS | !SET4SET'):
       SETS4SETS(sender, msg, client, users, community, allCards, manager);
       break;
     default:
