@@ -630,19 +630,18 @@ Array.prototype.remove = function (index = []) {
 };
 
 utils.parseCurrencies = (currency) => {
-  let key = '';
-
-  if (currency === 'CSGO') {
-    key = 'CSGO|CS:GO|CS|《反恐精英：全球攻势》|„CS:GO“';
-  } else if (currency === 'TF2') {
-    key = 'TF2|TF|团队要塞2|„TF2“';
-  } else if (currency === 'HYDRA') {
-    key = 'HYDRA|九头蛇|Гидра|Hidra|„Hydra“';
-  } else if (currency === 'GEMS') {
-    key = 'gem|gema|宝石|Самоцвет|gemme|ジェム|edelsteine';
+  switch (currency) {
+    case 'CSGO':
+      return 'CSGO|CS:GO|CS|《反恐精英：全球攻势》|„CS:GO“';
+    case 'TF2':
+      return 'TF2|TF|团队要塞2|„TF2“';
+    case 'HYDRA':
+      return 'HYDRA|九头蛇|Гидра|Hidra|„Hydra“';
+    case 'GEMS':
+      return 'gem|gema|宝石|Самоцвет|gemme|ジェム|edelsteine';
+    default:
+      return '';
   }
-
-  return key;
 };
 
 utils.parseCommand = (input, command) => {
