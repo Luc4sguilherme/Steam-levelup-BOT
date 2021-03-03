@@ -472,7 +472,7 @@ utils.removeCurrency = (msg, sectionType) => {
   const suppliers = main.handleSuppliers;
   const message = [...msg];
 
-  if (utils.isFalseAllObjectKeys(currencies)) {
+  if (utils.isFalseAllObjectValues(currencies)) {
     throw new Error(
       'Error in configuring accepted currencies: all currencies are disabled'
     );
@@ -543,7 +543,7 @@ utils.removeLanguages = (msg) => {
   const languages = main.acceptedLanguages;
   const message = [...msg];
 
-  if (utils.isFalseAllObjectKeys(languages)) {
+  if (utils.isFalseAllObjectValues(languages)) {
     throw new Error(
       'Error in configuring accepted languages: all languages are disabled'
     );
@@ -615,7 +615,7 @@ utils.removeKeys = (msg) => {
   return message;
 };
 
-utils.isFalseAllObjectKeys = (obj) =>
+utils.isFalseAllObjectValues = (obj) =>
   Object.values(obj).every((val) => val === false);
 
 // eslint-disable-next-line no-extend-native
