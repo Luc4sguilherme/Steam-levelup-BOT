@@ -183,6 +183,9 @@ log.userChatFullMessages = (id64, msg) => {
 };
 
 log.tradesHistory = (offer) => {
+  const itemsSent = offer.itemsToGive.map(utils.getOfferItemInfo);
+  const itemsReceived = offer.itemsToReceive.map(utils.getOfferItemInfo);
+
   let data = `Command: ${offer.data('commandused')}`;
   if (offer.data('amountofsets')) {
     data += `\nSets: ${offer.data('amountofsets')}`;
@@ -196,48 +199,9 @@ log.tradesHistory = (offer) => {
   if (offer.data('amountofgems')) {
     data += `\nGems: ${offer.data('amountofgems')}`;
   }
+
   data += `\nSteamID: ${offer.partner.getSteamID64()}`;
-
-  const itemsSent = offer.itemsToGive.map((item) => {
-    const {
-      appid,
-      contextid,
-      assetid,
-      classid,
-      market_fee_app: marketFeeApp,
-      amount,
-    } = item;
-
-    return {
-      appid,
-      contextid,
-      assetid,
-      classid,
-      marketFeeApp,
-      amount,
-    };
-  });
-
-  const itemsReceived = offer.itemsToReceive.map((item) => {
-    const {
-      appid,
-      contextid,
-      assetid,
-      classid,
-      market_fee_app: marketFeeApp,
-      amount,
-    } = item;
-
-    return {
-      appid,
-      contextid,
-      assetid,
-      classid,
-      marketFeeApp,
-      amount,
-    };
-  });
-
+  data += `\nOfferID: ${offer.id}`;
   data += `\nCreatedDate: ${moment(offer.created).toISOString()}`;
   data += `\nCompletedDate: ${moment(offer.updated).toISOString()}`;
   data += `\nItemsSent: ${JSON.stringify(itemsSent, null, 2)}`;

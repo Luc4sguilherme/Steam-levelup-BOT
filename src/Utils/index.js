@@ -662,4 +662,30 @@ utils.getDefaultLanguage = () => {
   return 'EN';
 };
 
+utils.getOfferItemInfo = (item) => {
+  const {
+    name,
+    appid,
+    contextid,
+    assetid,
+    classid,
+    market_fee_app: marketFeeApp,
+    amount,
+    tags,
+  } = item;
+
+  const Tags = tags.map((tag) => tag.name);
+
+  return {
+    name,
+    appid,
+    contextid,
+    assetid,
+    classid,
+    marketFeeApp,
+    amount,
+    tags: Tags,
+  };
+};
+
 module.exports = utils;
