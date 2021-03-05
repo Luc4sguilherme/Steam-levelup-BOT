@@ -126,6 +126,7 @@ const commands = [
   '!ROLLBACK',
   '!UNPACK',
   '!USERCHECK',
+  '!MYSTATS',
   '!WITHDRAWBOOSTER',
   '!WITHDRAWCSGO',
   '!WITHDRAWGEMS',

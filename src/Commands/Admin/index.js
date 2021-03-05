@@ -16,6 +16,7 @@ const ROLLBACK = require('./GENERAL/ROLLBACK');
 const UNBLOCK = require('./GENERAL/UNBLOCK');
 const UNPACK = require('./GENERAL/UNPACK');
 const USERCHECK = require('./GENERAL/USERCHECK');
+const MYSTATS = require('./GENERAL/MYSTATS');
 const WITHDRAWBOOSTER = require('./BOOSTER/WITHDRAW');
 const WITHDRAWCSGO = require('./CSGO/WITHDRAW');
 const WITHDRAWGEMS = require('./GEMS/WITHDRAW');
@@ -95,6 +96,9 @@ function admin(sender, msg, client, users, community, allCards, manager) {
       break;
     case '!USERCHECK':
       USERCHECK(sender, msg, client, users, community, allCards);
+      break;
+    case '!MYSTATS':
+      MYSTATS(sender, client, users, community, allCards);
       break;
     case '!WITHDRAWLEFTOVER':
       WITHDRAWLEFTOVER(sender, client, users, community, manager);
