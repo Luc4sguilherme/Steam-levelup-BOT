@@ -293,6 +293,16 @@ module.exports = {
         DE: 'Spenden sind deaktiviert!',
       },
     },
+    UNAVAILABLEITEMS: {
+      EN: 'Items are unavailable!',
+      PT: 'Itens indisponíveis!',
+      RU: 'Товары недоступны!',
+      ES: 'Los artículos no están disponibles!',
+      CN: '物品不可用！',
+      FR: 'Les articles ne sont pas disponibles!',
+      JA: 'アイテムは利用できません！',
+      DE: 'Artikel sind nicht verfügbar!',
+    },
     NOTIFYADMIN: {
       DEFAULT: {
         CURRENCIES: {
@@ -447,6 +457,16 @@ module.exports = {
           FR: 'Voici les cartes restantes.',
           JA: 'こちらが残り物のカードです。',
           DE: 'Hier sind übrig gebliebene Karten.',
+        },
+        ROLLBACK: {
+          EN: 'Reverting the negotiation with ID: {OFFERID}',
+          PT: 'Revertendo a negociação com ID: {OFFERID}',
+          RU: 'Откатить сделку с ID: {OFFERID}',
+          ES: 'Revertir la negociación con ID: {OFFERID}',
+          CN: '还原ID为{OFFERID}的协商 ',
+          FR: 'Inverse de la négociation avec ID: {OFFERID}',
+          JA: 'ID：{OFFERID}とのネゴシエーションを元に戻します。',
+          DE: 'Setzen Sie die Aushandlung mit der ID zurück: {OFFERID}',
         },
       },
       1: {
@@ -1675,6 +1695,66 @@ module.exports = {
         'セットの量を減らしてみてください。 このコマンドでは、一度に最大{SETS}セットしか交換できません。',
       DE:
         'Bitte versuchen Sie es mit einer geringeren Anzahl von Sets. Mit diesem Befehl können Sie nur bis zu {SETS} Sätze gleichzeitig austauschen!',
+    },
+  },
+  ADMINCHECK: {
+    INVENTORY: {
+      EN:
+        '- You currently have in inventory: \n' +
+        ' • {TOTALSETS} Cards sets. \n' +
+        ' • {CSKEYSTRADABLE} tradable CS:GO keys, and {CSKEYSNOTRADABLE} non-tradable CS:GO keys. \n' +
+        ' • {HYDRAKEYSTRADABLE} tradable HYDRA keys, and {HYDRAKEYSNOTRADABLE} non-tradable HYDRA keys. \n' +
+        ' • {TFKEYSTRADABLE} tradable TF2 keys, and {TFKEYSNOTRADABLE} non-tradable TF2 keys. \n' +
+        ' • {GEMSQUANTITYTRADABLE} tradable Gems, and {GEMSQUANTITYNOTRADABLE} non-tradable Gems.',
+      PT:
+        '- Atualmente, você tem em estoque: \n' +
+        ' • {TOTALSETS} conjuntos de cartas. \n' +
+        ' • {CSKEYSTRADABLE} chaves CS:GO negociáveis e {CSKEYSNOTRADABLE} chaves CS:GO não negociáveis. \n' +
+        ' • {HYDRAKEYSTRADABLE} chaves HYDRA negociáveis e {HYDRAKEYSNOTRADABLE} chaves HYDRA não negociáveis. \n' +
+        ' • {TFKEYSTRADABLE} chaves TF2 negociáveis e {TFKEYSNOTRADABLE} chaves TF2 não negociáveis. \n' +
+        ' • {GEMSQUANTITYTRADABLE} gemas negociáveis e {GEMSQUANTITYNOTRADABLE} gemas não negociáveis.',
+      RU:
+        '- В настоящее время у вас в инвентаре: \n' +
+        ' • {TOTALSETS} набор(ы) карточка. \n' +
+        ' • {CSKEYSTRADABLE} оборотные CS:GO ключ(ей), и {CSKEYSNOTRADABLE} неторгуемых CS:GO ключ(ей). \n' +
+        ' • {HYDRAKEYSTRADABLE} оборотные Гидра ключ(ей), и {HYDRAKEYSNOTRADABLE} неторгуемых Гидра ключ(ей). \n' +
+        ' • {TFKEYSTRADABLE} оборотные TF2 ключ(ей), и {TFKEYSNOTRADABLE} неторгуемых TF2 ключ(ей). \n' +
+        ' • {GEMSQUANTITYTRADABLE} оборотные Самоцветы, и {GEMSQUANTITYNOTRADABLE} неторгуемых Самоцветы.',
+      ES:
+        '- Actualmente tienes en inventario: \n' +
+        ' • {TOTALSETS} conjunto(s) de cromos. \n' +
+        ' • {CSKEYSTRADABLE} llave(s) CS:GO negociable, y {CSKEYSNOTRADABLE} llave(s) CS:GO no negociable. \n' +
+        ' • {HYDRAKEYSTRADABLE} llave(s) HYDRA negociable, y {HYDRAKEYSNOTRADABLE} llave(s) HYDRA no negociable. \n' +
+        ' • {TFKEYSTRADABLE} llave(s) TF2 negociable, y {TFKEYSNOTRADABLE} llave(s) TF2 no negociable. \n' +
+        ' • {GEMSQUANTITYTRADABLE} gemas negociable, y {GEMSQUANTITYNOTRADABLE} gemas no negociable.',
+      CN:
+        '- 您目前有库存： \n' +
+        ' • {TOTALSETS} 套卡牌. \n' +
+        ' • {CSKEYSTRADABLE} 可交易的《反恐精英：全球攻势》钥匙, 和 {CSKEYSNOTRADABLE} 不可交易《反恐精英：全球攻势》钥匙. \n' +
+        ' • {HYDRAKEYSTRADABLE} 可交易的九头蛇钥匙, 和 {HYDRAKEYSNOTRADABLE} 不可交易九头蛇钥匙. \n' +
+        ' • {TFKEYSTRADABLE} 可交易的团队要塞2钥匙, 和 {TFKEYSNOTRADABLE} 不可交易团队要塞2钥匙. \n' +
+        ' • {GEMSQUANTITYTRADABLE} 可交易的宝石, 和 {GEMSQUANTITYNOTRADABLE} 不可交易宝石.',
+      FR:
+        '- Vous avez actuellement en inventaire: \n' +
+        ' • {TOTALSETS} ensembles de cartes. \n' +
+        ' • {CSKEYSTRADABLE} clés CS:GO échangeables et {CSKEYSNOTRADABLE} clés CS:GO non échangeables. \n' +
+        ' • {HYDRAKEYSTRADABLE} clés HYDRA échangeables et {HYDRAKEYSNOTRADABLE} clés HYDRA non échangeables. \n' +
+        ' • {TFKEYSTRADABLE} clés TF2 échangeables et {TFKEYSNOTRADABLE} clés TF2 non échangeables. \n' +
+        ' • {GEMSQUANTITYTRADABLE} gemmes échangeables et {GEMSQUANTITYNOTRADABLE} gemmes non échangeables.',
+      JA:
+        '- 現在在庫があります： \n' +
+        ' • {TOTALSETS}カードセット。 \n' +
+        ' • {CSKEYSTRADABLE}個の取引可能なCS：GOキー、および{CSKEYSNOTRADABLE}個の取引不可能なCS：GOキー。 \n' +
+        ' • {HYDRAKEYSTRADABLE}個の取引可能なHYDRAキー、および{HYDRAKEYSNOTRADABLE}個の取引不可能なHYDRAキー。 \n' +
+        ' • {TFKEYSTRADABLE}個の取引可能なTF2キー、および{TFKEYSNOTRADABLE}個の取引不可能なTF2キー。 \n' +
+        ' • {GEMSQUANTITYTRADABLE}個の取引可能な宝石と{GEMSQUANTITYNOTRADABLE}個の取引不可能な宝石。',
+      DE:
+        '- Sie haben derzeit im Inventar: \n' +
+        ' • {TOTALSETS}Kartensätze. \n' +
+        ' • {CSKEYSTRADABLE} handelbare CS:GO-Schlüssel und {CSKEYSNOTRADABLE} nicht handelbare CS:GO-Schlüssel. \n' +
+        ' • {HYDRAKEYSTRADABLE} handelbare HYDRA-Schlüssel und {HYDRAKEYSNOTRADABLE} nicht handelbare HYDRA-Schlüssel. \n' +
+        ' • {TFKEYSTRADABLE} handelbare TF2-Schlüssel und {TFKEYSNOTRADABLE} nicht handelbare TF2-Schlüssel. \n' +
+        ' • {GEMSQUANTITYTRADABLE} handelbare Edelsteine und {GEMSQUANTITYNOTRADABLE} nicht handelbare Edelsteine.',
     },
   },
   USERCHECK: {
@@ -3180,7 +3260,6 @@ module.exports = {
       ' • Sie können !COMMANDS eingeben, um die Liste der Befehle anzuzeigen. \n' +
       ' • Sie können !LANG eingeben, um die Sprache zu ändern. \n\n',
   },
-
   COMMANDS: {
     EN: [
       'Commands: \n',
@@ -3536,9 +3615,11 @@ module.exports = {
       '► !DEPOSITBOOSTER (amount_of_booster) = Deposits a specific quantity of BOOSTER. \n',
       '► !RESTOCK = Sends a trade offer to the owner requesting that all available sets be traded. \n',
       '► !USERCHECK (ID64) = Verify User. \n',
+      '► !MYSTATS = Verify your inventory. \n',
       '► !BLOCK (ID64) = Block user. \n',
       '► !UNBLOCK (ID64) = Unlock user. \n',
       '► !CANCEL (OFFERID) = Cancel the trade offer. \n',
+      '► !ROLLBACK (OFFERID) = Rollback a trade. \n',
       '► !RELOAD = Reload Inventory. \n',
       '► !REQUESTER = Forces the automatic request to be triggered. \n',
       '► !PROFIT = Shows bot transactions this month. \n',
@@ -3564,9 +3645,11 @@ module.exports = {
       '► !DEPOSITBOOSTER (quantidade_de_booster) = Deposita uma quantidade específica de BOOSTER. \n',
       '► !RESTOCK = Envia uma oferta comercial ao proprietário solicitando que todos os conjuntos disponíveis sejam negociados. \n',
       '► !USERCHECK (ID64) = Verifica o usuário. \n',
+      '► !MYSTATS = Verifique seu inventário. \n',
       '► !BLOCK (ID64) = Bloquea usuário. \n',
       '► !UNBLOCK (ID64) = Desbloquea usuário. \n',
       '► !CANCEL (OFFERID) = Cancela a oferta comercial. \n',
+      '► !ROLLBACK (OFFERID) = Reverta uma negociação. \n',
       '► !RELOAD = Recarrega o inventário. \n',
       '► !REQUESTER = Força a solicitação automática a ser acionada. \n',
       '► !PROFIT = Mostra as transações feitas pelo bot nesse mês. \n',
@@ -3592,9 +3675,11 @@ module.exports = {
       '► !DEPOSITBOOSTER (количество набор карточек) = Депозиты определенное количество набор карточек. \n',
       '► !RESTOCK = Отправляет предложения обмена владельцу с просьбой обменять все доступные наборы. \n',
       '► !USERCHECK (ID64) = Проверить пользователя. \n',
+      '► !MYSTATS = Проверьте свой инвентарь. \n',
       '► !BLOCK (ID64) = Заблокировать пользователя. \n',
       '► !UNBLOCK (ID64) = Разблокировать пользователя. \n',
       '► !CANCEL (OFFERID) = Отменить коммерческое предложение. \n',
+      '► !ROLLBACK (OFFERID) = Откатить сделку. \n',
       '► !RELOAD = Перезагрузить инвентарь. \n',
       '► !REQUESTER = Принудительно инициирует автоматический запрос. \n',
       '► !PROFIT = Показывает транзакции ботов в этом месяце. \n',
@@ -3620,9 +3705,11 @@ module.exports = {
       '► !DEPOSITBOOSTER (número_de_pack) = Retirar una cantidad específica de Pack de refuerzo. \n',
       '► !RESTOCK = Envía una oferta comercial al propietario solicitando que se intercambien todos los conjuntos disponibles. \n',
       '► !USERCHECK (ID64) = Verificar usuario. \n',
+      '► !MYSTATS = Verifique su inventario. \n',
       '► !BLOCK (ID64) = Bloquear usuario. \n',
       '► !UNBLOCK (ID64) = Desbloquear usuario. \n',
       '► !CANCEL (OFFERID) = Cancelar la oferta comercial. \n',
+      '► !ROLLBACK (OFFERID) = Invierta una operación. \n',
       '► !RELOAD = Recargar inventario. \n',
       '► !REQUESTER = Obliga a que se active la solicitud automática.. \n',
       '► !PROFIT = Muestra las transacciones de bot este mes. \n',
@@ -3648,9 +3735,11 @@ module.exports = {
       '► !DEPOSITBOOSTER (补充包数) = 存放一定数量的补充包。 \n',
       '► !RESTOCK = 向所有者发送交易要约，请求所有可用的套进行交易。 \n',
       '► !USERCHECK (ID64) = 验证用户。 \n',
+      '► !MYSTATS = 验证您的库存。 \n',
       '► !BLOCK (ID64) = 阻止用户。 \n',
       '► !UNBLOCK (ID64) = 解锁用户。 \n',
       '► !CANCEL (OFFERID) = 取消商业报价。 \n',
+      '► !ROLLBACK (OFFERID) = 反向交易。 \n',
       '► !RELOAD = 重新加载库存。 \n',
       '► !REQUESTER = 强制触发自动请求。\n',
       '► !PROFIT = 显示本月的机器人交易。 \n',
@@ -3676,9 +3765,11 @@ module.exports = {
       '► !DEPOSITBOOSTER (quantité_de_booster) = Dépose une quantité spécifique de BOOSTER. \n',
       "► !RESTOCK = Envoie une offre d'échange au propriétaire demandant que tous les ensembles disponibles soient échangés. \n",
       "► !USERCHECK (ID64) = Vérifier l'utilisateur. \n",
+      '► !MYSTATS = Vérifiez votre inventaire. \n',
       '► !BLOCK (ID64) = Bloquer un utilisateur. \n',
       "► !UNBLOCK (ID64) = Déverrouillez l'utilisateur. \n",
       "► !CANCEL (OFFERID) = Annulez l'offre commerciale. \n",
+      '► !ROLLBACK (OFFERID) = Inverser un échange. \n',
       "► !RELOAD = Recharger l'inventaire. \n",
       '► !REQUESTER = Force le déclenchement de la requête automatique. \n',
       '► !PROFIT = Affiche les transactions de bot ce mois-ci. \n',
@@ -3704,9 +3795,11 @@ module.exports = {
       '► !DEPOSITBOOSTER (ブースターパックの量) = 特定の量のブースターパックを預けます。 \n',
       '► !RESTOCK = 所有者にトレードオファーを送信して、利用可能なすべてのセットのトレードを要求します。 \n',
       '► !USERCHECK (ID64) = ユーザーを確認します。 \n',
+      '► !MYSTATS = 在庫を確認します。 \n',
       '► !BLOCK (ID64) = ユーザをブロックする。 \n',
       '► !UNBLOCK (ID64) = ユーザーのロックを解除します。 \n',
       '► !CANCEL (OFFERID) = 商用オファーをキャンセルします。 \n',
+      '► !ROLLBACK (OFFERID) = 取引を逆にします。 \n',
       '► !RELOAD = インベントリをリロードします。 \n',
       '► !REQUESTER = 自動リクエストを強制的にトリガーします。 \n',
       '► !PROFIT = 今月のボットトランザクションを表示します。 \n',
@@ -3732,9 +3825,11 @@ module.exports = {
       '► !DEPOSITBOOSTER (anzahl_der_booster) = Hinterlegt eine bestimmte Anzahl von Booster-Pack. \n',
       '► !RESTOCK = Sendet ein Handelsangebot an den Eigentümer und fordert den Handel aller verfügbaren Sets an. \n',
       '► !USERCHECK (ID64) = Benutzer überprüfen. \n',
+      '► !MYSTATS = Überprüfen Sie Ihr Inventar. \n',
       '► !BLOCK (ID64) = Benutzer blockieren. \n',
       '► !UNBLOCK (ID64) = Benutzer entsperren. \n',
       '► !CANCEL (OFFERID) = Kündigen Sie das kommerzielle Angebot. \n',
+      '► !ROLLBACK (OFFERID) = Einen Handel rückgängig machen. \n',
       '► !RELOAD = Inventar neu laden. \n',
       '► !REQUESTER = Erzwingt das Auslösen der automatischen Anforderung. \n',
       '► !PROFIT = Zeigt Bot-Transaktionen in diesem Monat an. \n',

@@ -688,4 +688,71 @@ utils.getOfferItemInfo = (item) => {
   };
 };
 
+utils.intersectionBy = (array1, array2, fn) => {
+  const s = new Set(array2.map(fn));
+  return array1.filter((x) => s.has(fn(x)));
+};
+
+utils.getExchangedItems = (
+  community,
+  id64,
+  appid,
+  contextid,
+  exchangedItems,
+  inventoryOf = 'BOT'
+) =>
+  new Promise((resolve, reject) => {
+    community.getUserInventoryContents(
+      id64,
+      appid,
+      contextid,
+      true,
+      (error, inv) => {
+        if (error) {
+          reject(error);
+        } else {
+          const itemsToReturn = [];
+          const items = [...exchangedItems];
+          const inventory = utils.intersectionBy(
+            inv,
+            exchangedItems,
+            (x) => x.market_hash_name
+          );
+
+          for (let i = 0; i < inventory.length; i += 1) {
+            for (let j = 0; j < items.length; j += 1) {
+              if (
+                items[j].market_hash_name === inventory[i].market_hash_name &&
+                itemsToReturn.every((el) => el.assetid !== inventory[i].assetid)
+              ) {
+                const item = {
+                  ...inventory[i],
+                  amount: items[j].amount,
+                };
+                itemsToReturn.push(item);
+                items.splice(j, 1);
+              }
+            }
+          }
+
+          if (itemsToReturn.length !== exchangedItems.length) {
+            if (inventoryOf === 'BOT') {
+              reject(new Error('BOT items are unavailable'));
+            } else {
+              reject(new Error('User items are unavailable'));
+            }
+          } else {
+            const orderedItems = _.orderBy(itemsToReturn, [
+              'market_hash_name',
+              'classid',
+              'name',
+            ]);
+
+            resolve(orderedItems);
+          }
+        }
+      }
+    );
+  });
+
 module.exports = utils;

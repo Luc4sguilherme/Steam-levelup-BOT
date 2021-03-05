@@ -12,9 +12,11 @@ const REQUESTER = require('./GENERAL/REQUESTER');
 const RESTART = require('./GENERAL/RESTART');
 const CANCEL = require('./GENERAL/CANCEL');
 const RESTOCK = require('./GENERAL/RESTOCK');
+const ROLLBACK = require('./GENERAL/ROLLBACK');
 const UNBLOCK = require('./GENERAL/UNBLOCK');
 const UNPACK = require('./GENERAL/UNPACK');
 const USERCHECK = require('./GENERAL/USERCHECK');
+const MYSTATS = require('./GENERAL/MYSTATS');
 const WITHDRAWBOOSTER = require('./BOOSTER/WITHDRAW');
 const WITHDRAWCSGO = require('./CSGO/WITHDRAW');
 const WITHDRAWGEMS = require('./GEMS/WITHDRAW');
@@ -83,6 +85,9 @@ function admin(sender, msg, client, users, community, allCards, manager) {
     case '!RESTOCK':
       RESTOCK(sender, client, users, community, allCards, manager);
       break;
+    case '!ROLLBACK':
+      ROLLBACK(sender, msg, client, users, community, manager);
+      break;
     case '!UNBLOCK':
       UNBLOCK(sender, msg, client, users);
       break;
@@ -91,6 +96,9 @@ function admin(sender, msg, client, users, community, allCards, manager) {
       break;
     case '!USERCHECK':
       USERCHECK(sender, msg, client, users, community, allCards);
+      break;
+    case '!MYSTATS':
+      MYSTATS(sender, client, users, community, allCards);
       break;
     case '!WITHDRAWLEFTOVER':
       WITHDRAWLEFTOVER(sender, client, users, community, manager);
