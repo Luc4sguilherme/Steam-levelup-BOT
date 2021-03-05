@@ -67,11 +67,21 @@ module.exports = (sender, msg, client, users, community, manager) => {
         } catch (error1) {
           log.error(`There was an error getting items: ${error1}`);
 
-          if (error1.message.indexOf('items are unavailable') > -1) {
+          if (error1.message.indexOf('BOT items are unavailable') > -1) {
             chatMessage(
               client,
               sender,
-              messages.TRADE.UNAVAILABLEITEMS[
+              messages.TRADE.BOTITEMSUNAVAILABLE[
+                users[sender.getSteamID64()].language
+              ]
+            );
+          } else if (
+            error1.message.indexOf('User items are unavailable') > -1
+          ) {
+            chatMessage(
+              client,
+              sender,
+              messages.TRADE.USERITEMSUNAVAILABLE[
                 users[sender.getSteamID64()].language
               ]
             );
