@@ -2120,6 +2120,22 @@ module.exports = {
       'Ich lade gerade mein Inventar. Bitte versuchen Sie es später noch einmal',
   },
   ERROR: {
+    GETITEMS: {
+      EN: 'An error occurred while getting items. Please try again later!',
+      PT:
+        'Ocorreu um erro ao obter os itens. Por favor, tente novamente mais tarde!',
+      RU:
+        'Произошла ошибка при получении предметов. Пожалуйста, повторите попытку позже!',
+      ES:
+        'Se produjo un error al obtener los artículos. ¡Por favor, inténtelo de nuevo más tarde!',
+      CN: '获取物品时发生错误。 请稍后再试！',
+      FR:
+        "Une erreur s'est produite lors de l'obtention des éléments. Veuillez réessayer plus tard!",
+      JA:
+        'アイテムの取得中にエラーが発生しました。 後でもう一度やり直してください。',
+      DE:
+        'Beim Abrufen von Elementen ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal!',
+    },
     GETOFFER: {
       EN:
         'An error occurred while getting your offers. Please try again later!',

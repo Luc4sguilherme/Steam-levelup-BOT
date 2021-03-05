@@ -13,17 +13,17 @@ module.exports = (sender, msg, client, users, community, manager) => {
       users[sender.getSteamID64()].language,
       `[ !ROLLBACK ${offerID} ]`
     );
-    manager.getOffer(offerID, async (error1, offer) => {
-      if (error1) {
+    manager.getOffer(offerID, async (error, offer) => {
+      if (error) {
         chatMessage(
           client,
           sender,
           messages.ERROR.GETOFFER[users[sender.getSteamID64()].language]
         );
-        log.error(`There was an error getting offers: ${error1}`);
+        log.error(`There was an error getting offers: ${error}`);
       } else {
         let itemsSent = [];
-        let receivedItems = [];
+        let itemsReceived = [];
 
         try {
           if (offer.itemsToGive.length > 0) {
@@ -38,7 +38,7 @@ module.exports = (sender, msg, client, users, community, manager) => {
           }
 
           if (offer.itemsToReceive.length > 0) {
-            receivedItems = await utils.getExchangedItems(
+            itemsReceived = await utils.getExchangedItems(
               community,
               client.steamID.getSteamID64(),
               offer.itemsToReceive[0].appid,
@@ -53,7 +53,7 @@ module.exports = (sender, msg, client, users, community, manager) => {
             users,
             manager,
             offer.partner.getSteamID64(),
-            [].concat(...receivedItems),
+            [].concat(...itemsReceived),
             [].concat(...itemsSent),
             '!ROLLBACK',
             messages.TRADE.SETMESSAGE[0].ROLLBACK[
@@ -64,10 +64,10 @@ module.exports = (sender, msg, client, users, community, manager) => {
             offer.data('amountofkeys'),
             offer.data('amountofgems')
           );
-        } catch (error) {
-          log.error(`There was an error getting items: ${error}`);
+        } catch (error1) {
+          log.error(`There was an error getting items: ${error1}`);
 
-          if (error.message.indexOf('items are unavailable') > -1) {
+          if (error1.message.indexOf('items are unavailable') > -1) {
             chatMessage(
               client,
               sender,
@@ -76,7 +76,11 @@ module.exports = (sender, msg, client, users, community, manager) => {
               ]
             );
           } else {
-            chatMessage(client, sender, 'There was an error getting items');
+            chatMessage(
+              client,
+              sender,
+              messages.ERROR.GETITEMS[users[sender.getSteamID64()].language]
+            );
           }
         }
       }
