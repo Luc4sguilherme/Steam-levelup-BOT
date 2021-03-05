@@ -293,6 +293,16 @@ module.exports = {
         DE: 'Spenden sind deaktiviert!',
       },
     },
+    UNAVAILABLEITEMS: {
+      EN: 'Items are unavailable!',
+      PT: 'Itens indisponíveis!',
+      RU: 'Товары недоступны!',
+      ES: 'Los artículos no están disponibles!',
+      CN: '物品不可用！',
+      FR: 'Les articles ne sont pas disponibles!',
+      JA: 'アイテムは利用できません！',
+      DE: 'Artikel sind nicht verfügbar!',
+    },
     NOTIFYADMIN: {
       DEFAULT: {
         CURRENCIES: {
@@ -447,6 +457,16 @@ module.exports = {
           FR: 'Voici les cartes restantes.',
           JA: 'こちらが残り物のカードです。',
           DE: 'Hier sind übrig gebliebene Karten.',
+        },
+        ROLLBACK: {
+          EN: 'Reverting the negotiation with ID: {OFFERID}',
+          PT: 'Revertendo a negociação com ID: {OFFERID}',
+          RU: 'Откатить сделку с ID: {OFFERID}',
+          ES: 'Revertir la negociación con ID: {OFFERID}',
+          CN: '还原ID为{OFFERID}的协商 ',
+          FR: 'Inverse de la négociation avec ID: {OFFERID}',
+          JA: 'ID：{OFFERID}とのネゴシエーションを元に戻します。',
+          DE: 'Setzen Sie die Aushandlung mit der ID zurück: {OFFERID}',
         },
       },
       1: {
@@ -3180,7 +3200,6 @@ module.exports = {
       ' • Sie können !COMMANDS eingeben, um die Liste der Befehle anzuzeigen. \n' +
       ' • Sie können !LANG eingeben, um die Sprache zu ändern. \n\n',
   },
-
   COMMANDS: {
     EN: [
       'Commands: \n',
@@ -3539,6 +3558,7 @@ module.exports = {
       '► !BLOCK (ID64) = Block user. \n',
       '► !UNBLOCK (ID64) = Unlock user. \n',
       '► !CANCEL (OFFERID) = Cancel the trade offer. \n',
+      '► !ROLLBACK (OFFERID) = Rollback a trade. \n',
       '► !RELOAD = Reload Inventory. \n',
       '► !REQUESTER = Forces the automatic request to be triggered. \n',
       '► !PROFIT = Shows bot transactions this month. \n',
@@ -3567,6 +3587,7 @@ module.exports = {
       '► !BLOCK (ID64) = Bloquea usuário. \n',
       '► !UNBLOCK (ID64) = Desbloquea usuário. \n',
       '► !CANCEL (OFFERID) = Cancela a oferta comercial. \n',
+      '► !ROLLBACK (OFFERID) = Reverta uma negociação. \n',
       '► !RELOAD = Recarrega o inventário. \n',
       '► !REQUESTER = Força a solicitação automática a ser acionada. \n',
       '► !PROFIT = Mostra as transações feitas pelo bot nesse mês. \n',
@@ -3595,6 +3616,7 @@ module.exports = {
       '► !BLOCK (ID64) = Заблокировать пользователя. \n',
       '► !UNBLOCK (ID64) = Разблокировать пользователя. \n',
       '► !CANCEL (OFFERID) = Отменить коммерческое предложение. \n',
+      '► !ROLLBACK (OFFERID) = Откатить сделку. \n',
       '► !RELOAD = Перезагрузить инвентарь. \n',
       '► !REQUESTER = Принудительно инициирует автоматический запрос. \n',
       '► !PROFIT = Показывает транзакции ботов в этом месяце. \n',
@@ -3623,6 +3645,7 @@ module.exports = {
       '► !BLOCK (ID64) = Bloquear usuario. \n',
       '► !UNBLOCK (ID64) = Desbloquear usuario. \n',
       '► !CANCEL (OFFERID) = Cancelar la oferta comercial. \n',
+      '► !ROLLBACK (OFFERID) = Invierta una operación. \n',
       '► !RELOAD = Recargar inventario. \n',
       '► !REQUESTER = Obliga a que se active la solicitud automática.. \n',
       '► !PROFIT = Muestra las transacciones de bot este mes. \n',
@@ -3651,6 +3674,7 @@ module.exports = {
       '► !BLOCK (ID64) = 阻止用户。 \n',
       '► !UNBLOCK (ID64) = 解锁用户。 \n',
       '► !CANCEL (OFFERID) = 取消商业报价。 \n',
+      '► !ROLLBACK (OFFERID) = 反向交易。 \n',
       '► !RELOAD = 重新加载库存。 \n',
       '► !REQUESTER = 强制触发自动请求。\n',
       '► !PROFIT = 显示本月的机器人交易。 \n',
@@ -3679,6 +3703,7 @@ module.exports = {
       '► !BLOCK (ID64) = Bloquer un utilisateur. \n',
       "► !UNBLOCK (ID64) = Déverrouillez l'utilisateur. \n",
       "► !CANCEL (OFFERID) = Annulez l'offre commerciale. \n",
+      '► !ROLLBACK (OFFERID) = Inverser un échange. \n',
       "► !RELOAD = Recharger l'inventaire. \n",
       '► !REQUESTER = Force le déclenchement de la requête automatique. \n',
       '► !PROFIT = Affiche les transactions de bot ce mois-ci. \n',
@@ -3707,6 +3732,7 @@ module.exports = {
       '► !BLOCK (ID64) = ユーザをブロックする。 \n',
       '► !UNBLOCK (ID64) = ユーザーのロックを解除します。 \n',
       '► !CANCEL (OFFERID) = 商用オファーをキャンセルします。 \n',
+      '► !ROLLBACK (OFFERID) = 取引を逆にします。 \n',
       '► !RELOAD = インベントリをリロードします。 \n',
       '► !REQUESTER = 自動リクエストを強制的にトリガーします。 \n',
       '► !PROFIT = 今月のボットトランザクションを表示します。 \n',
@@ -3735,6 +3761,7 @@ module.exports = {
       '► !BLOCK (ID64) = Benutzer blockieren. \n',
       '► !UNBLOCK (ID64) = Benutzer entsperren. \n',
       '► !CANCEL (OFFERID) = Kündigen Sie das kommerzielle Angebot. \n',
+      '► !ROLLBACK (OFFERID) = Einen Handel rückgängig machen. \n',
       '► !RELOAD = Inventar neu laden. \n',
       '► !REQUESTER = Erzwingt das Auslösen der automatischen Anforderung. \n',
       '► !PROFIT = Zeigt Bot-Transaktionen in diesem Monat an. \n',

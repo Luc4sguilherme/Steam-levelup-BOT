@@ -123,6 +123,7 @@ const commands = [
   '!RESTOCK',
   '!UNBLOCK',
   '!CANCEL',
+  '!ROLLBACK',
   '!UNPACK',
   '!USERCHECK',
   '!WITHDRAWBOOSTER',
