@@ -723,6 +723,7 @@ utils.getExchangedItems = (
             for (let j = 0; j < items.length; j += 1) {
               if (
                 items[j].market_hash_name === inventory[i].market_hash_name &&
+                items[j].amount <= inventory[i].amount &&
                 itemsToReturn.every((el) => el.assetid !== inventory[i].assetid)
               ) {
                 const item = {
