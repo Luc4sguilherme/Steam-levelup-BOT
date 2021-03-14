@@ -3,7 +3,7 @@ const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
 const rates = require('../../../../Config/rates');
 const utils = require('../../../../Utils');
-const acceptedKeys = require('../../../../Config/keys');
+const acceptedCurrencies = require('../../../../Config/currencies');
 const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
 const makeOffer = require('../../../../Components/offer');
@@ -38,7 +38,9 @@ module.exports = (sender, msg, client, users, manager) => {
             for (let i = 0; i < inv.length; i += 1) {
               if (need !== 0) {
                 if (
-                  acceptedKeys.steamGems.indexOf(inv[i].market_hash_name) >= 0
+                  acceptedCurrencies.steamGems.indexOf(
+                    inv[i].market_hash_name
+                  ) >= 0
                 ) {
                   inv[i].amount = need <= inv[i].amount ? need : inv[i].amount;
                   need -= inv[i].amount;

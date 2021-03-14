@@ -30,7 +30,7 @@ function validate() {
         .uppercase()
         .allow('')
     ),
-    acceptedCurrency: Joi.object().keys({
+    acceptedCurrencies: Joi.object().keys({
       CSGO: Joi.boolean().required(),
       HYDRA: Joi.boolean().required(),
       TF2: Joi.boolean().required(),

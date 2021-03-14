@@ -1,5 +1,5 @@
 const messages = require('../../../../Config/messages');
-const acceptedKeys = require('../../../../Config/keys');
+const acceptedCurrencies = require('../../../../Config/currencies');
 const chatMessage = require('../../../../Components/message');
 const makeOffer = require('../../../../Components/offer');
 const log = require('../../../../Components/log');
@@ -31,7 +31,7 @@ module.exports = (sender, msg, client, users, manager) => {
           for (let i = 0; i < INV.length; i += 1) {
             if (
               theirKeys.length < amountkeys &&
-              acceptedKeys.csgo.indexOf(INV[i].market_hash_name) >= 0
+              acceptedCurrencies.csgo.indexOf(INV[i].market_hash_name) >= 0
             ) {
               theirKeys.push(INV[i]);
             }

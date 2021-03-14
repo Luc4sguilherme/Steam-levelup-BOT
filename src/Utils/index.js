@@ -468,7 +468,7 @@ utils.filterCommands = (msg, admin = false) => {
 };
 
 utils.removeCurrency = (msg, sectionType) => {
-  const currencies = main.acceptedCurrency;
+  const currencies = main.acceptedCurrencies;
   const suppliers = main.handleSuppliers;
   const message = [...msg];
 
@@ -583,7 +583,7 @@ utils.removeSuppliersCommands = (msg) => {
 };
 
 utils.removeKeys = (msg) => {
-  const currencies = main.acceptedCurrency;
+  const currencies = main.acceptedCurrencies;
   const message = msg.split('\n');
   for (const key in currencies) {
     if (!currencies[key]) {

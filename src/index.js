@@ -125,8 +125,8 @@ client.on('webSession', (_, cookies) => {
   // Update stock
   const load = ['SETS'];
 
-  Object.keys(main.acceptedCurrency).forEach((currency) => {
-    if (main.acceptedCurrency[currency]) {
+  Object.keys(main.acceptedCurrencies).forEach((currency) => {
+    if (main.acceptedCurrencies[currency]) {
       if (currency === 'HYDRA') {
         load.push(currency);
       } else {
