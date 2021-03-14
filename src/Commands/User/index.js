@@ -50,7 +50,7 @@ const { parseCommand } = require('../../Utils');
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
   const input = msg.toUpperCase().split(' ')[0];
   const ignoreCommands = main.ignoreCommands.map((el) => el.toUpperCase());
-  const { acceptedCurrency, handleSuppliers, acceptedLanguages } = main;
+  const { acceptedCurrencies, handleSuppliers, acceptedLanguages } = main;
 
   if (ignoreCommands.includes(input)) {
     return 'UNKNOW';
@@ -58,9 +58,9 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
 
   if (
     input.includes(`!KEYLIST`) &&
-    !acceptedCurrency.CSGO &&
-    !acceptedCurrency.TF2 &&
-    !acceptedCurrency.HYDRA
+    !acceptedCurrencies.CSGO &&
+    !acceptedCurrencies.TF2 &&
+    !acceptedCurrencies.HYDRA
   ) {
     return 'UNKNOW';
   }
@@ -73,12 +73,15 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     return 'UNKNOW';
   }
 
-  for (const key in acceptedCurrency) {
-    if (typeof acceptedCurrency[key] !== 'boolean') {
+  for (const key in acceptedCurrencies) {
+    if (typeof acceptedCurrencies[key] !== 'boolean') {
       throw new Error(
         'Error in configuring accepted currencies: not is boolean'
       );
-    } else if (input.includes(key.replace('2', '')) && !acceptedCurrency[key]) {
+    } else if (
+      input.includes(key.replace('2', '')) &&
+      !acceptedCurrencies[key]
+    ) {
       return 'UNKNOW';
     }
   }

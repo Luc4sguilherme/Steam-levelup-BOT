@@ -14,7 +14,7 @@ module.exports = (sender, client, users) => {
   message +=
     messages.KEYLIST.MESSAGES[0][users[sender.getSteamID64()].language];
 
-  if (main.acceptedCurrency.CSGO || main.acceptedCurrency.HYDRA) {
+  if (main.acceptedCurrencies.CSGO || main.acceptedCurrencies.HYDRA) {
     message +=
       messages.KEYLIST.MESSAGES[1][users[sender.getSteamID64()].language];
     for (

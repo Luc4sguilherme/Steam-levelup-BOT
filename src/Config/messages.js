@@ -2951,10 +2951,9 @@ module.exports = {
               RU: 'У бота не хватает самоцветы.',
               ES: 'El bot no tiene suficientes gemas.',
               CN: '该机器人没有足够的宝石。',
-              FR: 'Il ne reste plus de cartes. Veuillez réessayer plus tard.',
-              JA:
-                'Es gibt keine übrig gebliebenen Karten. Bitte versuchen Sie es später noch einmal.',
-              DE: '残りのカードはありません。 後でもう一度やり直してください。',
+              FR: "Le bot n'a pas assez de gemmes.",
+              JA: 'ボットには十分な宝石がありません。',
+              DE: 'Der Bot hat nicht genug Edelsteine.',
             },
             1: {
               EN:
@@ -3254,7 +3253,7 @@ module.exports = {
   },
   HELP: {
     EN:
-      "Hello there, i'm a bot to easy level up your Steam profile! \n\n" +
+      "Hello there, I'm a bot to easy level up your Steam profile! \n\n" +
       ' • You may type !COMMANDS for see the list of commands. \n' +
       ' • You may type !LANG for change language. \n\n',
     PT:
@@ -3602,12 +3601,12 @@ module.exports = {
       '► !BUYANYCSGO (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von CS:GO-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONECSGO (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',
       'Hydra-Sektion. \n',
-      '► !CHECKHYDRA (anzahl_der_schlüssel) = Shows how many sets and what level you would reach for a specific amount of HYDRA keys. \n',
+      '► !CHECKHYDRA (anzahl_der_schlüssel) = Zeigt an, wie viele Sätze und welche Stufe Sie für eine bestimmte Anzahl von HYDRA-Schlüsseln erreichen würden. \n',
       '► !BUYHYDRA (anzahl_der_schlüssel) = Kaufen Sie nicht gefertigte Kartensätze für eine bestimmte Anzahl von HYDRA-Schlüssel. \n',
       '► !BUYANYHYDRA (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von HYDRA-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONEHYDRA (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',
       'TF2-Sektion. \n',
-      '► !CHECKTF (anzahl_der_schlüssel) = Shows how many sets and what level you would reach for a specific amount of TF2 keys. \n',
+      '► !CHECKTF (anzahl_der_schlüssel) = Zeigt an, wie viele Sätze und welche Stufe Sie für eine bestimmte Anzahl von TF2-Schlüsseln erreichen würden. \n',
       '► !BUYTF (anzahl_der_schlüssel) = Kaufen Sie nicht gefertigte Kartensätze für eine bestimmte Anzahl von TF2-Schlüssel. \n',
       '► !BUYANYTF (anzahl_der_schlüssel) = Kaufen Sie Kartensätze für eine bestimmte Anzahl von TF2-Schlüssel. Der Bot ignoriert Ihre aktuellen Abzeichen. \n',
       '► !BUYONETF (anzahl_der_schlüssel) = Verwenden Sie diese Option, wenn Sie ein Abzeichen Sammler sind. Der BOT sendet nur einen set jedes Spiels mit der aktuellen BOT-Rate.  \n\n',

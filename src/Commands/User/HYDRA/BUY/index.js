@@ -3,7 +3,7 @@ const main = require('../../../../Config/main');
 const messages = require('../../../../Config/messages');
 const rates = require('../../../../Config/rates');
 const utils = require('../../../../Utils');
-const acceptedKeys = require('../../../../Config/keys');
+const acceptedCurrencies = require('../../../../Config/currencies');
 const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
 const makeOffer = require('../../../../Components/offer');
@@ -37,7 +37,7 @@ module.exports = (sender, msg, client, users, manager) => {
             for (let i = 0; i < INV.length; i += 1) {
               if (
                 theirKeys.length < n &&
-                acceptedKeys.hydra.indexOf(INV[i].market_hash_name) >= 0
+                acceptedCurrencies.hydra.indexOf(INV[i].market_hash_name) >= 0
               ) {
                 theirKeys.push(INV[i]);
               }

@@ -49,7 +49,7 @@ module.exports = {
   ignoreCommands: [''],
 
   // Setup the currencies you want the bot to accept
-  acceptedCurrency: {
+  acceptedCurrencies: {
     TF2: true,
     CSGO: true,
     GEMS: true,

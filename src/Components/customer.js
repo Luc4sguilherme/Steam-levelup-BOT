@@ -5,7 +5,7 @@ const async = require('async');
 const moment = require('moment');
 
 const log = require('./log');
-const acceptedKeys = require('../Config/keys');
+const acceptedCurrencies = require('../Config/currencies');
 const { getSets } = require('./sets');
 const inventory = require('./inventory');
 const utils = require('../Utils');
@@ -98,7 +98,7 @@ customer.loadCSGO = (id64, community, callback) => {
       customer.stock.csKeys.tradable = 0;
       customer.stock.csKeys.notradable = 0;
       for (let i = 0; i < INV.length; i += 1) {
-        if (acceptedKeys.csgo.indexOf(INV[i].market_hash_name) >= 0) {
+        if (acceptedCurrencies.csgo.indexOf(INV[i].market_hash_name) >= 0) {
           if (INV[i].tradable) {
             customer.stock.csKeys.tradable += 1;
           } else {
@@ -121,7 +121,7 @@ customer.loadHYDRA = (id64, community, callback) => {
       customer.stock.hydraKeys.tradable = 0;
       customer.stock.hydraKeys.notradable = 0;
       for (let i = 0; i < INV.length; i += 1) {
-        if (acceptedKeys.hydra.indexOf(INV[i].market_hash_name) >= 0) {
+        if (acceptedCurrencies.hydra.indexOf(INV[i].market_hash_name) >= 0) {
           if (INV[i].tradable) {
             customer.stock.hydraKeys.tradable += 1;
           } else {
@@ -144,7 +144,7 @@ customer.loadTF = (id64, community, callback) => {
       customer.stock.tfKeys.tradable = 0;
       customer.stock.tfKeys.notradable = 0;
       for (let i = 0; i < INV.length; i += 1) {
-        if (acceptedKeys.tf.indexOf(INV[i].market_hash_name) >= 0) {
+        if (acceptedCurrencies.tf.indexOf(INV[i].market_hash_name) >= 0) {
           if (INV[i].tradable) {
             customer.stock.tfKeys.tradable += 1;
           } else {
@@ -167,7 +167,9 @@ customer.loadGEMS = (id64, community, callback) => {
       customer.stock.gemsQuantity.tradable = 0;
       customer.stock.gemsQuantity.notradable = 0;
       for (let i = 0; i < INV.length; i += 1) {
-        if (acceptedKeys.steamGems.indexOf(INV[i].market_hash_name) >= 0) {
+        if (
+          acceptedCurrencies.steamGems.indexOf(INV[i].market_hash_name) >= 0
+        ) {
           if (INV[i].tradable) {
             customer.stock.gemsQuantity.tradable += INV[i].amount;
           } else {

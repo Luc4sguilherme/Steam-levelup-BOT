@@ -1,5 +1,5 @@
 const messages = require('../../../../Config/messages');
-const acceptedKeys = require('../../../../Config/keys');
+const acceptedCurrencies = require('../../../../Config/currencies');
 const chatMessage = require('../../../../Components/message');
 const makeOffer = require('../../../../Components/offer');
 const log = require('../../../../Components/log');
@@ -35,7 +35,9 @@ module.exports = (sender, msg, client, users, manager) => {
         let need = amountgems;
         for (let i = 0; i < inv.length; i += 1) {
           if (need !== 0) {
-            if (acceptedKeys.steamGems.indexOf(inv[i].market_hash_name) >= 0) {
+            if (
+              acceptedCurrencies.steamGems.indexOf(inv[i].market_hash_name) >= 0
+            ) {
               inv[i].amount = need <= inv[i].amount ? need : inv[i].amount;
               need -= inv[i].amount;
               botgems += inv[i].amount;

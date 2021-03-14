@@ -92,6 +92,7 @@ const commands = [
   '!SELLHYDRA',
   '!SELLTF',
   '!CHECK',
+  '!CHECKONE',
   '!CHECKCSGO',
   '!CHECKGEMS',
   '!CHECKHYDRA',

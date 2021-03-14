@@ -468,7 +468,7 @@ utils.filterCommands = (msg, admin = false) => {
 };
 
 utils.removeCurrency = (msg, sectionType) => {
-  const currencies = main.acceptedCurrency;
+  const currencies = main.acceptedCurrencies;
   const suppliers = main.handleSuppliers;
   const message = [...msg];
 
@@ -583,7 +583,7 @@ utils.removeSuppliersCommands = (msg) => {
 };
 
 utils.removeKeys = (msg) => {
-  const currencies = main.acceptedCurrency;
+  const currencies = main.acceptedCurrencies;
   const message = msg.split('\n');
   for (const key in currencies) {
     if (!currencies[key]) {
@@ -723,6 +723,7 @@ utils.getExchangedItems = (
             for (let j = 0; j < items.length; j += 1) {
               if (
                 items[j].market_hash_name === inventory[i].market_hash_name &&
+                items[j].amount <= inventory[i].amount &&
                 itemsToReturn.every((el) => el.assetid !== inventory[i].assetid)
               ) {
                 const item = {
