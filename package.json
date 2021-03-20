@@ -1,0 +1,79 @@
+{
+  "name": "steam-levelup-bot",
+  "version": "2.0.0",
+  "description": "A steam Cardsets/LevelUp BOT",
+  "author": "Lucas Guilherme",
+  "homepage": "https://github.com/Luc4sguilherme/Steam-levelup-BOT",
+  "bugs": {
+    "url": "https://github.com/Luc4sguilherme/Steam-levelup-BOT/issues"
+  },
+  "license": "MIT",
+  "main": "./src/index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint --config commitlint.config.cjs -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint --fix ./src/**/*.js",
+    "start": "node src/index.js",
+    "update": "npx -p npm-check-updates ncu -u && npm i",
+    "commit": "cz",
+    "release": "standard-version"
+  },
+  "engines": {
+    "node": ">=9.2.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.21.1",
+    "cli-color": "^2.0.0",
+    "joi": "^17.4.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "steam-totp": "^2.1.1",
+    "steam-tradeoffer-manager": "^2.10.2",
+    "steam-user": "^4.19.3",
+    "steamcommunity": "^3.42.0",
+    "tree-kill": "^1.2.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/eslint-parser": "^7.13.10",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-private-methods": "^7.13.0",
+    "@babel/preset-env": "^7.13.10",
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
+    "commitizen": "^4.2.3",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import-helpers": "^1.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^5.1.3",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "standard-version": "^9.1.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

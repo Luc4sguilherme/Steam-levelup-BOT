@@ -1,0 +1,39 @@
+{
+    "env": {
+        "commonjs": false,
+        "es2020": true
+    },
+    "parser": "@babel/eslint-parser",
+    "extends": [
+        "airbnb-base", 
+        "prettier", 
+        "plugin:node/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module",
+        "allowImportExportEverywhere": false,
+        "requireConfigFile": false,
+        "classPrivateProperties": true,
+        "classPrivateMethods": true
+    },
+    "plugins": ["prettier", "eslint-plugin-import-helpers"],
+    "rules": {
+        "prettier/prettier": "error",
+        "import-helpers/order-imports": [
+          "warn",
+          {
+            "newlinesBetween": "always",
+            "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+            "alphabetize": {
+              "order": "asc",
+              "ignoreCase": true
+            }
+          }
+        ],
+        "no-underscore-dangle": "off",
+        "no-console": "off",
+        "import/extensions": "off",
+        "node/no-unpublished-import": "off"
+    }
+}
