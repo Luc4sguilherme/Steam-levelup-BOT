@@ -9,18 +9,11 @@ const { getSets } = require('../../../../Components/sets');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
-  const dataInput = msg.toUpperCase().replace('!DEPOSITSETS ', '');
-  let amountofsets;
-  let ignoreMaxStock = 0;
-  if (dataInput.search(',') !== -1) {
-    amountofsets = parseInt(dataInput.substring(0, dataInput.indexOf(',')), 10);
-    ignoreMaxStock = parseInt(
-      dataInput.substring(dataInput.indexOf(',') + 1),
-      10
-    );
-  } else {
-    amountofsets = parseInt(dataInput, 10);
-  }
+  const dataInput = msg.toUpperCase().replace('!DEPOSITSETS ', '').split(',');
+  const amountofsets = parseInt(dataInput[0], 10);
+  const ignoreMaxStock = dataInput[1] ? parseInt(dataInput[1], 10) : 0;
+  const setsPerGame = (input) =>
+    dataInput[2] ? parseInt(dataInput[2], 10) : input;
 
   if (!Number.isNaN(amountofsets) && parseInt(amountofsets, 10) > 0) {
     log.adminChat(
@@ -44,7 +37,11 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
               const setsSent = {};
               firsttLoop: for (let i = 0; i < DATA2.length; i += 1) {
                 if (DDATA[DATA2[i]]) {
-                  for (let j = 0; j < DDATA[DATA2[i]].length; j += 1) {
+                  for (
+                    let j = 0;
+                    j < setsPerGame(DDATA[DATA2[i]].length);
+                    j += 1
+                  ) {
                     if (amountofB > 0) {
                       if (!setsSent[DATA2[i]]) {
                         setsSent[DATA2[i]] = 0;
