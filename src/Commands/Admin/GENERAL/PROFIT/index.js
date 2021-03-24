@@ -1,100 +1,80 @@
-const utils = require('../../../../Utils');
+const moment = require('moment');
+
 const messages = require('../../../../Config/messages');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');
 const Profit = require('../../../../Components/profit');
 const { filterCommands } = require('../../../../Utils');
+const utils = require('../../../../Utils');
 
-module.exports = async (sender, client, users) => {
+module.exports = async (sender, msg, client, users) => {
+  const input = msg.substring('!PROFIT'.length).trim().toUpperCase();
+  const { language } = users[sender.getSteamID64()];
+
+  const period = () => {
+    switch (utils.getPeriod(input)) {
+      case 'DAILY':
+        return {
+          path: `Daily/${moment().format('DD-MM-YYYY')}`,
+          period: 'DAILY',
+        };
+
+      case 'MONTHLY':
+        return {
+          path: `Monthly/${moment().format('MM-YYYY')}`,
+          period: 'MONTHLY',
+        };
+
+      case 'YEARLY':
+        return {
+          path: `Yearly/${moment().format('YYYY')}`,
+          period: 'YEARLY',
+        };
+
+      default:
+        return {
+          path: `Monthly/${moment().format('MM-YYYY')}`,
+          period: 'MONTHLY',
+        };
+    }
+  };
+
   try {
-    const profit = await Profit.read();
+    const profit = await Profit.read(period().path);
 
-    log.adminChat(
-      sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
-      '[ !PROFIT ]'
-    );
+    log.adminChat(sender.getSteamID64(), language, `[ !PROFIT ${input} ]`);
     let message = '/pre ';
-    message += messages.PROFIT.RESPONSE[0][
-      users[sender.getSteamID64()].language
-    ].replace(
-      '{MONTH}',
-      utils.getMonth(
-        new Date().getMonth(),
-        users[sender.getSteamID64()].language
-      )
+    message += messages.PROFIT.RESPONSE[0][period().period][language];
+    message += messages.PROFIT.RESPONSE[1][language].replace(
+      '{AMOUNT}',
+      profit.totaltrades
     );
-    message += messages.PROFIT.RESPONSE[1][
-      users[sender.getSteamID64()].language
-    ].replace('{AMOUNT}', profit.totaltrades);
-    if (profit.status.sets !== 0) {
-      message += messages.PROFIT.SETS[users[sender.getSteamID64()].language]
-        .replace(
-          '{STATUS}',
-          profit.status.sets > 0
-            ? messages.PROFIT.PROFITED[users[sender.getSteamID64()].language]
-            : messages.PROFIT.LOST[users[sender.getSteamID64()].language]
-        )
-        .replace(
-          '{AMOUNT}',
-          (profit.status.sets > 0 ? '+' : '-') + Math.abs(profit.status.sets)
-        );
+    if (profit.status.sets > 0) {
+      message += messages.PROFIT.SETS[language]
+        .replace('{STATUS}', messages.PROFIT.PROFITED[language])
+        .replace('{AMOUNT}', profit.status.sets);
     }
-    if (profit.status.csgo !== 0) {
-      message += messages.PROFIT.CSGO[users[sender.getSteamID64()].language]
-        .replace(
-          '{STATUS}',
-          profit.status.csgo > 0
-            ? messages.PROFIT.PROFITED[users[sender.getSteamID64()].language]
-            : messages.PROFIT.LOST[users[sender.getSteamID64()].language]
-        )
-        .replace(
-          '{AMOUNT}',
-          (profit.status.csgo > 0 ? '+' : '-') + Math.abs(profit.status.csgo)
-        );
+    if (profit.status.csgo > 0) {
+      message += messages.PROFIT.CSGO[language]
+        .replace('{STATUS}', messages.PROFIT.PROFITED[language])
+        .replace('{AMOUNT}', profit.status.csgo);
     }
-    if (profit.status.hydra !== 0) {
-      message += messages.PROFIT.HYDRA[users[sender.getSteamID64()].language]
-        .replace(
-          '{STATUS}',
-          profit.status.hydra > 0
-            ? messages.PROFIT.PROFITED[users[sender.getSteamID64()].language]
-            : messages.PROFIT.LOST[users[sender.getSteamID64()].language]
-        )
-        .replace(
-          '{AMOUNT}',
-          (profit.status.hydra > 0 ? '+' : '-') + Math.abs(profit.status.hydra)
-        );
+    if (profit.status.hydra > 0) {
+      message += messages.PROFIT.HYDRA[language]
+        .replace('{STATUS}', messages.PROFIT.PROFITED[language])
+        .replace('{AMOUNT}', profit.status.hydra);
     }
-    if (profit.status.tf !== 0) {
-      message += messages.PROFIT.TF[users[sender.getSteamID64()].language]
-        .replace(
-          '{STATUS}',
-          profit.status.tf > 0
-            ? messages.PROFIT.PROFITED[users[sender.getSteamID64()].language]
-            : messages.PROFIT.LOST[users[sender.getSteamID64()].language]
-        )
-        .replace(
-          '{AMOUNT}',
-          (profit.status.tf > 0 ? '+' : '-') + Math.abs(profit.status.tf)
-        );
+    if (profit.status.tf > 0) {
+      message += messages.PROFIT.TF[language]
+        .replace('{STATUS}', messages.PROFIT.PROFITED[language])
+        .replace('{AMOUNT}', profit.status.tf);
     }
-    if (profit.status.gems !== 0) {
-      message += messages.PROFIT.GEMS[users[sender.getSteamID64()].language]
-        .replace(
-          '{STATUS}',
-          profit.status.gems > 0
-            ? messages.PROFIT.PROFITED[users[sender.getSteamID64()].language]
-            : messages.PROFIT.LOST[users[sender.getSteamID64()].language]
-        )
-        .replace(
-          '{AMOUNT}',
-          (profit.status.gems > 0 ? '+' : '-') + Math.abs(profit.status.gems)
-        );
+    if (profit.status.gems > 0) {
+      message += messages.PROFIT.GEMS[language]
+        .replace('{STATUS}', messages.PROFIT.PROFITED[language])
+        .replace('{AMOUNT}', profit.status.gems);
     }
-    message += messages.PROFIT.RESPONSE[2][
-      users[sender.getSteamID64()].language
-    ]
+    message += messages.PROFIT.RESPONSE[2][language]
       .replace('{SETS1}', profit.sell.csgo.sets)
       .replace('{SETS2}', profit.sell.hydra.sets)
       .replace('{SETS3}', profit.sell.gems.sets)

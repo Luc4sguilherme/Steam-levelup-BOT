@@ -151,7 +151,7 @@ This is an advanced cardsets/levelup bot script.
 - <code>!ROLLBACK (OFFERID)</code> - Rollback a trade. 
 - <code>!RELOAD</code> - Reload Inventory. 
 - <code>!REQUESTER</code> - Forces the automatic request to be triggered. 
-- <code>!PROFIT</code> - Shows bot transactions this month. 
+- <code>!PROFIT (DAILY / MONTHLY / YEARLY)</code> - Shows information about transactions made by the bot. 
 - <code>!AUTHCODE</code> - Shows auth code. 
 - <code>!BROADCAST (message)</code> - Send a message to all friends in the friends list. 
 - <code>!UNPACK</code> - Unpack all boosters. 

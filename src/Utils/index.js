@@ -49,115 +49,57 @@ utils.date2 = () => {
   return `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`;
 };
 
-utils.getMonth = (value, language) => {
-  const arrayMonth = new Array(12);
-  if (language === 'EN') {
-    arrayMonth[0] = 'January';
-    arrayMonth[1] = 'February';
-    arrayMonth[2] = 'March';
-    arrayMonth[3] = 'April';
-    arrayMonth[4] = 'May';
-    arrayMonth[5] = 'June';
-    arrayMonth[6] = 'July';
-    arrayMonth[7] = 'August';
-    arrayMonth[8] = 'September';
-    arrayMonth[9] = 'October';
-    arrayMonth[10] = 'November';
-    arrayMonth[11] = 'December';
-  } else if (language === 'PT') {
-    arrayMonth[0] = 'Janeiro';
-    arrayMonth[1] = 'Fevereiro';
-    arrayMonth[2] = 'Marcio';
-    arrayMonth[3] = 'Abril';
-    arrayMonth[4] = 'Maio';
-    arrayMonth[5] = 'Junho';
-    arrayMonth[6] = 'Julho';
-    arrayMonth[7] = 'Agosto';
-    arrayMonth[8] = 'Setembro';
-    arrayMonth[9] = 'Outubro';
-    arrayMonth[10] = 'Novembro';
-    arrayMonth[11] = 'Dezembro';
-  } else if (language === 'RU') {
-    arrayMonth[0] = 'январь';
-    arrayMonth[1] = 'Февраль';
-    arrayMonth[2] = 'Март';
-    arrayMonth[3] = 'Апрель';
-    arrayMonth[4] = 'май';
-    arrayMonth[5] = 'июнь';
-    arrayMonth[6] = 'июль';
-    arrayMonth[7] = 'Август';
-    arrayMonth[8] = 'сентябрь';
-    arrayMonth[9] = 'Октябрь';
-    arrayMonth[10] = 'ноябрь';
-    arrayMonth[11] = 'декабрь';
-  } else if (language === 'ES') {
-    arrayMonth[0] = 'enero';
-    arrayMonth[1] = 'febrero';
-    arrayMonth[2] = 'marzo';
-    arrayMonth[3] = 'April';
-    arrayMonth[4] = 'mayo';
-    arrayMonth[5] = 'junio';
-    arrayMonth[6] = 'julio';
-    arrayMonth[7] = 'agosto';
-    arrayMonth[8] = 'septiembre';
-    arrayMonth[9] = 'octubre';
-    arrayMonth[10] = 'noviembre';
-    arrayMonth[11] = 'diciembre';
-  } else if (language === 'CN') {
-    arrayMonth[0] = '一月';
-    arrayMonth[1] = '二月';
-    arrayMonth[2] = '三月';
-    arrayMonth[3] = '四月';
-    arrayMonth[4] = '五月';
-    arrayMonth[5] = '六月';
-    arrayMonth[6] = '七月';
-    arrayMonth[7] = '八月';
-    arrayMonth[8] = ' 9月';
-    arrayMonth[9] = '十月';
-    arrayMonth[10] = '十一月';
-    arrayMonth[11] = '十二月';
-  } else if (language === 'FR') {
-    arrayMonth[0] = 'Janvier';
-    arrayMonth[1] = 'Février';
-    arrayMonth[2] = 'Mars';
-    arrayMonth[3] = 'Avril';
-    arrayMonth[4] = 'Mai';
-    arrayMonth[5] = 'Juin';
-    arrayMonth[6] = 'Juillet';
-    arrayMonth[7] = 'Août';
-    arrayMonth[8] = 'Septembre';
-    arrayMonth[9] = 'Octobre';
-    arrayMonth[10] = 'Novembre';
-    arrayMonth[11] = 'Décembre';
-  } else if (language === 'JA') {
-    arrayMonth[0] = '1月';
-    arrayMonth[1] = '2月';
-    arrayMonth[2] = '3月';
-    arrayMonth[3] = '4月';
-    arrayMonth[4] = '5月';
-    arrayMonth[5] = '6月';
-    arrayMonth[6] = '7月';
-    arrayMonth[7] = '8月';
-    arrayMonth[8] = '9月';
-    arrayMonth[9] = '10月';
-    arrayMonth[10] = '11月';
-    arrayMonth[11] = '12月';
-  } else if (language === 'DE') {
-    arrayMonth[0] = 'Januar';
-    arrayMonth[1] = 'Februar';
-    arrayMonth[2] = 'März';
-    arrayMonth[3] = 'April';
-    arrayMonth[4] = 'Mai';
-    arrayMonth[5] = 'Juni';
-    arrayMonth[6] = 'Juli';
-    arrayMonth[7] = 'August';
-    arrayMonth[8] = 'September';
-    arrayMonth[9] = 'Oktober';
-    arrayMonth[10] = 'November';
-    arrayMonth[11] = 'Dezember';
+utils.getPeriod = (period) => {
+  switch (period) {
+    case 'DAILY':
+      return 'DAILY';
+    case 'MONTHLY':
+      return 'MONTHLY';
+    case 'YEARLY':
+      return 'YEARLY';
+    case 'DIÁRIO':
+      return 'DAILY';
+    case 'MENSAL':
+      return 'MONTHLY';
+    case 'ANUAL':
+      return 'YEARLY';
+    case 'ЕЖЕДНЕВНАЯ':
+      return 'DAILY';
+    case 'ЕЖЕМЕСЯЧНАЯ':
+      return 'MONTHLY';
+    case 'ГОДОВАЯ':
+      return 'YEARLY';
+    case 'DIARIO':
+      return 'DAILY';
+    case 'MENSUAL':
+      return 'MONTHLY';
+    case '每日':
+      return 'DAILY';
+    case '每月':
+      return 'MONTHLY';
+    case '年度':
+      return 'YEARLY';
+    case 'QUOTIDIENNES':
+      return 'DAILY';
+    case 'MENSUELLES':
+      return 'MONTHLY';
+    case 'ANNUELLES':
+      return 'YEARLY';
+    case 'デイトレード':
+      return 'DAILY';
+    case '毎月の取引':
+      return 'MONTHLY';
+    case '年間取引':
+      return 'YEARLY';
+    case 'TÄGLICHE':
+      return 'DAILY';
+    case 'MONATLICHE':
+      return 'MONTHLY';
+    case 'JÄHRLICHE':
+      return 'YEARLY';
+    default:
+      return 'MONTHLY';
   }
-
-  return arrayMonth[value];
 };
 
 utils.getleftovercards = (SID, community, cards, callback) => {
