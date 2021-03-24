@@ -85,11 +85,11 @@ utils.getPeriod = (period) => {
       return 'MONTHLY';
     case 'ANNUELLES':
       return 'YEARLY';
-    case 'デイトレード':
+    case '毎日':
       return 'DAILY';
-    case '毎月の取引':
+    case '毎月':
       return 'MONTHLY';
-    case '年間取引':
+    case '毎年':
       return 'YEARLY';
     case 'TÄGLICHE':
       return 'DAILY';
