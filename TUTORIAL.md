@@ -20,7 +20,7 @@
 <pre>
   cd Steam-levelup-BOT
 
-  npm install
+  npm install --production --force
 </pre>
 
 ## 5° Getting your <code>shared_secret</code> & <code>identity_secret</code>:
