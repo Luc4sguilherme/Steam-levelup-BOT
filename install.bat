@@ -1,1 +1,1 @@
-npm install
+npm install --production --force
