@@ -1,7 +1,7 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 const _ = require('lodash');
-const fs = require('fs');
+const fs = require('graceful-fs');
 
 const log = require('./log');
 const main = require('../Config/main');

@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('graceful-fs');
 const moment = require('moment');
 const _ = require('lodash');
 

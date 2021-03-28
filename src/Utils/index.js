@@ -5,7 +5,7 @@
 
 const _ = require('lodash');
 const axios = require('axios');
-const fs = require('fs');
+const fs = require('graceful-fs');
 const util = require('util');
 
 const main = require('../Config/main.js');
