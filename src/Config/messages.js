@@ -1657,6 +1657,22 @@ module.exports = {
           '  • {SETS8} Sätze für {GEMSBUY} Edelsteine \n',
       },
     },
+    ERROR: {
+      EN: 'An error occurred while getting the profit. Please try again later.',
+      PT:
+        'Ocorreu um erro ao obter o lucro. Por favor, tente novamente mais tarde.',
+      RU:
+        'Произошла ошибка при получении прибыли. Пожалуйста, повторите попытку позже.',
+      ES:
+        'Se produjo un error al obtener la ganancia. Por favor, inténtelo de nuevo más tarde.',
+      CN: '获取利润时发生错误。 请稍后再试。',
+      FR:
+        "Une erreur s'est produite lors de l'obtention du profit. Veuillez réessayer plus tard.",
+      JA:
+        '利益を得ている間にエラーが発生しました。 後でもう一度やり直してください。',
+      DE:
+        'Beim Abrufen des Gewinns ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.',
+    },
   },
   RESTART: {
     EN: "I'll be back in a minute!",

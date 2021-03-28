@@ -15,6 +15,7 @@ const rates = require('../Config/rates.js');
 const utils = {};
 
 utils.readFileAsync = util.promisify(fs.readFile);
+utils.writeFileAsync = util.promisify(fs.writeFile);
 
 utils.timeZone = () => {
   let timezone;
