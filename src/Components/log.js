@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('graceful-fs');
 const colour = require('cli-color');
 const moment = require('moment');
 

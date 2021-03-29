@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('graceful-fs');
 const moment = require('moment');
 const _ = require('lodash');
 
@@ -7,49 +7,43 @@ const log = require('../log');
 
 const Profit = require('./constants/profit');
 
-const init = (period) => {
-  if (!fs.existsSync(`./Data/History/Profit/${period}.json`)) {
-    fs.writeFile(
-      `./Data/History/Profit/${period}.json`,
-      JSON.stringify(Profit),
-      {
-        flags: 'w',
-      },
-      (ERR) => {
-        if (ERR) {
-          log.error(`An error occurred while writing profit file: ${ERR}`);
+const init = async (period) => {
+  try {
+    if (!fs.existsSync(`./Data/History/Profit/${period}.json`)) {
+      await utils.writeFileAsync(
+        `./Data/History/Profit/${period}.json`,
+        JSON.stringify(Profit),
+        {
+          flags: 'w',
         }
-      }
-    );
+      );
+    }
+  } catch (error) {
+    log.error(`An error occurred while initializing profit file: ${error}`);
   }
 };
 
 const read = async (period) => {
-  try {
-    init(period);
+  await init(period);
 
-    return JSON.parse(
-      await utils.readFileAsync(`./Data/History/Profit/${period}.json`)
-    );
-  } catch (error) {
-    throw new Error(error);
-  }
+  return JSON.parse(
+    await utils.readFileAsync(`./Data/History/Profit/${period}.json`)
+  );
 };
 
 const write = async (profit, period) => {
-  const data = await read(period);
-  const add = (a, b) => _.defaultTo(_.add(a, b), undefined);
-  const profited = _.mergeWith({}, data, profit, add);
+  try {
+    const add = (a, b) => _.defaultTo(_.add(a, b), undefined);
+    const data = await read(period);
+    const profited = _.mergeWith({}, data, profit, add);
 
-  fs.writeFile(
-    `./Data/History/Profit/${period}.json`,
-    JSON.stringify(profited),
-    (ERR) => {
-      if (ERR) {
-        log.error(`An error occurred while writing profit file: ${ERR}`);
-      }
-    }
-  );
+    await utils.writeFileAsync(
+      `./Data/History/Profit/${period}.json`,
+      JSON.stringify(profited)
+    );
+  } catch (error) {
+    log.error(`An error occurred while writing profit file: ${error}`);
+  }
 };
 
 const calculate = async (offer) => {
@@ -111,11 +105,11 @@ const calculate = async (offer) => {
       }
     }
 
-    write(profit, `Daily/${moment().format('DD-MM-YYYY')}`);
-    write(profit, `Monthly/${moment().format('MM-YYYY')}`);
-    write(profit, `Yearly/${moment().format('YYYY')}`);
+    await write(profit, `Daily/${moment().format('DD-MM-YYYY')}`);
+    await write(profit, `Monthly/${moment().format('MM-YYYY')}`);
+    await write(profit, `Yearly/${moment().format('YYYY')}`);
   } catch (error) {
-    log.error(`An error occurred while getting profit file: ${error}`);
+    log.error(`An error occurred while calculating profit: ${error}`);
   }
 };
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-const fs = require('fs');
+const fs = require('graceful-fs');
 const log = require('./log');
 const main = require('../Config/main');
 const messages = require('../Config/messages');

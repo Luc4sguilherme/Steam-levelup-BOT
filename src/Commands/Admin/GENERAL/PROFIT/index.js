@@ -40,10 +40,12 @@ module.exports = async (sender, msg, client, users) => {
   };
 
   try {
-    const profit = await Profit.read(period().path);
-
     log.adminChat(sender.getSteamID64(), language, `[ !PROFIT ${input} ]`);
+    chatMessage(client, sender, messages.REQUEST[language]);
+
+    const profit = await Profit.read(period().path);
     let message = '/pre ';
+
     message += messages.PROFIT.RESPONSE[0][period().period][language];
     message += messages.PROFIT.RESPONSE[1][language].replace(
       '{AMOUNT}',
@@ -96,6 +98,7 @@ module.exports = async (sender, msg, client, users) => {
 
     chatMessage(client, sender, message);
   } catch (error) {
-    log.error(`An error occurred while getting profit.json: ${error}`);
+    log.error(`An error occurred while getting profit: ${error}`);
+    chatMessage(client, sender, messages.PROFIT.ERROR[language]);
   }
 };
