@@ -137,7 +137,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           amountofsets,
                           0,
                           0,
-                          amountofsets * rates.gems.sell
+                          amountofsets * rates.gems.buy
                         );
                       }
                     } else {
