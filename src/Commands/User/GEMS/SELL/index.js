@@ -18,14 +18,14 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
   if (!Number.isNaN(amountofsets) && amountofsets > 0) {
     log.userChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !SELLGEMS ${amountofsets} ]`
     );
     if (amountofsets <= main.maxSell) {
       chatMessage(
         client,
         sender,
-        messages.REQUEST[users[sender.getSteamID64()].language]
+        messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
       );
       let gemsAmount = 0;
       const botGems = [];
@@ -37,7 +37,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
             client,
             sender,
             messages.ERROR.LOADINVENTORY.US[
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ]
           );
         } else {
@@ -63,7 +63,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
               client,
               sender,
               messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.US[0][
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
           } else {
@@ -116,12 +116,12 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           client,
                           sender,
                           messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][
-                            users[sender.getSteamID64()].language
+                            utils.getLanguage(sender.getSteamID64(), users)
                           ]
                         );
                       } else {
                         const message = messages.TRADE.SETMESSAGE[2].GEMS[
-                          users[sender.getSteamID64()].language
+                          utils.getLanguage(sender.getSteamID64(), users)
                         ]
                           .replace('{SETS}', amountofsets)
                           .replace('{GEMS}', rates.gems.buy * amountofsets);
@@ -145,7 +145,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                         client,
                         sender,
                         messages.ERROR.LOADINVENTORY.THEM[0][
-                          users[sender.getSteamID64()].language
+                          utils.getLanguage(sender.getSteamID64(), users)
                         ]
                       );
                       log.error(
@@ -158,7 +158,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                     client,
                     sender,
                     messages.ERROR.LOADINVENTORY.THEM[2][
-                      users[sender.getSteamID64()].language
+                      utils.getLanguage(sender.getSteamID64(), users)
                     ]
                   );
                   log.error(
@@ -169,7 +169,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                     client,
                     sender,
                     messages.ERROR.LOADINVENTORY.THEM[0][
-                      users[sender.getSteamID64()].language
+                      utils.getLanguage(sender.getSteamID64(), users)
                     ]
                   );
                   log.error(
@@ -186,7 +186,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         client,
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.SETS[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ].replace('{SETS}', main.maxSell)
       );
     }
@@ -195,7 +195,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.SETS[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!SELLGEMS 1')
     );
   }

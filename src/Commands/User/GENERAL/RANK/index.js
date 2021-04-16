@@ -2,17 +2,18 @@ const messages = require('../../../../Config/messages');
 const log = require('../../../../Components/log');
 const { rank } = require('../../../../Components/rank');
 const chatMessage = require('../../../../Components/message');
+const utils = require('../../../../Utils');
 
 module.exports = async (sender, client, users) => {
   log.userChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     '[ !RANK ]'
   );
   chatMessage(
     client,
     sender,
-    messages.REQUEST[users[sender.getSteamID64()].language]
+    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
   );
 
   try {
@@ -22,7 +23,7 @@ module.exports = async (sender, client, users) => {
     chatMessage(
       client,
       sender,
-      messages.RANK.RESPONSE[users[sender.getSteamID64()].language]
+      messages.RANK.RESPONSE[utils.getLanguage(sender.getSteamID64(), users)]
         .replace('{WORLDWIDEXP}', WORLDWIDEXP)
         .replace('{REGIONXP}', REGIONXP)
         .replace('{COUNTRYXP}', COUNTRYXP)
@@ -32,7 +33,7 @@ module.exports = async (sender, client, users) => {
     chatMessage(
       client,
       sender,
-      messages.RANK.ERROR[users[sender.getSteamID64()].language]
+      messages.RANK.ERROR[utils.getLanguage(sender.getSteamID64(), users)]
     );
   }
 };

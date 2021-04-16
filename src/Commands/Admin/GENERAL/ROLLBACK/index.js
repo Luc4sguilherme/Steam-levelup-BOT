@@ -10,7 +10,7 @@ module.exports = (sender, msg, client, users, community, manager) => {
   if (offerID) {
     log.adminChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !ROLLBACK ${offerID} ]`
     );
     manager.getOffer(offerID, async (error, offer) => {
@@ -18,7 +18,9 @@ module.exports = (sender, msg, client, users, community, manager) => {
         chatMessage(
           client,
           sender,
-          messages.ERROR.GETOFFER[users[sender.getSteamID64()].language]
+          messages.ERROR.GETOFFER[
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
         log.error(`There was an error getting offers: ${error}`);
       } else {
@@ -57,7 +59,7 @@ module.exports = (sender, msg, client, users, community, manager) => {
             [].concat(...itemsSent),
             '!ROLLBACK',
             messages.TRADE.SETMESSAGE[0].ROLLBACK[
-              users[offer.partner.getSteamID64()].language
+              utils.getLanguage(offer.partner.getSteamID64(), users)
             ].replace('{OFFERID}', offer.id),
             offer.data('amountofsets'),
             offer.data('amountofleftovers'),
@@ -72,7 +74,7 @@ module.exports = (sender, msg, client, users, community, manager) => {
               client,
               sender,
               messages.TRADE.BOTITEMSUNAVAILABLE[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
           } else if (
@@ -82,14 +84,16 @@ module.exports = (sender, msg, client, users, community, manager) => {
               client,
               sender,
               messages.TRADE.USERITEMSUNAVAILABLE[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
           } else {
             chatMessage(
               client,
               sender,
-              messages.ERROR.GETITEMS[users[sender.getSteamID64()].language]
+              messages.ERROR.GETITEMS[
+                utils.getLanguage(sender.getSteamID64(), users)
+              ]
             );
           }
         }
@@ -100,7 +104,7 @@ module.exports = (sender, msg, client, users, community, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.OFFERID[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!ROLLBACK offerID')
     );
   }

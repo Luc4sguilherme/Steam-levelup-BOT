@@ -1,12 +1,13 @@
 const fs = require('graceful-fs');
 const chatMessage = require('../../../../../Components/message');
 const log = require('../../../../../Components/log');
+const utils = require('../../../../../Utils');
 
 module.exports = (sender, client, users) => {
   const user = users;
   log.userChat(
     sender.getSteamID64(),
-    user[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), user),
     '[ !RU ]'
   );
   user[sender.getSteamID64()].language = 'RU';

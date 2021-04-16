@@ -1,4 +1,5 @@
 const messages = require('../Config/messages');
+const utils = require('../Utils');
 const log = require('./log');
 const chatMessage = require('./message');
 
@@ -43,7 +44,7 @@ const makeOffer = (
       chatMessage(
         client,
         target,
-        messages.ERROR.TRADEHOLD[users[target].language]
+        messages.ERROR.TRADEHOLD[utils.getLanguage(target, users)]
       );
     } else if (ME.escrowDays === 0 && THEM.escrowDays === 0) {
       log.tradeoffer('Sending trade offer');
@@ -52,14 +53,14 @@ const makeOffer = (
           chatMessage(
             client,
             target,
-            messages.ERROR.SENDTRADE[users[target].language]
+            messages.ERROR.SENDTRADE[utils.getLanguage(target, users)]
           );
           log.error(`An error occurred while sending trade offer: ${ERR2}`);
         } else {
           chatMessage(
             client,
             target,
-            `${messages.TRADEMSG[users[target].language]} \n\n`
+            `${messages.TRADEMSG[utils.getLanguage(target, users)]} \n\n`
           );
           log.tradeoffer(
             `offer #${offer.id} sent successfully to user #${target}`
@@ -67,7 +68,11 @@ const makeOffer = (
         }
       });
     } else {
-      chatMessage(client, target, messages.TRADEHOLD[users[target].language]);
+      chatMessage(
+        client,
+        target,
+        messages.TRADEHOLD[utils.getLanguage(target, users)]
+      );
     }
   });
 };

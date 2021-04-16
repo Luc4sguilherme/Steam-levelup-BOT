@@ -25,13 +25,13 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
   if (!Number.isNaN(amountofsets) && parseInt(amountofsets, 10) > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !DEPOSITSETS ${amountofsets} ]`
     );
     chatMessage(
       client,
       sender,
-      messages.REQUEST[users[sender.getSteamID64()].language]
+      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
     );
     let amountofB = amountofsets;
     inventory.getInventory(sender.getSteamID64(), community, (ERR1, DATA1) => {
@@ -77,12 +77,12 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                 client,
                 sender,
                 messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
               );
             } else {
               const message = messages.TRADE.SETMESSAGE[0].SETS[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ].replace('{SETS}', amountofsets);
               makeOffer(
                 client,
@@ -104,7 +104,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
               client,
               sender,
               messages.ERROR.LOADINVENTORY.THEM[0][
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
             log.error(`An error occurred while getting user sets: ${ERR2}`);
@@ -115,7 +115,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
           client,
           sender,
           messages.ERROR.LOADINVENTORY.THEM[2][
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ]
         );
         log.error(`An error occurred while getting user inventory: ${ERR1}`);
@@ -124,7 +124,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
           client,
           sender,
           messages.ERROR.LOADINVENTORY.THEM[0][
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ]
         );
         log.error(`An error occurred while getting user inventory: ${ERR1}`);
@@ -135,7 +135,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.SETS[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!DEPOSITSETS 1')
     );
   }

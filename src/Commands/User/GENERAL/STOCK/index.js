@@ -3,23 +3,26 @@ const log = require('../../../../Components/log');
 const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
 const { filterCommands } = require('../../../../Utils');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
   log.userChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     '[ !STOCK ]'
   );
   chatMessage(
     client,
     sender,
-    messages.REQUEST[users[sender.getSteamID64()].language]
+    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
   );
 
   chatMessage(
     client,
     sender,
-    filterCommands(messages.STOCK[users[sender.getSteamID64()].language])
+    filterCommands(
+      messages.STOCK[utils.getLanguage(sender.getSteamID64(), users)]
+    )
       .join('\n')
       .replace('{TOTALBOTSETS}', inventory.stock.totalBotSets)
       .replace('{CSKEYSTRADABLE}', inventory.stock.csKeys.tradable)

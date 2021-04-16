@@ -3,6 +3,7 @@ const acceptedCurrencies = require('../../../../Config/currencies');
 const chatMessage = require('../../../../Components/message');
 const makeOffer = require('../../../../Components/offer');
 const log = require('../../../../Components/log');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, manager) => {
   const amountkeys = parseInt(
@@ -12,20 +13,22 @@ module.exports = (sender, msg, client, users, manager) => {
   if (!Number.isNaN(amountkeys) && parseInt(amountkeys, 10) > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !WITHDRAWTF ${amountkeys} ]`
     );
     chatMessage(
       client,
       sender,
-      messages.REQUEST[users[sender.getSteamID64()].language]
+      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
     );
     manager.getInventoryContents(440, 2, true, (ERR, INV) => {
       if (ERR) {
         chatMessage(
           client,
           sender,
-          messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
+          messages.ERROR.LOADINVENTORY.US[
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
         log.error(`An error occurred while getting inventory: ${ERR}`);
       } else {
@@ -46,12 +49,12 @@ module.exports = (sender, msg, client, users, manager) => {
             client,
             sender,
             messages.ERROR.OUTOFSTOCK.DEFAULT.TF.US[1][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ].replace('{TF}', botkeys)
           );
         } else {
           const message = messages.TRADE.SETMESSAGE[0].TF[
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ].replace('{TF}', amountkeys);
           makeOffer(
             client,
@@ -75,7 +78,7 @@ module.exports = (sender, msg, client, users, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.TF[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!WITHDRAWTF 1')
     );
   }

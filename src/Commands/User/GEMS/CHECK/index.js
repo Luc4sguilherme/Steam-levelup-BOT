@@ -11,7 +11,7 @@ module.exports = (sender, msg, client, users) => {
     if (n >= rates.gems.sell) {
       log.userChat(
         sender.getSteamID64(),
-        users[sender.getSteamID64()].language,
+        utils.getLanguage(sender.getSteamID64(), users),
         `[ !CHECKGEMS ${n} ]`
       );
       if (main.maxCheck.gems >= n) {
@@ -34,7 +34,7 @@ module.exports = (sender, msg, client, users) => {
                         client,
                         sender,
                         messages.ERROR.INPUT.AMOUNTOVER.GEMS[
-                          users[sender.getSteamID64()].language
+                          utils.getLanguage(sender.getSteamID64(), users)
                         ].replace('{GEMS}', main.maxCheck.gems)
                       );
                       can += 1;
@@ -59,7 +59,7 @@ module.exports = (sender, msg, client, users) => {
                         client,
                         sender,
                         messages.CHECK.GEMS[0][
-                          users[sender.getSteamID64()].language
+                          utils.getLanguage(sender.getSteamID64(), users)
                         ]
                           .replace('{GEMS}', n)
                           .replace(/{SETS}/g, a)
@@ -70,7 +70,7 @@ module.exports = (sender, msg, client, users) => {
                         client,
                         sender,
                         messages.CHECK.GEMS[1][
-                          users[sender.getSteamID64()].language
+                          utils.getLanguage(sender.getSteamID64(), users)
                         ]
                           .replace('{GEMS}', n)
                           .replace(/{SETS}/g, a)
@@ -83,7 +83,7 @@ module.exports = (sender, msg, client, users) => {
                     client,
                     sender,
                     messages.ERROR.LEVEL[1][
-                      users[sender.getSteamID64()].language
+                      utils.getLanguage(sender.getSteamID64(), users)
                     ]
                   );
                 }
@@ -91,7 +91,9 @@ module.exports = (sender, msg, client, users) => {
                 chatMessage(
                   client,
                   sender,
-                  messages.ERROR.LEVEL[0][users[sender.getSteamID64()].language]
+                  messages.ERROR.LEVEL[0][
+                    utils.getLanguage(sender.getSteamID64(), users)
+                  ]
                 );
               }
             } else {
@@ -99,7 +101,9 @@ module.exports = (sender, msg, client, users) => {
               chatMessage(
                 client,
                 sender,
-                messages.ERROR.BADGES[1][users[sender.getSteamID64()].language]
+                messages.ERROR.BADGES[1][
+                  utils.getLanguage(sender.getSteamID64(), users)
+                ]
               );
             }
           }
@@ -109,7 +113,7 @@ module.exports = (sender, msg, client, users) => {
           client,
           sender,
           messages.ERROR.INPUT.AMOUNTOVER.GEMS[
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ].replace('{GEMS}', main.maxCheck.gems)
         );
       }
@@ -118,7 +122,7 @@ module.exports = (sender, msg, client, users) => {
         client,
         sender,
         messages.ERROR.INPUT.AMOUNTLOW.GEMS[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ]
       );
     }
@@ -127,7 +131,7 @@ module.exports = (sender, msg, client, users) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.GEMS[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', `!CHECKGEMS ${rates.gems.sell}`)
     );
   }

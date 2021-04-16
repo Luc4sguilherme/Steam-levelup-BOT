@@ -6,17 +6,18 @@ const log = require('../../../../Components/log');
 const reputation = require('../../../../Components/reputation');
 const relationShip = require('../../../../Components/relationShip');
 const customer = require('../../../../Components/customer');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, community, allCards) => {
   chatMessage(
     client,
     sender,
-    messages.REQUEST[users[sender.getSteamID64()].language]
+    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
   );
   const id64 = msg.toUpperCase().replace('!USERCHECK ', '').toString();
   log.adminChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     `[ !USERCHECK ${id64} ]`
   );
   if (SID64REGEX.test(id64)) {
@@ -25,7 +26,7 @@ module.exports = (sender, msg, client, users, community, allCards) => {
     relationShip(client, id64, (relation) => {
       message +=
         messages.USERCHECK.RELATIONSHIP[relation][
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ];
     });
 
@@ -33,34 +34,34 @@ module.exports = (sender, msg, client, users, community, allCards) => {
       .then((infos) => {
         message +=
           messages.USERCHECK.REPUTATION.DEFAULT[
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ];
 
         if (infos.summary) {
           message +=
             messages.USERCHECK.REPUTATION[infos.summary][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ];
         }
 
         if (infos.tags) {
           message +=
             messages.USERCHECK.REPUTATION[infos.tags][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ];
         }
 
         if (infos.vacban) {
           message +=
             messages.USERCHECK.REPUTATION[infos.vacban][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ];
         }
 
         if (infos.tradeban) {
           message +=
             messages.USERCHECK.REPUTATION[infos.tradeban][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ];
         }
 
@@ -75,12 +76,14 @@ module.exports = (sender, msg, client, users, community, allCards) => {
         chatMessage(
           client,
           sender,
-          messages.ERROR.BADGES[3][users[sender.getSteamID64()].language]
+          messages.ERROR.BADGES[3][
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
         log.error(`An error occurred while getting badges: ${error}`);
       } else {
         message += messages.USERCHECK.SETSAVAILABLE[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ]
           .replace('{SETS1}', hisMaxSets)
           .replace('{SETS2}', botNSets);
@@ -93,12 +96,12 @@ module.exports = (sender, msg, client, users, community, allCards) => {
           client,
           sender,
           messages.ERROR.LOADINVENTORY.THEM[1][
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ]
         );
       } else {
         message += messages.USERCHECK.INVENTORY[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ]
           .replace('{TOTALSETS}', customer.stock.totalSets)
           .replace('{CSKEYSTRADABLE}', customer.stock.csKeys.tradable)
@@ -123,7 +126,7 @@ module.exports = (sender, msg, client, users, community, allCards) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.STEAMID64[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ]
     );
   }

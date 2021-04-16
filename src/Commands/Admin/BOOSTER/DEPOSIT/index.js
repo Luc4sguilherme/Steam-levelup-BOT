@@ -2,6 +2,7 @@ const chatMessage = require('../../../../Components/message');
 const messages = require('../../../../Config/messages');
 const makeOffer = require('../../../../Components/offer');
 const log = require('../../../../Components/log');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, manager) => {
   const amountbooster = parseInt(
@@ -11,13 +12,13 @@ module.exports = (sender, msg, client, users, manager) => {
   if (!Number.isNaN(amountbooster) && parseInt(amountbooster, 10) > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !DEPOSITBOOSTER ${amountbooster} ]`
     );
     chatMessage(
       client,
       sender,
-      messages.REQUEST[users[sender.getSteamID64()].language]
+      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
     );
     manager.getUserInventoryContents(
       sender.getSteamID64(),
@@ -40,12 +41,12 @@ module.exports = (sender, msg, client, users, manager) => {
               client,
               sender,
               messages.ERROR.OUTOFSTOCK.DEFAULT.BOOSTER.THEM[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ].replace('{BOOSTER}', theirbooster.length)
             );
           } else {
             const message = messages.TRADE.SETMESSAGE[0].BOOSTER[
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ].replace('{BOOSTER}', amountbooster.toString());
             makeOffer(
               client,
@@ -67,7 +68,7 @@ module.exports = (sender, msg, client, users, manager) => {
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[2][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ]
           );
           log.error(`An error occurred while getting user inventory: ${ERR}`);
@@ -76,7 +77,7 @@ module.exports = (sender, msg, client, users, manager) => {
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[0][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ]
           );
           log.error(`An error occurred while getting user inventory: ${ERR}`);
@@ -88,7 +89,7 @@ module.exports = (sender, msg, client, users, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.BOOSTER[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!DEPOSITBOOSTER 1')
     );
   }

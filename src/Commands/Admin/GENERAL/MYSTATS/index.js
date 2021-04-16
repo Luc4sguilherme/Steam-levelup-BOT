@@ -2,17 +2,18 @@ const messages = require('../../../../Config/messages');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');
 const customer = require('../../../../Components/customer');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users, community, allCards) => {
   chatMessage(
     client,
     sender,
-    messages.REQUEST[users[sender.getSteamID64()].language]
+    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
   );
 
   log.adminChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     `[ !MYSTATS ]`
   );
 
@@ -22,12 +23,12 @@ module.exports = (sender, client, users, community, allCards) => {
         client,
         sender,
         messages.ERROR.LOADINVENTORY.THEM[0][
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ]
       );
     } else {
       const message = `/pre ${messages.ADMINCHECK.INVENTORY[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ]
         .replace('{TOTALSETS}', customer.stock.totalSets)
         .replace('{CSKEYSTRADABLE}', customer.stock.csKeys.tradable)

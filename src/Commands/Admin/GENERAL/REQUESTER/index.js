@@ -4,17 +4,18 @@ const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
 const request = require('../../../../Components/request');
 const log = require('../../../../Components/log');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users, community, allCards, manager) => {
   log.adminChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     '[ !REQUESTER ]'
   );
   chatMessage(
     client,
     sender,
-    messages.REQUESTER[0][users[sender.getSteamID64()].language]
+    messages.REQUESTER[0][utils.getLanguage(sender.getSteamID64(), users)]
   );
   let i = 0;
   const ID64 = main.requester.steamID64;
@@ -40,7 +41,7 @@ module.exports = (sender, client, users, community, allCards, manager) => {
     chatMessage(
       client,
       sender,
-      messages.REQUESTER[1][users[sender.getSteamID64()].language]
+      messages.REQUESTER[1][utils.getLanguage(sender.getSteamID64(), users)]
     );
   }
 };

@@ -8,11 +8,11 @@ module.exports = (sender, client, users, community) => {
   chatMessage(
     client,
     sender,
-    messages.REQUEST[users[sender.getSteamID64()].language]
+    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
   );
   log.userChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     '[ !INVITE ]'
   );
   utils.checkUserinGroup(community, sender.getSteamID64(), (err, isMember) => {
@@ -22,14 +22,16 @@ module.exports = (sender, client, users, community) => {
         chatMessage(
           client,
           sender.getSteamID64(),
-          messages.INVITETOGROUP.INVITED[users[sender.getSteamID64()].language]
+          messages.INVITETOGROUP.INVITED[
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
       } else {
         chatMessage(
           client,
           sender.getSteamID64(),
           messages.INVITETOGROUP.ITSALREADY[
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ]
         );
       }
@@ -37,7 +39,9 @@ module.exports = (sender, client, users, community) => {
       chatMessage(
         client,
         sender.getSteamID64(),
-        messages.INVITETOGROUP.ERROR[users[sender.getSteamID64()].language]
+        messages.INVITETOGROUP.ERROR[
+          utils.getLanguage(sender.getSteamID64(), users)
+        ]
       );
       log.error(`An error occurred inviting user to steam group: ${err}`);
     }

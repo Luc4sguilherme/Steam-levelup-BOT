@@ -16,7 +16,7 @@ module.exports = (sender, msg, client, users, manager) => {
   if (!Number.isNaN(n) && n > 0) {
     log.userChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !BUYANYCSGO ${n} ]`
     );
     if (n <= maxKeys) {
@@ -25,7 +25,7 @@ module.exports = (sender, msg, client, users, manager) => {
       chatMessage(
         client,
         sender,
-        messages.REQUEST[users[sender.getSteamID64()].language]
+        messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
       );
       manager.getUserInventoryContents(
         sender.getSteamID64(),
@@ -48,7 +48,7 @@ module.exports = (sender, msg, client, users, manager) => {
                 client,
                 sender,
                 messages.ERROR.OUTOFSTOCK.DEFAULT.CSGO.THEM[0][
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
               );
             } else {
@@ -90,12 +90,12 @@ module.exports = (sender, msg, client, users, manager) => {
                   client,
                   sender,
                   messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
-                    users[sender.getSteamID64()].language
+                    utils.getLanguage(sender.getSteamID64(), users)
                   ]
                 );
               } else {
                 const message = messages.TRADE.SETMESSAGE[1].CSGO[
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
                   .replace('{SETS}', amountofsets)
                   .replace('{CSGO}', n);
@@ -120,7 +120,7 @@ module.exports = (sender, msg, client, users, manager) => {
               client,
               sender,
               messages.ERROR.LOADINVENTORY.THEM[2][
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
             log.error(`An error occurred while getting user inventory: ${ERR}`);
@@ -129,7 +129,7 @@ module.exports = (sender, msg, client, users, manager) => {
               client,
               sender,
               messages.ERROR.LOADINVENTORY.THEM[0][
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
             log.error(`An error occurred while getting user inventory: ${ERR}`);
@@ -141,7 +141,7 @@ module.exports = (sender, msg, client, users, manager) => {
         client,
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.CSGO[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ].replace('{KEYS}', maxKeys)
       );
     }
@@ -150,7 +150,7 @@ module.exports = (sender, msg, client, users, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.CSGO[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!BUYANYCSGO 1')
     );
   }

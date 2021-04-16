@@ -14,13 +14,13 @@ module.exports = (sender, msg, client, users, manager) => {
   if (!Number.isNaN(amountofsets) && amountofsets > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !WITHDRAWSETS ${amountofsets} ]`
     );
     chatMessage(
       client,
       sender,
-      messages.REQUEST[users[sender.getSteamID64()].language]
+      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
     );
     manager.getInventoryContents(753, 2, true, (ERR) => {
       if (ERR) {
@@ -28,7 +28,9 @@ module.exports = (sender, msg, client, users, manager) => {
         chatMessage(
           client,
           sender,
-          messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
+          messages.ERROR.LOADINVENTORY.US[
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
       } else {
         let amountofB = amountofsets;
@@ -67,12 +69,12 @@ module.exports = (sender, msg, client, users, manager) => {
             client,
             sender,
             messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ]
           );
         } else {
           const message = messages.TRADE.SETMESSAGE[0].SETS[
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ].replace('{SETS}', amountofsets);
           makeOffer(
             client,
@@ -96,7 +98,7 @@ module.exports = (sender, msg, client, users, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.SETS[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!WITHDRAWSETS 1')
     );
   }

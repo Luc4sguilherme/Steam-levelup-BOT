@@ -11,14 +11,14 @@ const log = require('../../../../Components/log');
 module.exports = (sender, client, users, community, manager) => {
   log.adminChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     '[ !WITHDRAWLEFTOVER ]'
   );
   const cards = [];
   chatMessage(
     client,
     sender,
-    messages.REQUEST[users[sender.getSteamID64()].language]
+    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
   );
   for (let i = 0; i < Object.keys(inventory.botSets).length; i += 1) {
     for (let j = 0; j < Object.values(inventory.botSets)[i].length; j += 1) {
@@ -43,7 +43,9 @@ module.exports = (sender, client, users, community, manager) => {
         chatMessage(
           client,
           sender,
-          messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
+          messages.ERROR.LOADINVENTORY.US[
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
       } else {
         const Cards = {};
@@ -56,7 +58,7 @@ module.exports = (sender, client, users, community, manager) => {
             client,
             sender,
             messages.ERROR.OUTOFSTOCK.DEFAULT.LEFTOVER[
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ]
           );
         } else {
@@ -95,7 +97,7 @@ module.exports = (sender, client, users, community, manager) => {
 
           const message =
             messages.TRADE.SETMESSAGE[0].LEFTOVER[
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ];
           makeOffer(
             client,

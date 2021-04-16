@@ -1,11 +1,12 @@
 const messages = require('../../../../Config/messages');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users, community, manager) => {
   log.adminChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     '[ !UNPACK ]'
   );
   manager.getInventoryContents(753, 6, true, (ERR1, INV) => {
@@ -32,21 +33,23 @@ module.exports = (sender, client, users, community, manager) => {
           client,
           sender,
           messages.UNPACK.RESPONSE[
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ].replace('{BOOSTER}', botBooster.length)
         );
       } else {
         chatMessage(
           client,
           sender,
-          messages.UNPACK.ERROR[users[sender.getSteamID64()].language]
+          messages.UNPACK.ERROR[utils.getLanguage(sender.getSteamID64(), users)]
         );
       }
     } else {
       chatMessage(
         client,
         sender,
-        messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
+        messages.ERROR.LOADINVENTORY.US[
+          utils.getLanguage(sender.getSteamID64(), users)
+        ]
       );
       log.error(
         sender.getSteamID64(),

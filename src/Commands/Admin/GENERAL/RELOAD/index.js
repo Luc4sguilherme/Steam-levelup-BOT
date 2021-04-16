@@ -3,6 +3,7 @@ const inventory = require('../../../../Components/inventory');
 const chatMessage = require('../../../../Components/message');
 const log = require('../../../../Components/log');
 const main = require('../../../../Config/main');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users, community, allCards) => {
   const load = ['SETS'];
@@ -20,11 +21,11 @@ module.exports = (sender, client, users, community, allCards) => {
   chatMessage(
     client,
     sender,
-    messages.REQUEST[users[sender.getSteamID64()].language]
+    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
   );
   log.adminChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     '[ !RELOAD ]'
   );
   inventory.loadInventory(client, community, allCards, load, () => {
@@ -32,7 +33,7 @@ module.exports = (sender, client, users, community, allCards) => {
     chatMessage(
       client,
       sender,
-      messages.RELOAD[users[sender.getSteamID64()].language]
+      messages.RELOAD[utils.getLanguage(sender.getSteamID64(), users)]
     );
   });
 };

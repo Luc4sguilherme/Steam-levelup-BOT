@@ -2,6 +2,7 @@ const chatMessage = require('../../../../Components/message');
 const makeOffer = require('../../../../Components/offer');
 const messages = require('../../../../Config/messages');
 const log = require('../../../../Components/log');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, manager) => {
   const amountbooster = parseInt(
@@ -11,20 +12,22 @@ module.exports = (sender, msg, client, users, manager) => {
   if (!Number.isNaN(amountbooster) && parseInt(amountbooster, 10) > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !WITHDRAWBOOSTER ${amountbooster} ]`
     );
     chatMessage(
       client,
       sender,
-      messages.REQUEST[users[sender.getSteamID64()].language]
+      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
     );
     manager.getInventoryContents(753, 6, true, (ERR, INV) => {
       if (ERR) {
         chatMessage(
           client,
           sender,
-          messages.ERROR.LOADINVENTORY.US[users[sender.getSteamID64()].language]
+          messages.ERROR.LOADINVENTORY.US[
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
         log.error(`An error occurred while getting inventory: ${ERR}`);
       } else {
@@ -42,12 +45,12 @@ module.exports = (sender, msg, client, users, manager) => {
             client,
             sender,
             messages.ERROR.OUTOFSTOCK.DEFAULT.BOOSTER.US[
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ].replace('{BOOSTER}', botBooster.length)
           );
         } else {
           const message = messages.TRADE.SETMESSAGE[0].BOOSTER[
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ].replace('{BOOSTER}', amountbooster.toString());
           makeOffer(
             client,
@@ -71,7 +74,7 @@ module.exports = (sender, msg, client, users, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.BOOSTER[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!WITHDRAWBOOSTER 1')
     );
   }

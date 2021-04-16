@@ -11,7 +11,7 @@ module.exports = (sender, msg, client, users) => {
   if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
     log.userChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !LEVEL ${n} ]`
     );
     if (n <= main.maxLevel) {
@@ -60,7 +60,7 @@ module.exports = (sender, msg, client, users) => {
                     sender,
                     filterCommands(
                       messages.LEVEL.RESPONSE[
-                        users[sender.getSteamID64()].language
+                        utils.getLanguage(sender.getSteamID64(), users)
                       ]
 
                         .replace('{level}', n)
@@ -86,7 +86,7 @@ module.exports = (sender, msg, client, users) => {
                     client,
                     sender,
                     messages.ERROR.INPUT.AMOUNTLOW.LEVEL[
-                      users[sender.getSteamID64()].language
+                      utils.getLanguage(sender.getSteamID64(), users)
                     ]
                   );
                 }
@@ -94,14 +94,18 @@ module.exports = (sender, msg, client, users) => {
                 chatMessage(
                   client,
                   sender,
-                  messages.ERROR.LEVEL[1][users[sender.getSteamID64()].language]
+                  messages.ERROR.LEVEL[1][
+                    utils.getLanguage(sender.getSteamID64(), users)
+                  ]
                 );
               }
             } else {
               chatMessage(
                 client,
                 sender,
-                messages.ERROR.LEVEL[0][users[sender.getSteamID64()].language]
+                messages.ERROR.LEVEL[0][
+                  utils.getLanguage(sender.getSteamID64(), users)
+                ]
               );
             }
           } else {
@@ -109,7 +113,9 @@ module.exports = (sender, msg, client, users) => {
             chatMessage(
               client,
               sender,
-              messages.ERROR.BADGES[1][users[sender.getSteamID64()].language]
+              messages.ERROR.BADGES[1][
+                utils.getLanguage(sender.getSteamID64(), users)
+              ]
             );
           }
         }
@@ -119,7 +125,7 @@ module.exports = (sender, msg, client, users) => {
         client,
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.LEVEL[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ].replace('{LEVEL}', main.maxLevel)
       );
     }
@@ -127,7 +133,9 @@ module.exports = (sender, msg, client, users) => {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.LEVEL[users[sender.getSteamID64()].language]
+      messages.ERROR.INPUT.INVALID.LEVEL[
+        utils.getLanguage(sender.getSteamID64(), users)
+      ]
     );
   }
 };

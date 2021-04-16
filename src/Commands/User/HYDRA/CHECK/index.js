@@ -10,7 +10,7 @@ module.exports = (sender, msg, client, users) => {
   if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
     log.userChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !CHECKHYDRA ${n} ]`
     );
     if (main.maxCheck.hydra >= n) {
@@ -31,7 +31,7 @@ module.exports = (sender, msg, client, users) => {
                       client,
                       sender,
                       messages.ERROR.INPUT.AMOUNTOVER.HYDRA[
-                        users[sender.getSteamID64()].language
+                        utils.getLanguage(sender.getSteamID64(), users)
                       ].replace('{KEYS}', main.maxCheck.hydra)
                     );
                     can += 1;
@@ -44,7 +44,7 @@ module.exports = (sender, msg, client, users) => {
                       client,
                       sender,
                       messages.CHECK.HYDRA[0][
-                        users[sender.getSteamID64()].language
+                        utils.getLanguage(sender.getSteamID64(), users)
                       ]
                         .replace(/{HYDRA}/g, n)
                         .replace('{SETS}', n * rates.hydra.sell)
@@ -55,7 +55,7 @@ module.exports = (sender, msg, client, users) => {
                       client,
                       sender,
                       messages.CHECK.HYDRA[1][
-                        users[sender.getSteamID64()].language
+                        utils.getLanguage(sender.getSteamID64(), users)
                       ]
                         .replace(/{HYDRA}/g, n)
                         .replace('{SETS}', n * rates.hydra.sell)
@@ -67,14 +67,18 @@ module.exports = (sender, msg, client, users) => {
                 chatMessage(
                   client,
                   sender,
-                  messages.ERROR.LEVEL[1][users[sender.getSteamID64()].language]
+                  messages.ERROR.LEVEL[1][
+                    utils.getLanguage(sender.getSteamID64(), users)
+                  ]
                 );
               }
             } else {
               chatMessage(
                 client,
                 sender,
-                messages.ERROR.LEVEL[0][users[sender.getSteamID64()].language]
+                messages.ERROR.LEVEL[0][
+                  utils.getLanguage(sender.getSteamID64(), users)
+                ]
               );
             }
           } else {
@@ -82,7 +86,9 @@ module.exports = (sender, msg, client, users) => {
             chatMessage(
               client,
               sender,
-              messages.ERROR.BADGES[1][users[sender.getSteamID64()].language]
+              messages.ERROR.BADGES[1][
+                utils.getLanguage(sender.getSteamID64(), users)
+              ]
             );
           }
         }
@@ -92,7 +98,7 @@ module.exports = (sender, msg, client, users) => {
         client,
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.HYDRA[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ].replace('{KEYS}', main.maxCheck.hydra)
       );
     }
@@ -101,7 +107,7 @@ module.exports = (sender, msg, client, users) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.HYDRA[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!CHECKHYDRA 1')
     );
   }
