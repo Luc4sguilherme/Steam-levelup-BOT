@@ -309,7 +309,7 @@ client.on('friendMessage', (SENDER, MSG) => {
     chatMessage(
       client,
       SENDER,
-      messages.REQUEST[users[SENDER.getSteamID64()].language]
+      messages.REQUEST[utils.getLanguage(SENDER.getSteamID64(), users)]
     );
     // this fix an error when the bot receives a donation
   } else if (
@@ -329,7 +329,7 @@ client.on('friendMessage', (SENDER, MSG) => {
     chatMessage(
       client,
       SENDER,
-      messages.LOADING[users[SENDER.getSteamID64()].language]
+      messages.LOADING[utils.getLanguage(SENDER.getSteamID64(), users)]
     );
   } else {
     commands(SENDER, MSG, client, users, community, allCards, manager);
@@ -440,7 +440,9 @@ manager.on('sentOfferChanged', (OFFER) => {
         }
         if (canComment && main.comment.enabled) {
           USER.comment(
-            messages.COMMENT[users[OFFER.partner.getSteamID64()].language],
+            messages.COMMENT[
+              utils.getLanguage(OFFER.partner.getSteamID64(), users)
+            ],
             (ERR1) => {
               if (ERR1) {
                 log.error(
@@ -481,7 +483,7 @@ manager.on('sentOfferChanged', (OFFER) => {
                   client,
                   OFFER.partner.getSteamID64(),
                   messages.TRADE.DONE[0][
-                    users[OFFER.partner.getSteamID64()].language
+                    utils.getLanguage(OFFER.partner.getSteamID64(), users)
                   ].replace('{GROUP}', main.steamGroup.link)
                 );
               } else {
@@ -489,7 +491,7 @@ manager.on('sentOfferChanged', (OFFER) => {
                   client,
                   OFFER.partner.getSteamID64(),
                   messages.TRADE.DONE[1][
-                    users[OFFER.partner.getSteamID64()].language
+                    utils.getLanguage(OFFER.partner.getSteamID64(), users)
                   ]
                 );
               }
@@ -498,7 +500,7 @@ manager.on('sentOfferChanged', (OFFER) => {
                 client,
                 OFFER.partner.getSteamID64(),
                 messages.TRADE.DONE[1][
-                  users[OFFER.partner.getSteamID64()].language
+                  utils.getLanguage(OFFER.partner.getSteamID64(), users)
                 ]
               );
               log.error(
@@ -514,7 +516,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       client,
       OFFER.partner,
       messages.TRADE.COUNTEROFFER[
-        users[OFFER.partner.getSteamID64()].language
+        utils.getLanguage(OFFER.partner.getSteamID64(), users)
       ].replace('{OFFERID}', OFFER.id)
     );
     log.tradeoffer(`Aborted because of counter offer. TradeID:${OFFER.id}`);
@@ -523,7 +525,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       client,
       OFFER.partner,
       messages.TRADE.EXPIRED[0][
-        users[OFFER.partner.getSteamID64()].language
+        utils.getLanguage(OFFER.partner.getSteamID64(), users)
       ].replace('{OFFERID}', OFFER.id)
     );
     log.tradeoffer(`Tradeoffer expired. TradeID:${OFFER.id}`);
@@ -540,7 +542,7 @@ manager.on('sentOfferChanged', (OFFER) => {
         client,
         OFFER.partner,
         messages.TRADE.EXPIRED[1][
-          users[OFFER.partner.getSteamID64()].language
+          utils.getLanguage(OFFER.partner.getSteamID64(), users)
         ].replace('{OFFERID}', OFFER.id)
       );
 
@@ -552,7 +554,7 @@ manager.on('sentOfferChanged', (OFFER) => {
         client,
         OFFER.partner,
         messages.TRADE.CANCELED[
-          users[OFFER.partner.getSteamID64()].language
+          utils.getLanguage(OFFER.partner.getSteamID64(), users)
         ].replace('{OFFERID}', OFFER.id)
       );
       log.tradeoffer(`Trade offer canceled by Bot. TradeID:${OFFER.id}`);
@@ -564,7 +566,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       client,
       OFFER.partner,
       messages.TRADE.DECLINED.THEM[
-        users[OFFER.partner.getSteamID64()].language
+        utils.getLanguage(OFFER.partner.getSteamID64(), users)
       ].replace('{OFFERID}', OFFER.id)
     );
     log.tradeoffer(`Tradeoffer declined by User. TradeID:${OFFER.id}`);
@@ -573,7 +575,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       client,
       OFFER.partner,
       messages.TRADE.DECLINED.US[1][
-        users[OFFER.partner.getSteamID64()].language
+        utils.getLanguage(OFFER.partner.getSteamID64(), users)
       ].replace('{OFFERID}', OFFER.id)
     );
     log.tradeoffer(
@@ -584,7 +586,7 @@ manager.on('sentOfferChanged', (OFFER) => {
       client,
       OFFER.partner,
       messages.TRADE.ESCROW[
-        users[OFFER.partner.getSteamID64()].language
+        utils.getLanguage(OFFER.partner.getSteamID64(), users)
       ].replace('{OFFERID}', OFFER.id)
     );
     log.tradeoffer(
@@ -602,7 +604,9 @@ manager.on('newOffer', (OFFER) => {
         chatMessage(
           client,
           OFFER.partner,
-          messages.ERROR.TRADEHOLD[users[OFFER.partner.getSteamID64()].language]
+          messages.ERROR.TRADEHOLD[
+            utils.getLanguage(OFFER.partner.getSteamID64(), users)
+          ]
         );
         OFFER.decline((ERR2) => {
           if (ERR2) {
@@ -623,7 +627,7 @@ manager.on('newOffer', (OFFER) => {
               client,
               OFFER.partner,
               messages.TRADE.ACCEPTED[
-                users[OFFER.partner.getSteamID64()].language
+                utils.getLanguage(OFFER.partner.getSteamID64(), users)
               ]
             );
           }
@@ -632,7 +636,9 @@ manager.on('newOffer', (OFFER) => {
         chatMessage(
           client,
           OFFER.partner,
-          messages.TRADEHOLD[users[OFFER.partner.getSteamID64()].language]
+          messages.TRADEHOLD[
+            utils.getLanguage(OFFER.partner.getSteamID64(), users)
+          ]
         );
         OFFER.decline((ERR5) => {
           if (ERR5) {
@@ -653,7 +659,7 @@ manager.on('newOffer', (OFFER) => {
               client,
               main.admins[j],
               messages.TRADE.NOTIFYADMIN.DONATION[
-                users[main.admins[j]].language
+                utils.getLanguage(main.admins[j], users)
               ].replace('{ID64}', OFFER.partner.getSteamID64())
             );
           }
@@ -661,7 +667,7 @@ manager.on('newOffer', (OFFER) => {
             client,
             OFFER.partner,
             messages.TRADE.DONATION.ACCEPTED[
-              users[OFFER.partner.getSteamID64()].language
+              utils.getLanguage(OFFER.partner.getSteamID64(), users)
             ]
           );
         }
@@ -676,7 +682,7 @@ manager.on('newOffer', (OFFER) => {
         client,
         OFFER.partner,
         messages.TRADE.DONATION.DECLINED[
-          users[OFFER.partner.getSteamID64()].language
+          utils.getLanguage(OFFER.partner.getSteamID64(), users)
         ]
       );
     }
@@ -689,7 +695,7 @@ manager.on('newOffer', (OFFER) => {
         client,
         OFFER.partner,
         messages.TRADE.DECLINED.US[0][
-          users[OFFER.partner.getSteamID64()].language
+          utils.getLanguage(OFFER.partner.getSteamID64(), users)
         ]
       );
     });

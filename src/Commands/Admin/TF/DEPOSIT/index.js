@@ -3,19 +3,20 @@ const acceptedCurrencies = require('../../../../Config/currencies');
 const chatMessage = require('../../../../Components/message');
 const makeOffer = require('../../../../Components/offer');
 const log = require('../../../../Components/log');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, manager) => {
   const amountkeys = parseInt(msg.toUpperCase().replace('!DEPOSITTF ', ''), 10);
   if (!Number.isNaN(amountkeys) && parseInt(amountkeys, 10) > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !DEPOSITTF ${amountkeys} ]`
     );
     chatMessage(
       client,
       sender,
-      messages.REQUEST[users[sender.getSteamID64()].language]
+      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
     );
     manager.getUserInventoryContents(
       sender.getSteamID64(),
@@ -38,12 +39,12 @@ module.exports = (sender, msg, client, users, manager) => {
               client,
               sender,
               messages.ERROR.OUTOFSTOCK.DEFAULT.TF.THEM[1][
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ].replace('{TF}', theirKeys.length)
             );
           } else {
             const message = messages.TRADE.SETMESSAGE[0].TF[
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ].replace('{TF}', amountkeys);
             makeOffer(
               client,
@@ -65,7 +66,7 @@ module.exports = (sender, msg, client, users, manager) => {
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[2][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ]
           );
           log.error(`An error occurred while getting user inventory: ${ERR}`);
@@ -74,7 +75,7 @@ module.exports = (sender, msg, client, users, manager) => {
             client,
             sender,
             messages.ERROR.LOADINVENTORY.THEM[0][
-              users[sender.getSteamID64()].language
+              utils.getLanguage(sender.getSteamID64(), users)
             ]
           );
           log.error(`An error occurred while getting user inventory: ${ERR}`);
@@ -86,7 +87,7 @@ module.exports = (sender, msg, client, users, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.TF[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!DEPOSITTF 1')
     );
   }

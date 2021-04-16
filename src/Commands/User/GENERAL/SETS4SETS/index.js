@@ -19,7 +19,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     if (!Number.isNaN(amountofsets) && amountofsets > 0) {
       log.userChat(
         sender.getSteamID64(),
-        users[sender.getSteamID64()].language,
+        utils.getLanguage(sender.getSteamID64(), users),
         `[ !SETS4SETS ${amountofsets} ]`
       );
       if (amountofsets <= main.maxSets4Sets) {
@@ -28,7 +28,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         chatMessage(
           client,
           sender,
-          messages.REQUEST[users[sender.getSteamID64()].language]
+          messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
         );
         let amountofB = amountofsets;
         inventory.getInventory(
@@ -75,7 +75,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                       client,
                       sender,
                       messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][
-                        users[sender.getSteamID64()].language
+                        utils.getLanguage(sender.getSteamID64(), users)
                       ]
                     );
                   } else {
@@ -253,12 +253,15 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                 client,
                                 sender,
                                 messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
-                                  users[sender.getSteamID64()].language
+                                  utils.getLanguage(
+                                    sender.getSteamID64(),
+                                    users
+                                  )
                                 ]
                               );
                             } else {
                               const message = messages.TRADE.SETMESSAGE[3].SETS[
-                                users[sender.getSteamID64()].language
+                                utils.getLanguage(sender.getSteamID64(), users)
                               ]
                                 .replace('{SETS1}', mySets.length)
                                 .replace('{SETS2}', theirSets.length);
@@ -283,7 +286,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                             client,
                             sender,
                             messages.ERROR.OUTOFSTOCK.NOTUSED.SETS[
-                              users[sender.getSteamID64()].language
+                              utils.getLanguage(sender.getSteamID64(), users)
                             ]
                           );
                         }
@@ -292,7 +295,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           client,
                           sender,
                           messages.ERROR.BADGES[1][
-                            users[sender.getSteamID64()].language
+                            utils.getLanguage(sender.getSteamID64(), users)
                           ]
                         );
                         log.error(
@@ -306,7 +309,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                     client,
                     sender,
                     messages.ERROR.LOADINVENTORY.THEM[0][
-                      users[sender.getSteamID64()].language
+                      utils.getLanguage(sender.getSteamID64(), users)
                     ]
                   );
                   log.error(
@@ -319,7 +322,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                 client,
                 sender,
                 messages.ERROR.LOADINVENTORY.THEM[2][
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
               );
               log.error(
@@ -330,7 +333,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                 client,
                 sender,
                 messages.ERROR.LOADINVENTORY.THEM[0][
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
               );
               log.error(
@@ -344,7 +347,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
           client,
           sender,
           messages.SETS4SETS.AMOUNTOVER[
-            users[sender.getSteamID64()].language
+            utils.getLanguage(sender.getSteamID64(), users)
           ].replace('{SETS}', main.maxSets4Sets)
         );
       }
@@ -353,7 +356,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         client,
         sender,
         messages.ERROR.INPUT.INVALID.SETS[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ].replace('{command}', `${command} 1`)
       );
     }
@@ -362,7 +365,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       client,
       sender,
       messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[2][
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ]
     );
   }

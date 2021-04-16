@@ -1,6 +1,7 @@
 const log = require('../../../../Components/log');
 const chatMessage = require('../../../../Components/message');
 const messages = require('../../../../Config/messages');
+const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, manager) => {
   const offerID = msg.substring('!CANCEL'.length).trim();
@@ -8,7 +9,7 @@ module.exports = (sender, msg, client, users, manager) => {
   if (offerID) {
     log.adminChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !CANCEL ${offerID} ]`
     );
 
@@ -17,7 +18,9 @@ module.exports = (sender, msg, client, users, manager) => {
         chatMessage(
           client,
           sender,
-          messages.ERROR.GETOFFER[users[sender.getSteamID64()].language]
+          messages.ERROR.GETOFFER[
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
         log.error(`There was an error getting offers: ${error1}`);
       } else {
@@ -32,7 +35,7 @@ module.exports = (sender, msg, client, users, manager) => {
                 client,
                 sender,
                 messages.ERROR.NONEXISTENTOFFER[
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ].replace('{OFFERID}', offerID)
               );
             } else {
@@ -40,7 +43,7 @@ module.exports = (sender, msg, client, users, manager) => {
                 client,
                 sender,
                 messages.ERROR.CANCELOFFER[
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
               );
             }
@@ -51,7 +54,7 @@ module.exports = (sender, msg, client, users, manager) => {
               client,
               sender,
               messages.TRADE.CANCELED[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ].replace('{OFFERID}', offer.id)
             );
           }
@@ -63,7 +66,7 @@ module.exports = (sender, msg, client, users, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.OFFERID[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!CANCEL offerID')
     );
   }

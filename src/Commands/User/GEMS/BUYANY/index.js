@@ -17,7 +17,7 @@ module.exports = (sender, msg, client, users, manager) => {
   if (!Number.isNaN(amountofsets) && amountofsets > 0) {
     log.userChat(
       sender.getSteamID64(),
-      users[sender.getSteamID64()].language,
+      utils.getLanguage(sender.getSteamID64(), users),
       `[ !BUYANYGEMS ${amountofsets} ]`
     );
     if (amountofsets <= main.maxBuy) {
@@ -27,7 +27,7 @@ module.exports = (sender, msg, client, users, manager) => {
       chatMessage(
         client,
         sender,
-        messages.REQUEST[users[sender.getSteamID64()].language]
+        messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
       );
       manager.getUserInventoryContents(
         sender.getSteamID64(),
@@ -60,7 +60,7 @@ module.exports = (sender, msg, client, users, manager) => {
                 client,
                 sender,
                 messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.THEM[0][
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
               );
             } else {
@@ -102,12 +102,12 @@ module.exports = (sender, msg, client, users, manager) => {
                   client,
                   sender,
                   messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
-                    users[sender.getSteamID64()].language
+                    utils.getLanguage(sender.getSteamID64(), users)
                   ]
                 );
               } else {
                 const message = messages.TRADE.SETMESSAGE[1].GEMS[
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
                   .replace('{SETS}', amountofsets)
                   .replace('{GEMS}', rates.gems.sell * amountofsets);
@@ -132,7 +132,7 @@ module.exports = (sender, msg, client, users, manager) => {
               client,
               sender,
               messages.ERROR.LOADINVENTORY.THEM[2][
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
             log.error(`An error occurred while getting user inventory: ${ERR}`);
@@ -141,7 +141,7 @@ module.exports = (sender, msg, client, users, manager) => {
               client,
               sender,
               messages.ERROR.LOADINVENTORY.THEM[0][
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
             log.error(`An error occurred while getting user inventory: ${ERR}`);
@@ -153,7 +153,7 @@ module.exports = (sender, msg, client, users, manager) => {
         client,
         sender,
         messages.ERROR.INPUT.AMOUNTOVER.SETS[
-          users[sender.getSteamID64()].language
+          utils.getLanguage(sender.getSteamID64(), users)
         ].replace('{SETS}', main.maxBuy)
       );
     }
@@ -162,7 +162,7 @@ module.exports = (sender, msg, client, users, manager) => {
       client,
       sender,
       messages.ERROR.INPUT.INVALID.SETS[
-        users[sender.getSteamID64()].language
+        utils.getLanguage(sender.getSteamID64(), users)
       ].replace('{command}', '!BUYANYGEMS 1')
     );
   }

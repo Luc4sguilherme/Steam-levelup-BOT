@@ -10,11 +10,11 @@ module.exports = (sender, client, users) => {
   chatMessage(
     client,
     sender,
-    messages.REQUEST[users[sender.getSteamID64()].language]
+    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
   );
   log.userChat(
     sender.getSteamID64(),
-    users[sender.getSteamID64()].language,
+    utils.getLanguage(sender.getSteamID64(), users),
     '[ !CHECKONE ]'
   );
   utils.getBadges(
@@ -51,28 +51,28 @@ module.exports = (sender, client, users) => {
             let message = ' ';
             if (cs > 0) {
               message += messages.CHECKONE.CURRENCIES.CSGO[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
                 .replace(/{CSGO}/g, cs)
                 .replace('{SETS1}', cs * rates.csgo.sell);
             }
             if (hydra > 0) {
               message += messages.CHECKONE.CURRENCIES.HYDRA[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
                 .replace(/{HYDRA}/g, hydra)
                 .replace('{SETS2}', hydra * rates.hydra.sell);
             }
             if (tf > 0) {
               message += messages.CHECKONE.CURRENCIES.TF[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
                 .replace(/{TF}/g, tf)
                 .replace('{SETS3}', tf * rates.tf.sell);
             }
             if (parseInt(hisMaxSets, 10) > 0) {
               message += messages.CHECKONE.CURRENCIES.GEMS[
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
                 .replace('{GEMS}', gems)
                 .replace('{SETS4}', hisMaxSets)
@@ -86,7 +86,7 @@ module.exports = (sender, client, users) => {
                 client,
                 sender,
                 messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[1][
-                  users[sender.getSteamID64()].language
+                  utils.getLanguage(sender.getSteamID64(), users)
                 ]
               );
               return;
@@ -104,7 +104,7 @@ module.exports = (sender, client, users) => {
                   client,
                   sender,
                   messages.CHECKONE.RESPONSE[0][
-                    users[sender.getSteamID64()].language
+                    utils.getLanguage(sender.getSteamID64(), users)
                   ]
                     .replace('{SETS}', hisMaxSets)
                     .replace('{LEVEL}', i - 1)
@@ -115,7 +115,7 @@ module.exports = (sender, client, users) => {
                   client,
                   sender,
                   messages.CHECKONE.RESPONSE[1][
-                    users[sender.getSteamID64()].language
+                    utils.getLanguage(sender.getSteamID64(), users)
                   ]
                     .replace('{SETS}', hisMaxSets)
                     .replace('{LEVEL}', i - 1)
@@ -126,7 +126,9 @@ module.exports = (sender, client, users) => {
               chatMessage(
                 client,
                 sender,
-                messages.ERROR.LEVEL[1][users[sender.getSteamID64()].language]
+                messages.ERROR.LEVEL[1][
+                  utils.getLanguage(sender.getSteamID64(), users)
+                ]
               );
             }
           } else {
@@ -134,7 +136,7 @@ module.exports = (sender, client, users) => {
               client,
               sender,
               messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[1][
-                users[sender.getSteamID64()].language
+                utils.getLanguage(sender.getSteamID64(), users)
               ]
             );
           }
@@ -142,14 +144,18 @@ module.exports = (sender, client, users) => {
           chatMessage(
             client,
             sender,
-            messages.ERROR.BADGES[0][users[sender.getSteamID64()].language]
+            messages.ERROR.BADGES[0][
+              utils.getLanguage(sender.getSteamID64(), users)
+            ]
           );
         }
       } else {
         chatMessage(
           client,
           sender,
-          messages.ERROR.BADGES[1][users[sender.getSteamID64()].language]
+          messages.ERROR.BADGES[1][
+            utils.getLanguage(sender.getSteamID64(), users)
+          ]
         );
         log.error(`An error occurred while getting badges: ${ERR}`);
       }
