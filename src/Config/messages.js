@@ -372,17 +372,22 @@ module.exports = {
           },
         },
         RESPONSE: {
-          EN: '/pre New trade: \n • Command: {COMMAND}\n • SteamID: {ID64}\n',
-          PT: '/pre Nova Troca: \n • Comando: {COMMAND}\n • SteamID: {ID64}\n',
+          EN:
+            '/pre New trade: \n • Command: {COMMAND}\n • SteamID: {ID64}\n • TradeID: {OFFERID}\n',
+          PT:
+            '/pre Nova Troca: \n • Comando: {COMMAND}\n • SteamID: {ID64}\n • ID comercial: {OFFERID}\n',
           RU:
-            '/pre Новая сделка: \n • команды: {COMMAND}\n • SteamID: {ID64}\n',
+            '/pre Новая сделка: \n • команды: {COMMAND}\n • SteamID: {ID64}\n • Торговый идентификатор: {OFFERID}\n',
           ES:
-            '/pre Nuevo comercio: \n • Comando: {COMMAND}\n • SteamID: {ID64}\n',
-          CN: '/pre 新贸易: \n • 命令: {COMMAND}\n • SteamID: {ID64}\n',
+            '/pre Nuevo comercio: \n • Comando: {COMMAND}\n • SteamID: {ID64}\n • Identificación comercial: {OFFERID}\n',
+          CN:
+            '/pre 新贸易: \n • 命令：{COMMAND}\n • SteamID：{ID64}\n • 贸易编号：{OFFERID}\n',
           FR:
-            '/pre Nouveau commerce: \n • Commander: {COMMAND}\n • SteamID: {ID64}\n',
-          JA: '/pre 新規貿易： \n • コマンド： {COMMAND}\n • SteamID: {ID64}\n',
-          DE: '/pre Neuer Handel: \n • Befehl: {COMMAND}\n • SteamID: {ID64}\n',
+            '/pre Nouveau commerce: \n • Commander: {COMMAND}\n • SteamID: {ID64}\n • Identifiant commercial: {OFFERID}\n',
+          JA:
+            '/pre 新規貿易： \n • コマンド： {COMMAND}\n • SteamID：{ID64}\n • 取引ID：{OFFERID}\n',
+          DE:
+            '/pre Neuer Handel: \n • Befehl: {COMMAND}\n • SteamID: {ID64}\n • Handels-ID: {OFFERID}\n',
         },
       },
       DONATION: {
