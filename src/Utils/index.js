@@ -251,7 +251,9 @@ utils.notifyAdmin = (client, users, offer) => {
         utils.getLanguage(main.admins[j], users)
       ]
         .replace('{COMMAND}', offer.data('commandused'))
-        .replace('{ID64}', offer.partner.getSteamID64());
+        .replace('{ID64}', offer.partner.getSteamID64())
+        .replace('{OFFERID}', offer.id);
+
       if (
         offer.data('commandused').search(/BUY/) !== -1 ||
         offer.data('commandused').search(/SELL/) !== -1
