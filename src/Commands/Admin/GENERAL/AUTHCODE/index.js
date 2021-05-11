@@ -6,15 +6,12 @@ const log = require('../../../../Components/log');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
-  log.adminChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !AUTHCODE ]'
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+  log.adminChat(sender.getSteamID64(), language, '[ !AUTHCODE ]');
   chatMessage(
     client,
     sender,
-    messages.AUTHCODE[utils.getLanguage(sender.getSteamID64(), users)].replace(
+    messages.AUTHCODE[language].replace(
       '{CODE}',
       SteamTotp.getAuthCode(main.sharedSecret)
     )

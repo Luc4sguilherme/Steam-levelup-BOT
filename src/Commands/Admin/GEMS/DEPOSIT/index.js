@@ -6,6 +6,7 @@ const log = require('../../../../Components/log');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, manager) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const amountgems = parseInt(
     msg.toUpperCase().replace('!DEPOSITGEMS ', ''),
     10
@@ -13,14 +14,10 @@ module.exports = (sender, msg, client, users, manager) => {
   if (!Number.isNaN(amountgems) && parseInt(amountgems, 10) > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      utils.getLanguage(sender.getSteamID64(), users),
+      language,
       `[ !DEPOSITGEMS ${amountgems} ]`
     );
-    chatMessage(
-      client,
-      sender,
-      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-    );
+    chatMessage(client, sender, messages.REQUEST[language]);
     manager.getUserInventoryContents(
       sender.getSteamID64(),
       753,
@@ -51,14 +48,16 @@ module.exports = (sender, msg, client, users, manager) => {
             chatMessage(
               client,
               sender,
-              messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.THEM[1][
-                utils.getLanguage(sender.getSteamID64(), users)
-              ].replace('{GEMS}', theirgems)
+              messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.THEM[1][language].replace(
+                '{GEMS}',
+                theirgems
+              )
             );
           } else {
-            const message = messages.TRADE.SETMESSAGE[0].GEMS[
-              utils.getLanguage(sender.getSteamID64(), users)
-            ].replace('{GEMS}', amountgems);
+            const message = messages.TRADE.SETMESSAGE[0].GEMS[language].replace(
+              '{GEMS}',
+              amountgems
+            );
             makeOffer(
               client,
               users,
@@ -78,18 +77,14 @@ module.exports = (sender, msg, client, users, manager) => {
           chatMessage(
             client,
             sender,
-            messages.ERROR.LOADINVENTORY.THEM[2][
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
+            messages.ERROR.LOADINVENTORY.THEM[2][language]
           );
           log.error(`An error occurred while getting user inventory: ${ERR}`);
         } else {
           chatMessage(
             client,
             sender,
-            messages.ERROR.LOADINVENTORY.THEM[0][
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
+            messages.ERROR.LOADINVENTORY.THEM[0][language]
           );
           log.error(`An error occurred while getting user inventory: ${ERR}`);
         }
@@ -99,9 +94,10 @@ module.exports = (sender, msg, client, users, manager) => {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.GEMS[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', '!DEPOSITGEMS 1')
+      messages.ERROR.INPUT.INVALID.GEMS[language].replace(
+        '{command}',
+        '!DEPOSITGEMS 1'
+      )
     );
   }
 };

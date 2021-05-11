@@ -6,14 +6,12 @@ const utils = require('../../../../Utils');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const n = parseInt(msg.toUpperCase().replace('!CHECKGEMS ', ''), 10);
+
   if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
     if (n >= rates.gems.sell) {
-      log.userChat(
-        sender.getSteamID64(),
-        utils.getLanguage(sender.getSteamID64(), users),
-        `[ !CHECKGEMS ${n} ]`
-      );
+      log.userChat(sender.getSteamID64(), language, `[ !CHECKGEMS ${n} ]`);
       if (main.maxCheck.gems >= n) {
         utils.getBadges(
           sender.getSteamID64(),
@@ -33,9 +31,10 @@ module.exports = (sender, msg, client, users) => {
                       chatMessage(
                         client,
                         sender,
-                        messages.ERROR.INPUT.AMOUNTOVER.GEMS[
-                          utils.getLanguage(sender.getSteamID64(), users)
-                        ].replace('{GEMS}', main.maxCheck.gems)
+                        messages.ERROR.INPUT.AMOUNTOVER.GEMS[language].replace(
+                          '{GEMS}',
+                          main.maxCheck.gems
+                        )
                       );
                       can += 1;
                       break;
@@ -58,9 +57,7 @@ module.exports = (sender, msg, client, users) => {
                       chatMessage(
                         client,
                         sender,
-                        messages.CHECK.GEMS[0][
-                          utils.getLanguage(sender.getSteamID64(), users)
-                        ]
+                        messages.CHECK.GEMS[0][language]
                           .replace('{GEMS}', n)
                           .replace(/{SETS}/g, a)
                           .replace('{LEVEL}', b)
@@ -69,9 +66,7 @@ module.exports = (sender, msg, client, users) => {
                       chatMessage(
                         client,
                         sender,
-                        messages.CHECK.GEMS[1][
-                          utils.getLanguage(sender.getSteamID64(), users)
-                        ]
+                        messages.CHECK.GEMS[1][language]
                           .replace('{GEMS}', n)
                           .replace(/{SETS}/g, a)
                           .replace('{LEVEL}', b)
@@ -82,29 +77,15 @@ module.exports = (sender, msg, client, users) => {
                   chatMessage(
                     client,
                     sender,
-                    messages.ERROR.LEVEL[1][
-                      utils.getLanguage(sender.getSteamID64(), users)
-                    ]
+                    messages.ERROR.LEVEL[1][language]
                   );
                 }
               } else {
-                chatMessage(
-                  client,
-                  sender,
-                  messages.ERROR.LEVEL[0][
-                    utils.getLanguage(sender.getSteamID64(), users)
-                  ]
-                );
+                chatMessage(client, sender, messages.ERROR.LEVEL[0][language]);
               }
             } else {
               log.error(`An error occurred while getting badge data: ${ERR}`);
-              chatMessage(
-                client,
-                sender,
-                messages.ERROR.BADGES[1][
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
-              );
+              chatMessage(client, sender, messages.ERROR.BADGES[1][language]);
             }
           }
         );
@@ -112,27 +93,27 @@ module.exports = (sender, msg, client, users) => {
         chatMessage(
           client,
           sender,
-          messages.ERROR.INPUT.AMOUNTOVER.GEMS[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ].replace('{GEMS}', main.maxCheck.gems)
+          messages.ERROR.INPUT.AMOUNTOVER.GEMS[language].replace(
+            '{GEMS}',
+            main.maxCheck.gems
+          )
         );
       }
     } else {
       chatMessage(
         client,
         sender,
-        messages.ERROR.INPUT.AMOUNTLOW.GEMS[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ]
+        messages.ERROR.INPUT.AMOUNTLOW.GEMS[language]
       );
     }
   } else {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.GEMS[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', `!CHECKGEMS ${rates.gems.sell}`)
+      messages.ERROR.INPUT.INVALID.GEMS[language].replace(
+        '{command}',
+        `!CHECKGEMS ${rates.gems.sell}`
+      )
     );
   }
 };

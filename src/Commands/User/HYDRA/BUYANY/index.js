@@ -10,23 +10,17 @@ const makeOffer = require('../../../../Components/offer');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, manager) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const n = parseInt(msg.toUpperCase().replace('!BUYANYHYDRA ', ''), 10);
   const amountofsets = n * rates.hydra.sell;
   const maxKeys = parseInt(main.maxBuy / rates.hydra.sell, 10);
+
   if (!Number.isNaN(n) && n > 0) {
-    log.userChat(
-      sender.getSteamID64(),
-      utils.getLanguage(sender.getSteamID64(), users),
-      `[ !BUYANYHYDRA ${n} ]`
-    );
+    log.userChat(sender.getSteamID64(), language, `[ !BUYANYHYDRA ${n} ]`);
     if (n <= maxKeys) {
       const theirKeys = [];
       const mySets = [];
-      chatMessage(
-        client,
-        sender,
-        messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-      );
+      chatMessage(client, sender, messages.REQUEST[language]);
       manager.getUserInventoryContents(
         sender.getSteamID64(),
         730,
@@ -47,9 +41,7 @@ module.exports = (sender, msg, client, users, manager) => {
               chatMessage(
                 client,
                 sender,
-                messages.ERROR.OUTOFSTOCK.DEFAULT.HYDRA.THEM[0][
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
+                messages.ERROR.OUTOFSTOCK.DEFAULT.HYDRA.THEM[0][language]
               );
             } else {
               utils.sortSetsByAmount(inventory.botSets, (DATA) => {
@@ -89,14 +81,10 @@ module.exports = (sender, msg, client, users, manager) => {
                 chatMessage(
                   client,
                   sender,
-                  messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
-                    utils.getLanguage(sender.getSteamID64(), users)
-                  ]
+                  messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][language]
                 );
               } else {
-                const message = messages.TRADE.SETMESSAGE[1].HYDRA[
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
+                const message = messages.TRADE.SETMESSAGE[1].HYDRA[language]
                   .replace('{SETS}', amountofsets)
                   .replace('{HYDRA}', n);
                 makeOffer(
@@ -119,18 +107,14 @@ module.exports = (sender, msg, client, users, manager) => {
             chatMessage(
               client,
               sender,
-              messages.ERROR.LOADINVENTORY.THEM[2][
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              messages.ERROR.LOADINVENTORY.THEM[2][language]
             );
             log.error(`An error occurred while getting user inventory: ${ERR}`);
           } else {
             chatMessage(
               client,
               sender,
-              messages.ERROR.LOADINVENTORY.THEM[0][
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              messages.ERROR.LOADINVENTORY.THEM[0][language]
             );
             log.error(`An error occurred while getting user inventory: ${ERR}`);
           }
@@ -140,18 +124,20 @@ module.exports = (sender, msg, client, users, manager) => {
       chatMessage(
         client,
         sender,
-        messages.ERROR.INPUT.AMOUNTOVER.HYDRA[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ].replace('{KEYS}', maxKeys)
+        messages.ERROR.INPUT.AMOUNTOVER.HYDRA[language].replace(
+          '{KEYS}',
+          maxKeys
+        )
       );
     }
   } else {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.HYDRA[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', '!BUYANYHYDRA 1')
+      messages.ERROR.INPUT.INVALID.HYDRA[language].replace(
+        '{command}',
+        '!BUYANYHYDRA 1'
+      )
     );
   }
 };

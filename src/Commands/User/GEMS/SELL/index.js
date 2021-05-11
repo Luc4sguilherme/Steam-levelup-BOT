@@ -11,22 +11,20 @@ const { getSets } = require('../../../../Components/sets');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const amountofsets = parseInt(
     msg.toUpperCase().replace('!SELLGEMS ', ''),
     10
   );
+
   if (!Number.isNaN(amountofsets) && amountofsets > 0) {
     log.userChat(
       sender.getSteamID64(),
-      utils.getLanguage(sender.getSteamID64(), users),
+      language,
       `[ !SELLGEMS ${amountofsets} ]`
     );
     if (amountofsets <= main.maxSell) {
-      chatMessage(
-        client,
-        sender,
-        messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-      );
+      chatMessage(client, sender, messages.REQUEST[language]);
       let gemsAmount = 0;
       const botGems = [];
       const theirSets = [];
@@ -36,9 +34,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
           chatMessage(
             client,
             sender,
-            messages.ERROR.LOADINVENTORY.US[
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
+            messages.ERROR.LOADINVENTORY.US[language]
           );
         } else {
           let need = amountofsets * rates.gems.buy;
@@ -62,9 +58,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
             chatMessage(
               client,
               sender,
-              messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.US[0][
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.US[0][language]
             );
           } else {
             let amountofB = amountofsets;
@@ -116,12 +110,12 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           client,
                           sender,
                           messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][
-                            utils.getLanguage(sender.getSteamID64(), users)
+                            language
                           ]
                         );
                       } else {
                         const message = messages.TRADE.SETMESSAGE[2].GEMS[
-                          utils.getLanguage(sender.getSteamID64(), users)
+                          language
                         ]
                           .replace('{SETS}', amountofsets)
                           .replace('{GEMS}', rates.gems.buy * amountofsets);
@@ -144,9 +138,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                       chatMessage(
                         client,
                         sender,
-                        messages.ERROR.LOADINVENTORY.THEM[0][
-                          utils.getLanguage(sender.getSteamID64(), users)
-                        ]
+                        messages.ERROR.LOADINVENTORY.THEM[0][language]
                       );
                       log.error(
                         `An error occurred while getting user sets: ${ERR3}`
@@ -157,9 +149,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                   chatMessage(
                     client,
                     sender,
-                    messages.ERROR.LOADINVENTORY.THEM[2][
-                      utils.getLanguage(sender.getSteamID64(), users)
-                    ]
+                    messages.ERROR.LOADINVENTORY.THEM[2][language]
                   );
                   log.error(
                     `An error occurred while getting user inventory: ${ERR2}`
@@ -168,9 +158,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                   chatMessage(
                     client,
                     sender,
-                    messages.ERROR.LOADINVENTORY.THEM[0][
-                      utils.getLanguage(sender.getSteamID64(), users)
-                    ]
+                    messages.ERROR.LOADINVENTORY.THEM[0][language]
                   );
                   log.error(
                     `An error occurred while getting user inventory: ${ERR2}`
@@ -185,18 +173,20 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
       chatMessage(
         client,
         sender,
-        messages.ERROR.INPUT.AMOUNTOVER.SETS[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ].replace('{SETS}', main.maxSell)
+        messages.ERROR.INPUT.AMOUNTOVER.SETS[language].replace(
+          '{SETS}',
+          main.maxSell
+        )
       );
     }
   } else {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.SETS[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', '!SELLGEMS 1')
+      messages.ERROR.INPUT.INVALID.SETS[language].replace(
+        '{command}',
+        '!SELLGEMS 1'
+      )
     );
   }
 };

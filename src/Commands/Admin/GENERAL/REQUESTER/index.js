@@ -7,16 +7,10 @@ const log = require('../../../../Components/log');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users, community, allCards, manager) => {
-  log.adminChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !REQUESTER ]'
-  );
-  chatMessage(
-    client,
-    sender,
-    messages.REQUESTER[0][utils.getLanguage(sender.getSteamID64(), users)]
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+
+  log.adminChat(sender.getSteamID64(), language, '[ !REQUESTER ]');
+  chatMessage(client, sender, messages.REQUESTER[0][language]);
   let i = 0;
   const ID64 = main.requester.steamID64;
   if (ID64[0]) {
@@ -38,10 +32,6 @@ module.exports = (sender, client, users, community, allCards, manager) => {
       }
     })();
   } else {
-    chatMessage(
-      client,
-      sender,
-      messages.REQUESTER[1][utils.getLanguage(sender.getSteamID64(), users)]
-    );
+    chatMessage(client, sender, messages.REQUESTER[1][language]);
   }
 };

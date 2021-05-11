@@ -6,21 +6,19 @@ const log = require('../../../../Components/log');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, manager) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const amountkeys = parseInt(
     msg.toUpperCase().replace('!DEPOSITCSGO ', ''),
     10
   );
+
   if (!Number.isNaN(amountkeys) && parseInt(amountkeys, 10) > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      utils.getLanguage(sender.getSteamID64(), users),
+      language,
       `[ !DEPOSITCSGO ${amountkeys} ]`
     );
-    chatMessage(
-      client,
-      sender,
-      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-    );
+    chatMessage(client, sender, messages.REQUEST[language]);
     manager.getUserInventoryContents(
       sender.getSteamID64(),
       730,
@@ -41,14 +39,16 @@ module.exports = (sender, msg, client, users, manager) => {
             chatMessage(
               client,
               sender,
-              messages.ERROR.OUTOFSTOCK.DEFAULT.CSGO.THEM[1][
-                utils.getLanguage(sender.getSteamID64(), users)
-              ].replace('{CSGO}', theirKeys.length)
+              messages.ERROR.OUTOFSTOCK.DEFAULT.CSGO.THEM[1][language].replace(
+                '{CSGO}',
+                theirKeys.length
+              )
             );
           } else {
-            const message = messages.TRADE.SETMESSAGE[0].CSGO[
-              utils.getLanguage(sender.getSteamID64(), users)
-            ].replace('{CSGO}', amountkeys);
+            const message = messages.TRADE.SETMESSAGE[0].CSGO[language].replace(
+              '{CSGO}',
+              amountkeys
+            );
             makeOffer(
               client,
               users,
@@ -68,18 +68,14 @@ module.exports = (sender, msg, client, users, manager) => {
           chatMessage(
             client,
             sender,
-            messages.ERROR.LOADINVENTORY.THEM[2][
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
+            messages.ERROR.LOADINVENTORY.THEM[2][language]
           );
           log.error(`An error occurred while getting user inventory: ${ERR}`);
         } else {
           chatMessage(
             client,
             sender,
-            messages.ERROR.LOADINVENTORY.THEM[0][
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
+            messages.ERROR.LOADINVENTORY.THEM[0][language]
           );
           log.error(`An error occurred while getting user inventory: ${ERR}`);
         }
@@ -89,9 +85,10 @@ module.exports = (sender, msg, client, users, manager) => {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.CSGO[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', '!DEPOSITCSGO 1')
+      messages.ERROR.INPUT.INVALID.CSGO[language].replace(
+        '{command}',
+        '!DEPOSITCSGO 1'
+      )
     );
   }
 };

@@ -11,6 +11,8 @@ const { getSets } = require('../../../../Components/sets');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, community, allCards, manager) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+
   if (Object.keys(inventory.botSets).length) {
     const input = msg.toUpperCase();
     const command = input.match('!SETS4SETS') || input.match('!SET4SET') || [];
@@ -19,17 +21,13 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
     if (!Number.isNaN(amountofsets) && amountofsets > 0) {
       log.userChat(
         sender.getSteamID64(),
-        utils.getLanguage(sender.getSteamID64(), users),
+        language,
         `[ !SETS4SETS ${amountofsets} ]`
       );
       if (amountofsets <= main.maxSets4Sets) {
         const mySets = [];
         const theirSets = [];
-        chatMessage(
-          client,
-          sender,
-          messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-        );
+        chatMessage(client, sender, messages.REQUEST[language]);
         let amountofB = amountofsets;
         inventory.getInventory(
           sender.getSteamID64(),
@@ -74,9 +72,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                     chatMessage(
                       client,
                       sender,
-                      messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][
-                        utils.getLanguage(sender.getSteamID64(), users)
-                      ]
+                      messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.THEM[0][language]
                     );
                   } else {
                     utils.getBadges(sender.getSteamID64(), (ERR3, DATA4) => {
@@ -253,15 +249,12 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                                 client,
                                 sender,
                                 messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
-                                  utils.getLanguage(
-                                    sender.getSteamID64(),
-                                    users
-                                  )
+                                  language
                                 ]
                               );
                             } else {
                               const message = messages.TRADE.SETMESSAGE[3].SETS[
-                                utils.getLanguage(sender.getSteamID64(), users)
+                                language
                               ]
                                 .replace('{SETS1}', mySets.length)
                                 .replace('{SETS2}', theirSets.length);
@@ -285,18 +278,14 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                           chatMessage(
                             client,
                             sender,
-                            messages.ERROR.OUTOFSTOCK.NOTUSED.SETS[
-                              utils.getLanguage(sender.getSteamID64(), users)
-                            ]
+                            messages.ERROR.OUTOFSTOCK.NOTUSED.SETS[language]
                           );
                         }
                       } else {
                         chatMessage(
                           client,
                           sender,
-                          messages.ERROR.BADGES[1][
-                            utils.getLanguage(sender.getSteamID64(), users)
-                          ]
+                          messages.ERROR.BADGES[1][language]
                         );
                         log.error(
                           `An error occurred while loading badges: ${ERR3}`
@@ -308,9 +297,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
                   chatMessage(
                     client,
                     sender,
-                    messages.ERROR.LOADINVENTORY.THEM[0][
-                      utils.getLanguage(sender.getSteamID64(), users)
-                    ]
+                    messages.ERROR.LOADINVENTORY.THEM[0][language]
                   );
                   log.error(
                     `An error occurred while getting user sets: ${ERR2}`
@@ -321,9 +308,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
               chatMessage(
                 client,
                 sender,
-                messages.ERROR.LOADINVENTORY.THEM[2][
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
+                messages.ERROR.LOADINVENTORY.THEM[2][language]
               );
               log.error(
                 `An error occurred while getting user inventory: ${ERR1}`
@@ -332,9 +317,7 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
               chatMessage(
                 client,
                 sender,
-                messages.ERROR.LOADINVENTORY.THEM[0][
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
+                messages.ERROR.LOADINVENTORY.THEM[0][language]
               );
               log.error(
                 `An error occurred while getting user inventory: ${ERR1}`
@@ -346,27 +329,27 @@ module.exports = (sender, msg, client, users, community, allCards, manager) => {
         chatMessage(
           client,
           sender,
-          messages.SETS4SETS.AMOUNTOVER[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ].replace('{SETS}', main.maxSets4Sets)
+          messages.SETS4SETS.AMOUNTOVER[language].replace(
+            '{SETS}',
+            main.maxSets4Sets
+          )
         );
       }
     } else {
       chatMessage(
         client,
         sender,
-        messages.ERROR.INPUT.INVALID.SETS[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ].replace('{command}', `${command} 1`)
+        messages.ERROR.INPUT.INVALID.SETS[language].replace(
+          '{command}',
+          `${command} 1`
+        )
       );
     }
   } else {
     chatMessage(
       client,
       sender,
-      messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[2][
-        utils.getLanguage(sender.getSteamID64(), users)
-      ]
+      messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[2][language]
     );
   }
 };

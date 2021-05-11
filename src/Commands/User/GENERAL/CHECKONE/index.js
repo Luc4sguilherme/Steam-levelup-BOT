@@ -7,16 +7,10 @@ const log = require('../../../../Components/log');
 const { filterCommands } = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
-  chatMessage(
-    client,
-    sender,
-    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-  );
-  log.userChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !CHECKONE ]'
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+
+  chatMessage(client, sender, messages.REQUEST[language]);
+  log.userChat(sender.getSteamID64(), language, '[ !CHECKONE ]');
   utils.getBadges(
     sender.getSteamID64(),
     (ERR, DATA, CURRENTLEVEL, _, TOTALXP) => {
@@ -50,30 +44,22 @@ module.exports = (sender, client, users) => {
             const gems = parseInt(hisMaxSets * rates.gems.sell, 10);
             let message = ' ';
             if (cs > 0) {
-              message += messages.CHECKONE.CURRENCIES.CSGO[
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              message += messages.CHECKONE.CURRENCIES.CSGO[language]
                 .replace(/{CSGO}/g, cs)
                 .replace('{SETS1}', cs * rates.csgo.sell);
             }
             if (hydra > 0) {
-              message += messages.CHECKONE.CURRENCIES.HYDRA[
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              message += messages.CHECKONE.CURRENCIES.HYDRA[language]
                 .replace(/{HYDRA}/g, hydra)
                 .replace('{SETS2}', hydra * rates.hydra.sell);
             }
             if (tf > 0) {
-              message += messages.CHECKONE.CURRENCIES.TF[
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              message += messages.CHECKONE.CURRENCIES.TF[language]
                 .replace(/{TF}/g, tf)
                 .replace('{SETS3}', tf * rates.tf.sell);
             }
             if (parseInt(hisMaxSets, 10) > 0) {
-              message += messages.CHECKONE.CURRENCIES.GEMS[
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              message += messages.CHECKONE.CURRENCIES.GEMS[language]
                 .replace('{GEMS}', gems)
                 .replace('{SETS4}', hisMaxSets)
                 .replace('{SETS5}', parseInt(hisMaxSets, 10));
@@ -85,9 +71,7 @@ module.exports = (sender, client, users) => {
               chatMessage(
                 client,
                 sender,
-                messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[1][
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
+                messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[1][language]
               );
               return;
             }
@@ -103,9 +87,7 @@ module.exports = (sender, client, users) => {
                 chatMessage(
                   client,
                   sender,
-                  messages.CHECKONE.RESPONSE[0][
-                    utils.getLanguage(sender.getSteamID64(), users)
-                  ]
+                  messages.CHECKONE.RESPONSE[0][language]
                     .replace('{SETS}', hisMaxSets)
                     .replace('{LEVEL}', i - 1)
                     .replace('{MESSAGE}', message)
@@ -114,49 +96,27 @@ module.exports = (sender, client, users) => {
                 chatMessage(
                   client,
                   sender,
-                  messages.CHECKONE.RESPONSE[1][
-                    utils.getLanguage(sender.getSteamID64(), users)
-                  ]
+                  messages.CHECKONE.RESPONSE[1][language]
                     .replace('{SETS}', hisMaxSets)
                     .replace('{LEVEL}', i - 1)
                     .replace('{MESSAGE}', message)
                 );
               }
             } else {
-              chatMessage(
-                client,
-                sender,
-                messages.ERROR.LEVEL[1][
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
-              );
+              chatMessage(client, sender, messages.ERROR.LEVEL[1][language]);
             }
           } else {
             chatMessage(
               client,
               sender,
-              messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[1][
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[1][language]
             );
           }
         } else {
-          chatMessage(
-            client,
-            sender,
-            messages.ERROR.BADGES[0][
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
-          );
+          chatMessage(client, sender, messages.ERROR.BADGES[0][language]);
         }
       } else {
-        chatMessage(
-          client,
-          sender,
-          messages.ERROR.BADGES[1][
-            utils.getLanguage(sender.getSteamID64(), users)
-          ]
-        );
+        chatMessage(client, sender, messages.ERROR.BADGES[1][language]);
         log.error(`An error occurred while getting badges: ${ERR}`);
       }
     }

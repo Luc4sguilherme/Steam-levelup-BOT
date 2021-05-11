@@ -6,23 +6,15 @@ const { filterCommands } = require('../../../../Utils');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
-  log.userChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !STOCK ]'
-  );
-  chatMessage(
-    client,
-    sender,
-    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+
+  log.userChat(sender.getSteamID64(), language, '[ !STOCK ]');
+  chatMessage(client, sender, messages.REQUEST[language]);
 
   chatMessage(
     client,
     sender,
-    filterCommands(
-      messages.STOCK[utils.getLanguage(sender.getSteamID64(), users)]
-    )
+    filterCommands(messages.STOCK[language])
       .join('\n')
       .replace('{TOTALBOTSETS}', inventory.stock.totalBotSets)
       .replace('{CSKEYSTRADABLE}', inventory.stock.csKeys.tradable)
