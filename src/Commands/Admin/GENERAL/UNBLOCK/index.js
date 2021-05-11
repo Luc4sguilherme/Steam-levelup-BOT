@@ -6,50 +6,28 @@ const log = require('../../../../Components/log');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const n = msg.toUpperCase().replace('!UNBLOCK ', '').toString();
-  log.adminChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    `[ !UNBLOCK ${n} ]`
-  );
+
+  log.adminChat(sender.getSteamID64(), language, `[ !UNBLOCK ${n} ]`);
   if (SID64REGEX.test(n)) {
     if (n !== sender.getSteamID64()) {
       client.unblockUser(n, (err) => {
         if (err) {
-          chatMessage(
-            client,
-            sender,
-            messages.UNBLOCK.ERROR[
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
-          );
+          chatMessage(client, sender, messages.UNBLOCK.ERROR[language]);
           log.error(`An error occured while unblocking user: ${err}`);
         } else {
-          chatMessage(
-            client,
-            sender,
-            messages.UNBLOCK.RESPONSE[
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
-          );
+          chatMessage(client, sender, messages.UNBLOCK.RESPONSE[language]);
         }
       });
     } else {
-      chatMessage(
-        client,
-        sender,
-        messages.UNBLOCK.NOTALLOWED[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ]
-      );
+      chatMessage(client, sender, messages.UNBLOCK.NOTALLOWED[language]);
     }
   } else {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.STEAMID64[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ]
+      messages.ERROR.INPUT.INVALID.STEAMID64[language]
     );
   }
 };

@@ -7,31 +7,23 @@ const makeOffer = require('../../../../Components/offer');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users, manager) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const amountofsets = parseInt(
     msg.toUpperCase().replace('!WITHDRAWSETS ', ''),
     10
   );
+
   if (!Number.isNaN(amountofsets) && amountofsets > 0) {
     log.adminChat(
       sender.getSteamID64(),
-      utils.getLanguage(sender.getSteamID64(), users),
+      language,
       `[ !WITHDRAWSETS ${amountofsets} ]`
     );
-    chatMessage(
-      client,
-      sender,
-      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-    );
+    chatMessage(client, sender, messages.REQUEST[language]);
     manager.getInventoryContents(753, 2, true, (ERR) => {
       if (ERR) {
         log.error(`An error occurred while getting inventory: ${ERR}`);
-        chatMessage(
-          client,
-          sender,
-          messages.ERROR.LOADINVENTORY.US[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ]
-        );
+        chatMessage(client, sender, messages.ERROR.LOADINVENTORY.US[language]);
       } else {
         let amountofB = amountofsets;
         const mySets = [];
@@ -68,14 +60,13 @@ module.exports = (sender, msg, client, users, manager) => {
           chatMessage(
             client,
             sender,
-            messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
+            messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][language]
           );
         } else {
-          const message = messages.TRADE.SETMESSAGE[0].SETS[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ].replace('{SETS}', amountofsets);
+          const message = messages.TRADE.SETMESSAGE[0].SETS[language].replace(
+            '{SETS}',
+            amountofsets
+          );
           makeOffer(
             client,
             users,
@@ -97,9 +88,10 @@ module.exports = (sender, msg, client, users, manager) => {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.SETS[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', '!WITHDRAWSETS 1')
+      messages.ERROR.INPUT.INVALID.SETS[language].replace(
+        '{command}',
+        '!WITHDRAWSETS 1'
+      )
     );
   }
 };

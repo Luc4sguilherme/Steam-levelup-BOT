@@ -5,16 +5,9 @@ const utils = require('../../../../Utils');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users, community) => {
-  chatMessage(
-    client,
-    sender,
-    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-  );
-  log.userChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !INVITE ]'
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+  chatMessage(client, sender, messages.REQUEST[language]);
+  log.userChat(sender.getSteamID64(), language, '[ !INVITE ]');
   utils.checkUserinGroup(community, sender.getSteamID64(), (err, isMember) => {
     if (!err) {
       if (!isMember) {
@@ -22,26 +15,20 @@ module.exports = (sender, client, users, community) => {
         chatMessage(
           client,
           sender.getSteamID64(),
-          messages.INVITETOGROUP.INVITED[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ]
+          messages.INVITETOGROUP.INVITED[language]
         );
       } else {
         chatMessage(
           client,
           sender.getSteamID64(),
-          messages.INVITETOGROUP.ITSALREADY[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ]
+          messages.INVITETOGROUP.ITSALREADY[language]
         );
       }
     } else {
       chatMessage(
         client,
         sender.getSteamID64(),
-        messages.INVITETOGROUP.ERROR[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ]
+        messages.INVITETOGROUP.ERROR[language]
       );
       log.error(`An error occurred inviting user to steam group: ${err}`);
     }

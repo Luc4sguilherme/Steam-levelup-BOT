@@ -18,6 +18,8 @@ const makeOffer = (
   amountofgems = 0
 ) => {
   const offer = manager.createOffer(target);
+  const language = utils.getLanguage(target, users);
+
   offer.addMyItems(itemsFromMe);
   offer.addTheirItems(itemsFromThem);
 
@@ -41,38 +43,22 @@ const makeOffer = (
   offer.getUserDetails((ERR1, ME, THEM) => {
     if (ERR1) {
       log.error(`An error occurred while getting trade holds: ${ERR1}`);
-      chatMessage(
-        client,
-        target,
-        messages.ERROR.TRADEHOLD[utils.getLanguage(target, users)]
-      );
+      chatMessage(client, target, messages.ERROR.TRADEHOLD[language]);
     } else if (ME.escrowDays === 0 && THEM.escrowDays === 0) {
       log.tradeoffer('Sending trade offer');
       offer.send((ERR2) => {
         if (ERR2) {
-          chatMessage(
-            client,
-            target,
-            messages.ERROR.SENDTRADE[utils.getLanguage(target, users)]
-          );
+          chatMessage(client, target, messages.ERROR.SENDTRADE[language]);
           log.error(`An error occurred while sending trade offer: ${ERR2}`);
         } else {
-          chatMessage(
-            client,
-            target,
-            `${messages.TRADEMSG[utils.getLanguage(target, users)]} \n\n`
-          );
+          chatMessage(client, target, `${messages.TRADEMSG[language]} \n\n`);
           log.tradeoffer(
             `offer #${offer.id} sent successfully to user #${target}`
           );
         }
       });
     } else {
-      chatMessage(
-        client,
-        target,
-        messages.TRADEHOLD[utils.getLanguage(target, users)]
-      );
+      chatMessage(client, target, messages.TRADEHOLD[language]);
     }
   });
 };

@@ -9,7 +9,7 @@ const utils = require('../../../../Utils');
 
 module.exports = async (sender, msg, client, users) => {
   const input = msg.substring('!PROFIT'.length).trim().toUpperCase();
-  const { language } = users[sender.getSteamID64()];
+  const language = utils.getLanguage(sender.getSteamID64(), users);
 
   const period = () => {
     switch (utils.getPeriod(input)) {

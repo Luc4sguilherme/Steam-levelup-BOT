@@ -7,13 +7,10 @@ const log = require('../../../../Components/log');
 const { filterCommands } = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const n = parseInt(msg.toUpperCase().replace('!LEVEL ', ''), 10);
   if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
-    log.userChat(
-      sender.getSteamID64(),
-      utils.getLanguage(sender.getSteamID64(), users),
-      `[ !LEVEL ${n} ]`
-    );
+    log.userChat(sender.getSteamID64(), language, `[ !LEVEL ${n} ]`);
     if (n <= main.maxLevel) {
       utils.getBadges(
         sender.getSteamID64(),
@@ -59,9 +56,7 @@ module.exports = (sender, msg, client, users) => {
                     client,
                     sender,
                     filterCommands(
-                      messages.LEVEL.RESPONSE[
-                        utils.getLanguage(sender.getSteamID64(), users)
-                      ]
+                      messages.LEVEL.RESPONSE[language]
 
                         .replace('{level}', n)
                         .replace(
@@ -85,38 +80,18 @@ module.exports = (sender, msg, client, users) => {
                   chatMessage(
                     client,
                     sender,
-                    messages.ERROR.INPUT.AMOUNTLOW.LEVEL[
-                      utils.getLanguage(sender.getSteamID64(), users)
-                    ]
+                    messages.ERROR.INPUT.AMOUNTLOW.LEVEL[language]
                   );
                 }
               } else {
-                chatMessage(
-                  client,
-                  sender,
-                  messages.ERROR.LEVEL[1][
-                    utils.getLanguage(sender.getSteamID64(), users)
-                  ]
-                );
+                chatMessage(client, sender, messages.ERROR.LEVEL[1][language]);
               }
             } else {
-              chatMessage(
-                client,
-                sender,
-                messages.ERROR.LEVEL[0][
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
-              );
+              chatMessage(client, sender, messages.ERROR.LEVEL[0][language]);
             }
           } else {
             log.error(`An error occurred while getting badge data: ${ERR}`);
-            chatMessage(
-              client,
-              sender,
-              messages.ERROR.BADGES[1][
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
-            );
+            chatMessage(client, sender, messages.ERROR.BADGES[1][language]);
           }
         }
       );
@@ -124,18 +99,13 @@ module.exports = (sender, msg, client, users) => {
       chatMessage(
         client,
         sender,
-        messages.ERROR.INPUT.AMOUNTOVER.LEVEL[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ].replace('{LEVEL}', main.maxLevel)
+        messages.ERROR.INPUT.AMOUNTOVER.LEVEL[language].replace(
+          '{LEVEL}',
+          main.maxLevel
+        )
       );
     }
   } else {
-    chatMessage(
-      client,
-      sender,
-      messages.ERROR.INPUT.INVALID.LEVEL[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ]
-    );
+    chatMessage(client, sender, messages.ERROR.INPUT.INVALID.LEVEL[language]);
   }
 };

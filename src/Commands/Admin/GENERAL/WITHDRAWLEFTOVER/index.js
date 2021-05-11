@@ -9,17 +9,11 @@ const makeOffer = require('../../../../Components/offer');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, client, users, community, manager) => {
-  log.adminChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !WITHDRAWLEFTOVER ]'
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+
+  log.adminChat(sender.getSteamID64(), language, '[ !WITHDRAWLEFTOVER ]');
   const cards = [];
-  chatMessage(
-    client,
-    sender,
-    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-  );
+  chatMessage(client, sender, messages.REQUEST[language]);
   for (let i = 0; i < Object.keys(inventory.botSets).length; i += 1) {
     for (let j = 0; j < Object.values(inventory.botSets)[i].length; j += 1) {
       for (
@@ -40,13 +34,7 @@ module.exports = (sender, client, users, community, manager) => {
     (ERR, DATA) => {
       if (ERR) {
         log.error(`An error occurred while getting inventory: ${ERR}`);
-        chatMessage(
-          client,
-          sender,
-          messages.ERROR.LOADINVENTORY.US[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ]
-        );
+        chatMessage(client, sender, messages.ERROR.LOADINVENTORY.US[language]);
       } else {
         const Cards = {};
         const myCards = [];
@@ -57,9 +45,7 @@ module.exports = (sender, client, users, community, manager) => {
           chatMessage(
             client,
             sender,
-            messages.ERROR.OUTOFSTOCK.DEFAULT.LEFTOVER[
-              utils.getLanguage(sender.getSteamID64(), users)
-            ]
+            messages.ERROR.OUTOFSTOCK.DEFAULT.LEFTOVER[language]
           );
         } else {
           const cardsSent = {};
@@ -95,10 +81,7 @@ module.exports = (sender, client, users, community, manager) => {
             }
           }
 
-          const message =
-            messages.TRADE.SETMESSAGE[0].LEFTOVER[
-              utils.getLanguage(sender.getSteamID64(), users)
-            ];
+          const message = messages.TRADE.SETMESSAGE[0].LEFTOVER[language];
           makeOffer(
             client,
             users,

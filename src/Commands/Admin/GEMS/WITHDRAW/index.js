@@ -6,30 +6,21 @@ const log = require('../../../../Components/log');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, manager) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const amountgems = parseInt(
     msg.toUpperCase().replace('!WITHDRAWGEMS ', ''),
     10
   );
   if (!Number.isNaN(amountgems) && parseInt(amountgems, 10) > 0) {
-    chatMessage(
-      client,
-      sender,
-      messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-    );
+    chatMessage(client, sender, messages.REQUEST[language]);
     manager.getInventoryContents(753, 6, true, (ERR, INV) => {
       log.adminChat(
         sender.getSteamID64(),
-        utils.getLanguage(sender.getSteamID64(), users),
+        language,
         `[ !WITHDRAWGEMS ${amountgems} ]`
       );
       if (ERR) {
-        chatMessage(
-          client,
-          sender,
-          messages.ERROR.LOADINVENTORY.US[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ]
-        );
+        chatMessage(client, sender, messages.ERROR.LOADINVENTORY.US[language]);
         log.error(`An error occurred while getting inventory: ${ERR}`);
       } else {
         let botgems = 0;
@@ -54,14 +45,16 @@ module.exports = (sender, msg, client, users, manager) => {
           chatMessage(
             client,
             sender,
-            messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.US[1][
-              utils.getLanguage(sender.getSteamID64(), users)
-            ].replace('{GEMS}', botgems)
+            messages.ERROR.OUTOFSTOCK.DEFAULT.GEMS.US[1][language].replace(
+              '{GEMS}',
+              botgems
+            )
           );
         } else {
-          const message = messages.TRADE.SETMESSAGE[0].GEMS[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ].replace('{GEMS}', amountgems);
+          const message = messages.TRADE.SETMESSAGE[0].GEMS[language].replace(
+            '{GEMS}',
+            amountgems
+          );
           makeOffer(
             client,
             users,
@@ -83,9 +76,10 @@ module.exports = (sender, msg, client, users, manager) => {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.GEMS[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', '!WITHDRAWGEMS 1')
+      messages.ERROR.INPUT.INVALID.GEMS[language].replace(
+        '{command}',
+        '!WITHDRAWGEMS 1'
+      )
     );
   }
 };

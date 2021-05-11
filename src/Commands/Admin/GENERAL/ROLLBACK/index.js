@@ -5,23 +5,16 @@ const messages = require('../../../../Config/messages');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, msg, client, users, community, manager) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const offerID = msg.substring('!ROLLBACK'.length).trim();
 
   if (offerID) {
-    log.adminChat(
-      sender.getSteamID64(),
-      utils.getLanguage(sender.getSteamID64(), users),
-      `[ !ROLLBACK ${offerID} ]`
-    );
+    chatMessage(client, sender, messages.REQUEST[language]);
+    log.adminChat(sender.getSteamID64(), language, `[ !ROLLBACK ${offerID} ]`);
+
     manager.getOffer(offerID, async (error, offer) => {
       if (error) {
-        chatMessage(
-          client,
-          sender,
-          messages.ERROR.GETOFFER[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ]
-        );
+        chatMessage(client, sender, messages.ERROR.GETOFFER[language]);
         log.error(`There was an error getting offers: ${error}`);
       } else {
         let itemsSent = [];
@@ -58,9 +51,10 @@ module.exports = (sender, msg, client, users, community, manager) => {
             [].concat(...itemsReceived),
             [].concat(...itemsSent),
             '!ROLLBACK',
-            messages.TRADE.SETMESSAGE[0].ROLLBACK[
-              utils.getLanguage(offer.partner.getSteamID64(), users)
-            ].replace('{OFFERID}', offer.id),
+            messages.TRADE.SETMESSAGE[0].ROLLBACK[language].replace(
+              '{OFFERID}',
+              offer.id
+            ),
             offer.data('amountofsets'),
             offer.data('amountofleftovers'),
             offer.data('amountofkeys'),
@@ -73,9 +67,7 @@ module.exports = (sender, msg, client, users, community, manager) => {
             chatMessage(
               client,
               sender,
-              messages.TRADE.BOTITEMSUNAVAILABLE[
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              messages.TRADE.BOTITEMSUNAVAILABLE[language]
             );
           } else if (
             error1.message.indexOf('User items are unavailable') > -1
@@ -83,18 +75,10 @@ module.exports = (sender, msg, client, users, community, manager) => {
             chatMessage(
               client,
               sender,
-              messages.TRADE.USERITEMSUNAVAILABLE[
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
+              messages.TRADE.USERITEMSUNAVAILABLE[language]
             );
           } else {
-            chatMessage(
-              client,
-              sender,
-              messages.ERROR.GETITEMS[
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
-            );
+            chatMessage(client, sender, messages.ERROR.GETITEMS[language]);
           }
         }
       }
@@ -103,9 +87,10 @@ module.exports = (sender, msg, client, users, community, manager) => {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.OFFERID[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', '!ROLLBACK offerID')
+      messages.ERROR.INPUT.INVALID.OFFERID[language].replace(
+        '{command}',
+        '!ROLLBACK offerID'
+      )
     );
   }
 };

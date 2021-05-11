@@ -247,9 +247,8 @@ utils.inviteToGroup = (client, community, target, callback) => {
 utils.notifyAdmin = (client, users, offer) => {
   if (main.getTradeMessages) {
     for (let j = 0; j < main.admins.length; j += 1) {
-      let msg1 = messages.TRADE.NOTIFYADMIN.DEFAULT.RESPONSE[
-        utils.getLanguage(main.admins[j], users)
-      ]
+      const language = utils.getLanguage(main.admins[j], users);
+      let msg1 = messages.TRADE.NOTIFYADMIN.DEFAULT.RESPONSE[language]
         .replace('{COMMAND}', offer.data('commandused'))
         .replace('{ID64}', offer.partner.getSteamID64())
         .replace('{OFFERID}', offer.id);
@@ -259,38 +258,28 @@ utils.notifyAdmin = (client, users, offer) => {
         offer.data('commandused').search(/SELL/) !== -1
       ) {
         if (offer.data('commandused').search(/CSGO/) !== -1) {
-          msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.CSGO[
-            utils.getLanguage(main.admins[j], users)
-          ]
+          msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.CSGO[language]
             .replace('{SETS}', offer.data('amountofsets'))
             .replace('{CSGO}', offer.data('amountofkeys'));
         }
         if (offer.data('commandused').search(/HYDRA/) !== -1) {
-          msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.HYDRA[
-            utils.getLanguage(main.admins[j], users)
-          ]
+          msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.HYDRA[language]
             .replace('{SETS}', offer.data('amountofsets'))
             .replace('{HYDRA}', offer.data('amountofkeys'));
         }
         if (offer.data('commandused').search(/TF/) !== -1) {
-          msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.TF[
-            utils.getLanguage(main.admins[j], users)
-          ]
+          msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.TF[language]
             .replace('{SETS}', offer.data('amountofsets'))
             .replace('{TF}', offer.data('amountofkeys'));
         }
         if (offer.data('commandused').search(/GEMS/) !== -1) {
-          msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.GEMS[
-            utils.getLanguage(main.admins[j], users)
-          ]
+          msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.GEMS[language]
             .replace('{SETS}', offer.data('amountofsets'))
             .replace('{GEMS}', offer.data('amountofgems'));
         }
       }
       if (offer.data('commandused').search(/SETS4SETS/) !== -1) {
-        msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.SETS[
-          utils.getLanguage(main.admins[j], users)
-        ]
+        msg1 += messages.TRADE.NOTIFYADMIN.DEFAULT.CURRENCIES.SETS[language]
           .replace('{SETS1}', offer.data('amountofsets'))
           .replace('{SETS2}', offer.data('amountofsets'));
       }

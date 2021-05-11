@@ -4,11 +4,9 @@ const log = require('../../../../Components/log');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users, community, manager) => {
-  log.adminChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !UNPACK ]'
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+
+  log.adminChat(sender.getSteamID64(), language, '[ !UNPACK ]');
   manager.getInventoryContents(753, 6, true, (ERR1, INV) => {
     if (!ERR1) {
       const botBooster = [];
@@ -32,25 +30,16 @@ module.exports = (sender, client, users, community, manager) => {
         chatMessage(
           client,
           sender,
-          messages.UNPACK.RESPONSE[
-            utils.getLanguage(sender.getSteamID64(), users)
-          ].replace('{BOOSTER}', botBooster.length)
+          messages.UNPACK.RESPONSE[language].replace(
+            '{BOOSTER}',
+            botBooster.length
+          )
         );
       } else {
-        chatMessage(
-          client,
-          sender,
-          messages.UNPACK.ERROR[utils.getLanguage(sender.getSteamID64(), users)]
-        );
+        chatMessage(client, sender, messages.UNPACK.ERROR[language]);
       }
     } else {
-      chatMessage(
-        client,
-        sender,
-        messages.ERROR.LOADINVENTORY.US[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ]
-      );
+      chatMessage(client, sender, messages.ERROR.LOADINVENTORY.US[language]);
       log.error(
         sender.getSteamID64(),
         `[ !UNPACK ] An error occurred while getting inventory: ${ERR1}`

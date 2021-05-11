@@ -5,20 +5,10 @@ const { restart } = require('../../../../Components/login');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
-  chatMessage(
-    client,
-    sender,
-    messages.REQUEST[utils.getLanguage(sender.getSteamID64(), users)]
-  );
-  log.adminChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !RESTART ]'
-  );
-  chatMessage(
-    client,
-    sender,
-    messages.RESTART[utils.getLanguage(sender.getSteamID64(), users)]
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+
+  chatMessage(client, sender, messages.REQUEST[language]);
+  log.adminChat(sender.getSteamID64(), language, '[ !RESTART ]');
+  chatMessage(client, sender, messages.RESTART[language]);
   restart(client);
 };

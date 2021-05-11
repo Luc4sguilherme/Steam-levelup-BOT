@@ -6,13 +6,11 @@ const utils = require('../../../../Utils');
 const log = require('../../../../Components/log');
 
 module.exports = (sender, msg, client, users) => {
+  const language = utils.getLanguage(sender.getSteamID64(), users);
   const n = parseInt(msg.toUpperCase().replace('!CHECKHYDRA ', ''), 10);
+
   if (!Number.isNaN(n) && parseInt(n, 10) > 0) {
-    log.userChat(
-      sender.getSteamID64(),
-      utils.getLanguage(sender.getSteamID64(), users),
-      `[ !CHECKHYDRA ${n} ]`
-    );
+    log.userChat(sender.getSteamID64(), language, `[ !CHECKHYDRA ${n} ]`);
     if (main.maxCheck.hydra >= n) {
       utils.getBadges(
         sender.getSteamID64(),
@@ -30,9 +28,10 @@ module.exports = (sender, msg, client, users) => {
                     chatMessage(
                       client,
                       sender,
-                      messages.ERROR.INPUT.AMOUNTOVER.HYDRA[
-                        utils.getLanguage(sender.getSteamID64(), users)
-                      ].replace('{KEYS}', main.maxCheck.hydra)
+                      messages.ERROR.INPUT.AMOUNTOVER.HYDRA[language].replace(
+                        '{KEYS}',
+                        main.maxCheck.hydra
+                      )
                     );
                     can += 1;
                     break;
@@ -43,9 +42,7 @@ module.exports = (sender, msg, client, users) => {
                     chatMessage(
                       client,
                       sender,
-                      messages.CHECK.HYDRA[0][
-                        utils.getLanguage(sender.getSteamID64(), users)
-                      ]
+                      messages.CHECK.HYDRA[0][language]
                         .replace(/{HYDRA}/g, n)
                         .replace('{SETS}', n * rates.hydra.sell)
                         .replace('{LEVEL}', i - 1)
@@ -54,9 +51,7 @@ module.exports = (sender, msg, client, users) => {
                     chatMessage(
                       client,
                       sender,
-                      messages.CHECK.HYDRA[1][
-                        utils.getLanguage(sender.getSteamID64(), users)
-                      ]
+                      messages.CHECK.HYDRA[1][language]
                         .replace(/{HYDRA}/g, n)
                         .replace('{SETS}', n * rates.hydra.sell)
                         .replace('{LEVEL}', i - 1)
@@ -64,32 +59,14 @@ module.exports = (sender, msg, client, users) => {
                   }
                 }
               } else {
-                chatMessage(
-                  client,
-                  sender,
-                  messages.ERROR.LEVEL[1][
-                    utils.getLanguage(sender.getSteamID64(), users)
-                  ]
-                );
+                chatMessage(client, sender, messages.ERROR.LEVEL[1][language]);
               }
             } else {
-              chatMessage(
-                client,
-                sender,
-                messages.ERROR.LEVEL[0][
-                  utils.getLanguage(sender.getSteamID64(), users)
-                ]
-              );
+              chatMessage(client, sender, messages.ERROR.LEVEL[0][language]);
             }
           } else {
             log.error(`An error occurred while getting badge data: ${ERR}`);
-            chatMessage(
-              client,
-              sender,
-              messages.ERROR.BADGES[1][
-                utils.getLanguage(sender.getSteamID64(), users)
-              ]
-            );
+            chatMessage(client, sender, messages.ERROR.BADGES[1][language]);
           }
         }
       );
@@ -97,18 +74,20 @@ module.exports = (sender, msg, client, users) => {
       chatMessage(
         client,
         sender,
-        messages.ERROR.INPUT.AMOUNTOVER.HYDRA[
-          utils.getLanguage(sender.getSteamID64(), users)
-        ].replace('{KEYS}', main.maxCheck.hydra)
+        messages.ERROR.INPUT.AMOUNTOVER.HYDRA[language].replace(
+          '{KEYS}',
+          main.maxCheck.hydra
+        )
       );
     }
   } else {
     chatMessage(
       client,
       sender,
-      messages.ERROR.INPUT.INVALID.HYDRA[
-        utils.getLanguage(sender.getSteamID64(), users)
-      ].replace('{command}', '!CHECKHYDRA 1')
+      messages.ERROR.INPUT.INVALID.HYDRA[language].replace(
+        '{command}',
+        '!CHECKHYDRA 1'
+      )
     );
   }
 };

@@ -6,17 +6,13 @@ const { filterCommands } = require('../../../../Utils');
 const utils = require('../../../../Utils');
 
 module.exports = (sender, client, users) => {
-  log.userChat(
-    sender.getSteamID64(),
-    utils.getLanguage(sender.getSteamID64(), users),
-    '[ !PRICES ]'
-  );
+  const language = utils.getLanguage(sender.getSteamID64(), users);
+
+  log.userChat(sender.getSteamID64(), language, '[ !PRICES ]');
   chatMessage(
     client,
     sender,
-    filterCommands(
-      messages.PRICES[utils.getLanguage(sender.getSteamID64(), users)]
-    )
+    filterCommands(messages.PRICES[language])
       .join('\n')
       .replace('{CSGOSELL}', rates.csgo.sell)
       .replace('{TFSELL}', rates.tf.sell)
