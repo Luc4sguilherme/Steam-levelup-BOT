@@ -51,10 +51,9 @@ module.exports = (sender, msg, client, users, community, manager) => {
             [].concat(...itemsReceived),
             [].concat(...itemsSent),
             '!ROLLBACK',
-            messages.TRADE.SETMESSAGE[0].ROLLBACK[language].replace(
-              '{OFFERID}',
-              offer.id
-            ),
+            messages.TRADE.SETMESSAGE[0].ROLLBACK[
+              utils.getLanguage(offer.partner.getSteamID64(), users)
+            ].replace('{OFFERID}', offer.id),
             offer.data('amountofsets'),
             offer.data('amountofleftovers'),
             offer.data('amountofkeys'),
