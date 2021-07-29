@@ -74,7 +74,7 @@
 # Windows 10
 ## 1° Install Node.js
 <pre>
-  <a href=https://nodejs.org/dist/v14.15.4/node-v14.15.4-x64.msi>https://nodejs.org/dist/v14.15.4/node-v14.15.4-x64.msi</a>
+  <a href=https://nodejs.org/dist/v14.17.4/node-v14.17.4-x64.msi>https://nodejs.org/dist/v14.17.4/node-v14.17.4-x64.msi</a>
 </pre>
 
 ## 2° Download Bot files
