@@ -15,7 +15,7 @@
     "update": "npx -p npm-check-updates ncu -u && npm i"
   },
   "engines": {
-    "node": ">=9.2.0"
+    "node": ">=14.15.0"
   },
   "dependencies": {
     "async": "^3.2.0",

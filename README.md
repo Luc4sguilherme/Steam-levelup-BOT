@@ -4,7 +4,7 @@ This is an advanced cardsets/levelup bot script.
 ## Requirements:
 - Steam account without limitations. Check <a href='https://support.steampowered.com/kb_article.php?ref=3330-iagk-7663'>steam support</a> to see your account status 
 - Steam Desktop authentication
-- Node.js v9.2.0 or higher 
+- Node.js v14 or higher 
 - Steam Api Key
 - Steam Group
 - SteamLadder Api Key
