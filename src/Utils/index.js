@@ -180,10 +180,11 @@ utils.getBadges = (SID, callback) => {
           const currentLevelXP = totalXP - XPNeededCurrentLevel;
 
           data.badges.forEach((badge) => {
-            if (
-              (badge.appid && badge.border_color === 0) ||
-              badge.border_color !== 1
-            ) {
+            if (main.foilMode) {
+              if (badge.appid && badge.border_color === 1) {
+                badges[badge.appid] = parseInt(badge.level, 10);
+              }
+            } else if (badge.appid && badge.border_color === 0) {
               badges[badge.appid] = parseInt(badge.level, 10);
             }
           });
