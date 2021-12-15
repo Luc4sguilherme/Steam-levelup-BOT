@@ -10,9 +10,15 @@ module.exports = (sender, client, users, lang) => {
 
   log.userChat(sender.getSteamID64(), language, '[ !COMMANDS ]');
 
-  let message = '/pre ';
-  for (let i = 0; i < msg.length; i += 1) {
-    message += msg[i];
+  let message1 = '/pre ';
+  for (let i = 0; i < 14; i += 1) {
+    message1 += msg[i];
   }
-  chatMessage(client, sender, message);
+  chatMessage(client, sender, message1);
+
+  let message2 = '/pre ';
+  for (let i = 14; i < msg.length; i += 1) {
+    message2 += msg[i];
+  }
+  chatMessage(client, sender, message2);
 };
