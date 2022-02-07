@@ -182,9 +182,12 @@ module.exports = (sender, msg, client, users, manager) => {
                           messages.ERROR.OUTOFSTOCK.DEFAULT.SETS.US[0][language]
                         );
                       } else {
-                        const message =
-                          messages.TRADE.SETMESSAGE[1].TF[language];
-                        language.replace('{TF}', n);
+                        const message = messages.TRADE.SETMESSAGE[1].TF[
+                          language
+                        ]
+                          .replace('{SETS}', amountofsets)
+                          .replace('{TF}', n);
+
                         makeOffer(
                           client,
                           users,
