@@ -188,7 +188,7 @@ community.on('sessionExpired', (error) => {
     log.error(error);
   }
 
-  login.webLogOn();
+  login.webLogin(client);
 });
 
 // Console will show us login session error
