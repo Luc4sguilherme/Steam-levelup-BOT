@@ -183,6 +183,14 @@ client.on('webSession', (_, cookies) => {
   }
 });
 
+community.on('sessionExpired', (error) => {
+  if (error) {
+    log.error(error);
+  }
+
+  login.webLogOn();
+});
+
 // Console will show us login session error
 client.on('error', (error) => {
   const minutes = 25;
