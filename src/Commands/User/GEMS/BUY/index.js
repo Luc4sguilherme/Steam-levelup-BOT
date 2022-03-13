@@ -116,13 +116,10 @@ module.exports = (sender, msg, client, users, manager) => {
                             inventory.botSets[DDATA[i]].length >=
                               badges[DDATA[i]]
                           ) {
-                            // BOT HAS ENOUGH SETS OF THIS KIND
-                            for (let j = 0; j < 5 - badges[DDATA[i]]; j += 1) {
-                              if (j + 1 < badges[DDATA[i]] && hisMaxSets > 0) {
+                            for (let j = 0; j < badges[DDATA[i]]; j += 1) {
+                              if (hisMaxSets > 0) {
                                 mySets.push(inventory.botSets[DDATA[i]][j]);
                                 hisMaxSets -= 1;
-                              } else {
-                                continue firstLoop;
                               }
                             }
                           } else if (
@@ -130,50 +127,23 @@ module.exports = (sender, msg, client, users, manager) => {
                             inventory.botSets[DDATA[i]].length <
                               badges[DDATA[i]]
                           ) {
-                            // BOT DOESNT HAVE ENOUGH SETS OF THIS KIND
-                            continue; // *
-                          } else if (
-                            !badges[DDATA[i]] &&
-                            inventory.botSets[DDATA[i]].length < 5 &&
-                            inventory.botSets[DDATA[i]].length -
-                              badges[DDATA[i]] >
-                              0
-                          ) {
-                            // TODO NOT FOR LOOP WITH BOTSETS. IT SENDS ALL
-                            // BOT HAS ENOUGH SETS AND USER NEVER CRAFTED THIS
+                            for (
+                              let j = 0;
+                              j < inventory.botSets[DDATA[i]].length;
+                              j += 1
+                            ) {
+                              if (hisMaxSets > 0) {
+                                mySets.push(inventory.botSets[DDATA[i]][j]);
+                                hisMaxSets -= 1;
+                              }
+                            }
+                          } else if (!badges[DDATA[i]]) {
                             for (
                               let j = 0;
                               j <
-                              inventory.botSets[DDATA[i]].length -
-                                badges[DDATA[i]];
+                              Math.min(5, inventory.botSets[DDATA[i]].length);
                               j += 1
                             ) {
-                              if (
-                                inventory.botSets[DDATA[i]][j] &&
-                                hisMaxSets > 0
-                              ) {
-                                mySets.push(inventory.botSets[DDATA[i]][j]);
-                                hisMaxSets -= 1;
-                              } else {
-                                continue firstLoop;
-                              }
-                            }
-                          } else if (hisMaxSets < 5) {
-                            // BOT DOESNT HAVE CARDS USER AREADY CRAFTED, IF USER STILL NEEDS 5 SETS:
-                            for (let j = 0; j !== hisMaxSets; j += 1) {
-                              if (
-                                inventory.botSets[DDATA[i]][j] &&
-                                hisMaxSets > 0
-                              ) {
-                                mySets.push(inventory.botSets[DDATA[i]][j]);
-                                hisMaxSets -= 1;
-                              } else {
-                                continue firstLoop;
-                              }
-                            }
-                          } else {
-                            // BOT DOESNT HAVE CARDS USER AREADY CRAFTED, IF USER STILL NEEDS LESS THAN 5 SETS:
-                            for (let j = 0; j !== 5; j += 1 && hisMaxSets > 0) {
                               if (
                                 inventory.botSets[DDATA[i]][j] &&
                                 hisMaxSets > 0
