@@ -51,7 +51,7 @@ const check = (client, community) => {
           restart(client);
         }
       } else if (!loggedIn) {
-        webLogin(client);
+        restart(client);
       } else {
         client.setPersona(SteamUser.EPersonaState.LookingToTrade);
       }
