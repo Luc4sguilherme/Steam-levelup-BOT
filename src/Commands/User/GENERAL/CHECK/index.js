@@ -58,10 +58,13 @@ module.exports = (sender, msg, client, users) => {
               for (let i = 0; i < Object.keys(badges).length; i += 1) {
                 if (
                   inventory.botSets[Object.keys(badges)[i]] &&
-                  inventory.botSets[Object.keys(badges)[i]].length >=
-                    badges[Object.keys(badges)[i]]
+                  Object.values(badges)[i] > 0
                 ) {
-                  hisMaxSets += badges[Object.keys(badges)[i]];
+                  hisMaxSets += Math.min(
+                    5,
+                    inventory.botSets[Object.keys(badges)[i]].length,
+                    Object.values(badges)[i]
+                  );
                 }
               }
               // Loop for sets he has never crafted
